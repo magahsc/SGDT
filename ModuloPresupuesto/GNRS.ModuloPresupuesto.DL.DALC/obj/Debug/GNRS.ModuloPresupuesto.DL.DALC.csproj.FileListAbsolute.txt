@@ -1,0 +1,5 @@
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.DL.DALC\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.dll
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.DL.DALC\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.pdb
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.DL.DALC\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.DL.DALC\obj\Debug\GNRS.ModuloPresupuesto.DL.DALC.dll
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.DL.DALC\obj\Debug\GNRS.ModuloPresupuesto.DL.DALC.pdb

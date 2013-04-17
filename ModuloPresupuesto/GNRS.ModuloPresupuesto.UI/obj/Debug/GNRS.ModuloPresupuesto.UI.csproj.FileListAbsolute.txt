@@ -1,0 +1,5 @@
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.UI.dll
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.UI.pdb
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.dll
+C:\Users\Renzo\Desktop\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.pdb
