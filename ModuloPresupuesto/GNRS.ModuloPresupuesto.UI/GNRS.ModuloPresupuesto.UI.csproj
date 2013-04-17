@@ -37,6 +37,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -147,6 +148,16 @@
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="ModuloPresupuesto.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GNRS.ModuloPresupuesto.BL.BC\GNRS.ModuloPresupuesto.BL.BC.csproj">
+      <Project>{3C18BCC9-1237-4AD9-AE78-59D61D6FEB7B}</Project>
+      <Name>GNRS.ModuloPresupuesto.BL.BC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GNRS.ModuloPresupuesto.DL.DALC\GNRS.ModuloPresupuesto.DL.DALC.csproj">
+      <Project>{402F69F2-C703-40F8-8B5F-9E3AE5600BC0}</Project>
+      <Name>GNRS.ModuloPresupuesto.DL.DALC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

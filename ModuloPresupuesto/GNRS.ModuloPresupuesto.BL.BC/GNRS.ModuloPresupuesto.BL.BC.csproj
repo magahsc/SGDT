@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapacitarProyectadoBC.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GNRS.ModuloPresupuesto.DL.DALC\GNRS.ModuloPresupuesto.DL.DALC.csproj">
+      <Project>{402F69F2-C703-40F8-8B5F-9E3AE5600BC0}</Project>
+      <Name>GNRS.ModuloPresupuesto.DL.DALC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

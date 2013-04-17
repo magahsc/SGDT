@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GNRS.ModuloPresupuesto.BL.BC
 {
-	class ModuloPresupuesto
+	public class ModuloPresupuesto
 	{
 	}
 }
