@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using GNRS.ModuloPresupuesto.DL.DALC;
+using System.Web.Services;
 
 namespace GNRS.ModuloPresupuesto.BL.BC
 {
@@ -13,6 +14,8 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         AreaDALC areaDALC = new AreaDALC();
         SeccionDALC seccionDALC = new SeccionDALC();
         CargoDALC cargoDALC = new CargoDALC();
+        PersonaDALC personaDALC;
+
 
         public List<LOCALIDAD> listarLocalidades()
         {
@@ -91,5 +94,31 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
             return listaCargos;
         }
+
+
+        public string registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string identificador)
+        {
+            PERSONA persona = new PERSONA();
+            persona.id_localidad = codigoLocalidad;
+            persona.id_seccion = codigoSeccion;
+            persona.id_cargo = codigoCargo;
+            persona.nombres_persona = identificador;
+
+            personaDALC = new PersonaDALC();
+           
+            Boolean registro=personaDALC.insertarPersonalProyectado(persona);
+
+            if (registro)
+            {
+                return identificador;
+            }
+            else
+            {
+                return "";
+            }
+
+
+        }
+       
     }
 }

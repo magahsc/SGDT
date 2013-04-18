@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="PresupuestoDBModelStoreContainer">
           <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
@@ -142,10 +142,10 @@
             <PropertyRef Name="id_persona" />
           </Key>
           <Property Name="id_persona" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="apellido_paterno" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="apellido_materno" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="apellido_paterno" Type="varchar" MaxLength="200" />
+          <Property Name="apellido_materno" Type="varchar" MaxLength="200" />
           <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="estado_persona" Type="char" MaxLength="1" />
           <Property Name="id_cargo" Type="int" Nullable="false" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
           <Property Name="id_localidad" Type="int" Nullable="false" />
@@ -341,8 +341,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PresupuestoDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -844,8 +843,8 @@
         <AssociationConnector Association="PresupuestoDBModel.CURSO_DEL_PRESUPUESTO" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
           <ConnectorPoint PointX="7.125" PointY="9.5011528461538468" />
-          <ConnectorPoint PointX="7.125" PointY="2.23784712109375" />
-          <ConnectorPoint PointX="7.5" PointY="2.23784712109375" />
+          <ConnectorPoint PointX="7.125" PointY="2.4131982421875016" />
+          <ConnectorPoint PointX="7.5" PointY="2.4131982421875016" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.INSTITUTO_DEL_CURSO" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.268992513020834" />

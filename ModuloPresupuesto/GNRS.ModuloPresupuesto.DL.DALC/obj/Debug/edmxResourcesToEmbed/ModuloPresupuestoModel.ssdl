@@ -137,10 +137,10 @@
       <PropertyRef Name="id_persona" />
     </Key>
     <Property Name="id_persona" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="apellido_paterno" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="apellido_materno" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="apellido_paterno" Type="varchar" MaxLength="200" />
+    <Property Name="apellido_materno" Type="varchar" MaxLength="200" />
     <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="estado_persona" Type="char" MaxLength="1" />
     <Property Name="id_cargo" Type="int" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />

@@ -1,14 +1,130 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="RegistrarPresupuestoPersonalProyectado.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.RegistrarPresupuestoPersonalProyectado" %>
 
-
- 
-
-
- 
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="contenido" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">  
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+ 
+    
+    <script>
+        function pageLoad() {
+            $(function () {
+                $("#dialog-form").dialog({
+                    autoOpen: false,
+                    height: 200,
+                    width: 350,
+                    modal: true,
+                    buttons: {
+                        "Aceptar": function () {
+                            var codigoLocalidad = document.getElementById("contenido_LocalidadComboBox").value;
+                            var codigoArea = document.getElementById("contenido_AreaComboBox").value;
+                            var codigoSeccion = document.getElementById("contenido_SeccionComboBox").value;
+                            var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
+                            var identificador = document.getElementById("contenido_IdentificadorTextBox").value;
+                            
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, identificador,confirmarRegistro);
+                            $(this).dialog("close");
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+
+                $("#dialog-form").css({
+                    fontSize: 15
+                });
+          
+
+                $("#opener").click(function () {
+                    $("#dialog-form").dialog("open");
+                });
+
+                
+            });
+
+
+        }
+
+        
+  </script>
+  <script>
+      function confirmarRegistro(message) {
+       
+       if (message != "") {
+           var texto = "El personal proyectado " + message + " ha sido guardado exitosamente";
+           $("#dialog-message").text(texto).dialog("open");
+       } else {
+           $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
+       }
+         
+      }
+  </script>
+  <script>
+      $(function () {
+          $("#dialog-message").dialog({
+              modal: true,
+              autoOpen: false,
+              height: 200,
+              width: 500,
+              buttons: {
+                  Ok: function () {
+                      document.getElementById("contenido_IdentificadorTextBox").value = '';
+
+                      document.getElementById("contenido_LocalidadComboBox").selectedIndex = 0;                    
+                      document.getElementById("contenido_SeccionComboBox").selectedIndex = 0;
+                      document.getElementById("contenido_SeccionComboBox").disabled = true;
+                      document.getElementById("contenido_AreaComboBox").selectedIndex = 0;
+                      document.getElementById("contenido_AreaComboBox").disabled = true;
+                      document.getElementById("contenido_CargoComboBox").selectedIndex = 0;
+                      document.getElementById("contenido_CargoComboBox").disabled = true;
+                      $(this).dialog("close");
+
+                  }
+              }
+          });
+          $("#dialog-message").css({
+              fontSize: 15
+          });
+          
+      });
+  </script>
+
+   <script>
+       $(function () {
+           $("#dialog-error").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               buttons: {
+                   Ok: function () {                       
+                       $(this).dialog("close");
+                   }
+               }
+           });
+           $("#dialog-error").css({
+               fontSize: 15
+           });
+
+       });
+  </script>
+
+
+  <div id="dialog-form" title="Confirmacion de registro">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea guardar el personal?</p>
+  </div>
+
+  <div id="dialog-message" title="Confirmacion de registro">  </div>
+  <div id="dialog-error" title="Error">  </div>
+  
+  
+  
+  
+  
+  
+  <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
+    EnablePartialRendering="true">  
     
     </asp:ScriptManager> 
 
@@ -60,8 +176,7 @@
                     <tr>
                 
                         <td colspan="2" align="right">
-                            <asp:Button ID="RegistrarButton" runat="server" Text="Registrar" onclick="RegistrarButton_Click" 
-                                 />                
+                           <button id="opener">Registrar</button>          
                         </td>
                     </tr>
                  </tbody>
@@ -69,6 +184,13 @@
 
 
   </ContentTemplate> 
-                     </asp:UpdatePanel>
+  </asp:UpdatePanel>
+
+
+
+ 
+
+ 
+ 
 
 </asp:Content>

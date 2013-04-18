@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using GNRS.ModuloPresupuesto.BL.BC;
 using GNRS.ModuloPresupuesto.DL.DALC;
 using System.Data.Entity;
-
+using System.Web.Services;
 namespace GNRS.ModuloPresupuesto.UI
 {
     public partial class RegistrarPresupuestoPersonalProyectado : System.Web.UI.Page
@@ -16,6 +16,9 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ScriptManager.RegisterStartupScript(this, GetType(), "SetupDialog", "SetupDialog();", true);
+
+
             if (!IsPostBack)
             {
                 cargarComboBox();
@@ -53,63 +56,129 @@ namespace GNRS.ModuloPresupuesto.UI
             CargoComboBox.Items.Insert(0, new ListItem("Seleccione el cargo", ""));
 
         }
-        protected void RegistrarButton_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         protected void LocalidadComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int codigoLocalidad=Convert.ToInt32(LocalidadComboBox.SelectedValue);
+            try
+            {
 
 
-            AreaComboBox.DataSource = presupuestoPersonalBC.filtrarAreasXLocalidad(codigoLocalidad) ;
-            AreaComboBox.DataBind();
-            AreaComboBox.Items.Insert(0, new ListItem("Seleccione el area", ""));
-
-            AreaComboBox.Enabled = true;
-            SeccionComboBox.Enabled = false;
-            CargoComboBox.Enabled = false;
+                int codigoLocalidad = Convert.ToInt32(LocalidadComboBox.SelectedValue);
 
 
-            ComboBoxUpdatePanel.Update();
+                AreaComboBox.DataSource = presupuestoPersonalBC.filtrarAreasXLocalidad(codigoLocalidad);
+                AreaComboBox.DataBind();
+                AreaComboBox.Items.Insert(0, new ListItem("Seleccione el area", ""));
+
+                AreaComboBox.Enabled = true;
+                SeccionComboBox.Enabled = false;
+                CargoComboBox.Enabled = false;
 
 
+                ComboBoxUpdatePanel.Update();
+
+            }
+            catch(Exception ex)
+            { 
+               }
         }
 
         protected void AreaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int codigoLocalidad = Convert.ToInt32(LocalidadComboBox.SelectedValue);
-            int codigoArea = Convert.ToInt32(AreaComboBox.SelectedValue);
+            try
+            {
 
-            SeccionComboBox.DataSource = presupuestoPersonalBC.filtrarSeccionesXAreaLocalidad(codigoArea,codigoLocalidad);
-            SeccionComboBox.DataBind();
-            SeccionComboBox.Items.Insert(0, new ListItem("Seleccione la seccion", ""));
+                int codigoLocalidad = Convert.ToInt32(LocalidadComboBox.SelectedValue);
+                int codigoArea = Convert.ToInt32(AreaComboBox.SelectedValue);
 
-            SeccionComboBox.Enabled = true;
-            CargoComboBox.Enabled = false;
+                SeccionComboBox.DataSource = presupuestoPersonalBC.filtrarSeccionesXAreaLocalidad(codigoArea, codigoLocalidad);
+                SeccionComboBox.DataBind();
+                SeccionComboBox.Items.Insert(0, new ListItem("Seleccione la seccion", ""));
 
-            ComboBoxUpdatePanel.Update();
+                SeccionComboBox.Enabled = true;
+                CargoComboBox.Enabled = false;
 
-            
+                ComboBoxUpdatePanel.Update();
+
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         protected void SeccionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int codigoLocalidad = Convert.ToInt32(LocalidadComboBox.SelectedValue);
+            try
+            {
+                int codigoLocalidad = Convert.ToInt32(LocalidadComboBox.SelectedValue);
 
-            int codigoSeccion = Convert.ToInt32(SeccionComboBox.SelectedValue);
-            CargoComboBox.DataSource = presupuestoPersonalBC.filtrarCargosXSeccion(codigoSeccion);
-            CargoComboBox.DataBind();
-            CargoComboBox.Items.Insert(0, new ListItem("Seleccione el cargo", ""));
+                int codigoSeccion = Convert.ToInt32(SeccionComboBox.SelectedValue);
+                CargoComboBox.DataSource = presupuestoPersonalBC.filtrarCargosXSeccion(codigoSeccion);
+                CargoComboBox.DataBind();
+                CargoComboBox.Items.Insert(0, new ListItem("Seleccione el cargo", ""));
 
-            CargoComboBox.Enabled = true;
+                CargoComboBox.Enabled = true;
 
-            ComboBoxUpdatePanel.Update();
-
+                ComboBoxUpdatePanel.Update();
+            }
+            catch (Exception ex)
+            {
+            }
 
         }
 
+
+
+        [WebMethod]
+        public static string confirmarRegistro(string codLocalidad, string codArea, string codSeccion, string codCargo, string identificador)
+        {
+            if (identificador.Equals(""))
+            {
+                return "";
+            }
+            PresupuestoPersonalProyectadoBC presupuestoPersonalBC = new PresupuestoPersonalProyectadoBC();
+            
+            int  codigoLocalidad,codigoArea, codigoSeccion, codigoCargo;
+
+
+           if(!int.TryParse(codLocalidad,out codigoLocalidad))
+           {
+               codigoLocalidad=0;
+           }
+
+           if (!int.TryParse(codArea, out codigoArea))
+           {
+               codigoArea = 0;
+           }
+
+           if (!int.TryParse(codSeccion, out codigoSeccion))
+           {
+               codigoSeccion = 0;
+           }
+
+           if (!int.TryParse(codCargo, out codigoCargo))
+           {
+               codigoCargo = 0;
+           }
+
+
+            string identAgregado=presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, identificador);
+            if (identAgregado.Equals (identificador))
+                return identAgregado;
+            else
+                return "sdf";
+            //int codigoArea, 
+            //int codigoSeccion, 
+            //int codigoCargo, 
+            //string identificador)
+
+
+            //presupuestoPersonalBC.registrarPersonalProyectar(loca
+
+        }
+
+        
        
     }
 }
