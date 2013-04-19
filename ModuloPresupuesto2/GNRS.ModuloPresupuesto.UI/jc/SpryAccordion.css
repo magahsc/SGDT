@@ -1,0 +1,39 @@
+.Accordion {
+	overflow: hidden;
+}
+.AccordionPanel {
+	margin: 0px;
+	padding: 0px;
+}
+.AccordionPanelTab {
+	margin: 0px;
+	padding: 2px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.AccordionPanelContent {
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+.AccordionPanelOpen .AccordionPanelTab {
+	background-color: #fffffff;
+}
+
+.AccordionPanelTabHover {
+	color: #fffffff;
+}
+.AccordionPanelOpen .AccordionPanelTabHover {
+	color: #fffffff;
+}
+
+.AccordionFocused .AccordionPanelTab {
+	background-color: #fffff;
+}
+
+.AccordionFocused .AccordionPanelOpen .AccordionPanelTab {
+	background-color: #ffffff;
+}
