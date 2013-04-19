@@ -1,0 +1,14 @@
+SCC = This is a Source Code Control file.
+
+[BussinessEntities.csproj]
+SCC_Aux_Path = 10.115.78.6:8877:perusdc01
+SCC_Project_Name = $/WEBLICSA2013/BussinesEntities
+
+[BussinesLogic.csproj]
+SCC_Aux_Path = 10.115.78.6:8877:perusdc01
+SCC_Project_Name = $/WEBLICSA2013/BussinesLogic
+
+[DataAccess.csproj]
+SCC_Aux_Path = 10.115.78.6:8877:perusdc01
+SCC_Project_Name = $/WEBLICSA2013/DataAccess
+

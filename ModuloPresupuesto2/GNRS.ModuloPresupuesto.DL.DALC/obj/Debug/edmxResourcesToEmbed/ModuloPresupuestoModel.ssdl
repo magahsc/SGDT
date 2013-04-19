@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="PresupuestoDBModelStoreContainer">
+    <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CURSO" EntityType="PresupuestoDBModel.Store.CURSO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LOCALIDAD_SECCION" EntityType="PresupuestoDBModel.Store.LOCALIDAD_SECCION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PERSONA" EntityType="PresupuestoDBModel.Store.PERSONA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PRESUPUESTO_CAPACITACION" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SECCION" EntityType="PresupuestoDBModel.Store.SECCION" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CURSO_DEL_PRESUPUESTO" Association="PresupuestoDBModel.Store.CURSO_DEL_PRESUPUESTO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cargo_Personal_SECCION" Association="PresupuestoDBModel.Store.FK_Cargo_Personal_SECCION">
+      <End Role="SECCION" EntitySet="SECCION" />
+      <End Role="CARGO_PERSONAL" EntitySet="CARGO_PERSONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA" Association="PresupuestoDBModel.Store.FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA">
+      <End Role="PERSONA" EntitySet="PERSONA" />
+      <End Role="CONCEPTO_POR_PERSONA" EntitySet="CONCEPTO_POR_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION" Association="PresupuestoDBModel.Store.FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION">
+      <End Role="CONCEPTO_REMUNERACION" EntitySet="CONCEPTO_REMUNERACION" />
+      <End Role="CONCEPTO_POR_PERSONA" EntitySet="CONCEPTO_POR_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOCALIDAD_SECCION_LOCALIDAD" Association="PresupuestoDBModel.Store.FK_LOCALIDAD_SECCION_LOCALIDAD">
+      <End Role="LOCALIDAD" EntitySet="LOCALIDAD" />
+      <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOCALIDAD_SECCION_SECCION" Association="PresupuestoDBModel.Store.FK_LOCALIDAD_SECCION_SECCION">
+      <End Role="SECCION" EntitySet="SECCION" />
+      <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERSONA_Cargo_Personal" Association="PresupuestoDBModel.Store.FK_PERSONA_Cargo_Personal">
+      <End Role="CARGO_PERSONAL" EntitySet="CARGO_PERSONAL" />
+      <End Role="PERSONA" EntitySet="PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERSONA_LOCALIDAD_SECCION" Association="PresupuestoDBModel.Store.FK_PERSONA_LOCALIDAD_SECCION">
+      <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
+      <End Role="PERSONA" EntitySet="PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION">
+      <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
+      <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA">
+      <End Role="PERSONA" EntitySet="PERSONA" />
+      <End Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntitySet="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION">
+      <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+      <End Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntitySet="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SECCION_AREA" Association="PresupuestoDBModel.Store.FK_SECCION_AREA">
+      <End Role="AREA" EntitySet="AREA" />
+      <End Role="SECCION" EntitySet="SECCION" />
+    </AssociationSet>
+    <AssociationSet Name="INSTITUTO_DEL_CURSO" Association="PresupuestoDBModel.Store.INSTITUTO_DEL_CURSO">
+      <End Role="INSTITUCION" EntitySet="INSTITUCION" />
+      <End Role="CURSO" EntitySet="CURSO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AREA">
+    <Key>
+      <PropertyRef Name="id_area" />
+    </Key>
+    <Property Name="id_area" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_area" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CARGO_PERSONAL">
+    <Key>
+      <PropertyRef Name="id_cargo" />
+    </Key>
+    <Property Name="id_cargo" Type="int" Nullable="false" />
+    <Property Name="nombre_cargo" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="id_seccion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CONCEPTO_POR_PERSONA">
+    <Key>
+      <PropertyRef Name="id_persona" />
+      <PropertyRef Name="id_concepto" />
+    </Key>
+    <Property Name="id_persona" Type="int" Nullable="false" />
+    <Property Name="id_concepto" Type="int" Nullable="false" />
+    <Property Name="monto" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CONCEPTO_REMUNERACION">
+    <Key>
+      <PropertyRef Name="id_concepto" />
+    </Key>
+    <Property Name="id_concepto" Type="int" Nullable="false" />
+    <Property Name="nombre_concepto" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CURSO">
+    <Key>
+      <PropertyRef Name="id_curso" />
+    </Key>
+    <Property Name="id_curso" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_curso" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="costo_curso" Type="float" Nullable="false" />
+    <Property Name="tipo_moneda" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="fecha_inicio" Type="date" Nullable="false" />
+    <Property Name="fecha_fin" Type="date" Nullable="false" />
+    <Property Name="codigo_institucion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="INSTITUCION">
+    <Key>
+      <PropertyRef Name="id_institucion" />
+    </Key>
+    <Property Name="id_institucion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_institucion" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="tipo_institucion" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="LOCALIDAD">
+    <Key>
+      <PropertyRef Name="id_localidad" />
+    </Key>
+    <Property Name="id_localidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_localidad" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="LOCALIDAD_SECCION">
+    <Key>
+      <PropertyRef Name="id_seccion" />
+      <PropertyRef Name="id_localidad" />
+    </Key>
+    <Property Name="id_seccion" Type="int" Nullable="false" />
+    <Property Name="id_localidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERSONA">
+    <Key>
+      <PropertyRef Name="id_persona" />
+    </Key>
+    <Property Name="id_persona" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="apellido_paterno" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="apellido_materno" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="id_cargo" Type="int" Nullable="false" />
+    <Property Name="id_seccion" Type="int" Nullable="false" />
+    <Property Name="id_localidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRESUPUESTO_CAPACITACION">
+    <Key>
+      <PropertyRef Name="id_presupuesto_capacitacion" />
+    </Key>
+    <Property Name="id_presupuesto_capacitacion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="codigo_presupuesto" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="id_curso" Type="int" Nullable="false" />
+    <Property Name="monto_total" Type="float" Nullable="false" />
+    <Property Name="cantidad_personas" Type="int" Nullable="false" />
+    <Property Name="presupuesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="id_seccion" Type="int" Nullable="false" />
+    <Property Name="id_localidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+    <Key>
+      <PropertyRef Name="id_presupuesto_capacitacion" />
+      <PropertyRef Name="id_persona" />
+    </Key>
+    <Property Name="id_presupuesto_capacitacion" Type="int" Nullable="false" />
+    <Property Name="id_persona" Type="int" Nullable="false" />
+    <Property Name="monto_presupuesto_proyectado" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SECCION">
+    <Key>
+      <PropertyRef Name="id_seccion" />
+    </Key>
+    <Property Name="id_seccion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_seccion" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="id_area" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CURSO_DEL_PRESUPUESTO">
+    <End Role="CURSO" Type="PresupuestoDBModel.Store.CURSO" Multiplicity="1" />
+    <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="id_curso" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cargo_Personal_SECCION">
+    <End Role="SECCION" Type="PresupuestoDBModel.Store.SECCION" Multiplicity="1" />
+    <End Role="CARGO_PERSONAL" Type="PresupuestoDBModel.Store.CARGO_PERSONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECCION">
+        <PropertyRef Name="id_seccion" />
+      </Principal>
+      <Dependent Role="CARGO_PERSONAL">
+        <PropertyRef Name="id_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA">
+    <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="1" />
+    <End Role="CONCEPTO_POR_PERSONA" Type="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERSONA">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="CONCEPTO_POR_PERSONA">
+        <PropertyRef Name="id_persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION">
+    <End Role="CONCEPTO_REMUNERACION" Type="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" Multiplicity="1" />
+    <End Role="CONCEPTO_POR_PERSONA" Type="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONCEPTO_REMUNERACION">
+        <PropertyRef Name="id_concepto" />
+      </Principal>
+      <Dependent Role="CONCEPTO_POR_PERSONA">
+        <PropertyRef Name="id_concepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOCALIDAD_SECCION_LOCALIDAD">
+    <End Role="LOCALIDAD" Type="PresupuestoDBModel.Store.LOCALIDAD" Multiplicity="1" />
+    <End Role="LOCALIDAD_SECCION" Type="PresupuestoDBModel.Store.LOCALIDAD_SECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCALIDAD">
+        <PropertyRef Name="id_localidad" />
+      </Principal>
+      <Dependent Role="LOCALIDAD_SECCION">
+        <PropertyRef Name="id_localidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOCALIDAD_SECCION_SECCION">
+    <End Role="SECCION" Type="PresupuestoDBModel.Store.SECCION" Multiplicity="1" />
+    <End Role="LOCALIDAD_SECCION" Type="PresupuestoDBModel.Store.LOCALIDAD_SECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECCION">
+        <PropertyRef Name="id_seccion" />
+      </Principal>
+      <Dependent Role="LOCALIDAD_SECCION">
+        <PropertyRef Name="id_seccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERSONA_Cargo_Personal">
+    <End Role="CARGO_PERSONAL" Type="PresupuestoDBModel.Store.CARGO_PERSONAL" Multiplicity="1" />
+    <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARGO_PERSONAL">
+        <PropertyRef Name="id_cargo" />
+      </Principal>
+      <Dependent Role="PERSONA">
+        <PropertyRef Name="id_cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERSONA_LOCALIDAD_SECCION">
+    <End Role="LOCALIDAD_SECCION" Type="PresupuestoDBModel.Store.LOCALIDAD_SECCION" Multiplicity="1" />
+    <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCALIDAD_SECCION">
+        <PropertyRef Name="id_seccion" />
+        <PropertyRef Name="id_localidad" />
+      </Principal>
+      <Dependent Role="PERSONA">
+        <PropertyRef Name="id_seccion" />
+        <PropertyRef Name="id_localidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION">
+    <End Role="LOCALIDAD_SECCION" Type="PresupuestoDBModel.Store.LOCALIDAD_SECCION" Multiplicity="1" />
+    <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCALIDAD_SECCION">
+        <PropertyRef Name="id_seccion" />
+        <PropertyRef Name="id_localidad" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION">
+        <PropertyRef Name="id_seccion" />
+        <PropertyRef Name="id_localidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA">
+    <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="1" />
+    <End Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERSONA">
+        <PropertyRef Name="id_persona" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+        <PropertyRef Name="id_persona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION">
+    <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="1" />
+    <End Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESUPUESTO_CAPACITACION">
+        <PropertyRef Name="id_presupuesto_capacitacion" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+        <PropertyRef Name="id_presupuesto_capacitacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SECCION_AREA">
+    <End Role="AREA" Type="PresupuestoDBModel.Store.AREA" Multiplicity="1" />
+    <End Role="SECCION" Type="PresupuestoDBModel.Store.SECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AREA">
+        <PropertyRef Name="id_area" />
+      </Principal>
+      <Dependent Role="SECCION">
+        <PropertyRef Name="id_area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="INSTITUTO_DEL_CURSO">
+    <End Role="INSTITUCION" Type="PresupuestoDBModel.Store.INSTITUCION" Multiplicity="1" />
+    <End Role="CURSO" Type="PresupuestoDBModel.Store.CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INSTITUCION">
+        <PropertyRef Name="id_institucion" />
+      </Principal>
+      <Dependent Role="CURSO">
+        <PropertyRef Name="codigo_institucion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
