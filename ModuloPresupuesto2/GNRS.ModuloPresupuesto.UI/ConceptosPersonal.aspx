@@ -4,8 +4,7 @@
     EnablePartialRendering="true">  
     
     </asp:ScriptManager> 
-
-   
+       
      <asp:UpdatePanel ID="ComboBoxUpdatePanel" runat="server" UpdateMode="Conditional"> 
      <ContentTemplate>   
             <Table ID="Table1" runat="server" >
@@ -13,7 +12,12 @@
                     <tr >
                         <td align="right" >Tipo de concepto:</td>
                         <td><asp:DropDownList ID="TipoConceptoComboBox" runat="server"                                 
-                                AutoPostBack="True" Height="20px" Width="130px" ></asp:DropDownList></td>
+                                AutoPostBack="True" Height="20px" Width="130px" 
+                                onselectedindexchanged="TipoConceptoComboBox_SelectedIndexChanged" >
+                               <asp:ListItem Text="Ingresos" Value="1"></asp:ListItem>  
+                              <asp:ListItem Text="Descuentos" Value="2"></asp:ListItem>  
+                              <asp:ListItem Text="Aportaciones" Value="3"></asp:ListItem>  
+                                </asp:DropDownList></td>
                     </tr>
 
                       
@@ -31,7 +35,8 @@
          
                     <tr>                
                         <td colspan="2" align="right">
-                           <button id="AgregarButton">Agregar</button>          
+                           <asp:Button ID="AgregarButton" runat="server" Text="Agregar" 
+                                onclick="AgregarButton_Click" />
                         </td>
                     </tr>
 
@@ -39,13 +44,13 @@
                         <td colspan="2" align="center">
                              <asp:GridView ID="ConceptosGridView" runat="server" AutoGenerateColumns="false" >
                                 <Columns>
-                                    <asp:BoundField DataField="usuario1" HeaderText="Tipo Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
-                                    <asp:BoundField DataField="password" HeaderText="Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
-                                    <asp:BoundField DataField="nombre" HeaderText="Monto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
+                                    <asp:BoundField DataField="TipoConcepto_Texto" HeaderText="Tipo Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
+                                    <asp:BoundField DataField="Concepto_Texto" HeaderText="Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
+                                    <asp:BoundField DataField="Monto" HeaderText="Monto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
                                   
                                     <asp:TemplateField HeaderText="Editar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="cmdEditar" CommandArgument='<%# Eval("usuario1") %>'>
+                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="cmdEditar" CommandArgument='<%# Eval("TipoConcepto_Texto") %>'>
                                                     E
                                                 </asp:LinkButton>
                                               </ItemTemplate>
@@ -53,7 +58,7 @@
 
                                      <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  CommandName="cmdEliminar" CommandArgument='<%# Eval("usuario1") %>'></asp:LinkButton>
+                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  CommandName="cmdEliminar" CommandArgument='<%# Eval("TipoConcepto_Texto") %>'></asp:LinkButton>
                        
                                               </ItemTemplate>
                                     </asp:TemplateField>

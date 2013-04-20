@@ -15,6 +15,8 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         SeccionDALC seccionDALC = new SeccionDALC();
         CargoDALC cargoDALC = new CargoDALC();
         PersonaDALC personaDALC;
+        ConceptoRemuneracionDALC conceptoRemuneracionDALC;
+
 
 
         public List<LOCALIDAD> listarLocalidades()
@@ -42,6 +44,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         List<AREA> listaAreas;
         List<SECCION> listaSecciones;
         List<CARGO_PERSONAL> listaCargos;
+        List<CONCEPTO_REMUNERACION> ConceptosList;
 
         public List<AREA> filtrarAreasXLocalidad(int codigoLocalidad)
         {
@@ -102,6 +105,15 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return listaCargos;
         }
 
+        public List<CONCEPTO_REMUNERACION> filtrarConceptosXTipo(int tipo)
+        {
+            conceptoRemuneracionDALC = new ConceptoRemuneracionDALC();
+
+            ConceptosList = new List<CONCEPTO_REMUNERACION>();
+            ConceptosList = conceptoRemuneracionDALC.listaConceptoRemuneracionXTipo(tipo);
+
+            return ConceptosList;
+        }
 
         public string registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string identificador)
         {
