@@ -65,6 +65,15 @@
       <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
       <End Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntitySet="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
     </AssociationSet>
+    <EntitySet Name="PERIODO_PRESUPUESTO" EntityType="PresupuestoDBModel.PERIODO_PRESUPUESTO" />
+    <AssociationSet Name="FK_PERSONA_PERIODO_PRESUPUESTO" Association="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO">
+      <End Role="PERIODO_PRESUPUESTO" EntitySet="PERIODO_PRESUPUESTO" />
+      <End Role="PERSONA" EntitySet="PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" Association="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO">
+      <End Role="PERIODO_PRESUPUESTO" EntitySet="PERIODO_PRESUPUESTO" />
+      <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AREA">
     <Key>
@@ -102,6 +111,8 @@
     <Property Name="id_concepto" Type="Int32" Nullable="false" />
     <Property Name="nombre_concepto" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="CONCEPTO_POR_PERSONA" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION" FromRole="CONCEPTO_REMUNERACION" ToRole="CONCEPTO_POR_PERSONA" />
+    <Property Type="Boolean" Name="mostrar_boleta" Nullable="false" />
+    <Property Type="Int32" Name="columna_boleta" Nullable="false" />
   </EntityType>
   <EntityType Name="CURSO">
     <Key>
@@ -162,6 +173,8 @@
     <NavigationProperty Name="CONCEPTO_POR_PERSONA" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA" FromRole="PERSONA" ToRole="CONCEPTO_POR_PERSONA" />
     <NavigationProperty Name="LOCALIDAD_SECCION" Relationship="PresupuestoDBModel.FK_PERSONA_LOCALIDAD_SECCION" FromRole="PERSONA" ToRole="LOCALIDAD_SECCION" />
     <NavigationProperty Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA" FromRole="PERSONA" ToRole="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
+    <Property Type="Int32" Name="id_periodo_presupuesto" Nullable="false" />
+    <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERSONA" ToRole="PERIODO_PRESUPUESTO" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION">
     <Key>
@@ -179,6 +192,8 @@
     <NavigationProperty Name="CURSO" Relationship="PresupuestoDBModel.CURSO_DEL_PRESUPUESTO" FromRole="PRESUPUESTO_CAPACITACION" ToRole="CURSO" />
     <NavigationProperty Name="LOCALIDAD_SECCION" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION" FromRole="PRESUPUESTO_CAPACITACION" ToRole="LOCALIDAD_SECCION" />
     <NavigationProperty Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION" FromRole="PRESUPUESTO_CAPACITACION" ToRole="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
+    <Property Type="Int32" Name="id_periodo_presupuesto" Nullable="false" />
+    <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" FromRole="PRESUPUESTO_CAPACITACION" ToRole="PERIODO_PRESUPUESTO" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
     <Key>
@@ -359,6 +374,40 @@
       </Principal>
       <Dependent Role="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
         <PropertyRef Name="id_presupuesto_capacitacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PERIODO_PRESUPUESTO">
+    <Key>
+      <PropertyRef Name="id_periodo_presupuesto" />
+    </Key>
+    <Property Type="Int32" Name="id_periodo_presupuesto" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="mes_periodo" Nullable="false" />
+    <Property Type="Int32" Name="anio_periodo" Nullable="false" />
+    <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PERSONA" />
+    <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
+  </EntityType>
+  <Association Name="FK_PERSONA_PERIODO_PRESUPUESTO">
+    <End Type="PresupuestoDBModel.PERIODO_PRESUPUESTO" Role="PERIODO_PRESUPUESTO" Multiplicity="1" />
+    <End Type="PresupuestoDBModel.PERSONA" Role="PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO_PRESUPUESTO">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Principal>
+      <Dependent Role="PERSONA">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO">
+    <End Type="PresupuestoDBModel.PERIODO_PRESUPUESTO" Role="PERIODO_PRESUPUESTO" Multiplicity="1" />
+    <End Type="PresupuestoDBModel.PRESUPUESTO_CAPACITACION" Role="PRESUPUESTO_CAPACITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO_PRESUPUESTO">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION">
+        <PropertyRef Name="id_periodo_presupuesto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

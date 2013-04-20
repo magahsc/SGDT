@@ -30,6 +30,8 @@
     <EntitySetMapping Name="CONCEPTO_REMUNERACION">
       <EntityTypeMapping TypeName="PresupuestoDBModel.CONCEPTO_REMUNERACION">
         <MappingFragment StoreEntitySet="CONCEPTO_REMUNERACION">
+          <ScalarProperty Name="columna_boleta" ColumnName="columna_boleta" />
+          <ScalarProperty Name="mostrar_boleta" ColumnName="mostrar_boleta" />
           <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
           <ScalarProperty Name="nombre_concepto" ColumnName="nombre_concepto" />
         </MappingFragment>
@@ -76,6 +78,7 @@
     <EntitySetMapping Name="PERSONA">
       <EntityTypeMapping TypeName="PresupuestoDBModel.PERSONA">
         <MappingFragment StoreEntitySet="PERSONA">
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
           <ScalarProperty Name="id_persona" ColumnName="id_persona" />
           <ScalarProperty Name="apellido_paterno" ColumnName="apellido_paterno" />
           <ScalarProperty Name="apellido_materno" ColumnName="apellido_materno" />
@@ -90,6 +93,7 @@
     <EntitySetMapping Name="PRESUPUESTO_CAPACITACION">
       <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_CAPACITACION">
         <MappingFragment StoreEntitySet="PRESUPUESTO_CAPACITACION">
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
           <ScalarProperty Name="id_presupuesto_capacitacion" ColumnName="id_presupuesto_capacitacion" />
           <ScalarProperty Name="codigo_presupuesto" ColumnName="codigo_presupuesto" />
           <ScalarProperty Name="id_curso" ColumnName="id_curso" />
@@ -117,6 +121,15 @@
           <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
           <ScalarProperty Name="nombre_seccion" ColumnName="nombre_seccion" />
           <ScalarProperty Name="id_area" ColumnName="id_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERIODO_PRESUPUESTO">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PERIODO_PRESUPUESTO">
+        <MappingFragment StoreEntitySet="PERIODO_PRESUPUESTO">
+          <ScalarProperty Name="anio_periodo" ColumnName="anio_periodo" />
+          <ScalarProperty Name="mes_periodo" ColumnName="mes_periodo" />
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -9,6 +9,7 @@
     <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LOCALIDAD_SECCION" EntityType="PresupuestoDBModel.Store.LOCALIDAD_SECCION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PERIODO_PRESUPUESTO" EntityType="PresupuestoDBModel.Store.PERIODO_PRESUPUESTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PERSONA" EntityType="PresupuestoDBModel.Store.PERSONA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRESUPUESTO_CAPACITACION" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" store:Type="Tables" Schema="dbo" />
@@ -45,8 +46,16 @@
       <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
       <End Role="PERSONA" EntitySet="PERSONA" />
     </AssociationSet>
+    <AssociationSet Name="FK_PERSONA_PERIODO_PRESUPUESTO" Association="PresupuestoDBModel.Store.FK_PERSONA_PERIODO_PRESUPUESTO">
+      <End Role="PERIODO_PRESUPUESTO" EntitySet="PERIODO_PRESUPUESTO" />
+      <End Role="PERSONA" EntitySet="PERSONA" />
+    </AssociationSet>
     <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION">
       <End Role="LOCALIDAD_SECCION" EntitySet="LOCALIDAD_SECCION" />
+      <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO">
+      <End Role="PERIODO_PRESUPUESTO" EntitySet="PERIODO_PRESUPUESTO" />
       <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
     </AssociationSet>
     <AssociationSet Name="FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA" Association="PresupuestoDBModel.Store.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA">
@@ -94,8 +103,10 @@
     <Key>
       <PropertyRef Name="id_concepto" />
     </Key>
-    <Property Name="id_concepto" Type="int" Nullable="false" />
+    <Property Name="id_concepto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="nombre_concepto" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="mostrar_boleta" Type="bit" Nullable="false" />
+    <Property Name="columna_boleta" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CURSO">
     <Key>
@@ -132,6 +143,14 @@
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="PERIODO_PRESUPUESTO">
+    <Key>
+      <PropertyRef Name="id_periodo_presupuesto" />
+    </Key>
+    <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="mes_periodo" Type="int" Nullable="false" />
+    <Property Name="anio_periodo" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="PERSONA">
     <Key>
       <PropertyRef Name="id_persona" />
@@ -144,6 +163,7 @@
     <Property Name="id_cargo" Type="int" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />
+    <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION">
     <Key>
@@ -158,6 +178,7 @@
     <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />
+    <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
     <Key>
@@ -274,6 +295,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PERSONA_PERIODO_PRESUPUESTO">
+    <End Role="PERIODO_PRESUPUESTO" Type="PresupuestoDBModel.Store.PERIODO_PRESUPUESTO" Multiplicity="1" />
+    <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO_PRESUPUESTO">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Principal>
+      <Dependent Role="PERSONA">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION">
     <End Role="LOCALIDAD_SECCION" Type="PresupuestoDBModel.Store.LOCALIDAD_SECCION" Multiplicity="1" />
     <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="*" />
@@ -285,6 +318,18 @@
       <Dependent Role="PRESUPUESTO_CAPACITACION">
         <PropertyRef Name="id_seccion" />
         <PropertyRef Name="id_localidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO">
+    <End Role="PERIODO_PRESUPUESTO" Type="PresupuestoDBModel.Store.PERIODO_PRESUPUESTO" Multiplicity="1" />
+    <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO_PRESUPUESTO">
+        <PropertyRef Name="id_periodo_presupuesto" />
+      </Principal>
+      <Dependent Role="PRESUPUESTO_CAPACITACION">
+        <PropertyRef Name="id_periodo_presupuesto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

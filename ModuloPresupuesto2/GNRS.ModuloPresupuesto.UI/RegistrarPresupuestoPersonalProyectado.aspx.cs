@@ -178,6 +178,11 @@ namespace GNRS.ModuloPresupuesto.UI
 
         }
 
+        protected void AgregarConceptosButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ConceptosPersonal.aspx");
+        }
+
         
        
     }

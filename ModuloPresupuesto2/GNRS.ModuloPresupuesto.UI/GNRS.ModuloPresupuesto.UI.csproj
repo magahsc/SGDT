@@ -56,6 +56,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="ConceptosPersonal.aspx" />
     <Content Include="images\ModuloPresupuesto.jpg" />
     <Content Include="MainPage.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
@@ -109,6 +110,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConceptosPersonal.aspx.cs">
+      <DependentUpon>ConceptosPersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConceptosPersonal.aspx.designer.cs">
+      <DependentUpon>ConceptosPersonal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

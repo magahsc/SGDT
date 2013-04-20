@@ -10,7 +10,7 @@
 namespace GNRS.ModuloPresupuesto.UI {
     
     
-    public partial class RegistrarPresupuestoPersonalProyectado {
+    public partial class ConceptosPersonal {
         
         /// <summary>
         /// ScriptManager1 control.
@@ -20,15 +20,6 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// ComboBoxUpdatePanel control.
@@ -49,57 +40,39 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.HtmlControls.HtmlTable Table1;
         
         /// <summary>
-        /// LocalidadComboBox control.
+        /// TipoConceptoComboBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList LocalidadComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList TipoConceptoComboBox;
         
         /// <summary>
-        /// AreaComboBox control.
+        /// ConceptoComboBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList AreaComboBox;
+        protected global::System.Web.UI.WebControls.DropDownList ConceptoComboBox;
         
         /// <summary>
-        /// SeccionComboBox control.
+        /// MontoTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SeccionComboBox;
+        protected global::System.Web.UI.WebControls.TextBox MontoTextBox;
         
         /// <summary>
-        /// CargoComboBox control.
+        /// ConceptosGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CargoComboBox;
-        
-        /// <summary>
-        /// CantidadTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CantidadTextBox;
-        
-        /// <summary>
-        /// AgregarConceptosButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AgregarConceptosButton;
+        protected global::System.Web.UI.WebControls.GridView ConceptosGridView;
     }
 }
