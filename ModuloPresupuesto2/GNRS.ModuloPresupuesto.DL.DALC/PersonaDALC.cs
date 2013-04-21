@@ -30,24 +30,35 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             try
             {
                 List<PersonaBE> lista = new List<PersonaBE>();
-                PersonaBE objpersonaBE = new PersonaBE();
+                PersonaBE objpersonaBE;
                 var context = new PresupuestoDBEntities();
                 var prueba = (from p in context.PERSONA
                               join s in context.SECCION on p.id_seccion equals s.id_seccion
                               join a in context.AREA on s.id_area equals a.id_area
                               join c in context.CARGO_PERSONAL on p.id_cargo equals c.id_cargo
                               where p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && a.id_area == codigoarea
-                              select new { p.id_persona, p.nombres_persona, p.apellido_paterno, p.apellido_materno, c.nombre_cargo }).ToList();
+                              group new { p, c } by new { p.id_persona, p.nombres_persona, p.apellido_paterno, p.apellido_materno, c.nombre_cargo } into datos
+                              select datos).ToList();
 
-                foreach(var item in prueba)
+                foreach (var item in prueba)
                 {
-                    String nombre = item.nombres_persona + "" + item.apellido_paterno + "" + item.apellido_materno;
-                    objpersonaBE.Id_persona = item.id_persona;
-                    objpersonaBE.Nombre_persona = nombre;
-                    objpersonaBE.Cargo_persona = item.nombre_cargo;
-                    lista.Add(objpersonaBE);
+                    List<int> objprueba = new List<int>();
+                    foreach (var item2 in item)
+                    {
+                        int index = objprueba.IndexOf(item2.p.id_persona);
+                        if (index == -1)
+                        {
+                            String nombre = item2.p.nombres_persona + " " + item2.p.apellido_paterno + " " + item2.p.apellido_materno;
+                            objpersonaBE = new PersonaBE();
+                            objpersonaBE.Id_persona = item2.p.id_persona;
+                            objpersonaBE.Nombre_persona = nombre;
+                            objpersonaBE.Cargo_persona = item2.c.nombre_cargo;
+                            lista.Add(objpersonaBE);
+
+                        }
+                    }
                 }
-               
+
                 return lista;
 
             }

@@ -41,5 +41,25 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 return null;
             }
         }
+
+        public CURSO obtenerCurso(int codigoCurso)
+        {
+            try
+            {
+                CURSO curso = new CURSO();
+                var context = new PresupuestoDBEntities();
+
+                curso = (from c in context.CURSO
+                         where c.id_curso == codigoCurso
+                         select c).First();
+
+                return curso;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

@@ -49,6 +49,8 @@
                                     <li><a href="#" id="A2">Listar presupuesto de capacitacion</a></li>
                                 </ul>
                      </li> 
+
+
                 </ol>
                 <script type="text/javascript">
                           var acc0 = new Spry.Widget.Accordion("main_nav0", { useFixedPanelHeights: false, defaultPanel: -1 });          

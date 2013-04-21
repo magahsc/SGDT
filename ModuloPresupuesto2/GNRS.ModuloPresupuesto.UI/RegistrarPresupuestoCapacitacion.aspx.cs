@@ -27,8 +27,18 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void ListaPersonasCapacitarGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            ListaPersonasCapacitarGridView.PageIndex = e.NewPageIndex;   
+            ListaPersonasCapacitarGridView.PageIndex = e.NewPageIndex;
+
+            int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+            int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
+            int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+
+            ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
+            ListaPersonasCapacitarGridView.DataBind();
+
+            DatosGridView.Update();  
         }
+
 
         protected void InstitutoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -60,10 +70,14 @@ namespace GNRS.ModuloPresupuesto.UI
             AreaDropDownList.Enabled = true;
             LocalidadDropDownList.Enabled = true;
             SeccionDropDownList.Enabled = false;
+            MontoPresupuestoLabel.Text = "0.0";
 
             int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
             AreaDropDownList.DataSource = objcapacitar.filtrarAreasXLocalidad(codigolocalidad);
-            AreaDropDownList.DataBind();
+
+            if (AreaDropDownList.Items.Count != 0)
+            { AreaDropDownList.DataBind(); }
+
             AreaDropDownList.Items.Insert(0, new ListItem("Seleccione el area", ""));
 
             if (LocalidadDropDownList.SelectedIndex == 0)
@@ -79,12 +93,16 @@ namespace GNRS.ModuloPresupuesto.UI
             SeccionDropDownList.Enabled = true;
             AreaDropDownList.Enabled = true;
             LocalidadDropDownList.Enabled = true;
+            MontoPresupuestoLabel.Text = "0.0";
 
             int codigoLocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
             int codigoArea = Convert.ToInt32(AreaDropDownList.SelectedValue);
 
             SeccionDropDownList.DataSource = objcapacitar.filtrarSeccionesXAreaLocalidad(codigoArea, codigoLocalidad);
-            SeccionDropDownList.DataBind();
+
+            if (SeccionDropDownList.Items.Count != 0)
+            { SeccionDropDownList.DataBind(); }
+
             SeccionDropDownList.Items.Insert(0, new ListItem("Seleccione la seccion", ""));
 
             if (AreaDropDownList.SelectedIndex == 0)
@@ -134,14 +152,76 @@ namespace GNRS.ModuloPresupuesto.UI
             SeccionDropDownList.Enabled = true;
             AreaDropDownList.Enabled = true;
             LocalidadDropDownList.Enabled = true;
+            MontoPresupuestoLabel.Text = "0.0";
 
-            int codigolocalidad = LocalidadDropDownList.SelectedIndex;
-            int codigoarea = AreaDropDownList.SelectedIndex;
-            int codigoseccion = SeccionDropDownList.SelectedIndex;
+            int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+            int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
+            int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
 
             ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
             ListaPersonasCapacitarGridView.DataBind();
 
+            DatosGridView.Update();
+            ComboBoxUpdatePanel2.Update();
+
+        }
+
+        protected void SelectCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            double j = 0.0;
+            Control chkSelect = null;
+            CURSO curso = new CURSO();
+            String tipomoneda ="";
+
+            // Select the checkboxes from the GridView control
+            for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+            {
+                GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
+
+                if (isChecked)
+                {
+                    if (chkSelect != null)
+                    {
+                        //If CheckBox is checked then get AddressId by using DataKeys
+                        // properties of GridView and add AddressId of selected row in List.
+                        if (((CheckBox)chkSelect).Checked)
+                        {
+                            int iAddressId = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
+                            // Column 2 is the name column
+                            //String id = ListaPersonasCapacitarGridView.Rows[i].Cells[0].Text;
+                            // ListaPersonasCapacitarGridView.Rows[i].Cells[0].Visible = false;
+                            if (CursoDropDownList.SelectedIndex > 0)
+                            {
+                                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                                curso = objcapacitar.obtenerCurso(codigoCurso);
+                                tipomoneda = curso.tipo_moneda;
+                                j = j + curso.costo_curso;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (CursoDropDownList.SelectedIndex > 0)
+            {
+                if(tipomoneda == "S")
+                  MontoPresupuestoLabel.Text = "S/. " + j + "";
+
+                if (tipomoneda == "D")
+                    MontoPresupuestoLabel.Text = "$ " + j + "";
+
+                LabelUpdatePanel.Update();
+            }
+
+            SeccionDropDownList.Enabled = true;
+            AreaDropDownList.Enabled = true;
+            LocalidadDropDownList.Enabled = true;
+            CursoDropDownList.Enabled = true;
+            InstitutoDropDownList.Enabled = true;
+            ComboBoxUpdatePanel1.Update();
             ComboBoxUpdatePanel2.Update();
 
         }

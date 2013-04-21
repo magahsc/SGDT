@@ -57,7 +57,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         public List<CURSO> listarCursoxInsituciones(int codInstitucion)
         {
             return cursoDALC.listaCursoXInstitucion(codInstitucion);
-        } 
+        }
 
         public List<AREA> filtrarAreasXLocalidad(int codigoLocalidad)
         {
@@ -65,15 +65,19 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
             listaCodigosAreasXLocalidad = new List<int>();
 
-            /*foreach (int item in listaCodigosSeccionesXLocalidad)
+            foreach (int item in listaCodigosSeccionesXLocalidad)
             {
                 List<int> temp = areaDALC.obtenerCodigosAreasXSeccion(item);
-                listaCodigosAreasXLocalidad.AddRange(temp);
-
-            }*/
+                foreach (int codArea in temp)
+                {
+                    int index = listaCodigosAreasXLocalidad.IndexOf(codArea);
+                    if (index == -1)
+                        listaCodigosAreasXLocalidad.Add(codArea);
+                }
+            }
 
             listaAreas = new List<AREA>();
-            foreach (int itemArea in listaCodigosSeccionesXLocalidad)
+            foreach (int itemArea in listaCodigosAreasXLocalidad)
             {
                 AREA temp = areaDALC.obtenerAreaXCodigo(itemArea);
                 listaAreas.Add(temp);
@@ -92,11 +96,19 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             foreach (int item in listaCodigosSeccionesXLocalidad)
             {
                 SECCION temp = seccionDALC.obtenerSeccionXCodigo(item);
-                if (temp.id_area == codigoArea)
-                    listaSecciones.Add(temp);
+                if (temp != null)
+                {
+                    if (temp.id_area == codigoArea)
+                        listaSecciones.Add(temp);
+                }
             }
 
             return listaSecciones;
+        }
+
+        public CURSO obtenerCurso(int codigoCurso)
+        {
+            return cursoDALC.obtenerCurso(codigoCurso);
         }
 
 
