@@ -24,5 +24,21 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 return null;
             }
         }
+
+        public Boolean insertarConceptoPersona(CONCEPTO_POR_PERSONA obj)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                context.CONCEPTO_POR_PERSONA.AddObject(obj);
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ConfiguracionPresupuesto.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConfiguracionPresupuesto" %>

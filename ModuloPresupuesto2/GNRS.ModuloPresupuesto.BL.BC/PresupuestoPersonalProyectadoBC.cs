@@ -115,29 +115,48 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return ConceptosList;
         }
 
-        public string registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string identificador)
+        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre)
         {
             PERSONA persona = new PERSONA();
             persona.id_localidad = codigoLocalidad;
             persona.id_seccion = codigoSeccion;
             persona.id_cargo = codigoCargo;
-            persona.nombres_persona = identificador;
+            persona.nombres_persona = nombre;
 
             personaDALC = new PersonaDALC();
            
             Boolean registro=personaDALC.insertarPersonalProyectado(persona);
+            int cod = persona.id_persona;
 
             if (registro)
             {
-                return identificador;
+                return cod;
             }
             else
             {
-                return "";
+                return -1;
             }
 
 
         }
+
+        public Boolean registrarConceptoXPersona(int codPersona,int codConcepto,float monto)
+        {
+            CONCEPTO_POR_PERSONA objConceptoPersona=new CONCEPTO_POR_PERSONA();
+            objConceptoPersona.id_concepto = codConcepto;
+            objConceptoPersona.id_persona = codPersona;
+            objConceptoPersona.monto = monto;
+
+
+
+            ConceptoRemuneracionDALC conceptoDALC= new ConceptoRemuneracionDALC();
+
+            return conceptoDALC.insertarConceptoPersona(objConceptoPersona);
+
+          
+
+        }
+
        
     }
 }

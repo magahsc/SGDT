@@ -50,6 +50,11 @@
                                 </ul>
                      </li> 
 
+                     <a href="ConfiguracionPresupuesto.aspx" class="menu-vertical AccordionPanelClosed">
+					    Consulta de Presupuesto</a>
+                    <ul class="AccordionPanelContent AccordionPanelClosed" style="height: 0px; display: none; ">                           
+                              
+                     </ul>
 
                 </ol>
                 <script type="text/javascript">

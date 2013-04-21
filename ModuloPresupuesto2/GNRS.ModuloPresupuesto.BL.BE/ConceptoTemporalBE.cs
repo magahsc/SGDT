@@ -7,6 +7,14 @@ namespace GNRS.ModuloPresupuesto.BL.BE
 {
     public class ConceptoTemporalBE
     {
+        private int _cod;
+        public int Cod
+        {
+            get { return _cod; }
+            set { _cod = value; }
+        }
+
+
         private int _tipoConcepto_Cod;
         public int TipoConcepto_Cod
         {
@@ -36,8 +44,8 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             get { return _concepto_Texto; }
             set { _concepto_Texto = value; }
         }
-        private double _monto;
-        public double Monto
+        private float _monto;
+        public float Monto
         {
             get { return _monto; }
             set { _monto = value; }

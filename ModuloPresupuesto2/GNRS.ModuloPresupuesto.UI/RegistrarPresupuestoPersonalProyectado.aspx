@@ -21,8 +21,10 @@
                             var codigoSeccion = document.getElementById("contenido_SeccionComboBox").value;
                             var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
                             var cantidad = document.getElementById("contenido_CantidadTextBox").value;
-
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, confirmarRegistro);
+                           
+                            var CargoDDL = document.getElementById("contenido_CargoComboBox");
+                            var cargo = CargoDDL.options[CargoDDL.selectedIndex].text;
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad,cargo, confirmarRegistro);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -34,13 +36,13 @@
                 $("#dialog-form").css({
                     fontSize: 15
                 });
-          
+
 
                 $("#opener").click(function () {
                     $("#dialog-form").dialog("open");
                 });
 
-                
+
             });
 
 
@@ -121,9 +123,7 @@
               if (theEvent.preventDefault) theEvent.preventDefault();
           }
       }
-      function opener_onclick() {
-
-      }
+    
 
   </script>
   <div id="dialog-form" title="Confirmacion de registro">

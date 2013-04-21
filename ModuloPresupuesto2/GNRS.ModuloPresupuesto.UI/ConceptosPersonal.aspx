@@ -1,6 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ConceptosPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConceptosPersonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-   <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
+    <script>
+        function check(value) {
+            if (/^[0-9]*(\.[0-9]{1,2})?$/.test(value)) {
+                if (parseFloat(value) < 3.0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+     
+  </script>
+  
+  
+  <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
     EnablePartialRendering="true">  
     
     </asp:ScriptManager> 
@@ -30,7 +43,7 @@
                     
                     <tr>
                         <td align="right">Monto:</td>
-                        <td><asp:TextBox ID="MontoTextBox" runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="MontoTextBox" onkeypress='validate(event)'  runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
                     </tr>
          
                     <tr>                
@@ -42,7 +55,8 @@
 
                     <tr>
                         <td colspan="2" align="center">
-                             <asp:GridView ID="ConceptosGridView" runat="server" AutoGenerateColumns="false" >
+                             <asp:GridView ID="ConceptosGridView" runat="server" AutoGenerateColumns="false" 
+                                 onrowcommand="ConceptosGridView_RowCommand" >
                                 <Columns>
                                     <asp:BoundField DataField="TipoConcepto_Texto" HeaderText="Tipo Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
                                     <asp:BoundField DataField="Concepto_Texto" HeaderText="Concepto" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
@@ -50,7 +64,7 @@
                                   
                                     <asp:TemplateField HeaderText="Editar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="cmdEditar" CommandArgument='<%# Eval("TipoConcepto_Texto") %>'>
+                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="cmdEditar" CommandArgument='<%# Eval("Cod") %>'>
                                                     E
                                                 </asp:LinkButton>
                                               </ItemTemplate>
@@ -58,14 +72,24 @@
 
                                      <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  CommandName="cmdEliminar" CommandArgument='<%# Eval("TipoConcepto_Texto") %>'></asp:LinkButton>
+                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  CommandName="cmdEliminar" CommandArgument='<%# Eval("Cod") %>'></asp:LinkButton>
                        
                                               </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                               </asp:GridView>         
+                               </asp:GridView>  
+                               
+                                      
                         </td>
 
+                    </tr>
+
+                    <tr>
+                        <td colspan=2 align=right>
+                            <asp:Button ID="GuardarConceptosButton" runat="server" Text="Guardar Conceptos" 
+                                onclick="GuardarConceptosButton_Click" /> 
+
+                        </td>
                     </tr>
                     
                  </tbody>

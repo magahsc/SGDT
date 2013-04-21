@@ -57,6 +57,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="ConceptosPersonal.aspx" />
+    <Content Include="ConfiguracionPresupuesto.aspx" />
     <Content Include="images\ModuloPresupuesto.jpg" />
     <Content Include="MainPage.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
@@ -117,6 +118,13 @@
     </Compile>
     <Compile Include="ConceptosPersonal.aspx.designer.cs">
       <DependentUpon>ConceptosPersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfiguracionPresupuesto.aspx.cs">
+      <DependentUpon>ConfiguracionPresupuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfiguracionPresupuesto.aspx.designer.cs">
+      <DependentUpon>ConfiguracionPresupuesto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
