@@ -9,17 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GNRS.ModuloPresupuesto.DL.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GNRS.ModuloPresupuesto.BL.BE", "GNRS.ModuloPresupuesto.BL.BE\GNRS.ModuloPresupuesto.BL.BE.csproj", "{9B3C8783-DC6D-4E2B-84E3-AB69ABC03114}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GNRS.ModuloPresupuesto.Pruebas", "GNRS.ModuloPresupuesto.Pruebas\GNRS.ModuloPresupuesto.Pruebas.csproj", "{A00E4671-783B-4F70-88BF-9627622DB595}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{B97F2177-9C05-4EF4-B665-4FCD0EF6FD52}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C234A9-249D-4788-9946-422D73E05474}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		ModuloPresupuesto.vsmdi = ModuloPresupuesto.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ModuloPresupuesto.vsmdi
@@ -45,14 +34,6 @@ Global
 		{9B3C8783-DC6D-4E2B-84E3-AB69ABC03114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3C8783-DC6D-4E2B-84E3-AB69ABC03114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3C8783-DC6D-4E2B-84E3-AB69ABC03114}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A00E4671-783B-4F70-88BF-9627622DB595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A00E4671-783B-4F70-88BF-9627622DB595}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A00E4671-783B-4F70-88BF-9627622DB595}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A00E4671-783B-4F70-88BF-9627622DB595}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B97F2177-9C05-4EF4-B665-4FCD0EF6FD52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B97F2177-9C05-4EF4-B665-4FCD0EF6FD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B97F2177-9C05-4EF4-B665-4FCD0EF6FD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B97F2177-9C05-4EF4-B665-4FCD0EF6FD52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
