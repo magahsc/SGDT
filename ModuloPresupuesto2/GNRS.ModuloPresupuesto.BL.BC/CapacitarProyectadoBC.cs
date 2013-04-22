@@ -16,6 +16,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         InstitutoDALC institucionesDALC = new InstitutoDALC();
         CursoDALC cursoDALC = new CursoDALC();
         PersonaDALC personaDALC = new PersonaDALC();
+        CapacitarProyectadoDALC capacitarDALC = new CapacitarProyectadoDALC();
 
         public List<LOCALIDAD> listarLocalidades()
         {
@@ -111,6 +112,20 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return cursoDALC.obtenerCurso(codigoCurso);
         }
 
+        public int insertarcapacitacionProyectada(PRESUPUESTO_CAPACITACION objcapacitacion)
+        {
+            return capacitarDALC.insertarCapacitacionProyectada(objcapacitacion);
+        }
+
+        public Boolean insertarcapacitacionProyectadaxPersona(PRESUPUESTO_CAPACITACION_POR_PERSONAL objcapacitacionxpersona)
+        {
+            return capacitarDALC.insertarCapacitacionProyectadaxPersona(objcapacitacionxpersona);
+        }
+
+        public Boolean ActualizarcapacitacionProyectada(PRESUPUESTO_CAPACITACION objcapacitacion)
+        {
+            return capacitarDALC.ActualizarCapacitacionProyectada(objcapacitacion);
+        }
 
     }
 }

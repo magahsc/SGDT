@@ -1,0 +1,11 @@
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\TestProject1.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\TestProject1.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.BL.BC.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.BL.BC.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\obj\Debug\TestProject1.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\TestProject1\obj\Debug\TestProject1.pdb

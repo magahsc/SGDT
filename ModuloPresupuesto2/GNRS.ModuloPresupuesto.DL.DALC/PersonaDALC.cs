@@ -30,7 +30,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             try
             {
                 List<PersonaBE> lista = new List<PersonaBE>();
-                PersonaBE objpersonaBE = new PersonaBE();
+                PersonaBE objpersonaBE;
                 var context = new PresupuestoDBEntities();
                 var prueba = (from p in context.PERSONA
                               join s in context.SECCION on p.id_seccion equals s.id_seccion
@@ -41,7 +41,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 
                 foreach(var item in prueba)
                 {
-                    String nombre = item.nombres_persona + "" + item.apellido_paterno + "" + item.apellido_materno;
+                    String nombre = item.nombres_persona + " " + item.apellido_paterno + " " + item.apellido_materno;
+                    objpersonaBE  = new PersonaBE();
                     objpersonaBE.Id_persona = item.id_persona;
                     objpersonaBE.Nombre_persona = nombre;
                     objpersonaBE.Cargo_persona = item.nombre_cargo;

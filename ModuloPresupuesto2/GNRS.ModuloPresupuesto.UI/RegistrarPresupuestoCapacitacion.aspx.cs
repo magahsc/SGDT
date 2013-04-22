@@ -7,22 +7,117 @@ using System.Web.UI.WebControls;
 using GNRS.ModuloPresupuesto.BL.BC;
 using GNRS.ModuloPresupuesto.DL.DALC;
 using System.Data.Entity;
+using System.Globalization;
+using System.Web.Services;
 
 namespace GNRS.ModuloPresupuesto.UI
 {
     public partial class RegistrarPresupuestoCapacitacion : System.Web.UI.Page
     {
         CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+        public double j ;
+        public int contador;
         protected void Page_Load(object sender, EventArgs e)
         {
             CursoDropDownList.Enabled = false;
             AreaDropDownList.Enabled = false;
             SeccionDropDownList.Enabled = false;
 
+            DateTime date = DateTime.Now;
+           // String hola = Session.
+
             if (!IsPostBack)
             {
                 cargarComboBox();
+                if (Session["mes"].ToString() == null || Session["mes"].ToString() == "" ||
+                    Session["dia"].ToString() == null || Session["dia"].ToString() == "" ||
+                    Session["anio"].ToString() == null || Session["anio"].ToString() == "")
+                {
+                    Session.Add("dia", date.Day);
+                    Session.Add("mes", date.Month);
+                    Session.Add("anio", date.Year);
+                }
             }
+        }
+
+        public String mes(int mes)
+        {
+            String mesd = "";
+            switch (mes)
+            {
+                case 1:
+                    {
+                        mesd = "Enero";
+                        break;
+                    }
+
+                case 2:
+                    {
+                        mesd = "Febrero";
+                        break;
+                    }
+
+                case 3:
+                    {
+                        mesd = "Marzo";
+                        break;
+                    }
+
+                case 4:
+                    {
+                        mesd = "Abril";
+                        break;
+                    }
+
+                case 5:
+                    {
+                        mesd = "Mayo";
+                        break;
+                    }
+
+                case 6:
+                    {
+                        mesd = "Junio";
+                        break;
+                    }
+
+                case 7:
+                    {
+                        mesd = "Julio";
+                        break;
+                    }
+
+                case 8:
+                    {
+                        mesd = "Agosto";
+                        break;
+                    }
+
+                case 9:
+                    {
+                        mesd = "Setiembre";
+                        break;
+                    }
+
+                case 10:
+                    {
+                        mesd = "Octubre";
+                        break;
+                    }
+
+                case 11:
+                    {
+                        mesd = "Noviembre";
+                        break;
+                    }
+
+                case 12:
+                    {
+                        mesd = "Diciembre";
+                        break;
+                    }
+            }
+            return mesd;
         }
 
         protected void ListaPersonasCapacitarGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -43,6 +138,7 @@ namespace GNRS.ModuloPresupuesto.UI
         protected void InstitutoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             CursoDropDownList.Enabled = true;
+            MarcarTodosCheckBox.Checked = false;
 
             int codigoinstituto = Convert.ToInt32(InstitutoDropDownList.SelectedValue);
 
@@ -62,6 +158,7 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             InstitutoDropDownList.Enabled = true;
             CursoDropDownList.Enabled = true;
+            MarcarTodosCheckBox.Checked = false;
             ComboBoxUpdatePanel1.Update();
         }
 
@@ -71,6 +168,7 @@ namespace GNRS.ModuloPresupuesto.UI
             LocalidadDropDownList.Enabled = true;
             SeccionDropDownList.Enabled = false;
             MontoPresupuestoLabel.Text = "0.0";
+            MarcarTodosCheckBox.Checked = false;
 
             int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
             AreaDropDownList.DataSource = objcapacitar.filtrarAreasXLocalidad(codigolocalidad);
@@ -94,6 +192,7 @@ namespace GNRS.ModuloPresupuesto.UI
             AreaDropDownList.Enabled = true;
             LocalidadDropDownList.Enabled = true;
             MontoPresupuestoLabel.Text = "0.0";
+            MarcarTodosCheckBox.Checked = false;
 
             int codigoLocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
             int codigoArea = Convert.ToInt32(AreaDropDownList.SelectedValue);
@@ -147,28 +246,117 @@ namespace GNRS.ModuloPresupuesto.UI
 
         }
 
+        public String cambiarmesydia(String dato)
+        {
+            String sdato = dato;
+            switch (dato)
+            {
+                case "1":
+                    {
+                        sdato = "01";
+                        break;
+                    }
+
+                case "2":
+                    {
+                        sdato = "02";
+                        break;
+                    }
+
+                case "3":
+                    {
+                        sdato = "03";
+                        break;
+                    }
+
+                case "4":
+                    {
+                        sdato = "04";
+                        break;
+                    }
+
+                case "5":
+                    {
+                        sdato = "05";
+                        break;
+                    }
+
+                case "6":
+                    {
+                        sdato = "06";
+                        break;
+                    }
+
+                case "7":
+                    {
+                        sdato = "07";
+                        break;
+                    }
+
+                case "8":
+                    {
+                        sdato = "08";
+                        break;
+                    }
+
+                case "9":
+                    {
+                        sdato = "09";
+                        break;
+                    }
+            
+            }
+
+            return sdato;
+        }
+
         protected void SeccionDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             SeccionDropDownList.Enabled = true;
             AreaDropDownList.Enabled = true;
+            MarcarTodosCheckBox.Checked = false;
             LocalidadDropDownList.Enabled = true;
             MontoPresupuestoLabel.Text = "0.0";
 
-            int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-            int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
-            int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+            if (CursoDropDownList.SelectedIndex > 0)
+            {
+                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                CURSO curso = new CURSO();
+                curso = objcapacitar.obtenerCurso(codigoCurso);
 
-            ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
-            ListaPersonasCapacitarGridView.DataBind();
+                String smes = Session["mes"].ToString();
+                smes = cambiarmesydia(smes);
+                String sanio = Session["anio"].ToString();
+                String sdia = Session["dia"].ToString();
+                sdia = cambiarmesydia(sdia);
 
-            DatosGridView.Update();
-            ComboBoxUpdatePanel2.Update();
+                String cadenafecha = sanio + "-" + smes + "-" + sdia;
+                DateTime myDate;
+                myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                int aniomydate = Convert.ToInt32(myDate.Year);
+                int aniocurso = Convert.ToInt32(curso.fecha_inicio.Year);
+
+                if ((DateTime.Compare(myDate, curso.fecha_inicio) > 0) && (DateTime.Compare(myDate, curso.fecha_fin) < 0) && aniocurso == aniomydate)
+                {
+                    int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                    int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
+                    int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+
+                    ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
+                    ListaPersonasCapacitarGridView.DataBind();
+
+                    DatosGridView.Update();
+                    ComboBoxUpdatePanel2.Update();
+                }
+            }
 
         }
 
         protected void SelectCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            double j = 0.0;
+            contador = 0;
+            j = 0.0;
             Control chkSelect = null;
             CURSO curso = new CURSO();
             String tipomoneda ="";
@@ -199,6 +387,7 @@ namespace GNRS.ModuloPresupuesto.UI
                                 curso = objcapacitar.obtenerCurso(codigoCurso);
                                 tipomoneda = curso.tipo_moneda;
                                 j = j + curso.costo_curso;
+                                contador++;
                             }
                         }
                     }
@@ -213,6 +402,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 if (tipomoneda == "D")
                     MontoPresupuestoLabel.Text = "$ " + j + "";
 
+                Session.Add("costocurso", j);
+                Session.Add("contador", contador);
                 LabelUpdatePanel.Update();
             }
 
@@ -225,5 +416,133 @@ namespace GNRS.ModuloPresupuesto.UI
             ComboBoxUpdatePanel2.Update();
 
         }
+
+        protected void MarcarTodosCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Select the checkboxes from the GridView control
+
+            bool valor = MarcarTodosCheckBox.Checked;
+
+            for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+            {
+                GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+               // bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                ((CheckBox)row.FindControl("SelectCheckBox")).Checked = valor;
+            }
+            DatosGridView.Update();
+            
+        }
+
+        protected void GuardarButton1_Click(object sender, EventArgs e)
+        {
+            Control chkSelect = null;
+            CURSO curso = new CURSO();
+            String scodigoalert = "";
+
+            if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
+            {
+                PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
+                PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+                String smes = Session["mes"].ToString();
+                smes = cambiarmesydia(smes);
+                String sanio = Session["anio"].ToString();
+                String sdia = Session["dia"].ToString();
+                sdia = cambiarmesydia(sdia);
+
+                String scosto = Session["costocurso"].ToString();
+                String scontador = Session["contador"].ToString();
+
+                String cadenafecha = sanio + "-" + smes + "-" + sdia;
+                DateTime myDate;
+                myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                objpresupuesto.monto_total = Convert.ToDouble(scosto);
+                objpresupuesto.codigo_presupuesto = "";
+                objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
+                objpresupuesto.presupuesto_aprobado = "P";
+                objpresupuesto.fecha_creacion = myDate;
+                objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+                objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                objpresupuesto.id_periodo_presupuesto = 0;
+                int codigoCapacitacion = objcapacitar.insertarcapacitacionProyectada(objpresupuesto);
+
+                objpresupuesto.id_presupuesto_capacitacion = codigoCapacitacion;
+                sanio = sanio.Substring(2,2);
+                scodigoalert = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
+                objpresupuesto.codigo_presupuesto = sdia + "" + smes + "" + sanio + ""  + codigoCapacitacion;
+                objcapacitar.ActualizarcapacitacionProyectada(objpresupuesto);
+                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                curso = objcapacitar.obtenerCurso(codigoCurso);
+
+                for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                {
+                    GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                    bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                    chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
+
+                    if (isChecked)
+                    {
+                        if (chkSelect != null)
+                        {
+                            if (((CheckBox)chkSelect).Checked)
+                            {
+                                if (CursoDropDownList.SelectedIndex > 0)
+                                {
+                                    int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
+                                    objpresupuestopersona.id_presupuesto_capacitacion = codigoCapacitacion;
+                                    objpresupuestopersona.monto_presupuesto_proyectado = curso.costo_curso;
+                                    objpresupuestopersona.id_persona = codigopersona;
+                                    objcapacitar.insertarcapacitacionProyectadaxPersona(objpresupuestopersona);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                alert("El presupuesto de capacitacíon proyectada " + scodigoalert + " ha sido guardado existosamente");
+
+            }
+
+            SeccionDropDownList.Enabled = true;
+            AreaDropDownList.Enabled = true;
+            LocalidadDropDownList.Enabled = true;
+            CursoDropDownList.Enabled = true;
+            InstitutoDropDownList.Enabled = true;
+
+            InstitutoDropDownList.SelectedIndex = 0;
+            SeccionDropDownList.SelectedIndex = 0;
+            AreaDropDownList.SelectedIndex = 0;
+            LocalidadDropDownList.SelectedIndex = 0;
+            CursoDropDownList.SelectedIndex = 0;
+
+            CursoDropDownList.Enabled = false;
+            SeccionDropDownList.Enabled = false;
+            AreaDropDownList.Enabled = false;
+
+            MarcarTodosCheckBox.Checked = false;
+            MontoPresupuestoLabel.Text = "0.0";
+
+            ListaPersonasCapacitarGridView.DataSource = null;
+            ListaPersonasCapacitarGridView.DataBind();
+
+            ComboBoxUpdatePanel1.Update();
+            DatosGridView.Update();
+            LabelUpdatePanel.Update();
+            ComboBoxUpdatePanel2.Update();
+
+            
+
+        }
+
+        public void alert(string msg)
+        {
+            Label lbl = new Label();
+            lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
+            Page.Controls.Add(lbl);
+        }
+
     }
 }

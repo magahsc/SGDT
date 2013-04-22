@@ -13,3 +13,8 @@ C:\Users\Renzo\Desktop\RepositorioFinal\ModuloPresupuesto2\GNRS.ModuloPresupuest
 C:\Users\Renzo\Desktop\RepositorioFinal\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Renzo\Desktop\RepositorioFinal\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
 C:\Users\Renzo\Desktop\RepositorioFinal\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\N3AR\Desktop\magah\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
