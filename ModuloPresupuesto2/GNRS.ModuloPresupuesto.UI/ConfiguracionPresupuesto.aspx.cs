@@ -25,9 +25,6 @@ namespace GNRS.ModuloPresupuesto.UI
             anioDropDownList.DataSource = ListaAnio(date.Year);
             anioDropDownList.DataBind();
 
-            diaDropDownList.DataSource = ListaDia() ;
-            diaDropDownList.DataBind();
-
             PanelUpdatePanel1.Update();
             }
         }
@@ -216,21 +213,10 @@ namespace GNRS.ModuloPresupuesto.UI
             return lista;
         }
 
-        public List<int> ListaDia()
-        {
-            List<int> lista = new List<int>();
-
-            for (int i = 1; i <= 30 ; i++)
-            {
-                lista.Add(i);
-            }
-
-            return lista;
-        }
 
         protected void GuardarButton_Click(object sender, EventArgs e)
         {
-            Session.Add("dia", diaDropDownList.SelectedValue.ToString());
+            Session.Add("dia", "01");
             Session.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
             Session.Add("anio", anioDropDownList.SelectedValue.ToString());
             alert("La configuración del presupuesto se grabo satisfactoriamente");
@@ -254,11 +240,6 @@ namespace GNRS.ModuloPresupuesto.UI
         }
 
         protected void anioDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PanelUpdatePanel1.Update();
-        }
-
-        protected void diaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelUpdatePanel1.Update();
         }

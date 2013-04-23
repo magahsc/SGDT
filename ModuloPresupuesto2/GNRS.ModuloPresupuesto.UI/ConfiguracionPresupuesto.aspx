@@ -13,11 +13,7 @@
          <tbody>
 
           <tr>
-             <td>Dia:</td>
-             <td><asp:DropDownList ID="diaDropDownList" runat="server" Height="24px" 
-                        Width="130px" 
-                      AutoPostBack="True" 
-                     onselectedindexchanged="diaDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+             <td>&nbsp;</td>
 
 
             

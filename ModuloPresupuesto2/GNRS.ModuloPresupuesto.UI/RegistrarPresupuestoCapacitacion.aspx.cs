@@ -33,7 +33,7 @@ namespace GNRS.ModuloPresupuesto.UI
                     Session["dia"]== null || 
                     Session["anio"] == null)
                 {
-                    Session.Add("dia", date.Day);
+                    Session.Add("dia", "01");
                     Session.Add("mes", date.Month);
                     Session.Add("anio", date.Year);
                 }
