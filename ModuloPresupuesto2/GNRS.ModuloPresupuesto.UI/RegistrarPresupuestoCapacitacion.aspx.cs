@@ -29,9 +29,9 @@ namespace GNRS.ModuloPresupuesto.UI
             if (!IsPostBack)
             {
                 cargarComboBox();
-                if (Session["mes"].ToString() == null || Session["mes"].ToString() == "" ||
-                    Session["dia"].ToString() == null || Session["dia"].ToString() == "" ||
-                    Session["anio"].ToString() == null || Session["anio"].ToString() == "")
+                if (Session["mes"] == null || 
+                    Session["dia"]== null || 
+                    Session["anio"] == null)
                 {
                     Session.Add("dia", date.Day);
                     Session.Add("mes", date.Month);
@@ -393,6 +393,17 @@ namespace GNRS.ModuloPresupuesto.UI
                     }
                 }
             }
+
+            if (CursoDropDownList.SelectedIndex == 0)
+            {
+                MontoPresupuestoLabel.Text = "0.0";
+                alert("Debe seleccionar un curso si desea ver el monto presupuestado");
+                Session.Add("costocurso", j);
+                Session.Add("contador", contador);
+                LabelUpdatePanel.Update();
+            }
+            
+
 
             if (CursoDropDownList.SelectedIndex > 0)
             {
