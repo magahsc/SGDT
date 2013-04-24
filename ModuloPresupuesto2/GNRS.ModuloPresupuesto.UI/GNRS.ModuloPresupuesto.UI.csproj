@@ -58,7 +58,10 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="ConceptosPersonal.aspx" />
     <Content Include="ConfiguracionPresupuesto.aspx" />
+    <Content Include="images\delete.gif" />
+    <Content Include="images\edit.gif" />
     <Content Include="images\ModuloPresupuesto.jpg" />
+    <Content Include="ListarPresupuestoCapacitacion.aspx" />
     <Content Include="MainPage.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
     <Content Include="RegistrarPresupuestoPersonalProyectado.aspx" />
@@ -135,6 +138,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ListarPresupuestoCapacitacion.aspx.cs">
+      <DependentUpon>ListarPresupuestoCapacitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarPresupuestoCapacitacion.aspx.designer.cs">
+      <DependentUpon>ListarPresupuestoCapacitacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>

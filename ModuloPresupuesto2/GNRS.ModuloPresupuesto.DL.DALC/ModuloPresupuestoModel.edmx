@@ -7,6 +7,7 @@
     <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="PresupuestoDBModelStoreContainer">
           <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AUDITORIA_PRESUPUESTO" EntityType="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
@@ -19,6 +20,14 @@
           <EntitySet Name="PRESUPUESTO_CAPACITACION" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SECCION" EntityType="PresupuestoDBModel.Store.SECCION" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" Association="PresupuestoDBModel.Store.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
+            <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="AUDITORIA_DEL_PRESUPUESTO_PERSONAL" Association="PresupuestoDBModel.Store.AUDITORIA_DEL_PRESUPUESTO_PERSONAL">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
           <AssociationSet Name="CURSO_DEL_PRESUPUESTO" Association="PresupuestoDBModel.Store.CURSO_DEL_PRESUPUESTO">
             <End Role="CURSO" EntitySet="CURSO" />
             <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
@@ -87,11 +96,22 @@
           <Property Name="id_area" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre_area" Type="varchar" Nullable="false" MaxLength="200" />
         </EntityType>
+        <EntityType Name="AUDITORIA_PRESUPUESTO">
+          <Key>
+            <PropertyRef Name="id_auditoria" />
+          </Key>
+          <Property Name="id_auditoria" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id_capacitacion_proyectada" Type="int" Nullable="false" />
+          <Property Name="id_personal_proyectado" Type="int" Nullable="false" />
+          <Property Name="fecha_accion" Type="datetime" Nullable="false" />
+          <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
         <EntityType Name="CARGO_PERSONAL">
           <Key>
             <PropertyRef Name="id_cargo" />
           </Key>
-          <Property Name="id_cargo" Type="int" Nullable="false" />
+          <Property Name="id_cargo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre_cargo" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
         </EntityType>
@@ -161,9 +181,10 @@
             <PropertyRef Name="id_persona" />
           </Key>
           <Property Name="id_persona" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="apellido_paterno" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="apellido_materno" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="apellido_paterno" Type="varchar" MaxLength="200" />
+          <Property Name="apellido_materno" Type="varchar" MaxLength="200" />
           <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="fecha_creacion" Type="date" Nullable="false" />
           <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="id_cargo" Type="int" Nullable="false" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
@@ -202,6 +223,30 @@
           <Property Name="nombre_seccion" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="id_area" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
+          <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="1" />
+          <End Role="AUDITORIA_PRESUPUESTO" Type="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO_CAPACITACION">
+              <PropertyRef Name="id_presupuesto_capacitacion" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_capacitacion_proyectada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUDITORIA_DEL_PRESUPUESTO_PERSONAL">
+          <End Role="PERSONA" Type="PresupuestoDBModel.Store.PERSONA" Multiplicity="1" />
+          <End Role="AUDITORIA_PRESUPUESTO" Type="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_personal_proyectado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="CURSO_DEL_PRESUPUESTO">
           <End Role="CURSO" Type="PresupuestoDBModel.Store.CURSO" Multiplicity="1" />
           <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="*" />
@@ -464,6 +509,15 @@
             <End Role="PERIODO_PRESUPUESTO" EntitySet="PERIODO_PRESUPUESTO" />
             <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
           </AssociationSet>
+          <EntitySet Name="AUDITORIA_PRESUPUESTO" EntityType="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" />
+          <AssociationSet Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
+            <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="AUDITORIA_DEL_PRESUPUESTO_PERSONAL" Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AREA">
           <Key>
@@ -565,6 +619,8 @@
           <NavigationProperty Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA" FromRole="PERSONA" ToRole="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
           <Property Type="Int32" Name="id_periodo_presupuesto" Nullable="false" />
           <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERSONA" ToRole="PERIODO_PRESUPUESTO" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="false" />
+          <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="PERSONA" ToRole="AUDITORIA_PRESUPUESTO" />
         </EntityType>
         <EntityType Name="PRESUPUESTO_CAPACITACION">
           <Key>
@@ -584,6 +640,7 @@
           <NavigationProperty Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION" FromRole="PRESUPUESTO_CAPACITACION" ToRole="PRESUPUESTO_CAPACITACION_POR_PERSONAL" />
           <Property Type="Int32" Name="id_periodo_presupuesto" Nullable="false" />
           <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" FromRole="PRESUPUESTO_CAPACITACION" ToRole="PERIODO_PRESUPUESTO" />
+          <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" FromRole="PRESUPUESTO_CAPACITACION" ToRole="AUDITORIA_PRESUPUESTO" />
         </EntityType>
         <EntityType Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
           <Key>
@@ -801,6 +858,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AUDITORIA_PRESUPUESTO">
+          <Key>
+            <PropertyRef Name="id_auditoria" />
+          </Key>
+          <Property Type="Int32" Name="id_auditoria" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id_capacitacion_proyectada" Nullable="false" />
+          <Property Type="Int32" Name="id_personal_proyectado" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_accion" Nullable="false" />
+          <Property Type="String" Name="tipo_accion" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="tipo_presupuesto" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
+          <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PERSONA" />
+        </EntityType>
+        <Association Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
+          <End Type="PresupuestoDBModel.PRESUPUESTO_CAPACITACION" Role="PRESUPUESTO_CAPACITACION" Multiplicity="1" />
+          <End Type="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Role="AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO_CAPACITACION">
+              <PropertyRef Name="id_presupuesto_capacitacion" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_capacitacion_proyectada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUDITORIA_DEL_PRESUPUESTO_PERSONAL">
+          <End Type="PresupuestoDBModel.PERSONA" Role="PERSONA" Multiplicity="1" />
+          <End Type="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Role="AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_personal_proyectado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -850,7 +944,8 @@
             <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PERSONA"><EntityTypeMapping TypeName="PresupuestoDBModel.PERSONA"><MappingFragment StoreEntitySet="PERSONA">
-            <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+            <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
                 <ScalarProperty Name="id_persona" ColumnName="id_persona" />
             <ScalarProperty Name="apellido_paterno" ColumnName="apellido_paterno" />
             <ScalarProperty Name="apellido_materno" ColumnName="apellido_materno" />
@@ -888,6 +983,18 @@
                 <ScalarProperty Name="anio_periodo" ColumnName="anio_periodo" />
                 <ScalarProperty Name="mes_periodo" ColumnName="mes_periodo" />
                 <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AUDITORIA_PRESUPUESTO">
+            <EntityTypeMapping TypeName="PresupuestoDBModel.AUDITORIA_PRESUPUESTO">
+              <MappingFragment StoreEntitySet="AUDITORIA_PRESUPUESTO">
+                <ScalarProperty Name="tipo_presupuesto" ColumnName="tipo_presupuesto" />
+                <ScalarProperty Name="tipo_accion" ColumnName="tipo_accion" />
+                <ScalarProperty Name="fecha_accion" ColumnName="fecha_accion" />
+                <ScalarProperty Name="id_personal_proyectado" ColumnName="id_personal_proyectado" />
+                <ScalarProperty Name="id_capacitacion_proyectada" ColumnName="id_capacitacion_proyectada" />
+                <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -935,10 +1042,10 @@
           <ConnectorPoint PointX="5.25" PointY="7.3651432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PERSONA_Cargo_Personal" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="7.3651432291666659" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="7.365143229166665" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="7.3651432291666659" />
-          <ConnectorPoint PointX="7.5" PointY="7.3651432291666659" />
+          <ConnectorPoint PointX="6.75" PointY="7.5378429882812483" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="7.5378429882812474" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="7.5378429882812483" />
+          <ConnectorPoint PointX="7.5" PointY="7.5378429882812483" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="7.3651432291666659" />
@@ -952,8 +1059,8 @@
         <AssociationConnector Association="PresupuestoDBModel.CURSO_DEL_PRESUPUESTO" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
           <ConnectorPoint PointX="7.125" PointY="9.5011528461538468" />
-          <ConnectorPoint PointX="7.125" PointY="2.2690996210937509" />
-          <ConnectorPoint PointX="7.5" PointY="2.2690996210937509" />
+          <ConnectorPoint PointX="7.125" PointY="2.8249435228678381" />
+          <ConnectorPoint PointX="7.5" PointY="2.8249435228678381" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.INSTITUTO_DEL_CURSO" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.268992513020834" />
@@ -969,26 +1076,26 @@
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PERSONA_LOCALIDAD_SECCION" ManuallyRouted="false">
           <ConnectorPoint PointX="4.875" PointY="5.672587890625" />
-          <ConnectorPoint PointX="4.875" PointY="9.0355436197916674" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="9.0355436197916674" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="9.0355436197916674" />
-          <ConnectorPoint PointX="7.5" PointY="9.0355436197916674" />
+          <ConnectorPoint PointX="4.875" PointY="9.2278450520833353" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="9.2278450520833353" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="9.2278450520833353" />
+          <ConnectorPoint PointX="7.5" PointY="9.2278450520833353" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.125" PointY="3.9804996744791663" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="3.9804996744791654" />
-          <ConnectorPoint PointX="7.270833333333333" PointY="3.9804996744791663" />
-          <ConnectorPoint PointX="7.5" PointY="3.9804996744791663" />
+          <ConnectorPoint PointX="6.125" PointY="4.076650390625" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="4.0766503906249989" />
+          <ConnectorPoint PointX="7.270833333333333" PointY="4.076650390625" />
+          <ConnectorPoint PointX="7.5" PointY="4.076650390625" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="5.75" />
           <ConnectorPoint PointX="9.375" PointY="5.375" />
-          <ConnectorPoint PointX="9.375" PointY="4.1126810364583353" />
-          <ConnectorPoint PointX="9.75" PointY="4.1126810364583353" />
+          <ConnectorPoint PointX="9.375" PointY="4.1900366012369812" />
+          <ConnectorPoint PointX="9.75" PointY="4.1900366012369812" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="3.4313405182291676" />
-          <ConnectorPoint PointX="9.75" PointY="3.4313405182291676" />
+          <ConnectorPoint PointX="9" PointY="3.4700183006184906" />
+          <ConnectorPoint PointX="9.75" PointY="3.4700183006184906" />
         </AssociationConnector>
         <EntityTypeShape EntityType="PresupuestoDBModel.PERIODO_PRESUPUESTO" Width="1.5" PointX="5.25" PointY="0.75" Height="1.9802864583333388" />
         <AssociationConnector Association="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" >
@@ -996,12 +1103,22 @@
           <ConnectorPoint PointX="7.0660744349011217" PointY="2.9840522009267665" />
           <ConnectorPoint PointX="7.1839255650988791" PointY="3.1019033311245252" />
           <ConnectorPoint PointX="7.1875" PointY="3.1054777660256461" />
-          <ConnectorPoint PointX="7.1875" PointY="6.5263196145833327" />
-          <ConnectorPoint PointX="7.5" PointY="6.5263196145833327" />
+          <ConnectorPoint PointX="7.1875" PointY="6.6126694941406239" />
+          <ConnectorPoint PointX="7.5" PointY="6.6126694941406239" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" >
-          <ConnectorPoint PointX="6.75" PointY="1.4470498105468757" />
-          <ConnectorPoint PointX="7.5" PointY="1.4470498105468757" />
+          <ConnectorPoint PointX="6.75" PointY="1.6777363830128222" />
+          <ConnectorPoint PointX="7.5" PointY="1.6777363830128222" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Width="1.5" PointX="12.75" PointY="4" Height="2.5571907552083388" />
+        <AssociationConnector Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" >
+          <ConnectorPoint PointX="9" PointY="1.7812500000000002" />
+          <ConnectorPoint PointX="13.5" PointY="1.7812500000000002" />
+          <ConnectorPoint PointX="13.5" PointY="4" />
+        </AssociationConnector>
+        <AssociationConnector Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" >
+          <ConnectorPoint PointX="9" PointY="6.0625025000000008" />
+          <ConnectorPoint PointX="12.75" PointY="6.0625025000000008" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

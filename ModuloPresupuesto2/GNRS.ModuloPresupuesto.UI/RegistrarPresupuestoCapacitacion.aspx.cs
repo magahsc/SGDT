@@ -33,10 +33,17 @@ namespace GNRS.ModuloPresupuesto.UI
                     Session["dia"]== null || 
                     Session["anio"] == null)
                 {
-                    Session.Add("dia", "01");
+                   /* Session.Add("dia", "01");
                     Session.Add("mes", date.Month);
                     Session.Add("anio", date.Year);
+                    * */
+                    Session.Add("Mensaje", "1");
+                    Server.Transfer("MainPage.aspx");
+                    //alert("Debe configurar el mes y el año para poder realizar un registro de capacitación");
                 }
+
+
+
             }
         }
 
@@ -331,13 +338,19 @@ namespace GNRS.ModuloPresupuesto.UI
                 sdia = cambiarmesydia(sdia);
 
                 String cadenafecha = sanio + "-" + smes + "-" + sdia;
-                DateTime myDate;
+                DateTime myDate,myDate2;
                 myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+
+                int aniofinal = Convert.ToInt32(sanio) + 1;
+                String saniofinal = aniofinal + "";
+                String cadenafecha2 = aniofinal + "-" + smes + "-" + sdia;
+                myDate2 = DateTime.ParseExact(cadenafecha2, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
                 int aniomydate = Convert.ToInt32(myDate.Year);
                 int aniocurso = Convert.ToInt32(curso.fecha_inicio.Year);
 
-                if ((DateTime.Compare(myDate, curso.fecha_inicio) > 0) && (DateTime.Compare(myDate, curso.fecha_fin) < 0) && aniocurso == aniomydate)
+                if ((DateTime.Compare(myDate, curso.fecha_inicio) < 0) && (DateTime.Compare(myDate2, curso.fecha_fin) > 0) && aniocurso == aniomydate)
                 {
                     int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
                     int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);

@@ -46,7 +46,7 @@
            	                <a class=" AccordionPanelTab" href="#">Presupuesto de capacitacion proyectada</a>
                                 <ul class="AccordionPanelContent" style="height: auto; display: block;">
                                     <li><a href="RegistrarPresupuestoCapacitacion.aspx" id="A1">Registrar presupuesto de capacitacion</a></li>
-                                    <li><a href="#" id="A2">Listar presupuesto de capacitacion</a></li>
+                                    <li><a href="ListarPresupuestoCapacitacion.aspx" id="A2">Listar presupuesto de capacitacion</a></li>
                                 </ul>
                      </li> 
 

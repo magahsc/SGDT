@@ -127,5 +127,45 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return capacitarDALC.ActualizarCapacitacionProyectada(objcapacitacion);
         }
 
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMesxAnioxEstado(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxMesxAnioxEstado(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMes(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxMes(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxAnio(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxAnio(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxEstado(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxEstado(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMesxAnio(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxMesxAnio(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMesxEstado(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxMesxEstado(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxAnioxEstado(CapacitacionProyectadaBE objcapacitar)
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxAnioxEstado(objcapacitar);
+        }
+
+        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxTodo()
+        {
+            return capacitarDALC.ListarCapacitacionProyectadaxTodo();
+        }
+
     }
 }

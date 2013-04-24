@@ -219,6 +219,7 @@ namespace GNRS.ModuloPresupuesto.UI
             Session.Add("dia", "01");
             Session.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
             Session.Add("anio", anioDropDownList.SelectedValue.ToString());
+            Session.Add("Mensaje", "0");
             alert("La configuración del presupuesto se grabo satisfactoriamente");
             /*Context.Items.Add("dia", diaDropDownList.SelectedValue.ToString());
             Context.Items.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
