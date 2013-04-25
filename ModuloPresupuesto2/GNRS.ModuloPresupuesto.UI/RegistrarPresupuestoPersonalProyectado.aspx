@@ -39,7 +39,16 @@
 
 
                 $("#opener").click(function () {
-                    $("#dialog-form").dialog("open");
+                    var cantidadPersonales = document.getElementById("contenido_CantidadTextBox").value;
+                    var cantidadConceptos = '<%= Session["NumeroConceptos"] %>';
+                    var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
+
+                    if (codigoCargo=="" || cantidadPersonales == "" || cantidadConceptos == "" || cantidadConceptos == "0") {
+                        $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
+                    }
+                    else {
+                        $("#dialog-form").dialog("open");
+                    }
                 });
 
 
@@ -80,6 +89,9 @@
                       document.getElementById("contenido_AreaComboBox").disabled = true;
                       document.getElementById("contenido_CargoComboBox").selectedIndex = 0;
                       document.getElementById("contenido_CargoComboBox").disabled = true;
+                      document.getElementById("contenido_AgregarConceptosButton").disabled = true;
+                      document.getElementById("contenido_nuevo").value = "si";
+                      
                       $(this).dialog("close");
 
                   }
@@ -114,14 +126,12 @@
 
   <script>
       function validate(evt) {
-          var theEvent = evt || window.event;
-          var key = theEvent.keyCode || theEvent.which;
-          key = String.fromCharCode(key);
-          var regex = /[0-9]|\./;
-          if (!regex.test(key)) {
-              theEvent.returnValue = false;
-              if (theEvent.preventDefault) theEvent.preventDefault();
-          }
+          var charCode = (evt.which) ? evt.which : event.keyCode;
+
+
+          if (charCode > 31 && (charCode < 48 || charCode > 57))
+              return false;
+          return true;
       }
     
 
@@ -175,12 +185,13 @@
                      <tr>
                         <td align="right">Cargo:</td>
                         <td><asp:DropDownList ID="CargoComboBox" runat="server" AutoPostBack="True"
-                            Height="20px" Width="130px" Enabled=false></asp:DropDownList></td>
+                            Height="20px" Width="130px" Enabled=false 
+                                onselectedindexchanged="CargoComboBox_SelectedIndexChanged"></asp:DropDownList></td>
                     </tr>
 
                     <tr>
                         <td align="right">Cantidad:</td>
-                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='validate(event)' ></asp:TextBox></td>
+                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validate(event)' ></asp:TextBox></td>
                     </tr>
          
                     <tr>
@@ -197,6 +208,8 @@
                            <button id="opener" onclick="return opener_onclick()">Registrar</button>          
                         </td>
                     </tr>
+
+                    
                  </tbody>
             </Table>
 
@@ -204,6 +217,8 @@
   </ContentTemplate> 
   </asp:UpdatePanel>
 
+  <input type="hidden" name="nuevo" id="nuevo" runat="server" />
+ 
 
 
  

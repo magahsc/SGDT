@@ -15,6 +15,10 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 var context = new PresupuestoDBEntities();
                 context.PERSONA.AddObject(persona);
+                persona.estado_persona = "P";
+
+                DateTime now = DateTime.Now;
+                persona.fecha_creacion = now;
                 context.SaveChanges();
                 return true;
                 
@@ -49,6 +53,32 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     lista.Add(objpersonaBE);
                 }
                
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<PERSONA> obtenerPersonasXLocalidadSeccionCargo(int codigolocalidad, int codigoarea, int codigoseccion, int codigoCargo)
+        {
+            try
+            {
+                List<PERSONA> lista = new List<PERSONA>();
+                var context = new PresupuestoDBEntities();
+                lista = (from p in context.PERSONA
+                         // orderby p.nombres_persona descending
+                         // where (p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && p.id_cargo == codigoCargo)
+                         where p.id_localidad == codigolocalidad
+                         select p).ToList();
+
+                //foreach (var item in prueba)
+                //{
+                //    lista.Add(item);
+                //}
+
                 return lista;
 
             }

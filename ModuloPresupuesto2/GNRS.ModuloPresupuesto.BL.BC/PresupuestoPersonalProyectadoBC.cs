@@ -157,6 +157,41 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
         }
 
-       
+
+
+        public int obtenerCodDePersonalProyectado(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string cargo)
+        {
+            try
+            {
+
+                personaDALC = new PersonaDALC();
+                int codigo = -1;
+                List<PERSONA> lista = new List<PERSONA>();
+
+                lista = personaDALC.obtenerPersonasXLocalidadSeccionCargo(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo);
+
+                lista.OrderBy(p => p.nombres_persona).ToList();
+
+                if (lista.Count() > 0)
+                {
+                    string cargoCompleto = lista[lista.Count() - 1].nombres_persona;
+                    if (cargoCompleto.Contains(cargo))
+                    {
+                        int index = cargo.Length;
+                        string numero = cargoCompleto.Substring(index + 1);
+                        codigo = Convert.ToInt32(numero);
+
+                    }
+                    return codigo;
+                }
+                else
+                    return 0;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 }

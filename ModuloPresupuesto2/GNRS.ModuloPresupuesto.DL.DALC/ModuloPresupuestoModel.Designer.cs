@@ -2277,7 +2277,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_paternoChanging(value);
                 ReportPropertyChanging("apellido_paterno");
-                _apellido_paterno = StructuralObject.SetValidValue(value, false);
+                _apellido_paterno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_paterno");
                 Onapellido_paternoChanged();
             }
@@ -2301,7 +2301,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_maternoChanging(value);
                 ReportPropertyChanging("apellido_materno");
-                _apellido_materno = StructuralObject.SetValidValue(value, false);
+                _apellido_materno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_materno");
                 Onapellido_maternoChanged();
             }

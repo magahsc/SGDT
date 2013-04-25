@@ -27,7 +27,8 @@ namespace GNRS.ModuloPresupuesto.UI
                     ConceptosGridView.DataSource = ConceptosTemporalesLista;
                     ConceptosGridView.DataBind();
                 }
-
+                else
+                    GuardarConceptosButton.Visible = false;
             }
         }
 
@@ -90,10 +91,33 @@ namespace GNRS.ModuloPresupuesto.UI
                 float _monto;
                 float.TryParse(MontoTextBox.Text, out _monto);
                 objConceptoTemp.Monto = _monto;
-                int cantidad = ConceptosTemporalesLista.Count();
-                objConceptoTemp.Cod = cantidad + 1;
 
-                ConceptosTemporalesLista.Add(objConceptoTemp);
+
+                if (Session["accion"] != null && Session["accion"].Equals("editar"))
+                {
+                    int codigoEditar = Convert.ToInt32(Session["codConceptoAEditar"]);
+                    objConceptoTemp.Cod = codigoEditar;
+                    var index = ConceptosTemporalesLista.FindIndex(x => x.Cod == codigoEditar);
+                    ConceptosTemporalesLista[index] = objConceptoTemp;
+
+                    Session.Remove("accion");
+                    Session.Remove("codConceptoAEditar");
+
+                }
+
+                else
+                {
+                    int cantidad;
+                    if (ConceptosTemporalesLista.Count() == 0)
+                        cantidad = 0;
+                    else
+                        cantidad = ConceptosTemporalesLista[ConceptosTemporalesLista.Count - 1].Cod;
+
+                    objConceptoTemp.Cod = cantidad + 1;
+                    ConceptosTemporalesLista.Add(objConceptoTemp);
+
+                }
+               
                 ConceptosGridView.DataSource = ConceptosTemporalesLista;
                 ConceptosGridView.DataBind();
 
@@ -104,6 +128,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 TipoConceptoComboBox.SelectedIndex = 0;
                 MontoTextBox.Text = "";
 
+                AgregarButton.Enabled = false;
+                GuardarConceptosButton.Visible = true;
 
                 ComboBoxUpdatePanel.Update();
             }
@@ -114,6 +140,50 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void ConceptosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName.Equals("cmdEditar"))
+            {
+                List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
+
+                if (Session["ConceptosTemporalesLista"] != null)
+                {
+                    ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
+
+                }
+
+                int codigoEditar = Convert.ToInt32(e.CommandArgument);
+                ConceptoTemporalBE objEditar = ConceptosTemporalesLista.Find(x => x.Cod == codigoEditar);
+
+                int codTipo = objEditar.TipoConcepto_Cod;
+                TipoConceptoComboBox.ClearSelection();
+                TipoConceptoComboBox.Items.FindByValue(codTipo.ToString()).Selected = true;
+
+                int codConcepto = objEditar.Concepto_Cod;
+
+                int tipoConcepto = Convert.ToInt32(TipoConceptoComboBox.SelectedValue);
+                ConceptoComboBox.DataSource = presupuestoPersonalBC.filtrarConceptosXTipo(tipoConcepto);
+                ConceptoComboBox.DataTextField = "nombre_concepto";
+                ConceptoComboBox.DataValueField = "id_concepto";
+                ConceptoComboBox.DataBind();
+                ConceptoComboBox.Items.Insert(0, new ListItem("Seleccione un concepto", ""));
+
+
+
+                ConceptoComboBox.ClearSelection();
+
+                ConceptoComboBox.Items.FindByValue(codConcepto.ToString()).Selected = true;
+                ConceptoComboBox.Enabled = true;
+                MontoTextBox.Text = objEditar.Monto.ToString();
+
+                Session.Add("accion", "editar");
+                Session.Add("codConceptoAEditar", codigoEditar);
+
+                AgregarButton.Enabled = true;
+
+                ComboBoxUpdatePanel.Update();
+
+
+            } 
+            
             if (e.CommandName.Equals("cmdEliminar"))
             {
                 List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
@@ -151,8 +221,24 @@ namespace GNRS.ModuloPresupuesto.UI
 
             }
             Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
+            Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
             Response.Redirect("RegistrarPresupuestoPersonalProyectado.aspx");
 
+        }
+
+        protected void ConceptoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ConceptoComboBox.SelectedItem.Value == "")
+                    AgregarButton.Enabled = false;
+                else
+                    AgregarButton.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+            }
         }
        
     }

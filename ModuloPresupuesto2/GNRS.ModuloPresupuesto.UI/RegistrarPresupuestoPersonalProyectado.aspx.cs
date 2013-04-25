@@ -27,9 +27,41 @@ namespace GNRS.ModuloPresupuesto.UI
 
                
                 cargarDatosSession();
+
+                if (CargoComboBox.SelectedItem.Value == "")
+                    AgregarConceptosButton.Enabled = false;
+
+                List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
+                if (Session["ConceptosTemporalesLista"] != null)
+                {
+                    ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
+                    nuevo.Attributes["value"] = "no";
+
+                    
+                    
+
+                }
+                else
+                {
+                    nuevo.Attributes["value"] = "si";
+
+                }
+
+
+                if (Session["mes"] == null ||    Session["dia"] == null ||        Session["anio"] == null)
+                {
+
+                    alert("Debe configurar el mes y el año para poder realizar un registro de capacitación");
+                }
             }
         }
 
+        public void alert(string msg)
+        {
+            Label lbl = new Label();
+            lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
+            Page.Controls.Add(lbl);
+        }
 
         public void cargarDatosSession()
         {
@@ -186,52 +218,64 @@ namespace GNRS.ModuloPresupuesto.UI
                 return "";
             }
 
-            int cantidadAgregar=Convert.ToInt32(cantidad);
+            int cantidadAgregar = Convert.ToInt32(cantidad);
             PresupuestoPersonalProyectadoBC presupuestoPersonalBC = new PresupuestoPersonalProyectadoBC();
 
-            for(int i=1;i <=cantidadAgregar;i++)
+
+            int codigoLocalidad, codigoArea, codigoSeccion, codigoCargo;
+
+            if (!int.TryParse(codLocalidad, out codigoLocalidad))
             {
+                codigoLocalidad = 0;
+            }
 
-                int codigoLocalidad, codigoArea, codigoSeccion, codigoCargo;
+            if (!int.TryParse(codArea, out codigoArea))
+            {
+                codigoArea = 0;
+            }
 
-                if (!int.TryParse(codLocalidad, out codigoLocalidad))
-                {
-                    codigoLocalidad = 0;
-                }
+            if (!int.TryParse(codSeccion, out codigoSeccion))
+            {
+                codigoSeccion = 0;
+            }
 
-                if (!int.TryParse(codArea, out codigoArea))
-                {
-                    codigoArea = 0;
-                }
+            if (!int.TryParse(codCargo, out codigoCargo))
+            {
+                codigoCargo = 0;
+            }
 
-                if (!int.TryParse(codSeccion, out codigoSeccion))
-                {
-                    codigoSeccion = 0;
-                }
 
-                if (!int.TryParse(codCargo, out codigoCargo))
-                {
-                    codigoCargo = 0;
-                }
+            int numeroDeCargoActual = presupuestoPersonalBC.obtenerCodDePersonalProyectado(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cargo);
+            numeroDeCargoActual++;
 
-                string nombre = cargo + " " + i;
+
+           
+            for(int i=1;i <=cantidadAgregar;i++)
+            {               
+
+                string nombre = cargo + " " + numeroDeCargoActual;
+                numeroDeCargoActual++;
+
                 int codAgregado = presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, nombre);
 
-                
-                List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
-                if (HttpContext.Current.Session["ConceptosTemporalesLista"] != null)
+                if (codAgregado != -1)
                 {
-                    ConceptosTemporalesLista = (List<ConceptoTemporalBE>)HttpContext.Current.Session["ConceptosTemporalesLista"];
+                    List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
+                    if (HttpContext.Current.Session["ConceptosTemporalesLista"] != null)
+                    {
+                        ConceptosTemporalesLista = (List<ConceptoTemporalBE>)HttpContext.Current.Session["ConceptosTemporalesLista"];
 
+                    }
+
+                    foreach (ConceptoTemporalBE item in ConceptosTemporalesLista)
+                    {
+                        presupuestoPersonalBC.registrarConceptoXPersona(codAgregado, item.Concepto_Cod, item.Monto);
+                    }
                 }
-
-                
-
-                foreach (ConceptoTemporalBE item in ConceptosTemporalesLista)
+                else
                 {
-                    presupuestoPersonalBC.registrarConceptoXPersona(codAgregado, item.Concepto_Cod, item.Monto);
+                    return "";
                 }
-
             }
 
            
@@ -241,6 +285,12 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void AgregarConceptosButton_Click(object sender, EventArgs e)
         {
+
+            
+            if (nuevo.Attributes["value"].Equals("si"))
+                Session.Remove("ConceptosTemporalesLista");
+
+
             if (LocalidadComboBox.SelectedItem.Value != "")
                 Session.Add("codLocalidad", LocalidadComboBox.SelectedItem.Value);
 
@@ -257,6 +307,23 @@ namespace GNRS.ModuloPresupuesto.UI
                 Session.Add("cantidad", CantidadTextBox.Text);
 
             Response.Redirect("ConceptosPersonal.aspx");
+        }
+
+        protected void CargoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               
+
+                if (CargoComboBox.SelectedItem.Value == "")
+                    AgregarConceptosButton.Enabled = false;
+                else
+                    AgregarConceptosButton.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         

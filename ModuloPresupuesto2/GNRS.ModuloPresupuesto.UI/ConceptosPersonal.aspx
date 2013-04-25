@@ -1,15 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ConceptosPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConceptosPersonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
     <script>
-        function check(value) {
-            if (/^[0-9]*(\.[0-9]{1,2})?$/.test(value)) {
-                if (parseFloat(value) < 3.0) {
-                    return true;
-                }
-            }
-            return false;
+        function validate(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+
+
+            if (charCode != 44 && charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
         }
-     
   </script>
   
   
@@ -36,14 +35,16 @@
                       
                         <tr>
                             <td align="right">Concepto:</td>
-                            <td><asp:DropDownList ID="ConceptoComboBox" runat="server" Height="20px" Width="130px" Enabled=false></asp:DropDownList></td>
+                            <td><asp:DropDownList ID="ConceptoComboBox" runat="server" Height="20px" 
+                                    Width="130px" AutoPostBack="True"  Enabled=false 
+                                    onselectedindexchanged="ConceptoComboBox_SelectedIndexChanged"></asp:DropDownList></td>
                         </tr>
                    
 
                     
                     <tr>
                         <td align="right">Monto:</td>
-                        <td><asp:TextBox ID="MontoTextBox" onkeypress='validate(event)'  runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="MontoTextBox" onkeypress='return validate(event)'  runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
                     </tr>
          
                     <tr>                
