@@ -17,6 +17,7 @@ namespace GNRS.ModuloPresupuesto.UI
         CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
         public double j ;
         public int contador;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             CursoDropDownList.Enabled = false;

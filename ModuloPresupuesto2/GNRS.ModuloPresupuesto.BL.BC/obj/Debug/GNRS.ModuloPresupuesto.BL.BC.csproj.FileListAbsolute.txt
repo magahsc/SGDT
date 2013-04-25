@@ -62,3 +62,12 @@ C:\Users\N3AR\Desktop\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\D
 C:\Users\N3AR\Desktop\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\N3AR\Desktop\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\GNRS.ModuloPresupuesto.BL.BC.dll
 C:\Users\N3AR\Desktop\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\GNRS.ModuloPresupuesto.BL.BC.pdb
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.BL.BC.dll
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.BL.BC.pdb
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.dll
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\bin\Debug\GNRS.ModuloPresupuesto.DL.DALC.pdb
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\ResolveAssemblyReference.cache
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\GNRS.ModuloPresupuesto.BL.BC.dll
+E:\Users\JAVIER\Documents\Visual Studio 2010\Projects\SGDT\ModuloPresupuesto2\GNRS.ModuloPresupuesto.BL.BC\obj\Debug\GNRS.ModuloPresupuesto.BL.BC.pdb
