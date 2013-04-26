@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaDALC.cs" />
+    <Compile Include="CapacitarProyectadoDALC.cs" />
     <Compile Include="CargoDALC.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="ConceptoRemuneracionDALC.cs" />
+    <Compile Include="CursoDALC.cs" />
+    <Compile Include="InstitutoDALC.cs" />
     <Compile Include="LocalidadDALC.cs" />
     <Compile Include="ModuloPresupuestoModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -57,11 +60,19 @@
     <Compile Include="SeccionDALC.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="ModuloPresupuestoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModuloPresupuestoModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GNRS.ModuloPresupuesto.BL.BE\GNRS.ModuloPresupuesto.BL.BE.csproj">
+      <Project>{9B3C8783-DC6D-4E2B-84E3-AB69ABC03114}</Project>
+      <Name>GNRS.ModuloPresupuesto.BL.BE</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

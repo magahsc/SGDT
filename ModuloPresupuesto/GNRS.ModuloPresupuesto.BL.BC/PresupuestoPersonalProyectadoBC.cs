@@ -15,6 +15,8 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         SeccionDALC seccionDALC = new SeccionDALC();
         CargoDALC cargoDALC = new CargoDALC();
         PersonaDALC personaDALC;
+        ConceptoRemuneracionDALC conceptoRemuneracionDALC;
+
 
 
         public List<LOCALIDAD> listarLocalidades()
@@ -42,6 +44,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         List<AREA> listaAreas;
         List<SECCION> listaSecciones;
         List<CARGO_PERSONAL> listaCargos;
+        List<CONCEPTO_REMUNERACION> ConceptosList;
 
         public List<AREA> filtrarAreasXLocalidad(int codigoLocalidad)
         {
@@ -52,8 +55,12 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             foreach (int item in listaCodigosSeccionesXLocalidad)
             {
                 List<int> temp=areaDALC.obtenerCodigosAreasXSeccion(item);
-                listaCodigosAreasXLocalidad.AddRange(temp);
-
+                foreach (int codArea in temp)
+                {
+                    int index = listaCodigosAreasXLocalidad.IndexOf(codArea);
+                    if (index == -1)
+                        listaCodigosAreasXLocalidad.Add(codArea);
+                } 
             }
                         
             listaAreas = new List<AREA>();
@@ -76,8 +83,11 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             foreach (int item in listaCodigosSeccionesXLocalidad)
             {
                 SECCION temp = seccionDALC.obtenerSeccionXCodigo(item);
-                if(temp.id_area==codigoArea)
-                    listaSecciones.Add(temp);                
+                if (temp != null)
+                {
+                    if (temp.id_area == codigoArea)
+                        listaSecciones.Add(temp);
+                }
             }
 
             return listaSecciones;
@@ -95,30 +105,93 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return listaCargos;
         }
 
+        public List<CONCEPTO_REMUNERACION> filtrarConceptosXTipo(int tipo)
+        {
+            conceptoRemuneracionDALC = new ConceptoRemuneracionDALC();
 
-        public string registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string identificador)
+            ConceptosList = new List<CONCEPTO_REMUNERACION>();
+            ConceptosList = conceptoRemuneracionDALC.listaConceptoRemuneracionXTipo(tipo);
+
+            return ConceptosList;
+        }
+
+        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre)
         {
             PERSONA persona = new PERSONA();
             persona.id_localidad = codigoLocalidad;
             persona.id_seccion = codigoSeccion;
             persona.id_cargo = codigoCargo;
-            persona.nombres_persona = identificador;
+            persona.nombres_persona = nombre;
 
             personaDALC = new PersonaDALC();
            
             Boolean registro=personaDALC.insertarPersonalProyectado(persona);
+            int cod = persona.id_persona;
 
             if (registro)
             {
-                return identificador;
+                return cod;
             }
             else
             {
-                return "";
+                return -1;
             }
 
 
         }
-       
+
+        public Boolean registrarConceptoXPersona(int codPersona,int codConcepto,float monto)
+        {
+            CONCEPTO_POR_PERSONA objConceptoPersona=new CONCEPTO_POR_PERSONA();
+            objConceptoPersona.id_concepto = codConcepto;
+            objConceptoPersona.id_persona = codPersona;
+            objConceptoPersona.monto = monto;
+
+
+
+            ConceptoRemuneracionDALC conceptoDALC= new ConceptoRemuneracionDALC();
+
+            return conceptoDALC.insertarConceptoPersona(objConceptoPersona);
+
+          
+
+        }
+
+
+
+        public int obtenerCodDePersonalProyectado(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string cargo)
+        {
+            try
+            {
+
+                personaDALC = new PersonaDALC();
+                int codigo = -1;
+                List<PERSONA> lista = new List<PERSONA>();
+
+                lista = personaDALC.obtenerPersonasXLocalidadSeccionCargo(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo);
+
+                lista.OrderBy(p => p.nombres_persona).ToList();
+
+                if (lista.Count() > 0)
+                {
+                    string cargoCompleto = lista[lista.Count() - 1].nombres_persona;
+                    if (cargoCompleto.Contains(cargo))
+                    {
+                        int index = cargo.Length;
+                        string numero = cargoCompleto.Substring(index + 1);
+                        codigo = Convert.ToInt32(numero);
+
+                    }
+                    return codigo;
+                }
+                else
+                    return 0;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 }

@@ -20,9 +20,11 @@
                             var codigoArea = document.getElementById("contenido_AreaComboBox").value;
                             var codigoSeccion = document.getElementById("contenido_SeccionComboBox").value;
                             var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
-                            var identificador = document.getElementById("contenido_IdentificadorTextBox").value;
-                            
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, identificador,confirmarRegistro);
+                            var cantidad = document.getElementById("contenido_CantidadTextBox").value;
+                           
+                            var CargoDDL = document.getElementById("contenido_CargoComboBox");
+                            var cargo = CargoDDL.options[CargoDDL.selectedIndex].text;
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad,cargo, confirmarRegistro);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -34,13 +36,22 @@
                 $("#dialog-form").css({
                     fontSize: 15
                 });
-          
+
 
                 $("#opener").click(function () {
-                    $("#dialog-form").dialog("open");
+                    var cantidadPersonales = document.getElementById("contenido_CantidadTextBox").value;
+                    var cantidadConceptos = '<%= Session["NumeroConceptos"] %>';
+                    var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
+
+                    if (codigoCargo=="" || cantidadPersonales == "" || cantidadConceptos == "" || cantidadConceptos == "0") {
+                        $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
+                    }
+                    else {
+                        $("#dialog-form").dialog("open");
+                    }
                 });
 
-                
+
             });
 
 
@@ -52,7 +63,7 @@
       function confirmarRegistro(message) {
        
        if (message != "") {
-           var texto = "El personal proyectado " + message + " ha sido guardado exitosamente";
+           var texto = "El personal proyectado ha sido guardado exitosamente";
            $("#dialog-message").text(texto).dialog("open");
        } else {
            $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
@@ -69,7 +80,7 @@
               width: 500,
               buttons: {
                   Ok: function () {
-                      document.getElementById("contenido_IdentificadorTextBox").value = '';
+                      document.getElementById("contenido_CantidadTextBox").value = '';
 
                       document.getElementById("contenido_LocalidadComboBox").selectedIndex = 0;                    
                       document.getElementById("contenido_SeccionComboBox").selectedIndex = 0;
@@ -78,6 +89,9 @@
                       document.getElementById("contenido_AreaComboBox").disabled = true;
                       document.getElementById("contenido_CargoComboBox").selectedIndex = 0;
                       document.getElementById("contenido_CargoComboBox").disabled = true;
+                      document.getElementById("contenido_AgregarConceptosButton").disabled = true;
+                      document.getElementById("contenido_nuevo").value = "si";
+                      
                       $(this).dialog("close");
 
                   }
@@ -110,7 +124,18 @@
        });
   </script>
 
+  <script>
+      function validate(evt) {
+          var charCode = (evt.which) ? evt.which : event.keyCode;
 
+
+          if (charCode > 31 && (charCode < 48 || charCode > 57))
+              return false;
+          return true;
+      }
+    
+
+  </script>
   <div id="dialog-form" title="Confirmacion de registro">
   <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea guardar el personal?</p>
   </div>
@@ -160,25 +185,31 @@
                      <tr>
                         <td align="right">Cargo:</td>
                         <td><asp:DropDownList ID="CargoComboBox" runat="server" AutoPostBack="True"
-                            Height="20px" Width="130px" Enabled=false></asp:DropDownList></td>
+                            Height="20px" Width="130px" Enabled=false 
+                                onselectedindexchanged="CargoComboBox_SelectedIndexChanged"></asp:DropDownList></td>
                     </tr>
 
                     <tr>
-                        <td align="right">Identificador:</td>
-                        <td><asp:TextBox ID="IdentificadorTextBox" runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
+                        <td align="right">Cantidad:</td>
+                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validate(event)' ></asp:TextBox></td>
                     </tr>
          
                     <tr>
                         <td align="right">Conceptos:</td>
-                        <td><asp:TextBox ID="TextBox2" runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
+                         <td>
+                             <asp:Button ID="AgregarConceptosButton" runat="server" Text="+" 
+                                 onclick="AgregarConceptosButton_Click" />   </td>      
+                        
                     </tr>
 
                     <tr>
                 
                         <td colspan="2" align="right">
-                           <button id="opener">Registrar</button>          
+                           <button id="opener" onclick="return opener_onclick()">Registrar</button>          
                         </td>
                     </tr>
+
+                    
                  </tbody>
             </Table>
 
@@ -186,6 +217,8 @@
   </ContentTemplate> 
   </asp:UpdatePanel>
 
+  <input type="hidden" name="nuevo" id="nuevo" runat="server" />
+ 
 
 
  

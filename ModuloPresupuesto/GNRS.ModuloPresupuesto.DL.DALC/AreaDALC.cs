@@ -29,9 +29,16 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 List<int> lista = new List<int>();
                 var context = new PresupuestoDBEntities();
+                /*var prueba = (from s in context.SECCION
+                              where s.id_seccion == codigoSeccion
+                              group s by s.id_area into areas                              
+                              select areas).ToList();*/
                 lista = (from s in context.SECCION
                          where s.id_seccion == codigoSeccion
                          select s.id_area).ToList();
+
+               // prueba.ToList().ForEach(ig => ig.ToList().ForEach(emp => lista.Add(emp.id_area)));
+
                 return lista;
 
             }
