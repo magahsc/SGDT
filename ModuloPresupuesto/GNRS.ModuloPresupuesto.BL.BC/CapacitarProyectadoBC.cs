@@ -17,6 +17,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         CursoDALC cursoDALC = new CursoDALC();
         PersonaDALC personaDALC = new PersonaDALC();
         CapacitarProyectadoDALC capacitarDALC = new CapacitarProyectadoDALC();
+        AuditoriaPresupuestoDALC auditoriaDALC = new AuditoriaPresupuestoDALC();
 
         public List<LOCALIDAD> listarLocalidades()
         {
@@ -165,6 +166,22 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxTodo()
         {
             return capacitarDALC.ListarCapacitacionProyectadaxTodo();
+        }
+
+        //nuevos
+        public Boolean ActualizarEstadoPresupuestoCapacitacion(int id_presupuesto_capacitacion)
+        {
+            return capacitarDALC.ActualizarEstadoCapacitacionProyectada(id_presupuesto_capacitacion);
+        }
+
+        public int RegistrarAuditoriaPresupuesto(AUDITORIA_PRESUPUESTO objauditoria)
+        {
+            return auditoriaDALC.insertarCapacitacionProyectada(objauditoria);
+        }
+
+        public PRESUPUESTO_CAPACITACION ObtenerPresupuestoCapacitacion(int id_presupuesto_capacitacion)
+        {
+            return capacitarDALC.obtenerPresupuestoCapacitacion(id_presupuesto_capacitacion);
         }
 
     }

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaDALC.cs" />
+    <Compile Include="AuditoriaPresupuestoDALC.cs" />
     <Compile Include="CapacitarProyectadoDALC.cs" />
     <Compile Include="CargoDALC.cs" />
     <Compile Include="ConceptoRemuneracionDALC.cs" />
