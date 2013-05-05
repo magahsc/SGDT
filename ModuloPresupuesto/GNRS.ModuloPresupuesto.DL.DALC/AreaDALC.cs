@@ -22,7 +22,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
 
-
         public List<int> obtenerCodigosAreasXSeccion(int codigoSeccion)
         {
             try
@@ -63,6 +62,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public AREA obtenerLocalidadXCodigoSeccion(int codigoSeccion)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                AREA area = new AREA();
+
+                area = (from a in context.AREA
+                        join s in context.SECCION on a.id_area equals s.id_area
+                        where s.id_seccion == codigoSeccion
+                        select a).First();
+
+                return area;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

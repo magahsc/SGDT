@@ -17,7 +17,7 @@ namespace GNRS.ModuloPresupuesto.UI
     public partial class ListarPresupuestoCapacitacion : System.Web.UI.Page
     {
         CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             MensajeLabel.Text = "";
@@ -281,7 +281,7 @@ namespace GNRS.ModuloPresupuesto.UI
                     DatosUpdatePanel.Update();
                     MensajeUpdatePanel.Update();
                 }
-                
+
             }
 
             if (mesDropDownList.SelectedIndex > 0 && anioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex > 0)
@@ -290,8 +290,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
                 objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
 
-                if(estadoDropDownList.SelectedIndex == 1)
-                   objcapacitacionBE.Presupuesto_aprobado = "P";
+                if (estadoDropDownList.SelectedIndex == 1)
+                    objcapacitacionBE.Presupuesto_aprobado = "P";
 
                 if (estadoDropDownList.SelectedIndex == 2)
                     objcapacitacionBE.Presupuesto_aprobado = "N";
@@ -457,14 +457,14 @@ namespace GNRS.ModuloPresupuesto.UI
                 objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
                 //objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
 
-               /* if (estadoDropDownList.SelectedIndex == 1)
-                    objcapacitacionBE.Presupuesto_aprobado = "P";
+                /* if (estadoDropDownList.SelectedIndex == 1)
+                     objcapacitacionBE.Presupuesto_aprobado = "P";
 
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objcapacitacionBE.Presupuesto_aprobado = "N";
+                 if (estadoDropDownList.SelectedIndex == 2)
+                     objcapacitacionBE.Presupuesto_aprobado = "N";
 
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objcapacitacionBE.Presupuesto_aprobado = "A";*/
+                 if (estadoDropDownList.SelectedIndex == 3)
+                     objcapacitacionBE.Presupuesto_aprobado = "A";*/
 
                 List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnio(objcapacitacionBE);
                 if (lista != null)
@@ -532,73 +532,52 @@ namespace GNRS.ModuloPresupuesto.UI
             PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
             AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
 
-             CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+            CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
 
-                iIdcapacitacion = Convert.ToInt32(sIdCapacitacion);
-                objcapacitar.ActualizarEstadoPresupuestoCapacitacion(iIdcapacitacion);
+            iIdcapacitacion = Convert.ToInt32(sIdCapacitacion);
+            objcapacitar.ActualizarEstadoPresupuestoCapacitacion(iIdcapacitacion);
 
-                objpresupuesto = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
+            objpresupuesto = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
 
-                objauditoria.id_capacitacion_proyectada = iIdcapacitacion;
-                objauditoria.id_personal_proyectado = 0;
-                objauditoria.fecha_accion = DateTime.Now;
-                objauditoria.tipo_accion = "E";
-                objauditoria.tipo_presupuesto = "C";
+            objauditoria.id_capacitacion_proyectada = iIdcapacitacion;
+            objauditoria.id_personal_proyectado = 0;
+            objauditoria.fecha_accion = DateTime.Now;
+            objauditoria.tipo_accion = "E";
+            objauditoria.tipo_presupuesto = "C";
 
-                objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
+            objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
 
-                //DatosUpdatePanel.Update();
-                //CriteriosUpdatePanel.Update();
-                //BuscarButton_Click(sender, e);
+            //DatosUpdatePanel.Update();
+            //CriteriosUpdatePanel.Update();
+            //BuscarButton_Click(sender, e);
 
 
-                // alert("¿Está seguro de eliminar el presupuesto " + objpresupuesto.codigo_presupuesto + "?");
-                return "laksdl2";
+            // alert("¿Está seguro de eliminar el presupuesto " + objpresupuesto.codigo_presupuesto + "?");
+            return "laksdl2";
 
         }
-        //protected void ListasCapacitarProyectadaGridView_RowCommand1(object sender, GridViewCommandEventArgs e)
-        //{
-            
-        //    String sIdCapacitacion = "";
-        //    int iIdcapacitacion;
-        //    PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
-        //    AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
+        protected void ListasCapacitarProyectadaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            String sIdCapacitacion = "";
+            int iIdcapacitacion;
+            PRESUPUESTO_CAPACITACION obj = new PRESUPUESTO_CAPACITACION();
 
-        //    if (e.CommandName.ToUpper().Equals("CMDELIMINAR"))
-        //    {
-        //        sIdCapacitacion = e.CommandArgument.ToString();
-        //        iIdcapacitacion = Convert.ToInt32(sIdCapacitacion);
-        //        objcapacitar.ActualizarEstadoPresupuestoCapacitacion(iIdcapacitacion);
+            if (e.CommandName.ToUpper().Equals("CMDEDITAR"))
+            {
+                sIdCapacitacion = e.CommandArgument.ToString();
+                iIdcapacitacion = Convert.ToInt32(sIdCapacitacion);
+                obj = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
+                if (obj.presupuesto_aprobado == "P")
+                {
+                    Session.Add("IdCapacitacion", iIdcapacitacion);
+                    string Fullurl = "EditarPresupuestoCapacitacion.aspx";
+                    OpenNewBrowserWindow(Fullurl, this);
+                    //Server.Transfer("EditarPresupuestoCapacitacion.aspx");
+                }
 
-        //        objpresupuesto = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
+            }
 
-        //        objauditoria.id_capacitacion_proyectada = iIdcapacitacion;
-        //        objauditoria.id_personal_proyectado = 0;
-        //        objauditoria.fecha_accion = DateTime.Now;
-        //        objauditoria.tipo_accion = "E";
-        //        objauditoria.tipo_presupuesto = "C";
-
-        //        objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
-
-        //      /*  ClientScriptManager CSM = Page.ClientScript;
-
-        //        string strconfirm = "<script language='javascript'>if(!window.confirm('¿Está seguro de eliminar el presupuesto' + objpresupuesto.codigo_presupuesto + '?'))</script>";
-        //            CSM.RegisterClientScriptBlock(this.GetType(), "Confirm", strconfirm, false);*/
-
-        //            DatosUpdatePanel.Update();
-        //            CriteriosUpdatePanel.Update();
-        //            BuscarButton_Click(sender, e);
-
-
-        //       // alert("¿Está seguro de eliminar el presupuesto " + objpresupuesto.codigo_presupuesto + "?");
-                
-               
-        //    }
-        //    else if (e.CommandName.ToUpper().Equals("CMDEditar"))
-        //    {
-        //    }
-
-        //}
+        }
 
         public void alert(string msg)
         {
@@ -607,6 +586,10 @@ namespace GNRS.ModuloPresupuesto.UI
             Page.Controls.Add(lbl);
         }
 
+        public static void OpenNewBrowserWindow(string Url, Control control)
+        {
+            ScriptManager.RegisterStartupScript(control, control.GetType(), "Open", "window.open('" + Url + "');", true);
+        }
 
     }
 }

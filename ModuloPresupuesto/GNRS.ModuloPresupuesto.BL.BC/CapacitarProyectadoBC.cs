@@ -168,7 +168,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return capacitarDALC.ListarCapacitacionProyectadaxTodo();
         }
 
-        //nuevos
+       
         public Boolean ActualizarEstadoPresupuestoCapacitacion(int id_presupuesto_capacitacion)
         {
             return capacitarDALC.ActualizarEstadoCapacitacionProyectada(id_presupuesto_capacitacion);
@@ -184,5 +184,39 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return capacitarDALC.obtenerPresupuestoCapacitacion(id_presupuesto_capacitacion);
         }
 
+        public INSTITUCION ObtenerInstitucionxCodigoCurso(int codigoCurso)
+        {
+            return institucionesDALC.obtenerInstitucionXcodigoCurso(codigoCurso);
+        }
+
+        public LOCALIDAD ObtenerLocalidadXCodigo(int codigoLocalidad)
+        {
+            return localidadDALC.obtenerLocalidadXCodigo(codigoLocalidad);
+        }
+
+        public AREA ObtenerAreaxCodigoSeccion(int codigoSeccion)
+        {
+            return areaDALC.obtenerLocalidadXCodigoSeccion(codigoSeccion);
+        }
+
+        public SECCION ObtenerSeccionXCodigo(int codigoSeccion)
+        {
+            return seccionDALC.obtenerSeccionXCodigo(codigoSeccion);
+        }
+
+        public List<PRESUPUESTO_CAPACITACION_POR_PERSONAL> ObtenerCapacitacionPersonaXCodigo(int idpresupuestocapacitacion)
+        {
+            return personaDALC.obtenerCapacitacionPersonaXCodigo(idpresupuestocapacitacion);
+        }
+
+        public Boolean ActualizarCapacitacionProyectadaDatos(PRESUPUESTO_CAPACITACION objcapacitacion)
+        {
+            return capacitarDALC.ActualizarCapacitacionProyectadaDatos(objcapacitacion);
+        }
+
+        public Boolean EliminarCapacitacionProyectadaxPersona(PRESUPUESTO_CAPACITACION_POR_PERSONAL objcapacitacionxpersona)
+        {
+            return capacitarDALC.EliminarCapacitacionProyectadaxPersona(objcapacitacionxpersona);
+        }
     }
 }

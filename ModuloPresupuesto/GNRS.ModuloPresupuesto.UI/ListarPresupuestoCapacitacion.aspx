@@ -8,43 +8,43 @@
     
     
     <script>
-       $(document).ready(function() {
-           
-                $("#dialog-confirmacion").dialog({
-                   autoOpen: false,
-                    draggable: true,                    
-                    
-                   height: 200,
-                   width: 350,
-                   modal: true,
-                   buttons: {
-                       "Aceptar": function () {
-                           var sIdCapacitacion = $(this).data("sIdCapacitacion");
-                          // var scodigo = $(this).data("scodigo");
-                           PageMethods.eliminar(sIdCapacitacion);
+        $(document).ready(function () {
 
-                           var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
-                           clickButton.click();
-                             $(this).dialog("close");
+            $("#dialog-confirmacion").dialog({
+                autoOpen: false,
+                draggable: true,
 
-                       },
-                       Cancel: function () {
-                           $(this).dialog("close");
-                       }
-                   }
-               });
+                height: 200,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Aceptar": function () {
+                        var sIdCapacitacion = $(this).data("sIdCapacitacion");
+                        // var scodigo = $(this).data("scodigo");
+                        PageMethods.eliminar(sIdCapacitacion);
 
-               
+                        var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
+                        clickButton.click();
+                        $(this).dialog("close");
 
-              
-           });
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
 
-           function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
-               var texto = '¿Está seguro de eliminar el presupuesto ' + sco + ' ?';
 
-               $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
-              // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
-           }   
+
+
+        });
+
+        function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
+            var texto = '¿Está seguro de eliminar el presupuesto ' + sco + ' ?';
+
+            $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
+            // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
+        }   
        
 
       
@@ -123,14 +123,14 @@
   </ContentTemplate> 
 </asp:UpdatePanel > 
   
- <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="200">  
+ <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="300">  
  <asp:UpdatePanel ID="DatosUpdatePanel" runat="server" UpdateMode="Conditional" > 
   <ContentTemplate>
    
     <asp:GridView ID="ListasCapacitarProyectadaGridView" runat="server" 
           AutoGenerateColumns="false" align = "center"
         
-          CellPadding="3" CellSpacing="1"   
+          CellPadding="3" CellSpacing="1" onrowcommand="ListasCapacitarProyectadaGridView_RowCommand"   
          >
      <Columns>
 
@@ -150,7 +150,7 @@
                         ItemStyle-Width="300" >                    
                     </asp:BoundField>
 
-                    <asp:BoundField HeaderText="Fecha de creación" DataField="Fecha_creacion" 
+                    <asp:BoundField HeaderText="Fecha de creación" DataField="Fecha_modificada" 
                         ItemStyle-Width="300" >                    
                     </asp:BoundField>
 

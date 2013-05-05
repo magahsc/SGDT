@@ -12,37 +12,103 @@ using System.Web.Services;
 
 namespace GNRS.ModuloPresupuesto.UI
 {
-    public partial class RegistrarPresupuestoCapacitacion : System.Web.UI.Page
+    public partial class EditarPresupuestoCapacitacion : System.Web.UI.Page
     {
         CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
         public double j;
         public int contador;
+        public int iIdCapacitacion;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CursoDropDownList.Enabled = false;
-            AreaDropDownList.Enabled = false;
-            SeccionDropDownList.Enabled = false;
-
-            DateTime date = DateTime.Now;
-            // String hola = Session.
+            INSTITUCION objinstitucion = new INSTITUCION();
+            CURSO objcurso = new CURSO();
+            LOCALIDAD objlocalidad = new LOCALIDAD();
+            AREA objarea = new AREA();
+            SECCION objseccion = new SECCION();
+            List<PRESUPUESTO_CAPACITACION_POR_PERSONAL> lista = new List<PRESUPUESTO_CAPACITACION_POR_PERSONAL>();
+            PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
 
             if (!IsPostBack)
             {
                 cargarComboBox();
-                if (Session["mes"] == null ||
-                    Session["dia"] == null ||
-                    Session["anio"] == null)
+                if (Session["IdCapacitacion"] == null)
                 {
-                    /*Session.Add("dia", "01");
-                    Session.Add("mes", date.Month);
-                    Session.Add("anio", date.Year);*/
-
-                    Session.Add("Mensaje", "1");
-                    Server.Transfer("MainPage.aspx");
-                    //alert("Debe configurar el mes y el año para poder realizar un registro de capacitación");
+                    Server.Transfer("ListarPresupuestoCapacitacion.aspx");
                 }
 
+
+                iIdCapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
+                objpresupuesto = objcapacitar.ObtenerPresupuestoCapacitacion(iIdCapacitacion);
+
+                FechaLabel.Text = "Mes de inicio del periodo del presupuesto: " + mes(objpresupuesto.fecha_creacion.Month) + " del " +
+                    objpresupuesto.fecha_creacion.Year + "&nbsp;" + "&nbsp;" + " &nbsp;" + "&nbsp; " + "Fecha de creación: " + cambiarmesydia(Convert.ToString(objpresupuesto.fecha_creacion.Day)) + "/" + cambiarmesydia(Convert.ToString(objpresupuesto.fecha_creacion.Month)) + "/" + objpresupuesto.fecha_creacion.Year;
+
+                objinstitucion = objcapacitar.ObtenerInstitucionxCodigoCurso(Convert.ToInt32(objpresupuesto.id_curso));
+                InstitutoDropDownList.Items.FindByText(objinstitucion.nombre_institucion).Selected = true;
+
+                CursoDropDownList.DataSource = objcapacitar.listarCursoxInsituciones(objinstitucion.id_institucion);
+                CursoDropDownList.DataBind();
+                CursoDropDownList.Items.Insert(0, new ListItem("Seleccione el curso", ""));
+
+                objcurso = objcapacitar.obtenerCurso(Convert.ToInt32(objpresupuesto.id_curso));
+                CursoDropDownList.Items.FindByText(objcurso.nombre_curso).Selected = true;
+
+                objlocalidad = objcapacitar.ObtenerLocalidadXCodigo(Convert.ToInt32(objpresupuesto.id_localidad));
+                LocalidadDropDownList.Items.FindByText(objlocalidad.nombre_localidad).Selected = true;
+
+                AreaDropDownList.DataSource = objcapacitar.filtrarAreasXLocalidad(objlocalidad.id_localidad);
+                AreaDropDownList.DataBind();
+                AreaDropDownList.Items.Insert(0, new ListItem("Seleccione el area", ""));
+
+                objarea = objcapacitar.ObtenerAreaxCodigoSeccion(Convert.ToInt32(objpresupuesto.id_seccion));
+                AreaDropDownList.Items.FindByText(objarea.nombre_area).Selected = true;
+
+                SeccionDropDownList.DataSource = objcapacitar.filtrarSeccionesXAreaLocalidad(objarea.id_area, objlocalidad.id_localidad);
+                SeccionDropDownList.DataBind();
+                SeccionDropDownList.Items.Insert(0, new ListItem("Seleccione la seccion", ""));
+
+                objseccion = objcapacitar.ObtenerSeccionXCodigo(Convert.ToInt32(objpresupuesto.id_seccion));
+                SeccionDropDownList.Items.FindByText(objseccion.nombre_seccion).Selected = true;
+
+                ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(objlocalidad.id_localidad, objarea.id_area, objseccion.id_seccion);
+                ListaPersonasCapacitarGridView.DataBind();
+
+                lista = objcapacitar.ObtenerCapacitacionPersonaXCodigo(iIdCapacitacion);
+
+                DatosGridView.Update();
+                ComboBoxUpdatePanel2.Update();
+
+                for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                {
+                    GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                    bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                    int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
+
+                    foreach (PRESUPUESTO_CAPACITACION_POR_PERSONAL item in lista)
+                    {
+                        if (item.id_persona == codigopersona)
+                        {
+                            ((CheckBox)row.FindControl("SelectCheckBox")).Checked = true;
+                        }
+                    }
+                }
+
+                Session.Add("costocurso", objpresupuesto.monto_total);
+                Session.Add("contador", objpresupuesto.cantidad_personas);
+
+                DatosGridView.Update();
+                ComboBoxUpdatePanel2.Update();
+                ComboBoxUpdatePanel1.Update();
+
+                if (objcurso.tipo_moneda == "S")
+                    MontoPresupuestoLabel.Text = "S/. " + objpresupuesto.monto_total;
+
+                if (objcurso.tipo_moneda == "D")
+                    MontoPresupuestoLabel.Text = "$ " + objpresupuesto.monto_total;
+
+                LabelUpdatePanel.Update();
 
 
             }
@@ -148,11 +214,12 @@ namespace GNRS.ModuloPresupuesto.UI
             MarcarTodosCheckBox.Checked = false;
             ListaPersonasCapacitarGridView.DataSource = null;
             ListaPersonasCapacitarGridView.DataBind();
+            MontoPresupuestoLabel.Text = "0.0";
+            LabelUpdatePanel.Update();
             DatosGridView.Update();
 
             if (InstitutoDropDownList.SelectedIndex != 0)
             {
-
                 int codigoinstituto = Convert.ToInt32(InstitutoDropDownList.SelectedValue);
 
                 CursoDropDownList.DataSource = objcapacitar.listarCursoxInsituciones(codigoinstituto);
@@ -182,6 +249,8 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             ListaPersonasCapacitarGridView.DataSource = null;
             ListaPersonasCapacitarGridView.DataBind();
+            MontoPresupuestoLabel.Text = "0.0";
+            LabelUpdatePanel.Update();
             DatosGridView.Update();
 
             if (CursoDropDownList.SelectedIndex != 0)
@@ -211,6 +280,7 @@ namespace GNRS.ModuloPresupuesto.UI
             LocalidadDropDownList.Enabled = true;
             SeccionDropDownList.Enabled = false;
             MontoPresupuestoLabel.Text = "0.0";
+            LabelUpdatePanel.Update();
             MarcarTodosCheckBox.Checked = false;
 
             ListaPersonasCapacitarGridView.DataSource = null;
@@ -251,6 +321,7 @@ namespace GNRS.ModuloPresupuesto.UI
             AreaDropDownList.Enabled = true;
             LocalidadDropDownList.Enabled = true;
             MontoPresupuestoLabel.Text = "0.0";
+            LabelUpdatePanel.Update();
             MarcarTodosCheckBox.Checked = false;
 
             ListaPersonasCapacitarGridView.DataSource = null;
@@ -394,6 +465,7 @@ namespace GNRS.ModuloPresupuesto.UI
             MarcarTodosCheckBox.Checked = false;
             LocalidadDropDownList.Enabled = true;
             MontoPresupuestoLabel.Text = "0.0";
+            LabelUpdatePanel.Update();
 
             ListaPersonasCapacitarGridView.DataSource = null;
             ListaPersonasCapacitarGridView.DataBind();
@@ -408,37 +480,17 @@ namespace GNRS.ModuloPresupuesto.UI
                     CURSO curso = new CURSO();
                     curso = objcapacitar.obtenerCurso(codigoCurso);
 
-                    String smes = Session["mes"].ToString();
-                    smes = cambiarmesydia(smes);
-                    String sanio = Session["anio"].ToString();
-                    String sdia = Session["dia"].ToString();
-                    sdia = cambiarmesydia(sdia);
 
-                    String cadenafecha = sanio + "-" + smes + "-" + sdia;
-                    DateTime myDate, myDate2;
-                    myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                    int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
+                    int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
 
+                    ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
+                    ListaPersonasCapacitarGridView.DataBind();
 
-                    int aniofinal = Convert.ToInt32(sanio) + 1;
-                    String saniofinal = aniofinal + "";
-                    String cadenafecha2 = aniofinal + "-" + smes + "-" + sdia;
-                    myDate2 = DateTime.ParseExact(cadenafecha2, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    DatosGridView.Update();
+                    ComboBoxUpdatePanel2.Update();
 
-                    int aniomydate = Convert.ToInt32(myDate.Year);
-                    int aniocurso = Convert.ToInt32(curso.fecha_inicio.Year);
-
-                    if ((DateTime.Compare(myDate, curso.fecha_inicio) < 0) && (DateTime.Compare(myDate2, curso.fecha_fin) > 0) && aniocurso == aniomydate)
-                    {
-                        int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-                        int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
-                        int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
-
-                        ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
-                        ListaPersonasCapacitarGridView.DataBind();
-
-                        DatosGridView.Update();
-                        ComboBoxUpdatePanel2.Update();
-                    }
                 }
             }
 
@@ -496,7 +548,6 @@ namespace GNRS.ModuloPresupuesto.UI
             if (CursoDropDownList.SelectedIndex == 0)
             {
                 MontoPresupuestoLabel.Text = "0.0";
-                alert("Debe seleccionar un curso si desea ver el monto presupuestado");
                 Session.Add("costocurso", j);
                 Session.Add("contador", contador);
                 LabelUpdatePanel.Update();
@@ -565,7 +616,6 @@ namespace GNRS.ModuloPresupuesto.UI
             if (CursoDropDownList.SelectedIndex == 0)
             {
                 MontoPresupuestoLabel.Text = "0.0";
-                alert("Debe seleccionar un curso si desea ver el monto presupuestado");
                 Session.Add("costocurso", j);
                 Session.Add("contador", contador);
                 LabelUpdatePanel.Update();
@@ -602,41 +652,41 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             Control chkSelect = null;
             CURSO curso = new CURSO();
-            String scodigoalert = "";
+            iIdCapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
 
             if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
             {
                 PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
                 PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = null;
-                String smes = Session["mes"].ToString();
-                smes = cambiarmesydia(smes);
-                String sanio = Session["anio"].ToString();
-                String sdia = Session["dia"].ToString();
-                sdia = cambiarmesydia(sdia);
 
                 String scosto = Session["costocurso"].ToString();
                 String scontador = Session["contador"].ToString();
 
-                String cadenafecha = sanio + "-" + smes + "-" + sdia;
-                DateTime myDate;
-                myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
                 objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
                 objpresupuesto.monto_total = Convert.ToDouble(scosto);
-                objpresupuesto.codigo_presupuesto = "";
+                objpresupuesto.id_presupuesto_capacitacion = iIdCapacitacion;
                 objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
-                objpresupuesto.presupuesto_aprobado = "P";
-                objpresupuesto.fecha_creacion = DateTime.Now;
                 objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
                 objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-                objpresupuesto.id_periodo_presupuesto = 0;
-                int codigoCapacitacion = objcapacitar.insertarcapacitacionProyectada(objpresupuesto);
 
-                objpresupuesto.id_presupuesto_capacitacion = codigoCapacitacion;
-                sanio = sanio.Substring(2, 2);
-                scodigoalert = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
-                objpresupuesto.codigo_presupuesto = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
-                objcapacitar.ActualizarcapacitacionProyectada(objpresupuesto);
+                objcapacitar.ActualizarCapacitacionProyectadaDatos(objpresupuesto);
+
+                objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+                objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
+
+                objcapacitar.EliminarCapacitacionProyectadaxPersona(objpresupuestopersona);
+
+                AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
+
+                objauditoria.id_capacitacion_proyectada = iIdCapacitacion;
+                objauditoria.id_personal_proyectado = 0;
+                objauditoria.fecha_accion = DateTime.Now;
+                objauditoria.tipo_accion = "A";
+                objauditoria.tipo_presupuesto = "C";
+
+                objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
+
+
                 int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
                 curso = objcapacitar.obtenerCurso(codigoCurso);
 
@@ -657,7 +707,7 @@ namespace GNRS.ModuloPresupuesto.UI
                                 {
                                     int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
                                     objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
-                                    objpresupuestopersona.id_presupuesto_capacitacion = codigoCapacitacion;
+                                    objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
                                     objpresupuestopersona.monto_presupuesto_proyectado = curso.costo_curso;
                                     objpresupuestopersona.id_persona = codigopersona;
                                     objcapacitar.insertarcapacitacionProyectadaxPersona(objpresupuestopersona);
@@ -666,8 +716,6 @@ namespace GNRS.ModuloPresupuesto.UI
                         }
                     }
                 }
-
-                alert("El presupuesto de capacitacíon proyectada " + scodigoalert + " ha sido guardado existosamente");
 
             }
 
@@ -698,16 +746,8 @@ namespace GNRS.ModuloPresupuesto.UI
             LabelUpdatePanel.Update();
             ComboBoxUpdatePanel2.Update();
 
-
+            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
 
         }
-
-        public void alert(string msg)
-        {
-            Label lbl = new Label();
-            lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
-            Page.Controls.Add(lbl);
-        }
-
     }
 }

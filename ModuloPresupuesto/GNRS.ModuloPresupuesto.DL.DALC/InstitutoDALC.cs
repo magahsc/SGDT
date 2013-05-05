@@ -21,5 +21,26 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 return null;
             }
         }
+
+        public INSTITUCION obtenerInstitucionXcodigoCurso(int codigoCurso)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                INSTITUCION institucion = new INSTITUCION();
+
+                institucion = (from i in context.INSTITUCION
+                               join c in context.CURSO on i.id_institucion equals c.codigo_institucion
+                               where c.id_curso == codigoCurso
+                               select i).First();
+
+                return institucion;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -52,8 +52,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 PRESUPUESTO_CAPACITACION presupuestocapitalizacion = new PRESUPUESTO_CAPACITACION();
 
                 presupuestocapitalizacion = (from c in context.PRESUPUESTO_CAPACITACION
-                         where c.id_presupuesto_capacitacion == objcapacitacion.id_presupuesto_capacitacion
-                         select c).First();
+                                             where c.id_presupuesto_capacitacion == objcapacitacion.id_presupuesto_capacitacion
+                                             select c).First();
 
                 presupuestocapitalizacion.codigo_presupuesto = objcapacitacion.codigo_presupuesto;
                 context.SaveChanges();
@@ -64,7 +64,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 return false;
             }
-        
+
         }
 
         public List<CapacitacionProyectadaBE> ListarCapacitacionProyectadaxMesxAnioxEstado(CapacitacionProyectadaBE objcapacitacion)
@@ -78,13 +78,13 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var prueba = (from c in context.CURSO
                               join p in context.PRESUPUESTO_CAPACITACION on c.id_curso equals p.id_curso
                               where p.fecha_creacion.Month == objcapacitacion.Mes && p.fecha_creacion.Year == objcapacitacion.Anio && p.presupuesto_aprobado == objcapacitacion.Presupuesto_aprobado
-                              select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado}).ToList();
+                              select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
                 {
-                    if(item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if(item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("S"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -99,7 +99,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -108,8 +108,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     if (item.presupuesto_aprobado.Equals("P"))
                         objcapacitacionBE.Presupuesto_aprobado = "Pendiente";
 
-                    if(!item.presupuesto_aprobado.Equals("E"))
-                       lista.Add(objcapacitacionBE);
+                    if (!item.presupuesto_aprobado.Equals("E"))
+                        lista.Add(objcapacitacionBE);
                 }
 
                 if (lista.Count() > 0)
@@ -156,7 +156,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -191,7 +191,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 var prueba = (from c in context.CURSO
                               join p in context.PRESUPUESTO_CAPACITACION on c.id_curso equals p.id_curso
-                              where p.fecha_creacion.Year == objcapacitacion.Anio 
+                              where p.fecha_creacion.Year == objcapacitacion.Anio
                               select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
@@ -213,7 +213,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -248,7 +248,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 var prueba = (from c in context.CURSO
                               join p in context.PRESUPUESTO_CAPACITACION on c.id_curso equals p.id_curso
-                              where  p.presupuesto_aprobado == objcapacitacion.Presupuesto_aprobado
+                              where p.presupuesto_aprobado == objcapacitacion.Presupuesto_aprobado
                               select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
@@ -270,7 +270,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -305,7 +305,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 var prueba = (from c in context.CURSO
                               join p in context.PRESUPUESTO_CAPACITACION on c.id_curso equals p.id_curso
-                              where p.fecha_creacion.Month == objcapacitacion.Mes && p.fecha_creacion.Year == objcapacitacion.Anio 
+                              where p.fecha_creacion.Month == objcapacitacion.Mes && p.fecha_creacion.Year == objcapacitacion.Anio
                               select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
@@ -327,7 +327,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -384,7 +384,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -419,7 +419,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 var prueba = (from c in context.CURSO
                               join p in context.PRESUPUESTO_CAPACITACION on c.id_curso equals p.id_curso
-                              where p.fecha_creacion.Month == objcapacitacion.Mes  && p.presupuesto_aprobado == objcapacitacion.Presupuesto_aprobado
+                              where p.fecha_creacion.Month == objcapacitacion.Mes && p.presupuesto_aprobado == objcapacitacion.Presupuesto_aprobado
                               select new { p.id_presupuesto_capacitacion, p.codigo_presupuesto, c.nombre_curso, p.monto_total, c.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
@@ -441,7 +441,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -497,7 +497,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     anio = anio.Substring(2, 2);
 
                     objcapacitacionBE.Fecha_creacion = item.fecha_creacion;
-                    objcapacitacionBE.Fecha_modificada = anio;
+                    objcapacitacionBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
                     if (item.presupuesto_aprobado.Equals("A"))
                         objcapacitacionBE.Presupuesto_aprobado = "Aprobado";
@@ -522,7 +522,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
 
-        //nuevo
         public Boolean ActualizarEstadoCapacitacionProyectada(int id_presupuesto_capacitacion)
         {
             try
@@ -563,6 +562,125 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 throw;
             }
+        }
+
+        //Nuevo
+        public Boolean ActualizarCapacitacionProyectadaDatos(PRESUPUESTO_CAPACITACION objcapacitacion)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PRESUPUESTO_CAPACITACION presupuestocapitalizacion = new PRESUPUESTO_CAPACITACION();
+
+                presupuestocapitalizacion = (from c in context.PRESUPUESTO_CAPACITACION
+                                             where c.id_presupuesto_capacitacion == objcapacitacion.id_presupuesto_capacitacion
+                                             select c).First();
+
+                presupuestocapitalizacion.id_curso = objcapacitacion.id_curso;
+                presupuestocapitalizacion.id_localidad = objcapacitacion.id_localidad;
+                presupuestocapitalizacion.id_seccion = objcapacitacion.id_seccion;
+                presupuestocapitalizacion.monto_total = objcapacitacion.monto_total;
+                presupuestocapitalizacion.cantidad_personas = objcapacitacion.cantidad_personas;
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public Boolean EliminarCapacitacionProyectadaxPersona(PRESUPUESTO_CAPACITACION_POR_PERSONAL objcapacitacionxpersona)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PRESUPUESTO_CAPACITACION_POR_PERSONAL presupuestocapitalizacion = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+
+                var prueba = (from p in context.PRESUPUESTO_CAPACITACION_POR_PERSONAL
+                              where p.id_presupuesto_capacitacion == objcapacitacionxpersona.id_presupuesto_capacitacion
+                              select p).ToList();
+
+                foreach (var item in prueba)
+                {
+                    context.PRESUPUESTO_CAPACITACION_POR_PERSONAL.DeleteObject(item);
+                }
+
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public String cambiarmesydia(String dato)
+        {
+            String sdato = dato;
+            switch (dato)
+            {
+                case "1":
+                    {
+                        sdato = "01";
+                        break;
+                    }
+
+                case "2":
+                    {
+                        sdato = "02";
+                        break;
+                    }
+
+                case "3":
+                    {
+                        sdato = "03";
+                        break;
+                    }
+
+                case "4":
+                    {
+                        sdato = "04";
+                        break;
+                    }
+
+                case "5":
+                    {
+                        sdato = "05";
+                        break;
+                    }
+
+                case "6":
+                    {
+                        sdato = "06";
+                        break;
+                    }
+
+                case "7":
+                    {
+                        sdato = "07";
+                        break;
+                    }
+
+                case "8":
+                    {
+                        sdato = "08";
+                        break;
+                    }
+
+                case "9":
+                    {
+                        sdato = "09";
+                        break;
+                    }
+
+            }
+
+            return sdato;
         }
     }
 }

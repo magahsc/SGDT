@@ -1,39 +1,33 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="RegistrarPresupuestoCapacitacion.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.RegistrarPresupuestoCapacitacion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditarPresupuestoCapacitacion.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.EditarPresupuestoCapacitacion" %>
 
- <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title title="Actualizar presupuesto de capacitación proyectada"></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+      <asp:ScriptManager ID="ScriptManager1" runat="server">  
     
     </asp:ScriptManager> 
 
+    <div>
+      <asp:panel ID="Datos1Panel" runat="server" GroupingText="Información relacionada a la capacitación">
+       <table border="0" cellpadding="5" cellspacing="0">
+        <tr>
+            <td>
+                <asp:Label ID="FechaLabel" runat="server" Text=""></asp:Label>
+            </td>
+        </tr>
+    </table>
+   </asp:panel>
 
-<br />
-    <br />
+   </br></br>
 
-    <script type="text/javascript">
-<!--
-        function confirmation() {
-            var answer = confirm("¿Desea guardar el presupuesto?")
-            if (answer) {
-                PageMethods.Guardar();
-                //alert("Bye bye!")
-
-
-            }
-            else {
-                //alert("")
-            }
-        }
-//-->
-</script>
-
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    Información relacionada a la capacitación:
-    &nbsp;&nbsp;&nbsp;&nbsp;
-
-
-
- <asp:UpdatePanel ID="ComboBoxUpdatePanel1" runat="server" UpdateMode="Conditional"> 
+    <asp:panel ID="Datos2Panel" runat="server" GroupingText="Información relacionada a la capacitación">
+   <asp:UpdatePanel ID="ComboBoxUpdatePanel1" runat="server" UpdateMode="Conditional"> 
   <ContentTemplate>  
   <Table ID="Table1" runat="server" style="height: 50px; width: 450px;">
          <tbody>
@@ -55,10 +49,13 @@
          </tbody>
     </Table>
      </ContentTemplate>  
- </asp:UpdatePanel>
-  
-    <br />
-     <asp:UpdatePanel ID="ComboBoxUpdatePanel2" runat="server" UpdateMode="Conditional"> 
+   </asp:UpdatePanel>
+   </asp:panel>
+
+   </br></br>
+   
+  <asp:panel ID="Panel1" runat="server" GroupingText="Información relacionada al personal">
+ <asp:UpdatePanel ID="ComboBoxUpdatePanel2" runat="server" UpdateMode="Conditional"> 
       <ContentTemplate>  
     <Table ID="Table2" runat="server">
          <tbody>
@@ -83,15 +80,13 @@
          </tbody>
     </Table>
      </ContentTemplate>  
-</asp:UpdatePanel>
+  </asp:UpdatePanel>
+     
+    <br />
 
-    &nbsp;
-
-
-   <br />
-    <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="200">  
+     <asp:Panel ID="Panel2" runat="server" ScrollBars="Vertical" Height="200">  
      <asp:UpdatePanel ID="DatosGridView" runat="server" UpdateMode="Conditional"> 
-  <ContentTemplate>
+     <ContentTemplate>
    
     <asp:GridView ID="ListaPersonasCapacitarGridView" runat="server" 
           AutoGenerateColumns="false" align = "center" DataKeyNames = "Id_persona"
@@ -99,6 +94,7 @@
         onpageindexchanging="ListaPersonasCapacitarGridView_PageIndexChanging" 
           CellPadding="3" CellSpacing="1" 
         AllowPaging="True" PageSize="100" 
+          
          >
      <Columns>
 
@@ -131,19 +127,19 @@
     </asp:GridView>
    
      </ContentTemplate>  
-
  </asp:UpdatePanel>
- </asp:Panel>
 
-
-
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:CheckBox ID="MarcarTodosCheckBox" runat="server"  AutoPostBack="True"
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <br />
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <asp:CheckBox ID="MarcarTodosCheckBox" runat="server"  AutoPostBack="True"
         Text=" Capacitar a todos" Font-Size="Small" oncheckedchanged="MarcarTodosCheckBox_CheckedChanged" 
         />
-    <br />
-    <br />
-     <asp:UpdatePanel ID="LabelUpdatePanel" runat="server" UpdateMode="Conditional"> 
+      </asp:Panel>
+   </asp:panel>
+
+   <asp:UpdatePanel ID="LabelUpdatePanel" runat="server" UpdateMode="Conditional"> 
       <ContentTemplate>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
      <Table ID="Table3" runat="server">
@@ -158,10 +154,10 @@
          </ContentTemplate>  
  </asp:UpdatePanel>
     <br />
-    <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
     <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
-        onclick="GuardarButton1_Click" OnClientClick="if (confirm('¿Desea guardar el presupuesto?')) { return true; } else { return false; }"/>
-
-    <br />
-  </asp:Content>
+        onclick="GuardarButton1_Click" />
+        </div>
+    </form>
+</body>
+</html>

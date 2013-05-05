@@ -21,7 +21,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 persona.fecha_creacion = now;
                 context.SaveChanges();
                 return true;
-                
+
             }
             catch (Exception ex)
             {
@@ -43,16 +43,16 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                               where p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && a.id_area == codigoarea
                               select new { p.id_persona, p.nombres_persona, p.apellido_paterno, p.apellido_materno, c.nombre_cargo }).ToList();
 
-                foreach(var item in prueba)
+                foreach (var item in prueba)
                 {
                     String nombre = item.nombres_persona + " " + item.apellido_paterno + " " + item.apellido_materno;
-                    objpersonaBE  = new PersonaBE();
+                    objpersonaBE = new PersonaBE();
                     objpersonaBE.Id_persona = item.id_persona;
                     objpersonaBE.Nombre_persona = nombre;
                     objpersonaBE.Cargo_persona = item.nombre_cargo;
                     lista.Add(objpersonaBE);
                 }
-               
+
                 return lista;
 
             }
@@ -86,6 +86,26 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 throw;
             }
+        }
+
+        public List<PRESUPUESTO_CAPACITACION_POR_PERSONAL> obtenerCapacitacionPersonaXCodigo(int idpresupuestocapacitacion)
+        {
+            try
+            {
+                List<PRESUPUESTO_CAPACITACION_POR_PERSONAL> lista = new List<PRESUPUESTO_CAPACITACION_POR_PERSONAL>();
+                var context = new PresupuestoDBEntities();
+                lista = (from p in context.PRESUPUESTO_CAPACITACION_POR_PERSONAL
+                         where p.id_presupuesto_capacitacion == idpresupuestocapacitacion
+                         select p).ToList();
+
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

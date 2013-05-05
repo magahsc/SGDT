@@ -59,6 +59,7 @@
     <Content Include="ConceptosPersonal.aspx" />
     <Content Include="ConfiguracionPresupuesto.aspx" />
     <Content Include="CostoEmpresa.aspx" />
+    <Content Include="EditarPresupuestoCapacitacion.aspx" />
     <Content Include="images\delete.gif" />
     <Content Include="images\edit.gif" />
     <Content Include="images\ModuloPresupuesto.jpg" />
@@ -144,6 +145,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditarPresupuestoCapacitacion.aspx.cs">
+      <DependentUpon>EditarPresupuestoCapacitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarPresupuestoCapacitacion.aspx.designer.cs">
+      <DependentUpon>EditarPresupuestoCapacitacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,7 +221,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23582</DevelopmentServerPort>
+          <DevelopmentServerPort>17462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
