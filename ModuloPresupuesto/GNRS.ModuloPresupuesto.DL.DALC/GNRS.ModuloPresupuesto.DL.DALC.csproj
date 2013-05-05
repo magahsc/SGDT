@@ -48,6 +48,7 @@
     <Compile Include="CapacitarProyectadoDALC.cs" />
     <Compile Include="CargoDALC.cs" />
     <Compile Include="ConceptoRemuneracionDALC.cs" />
+    <Compile Include="CostoEmpresaDALC.cs" />
     <Compile Include="CursoDALC.cs" />
     <Compile Include="InstitutoDALC.cs" />
     <Compile Include="LocalidadDALC.cs" />

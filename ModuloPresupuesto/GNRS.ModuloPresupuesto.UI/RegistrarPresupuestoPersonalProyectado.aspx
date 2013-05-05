@@ -125,7 +125,7 @@
   </script>
 
   <script>
-      function validate(evt) {
+      function validateNumerosEnteros(evt) {
           var charCode = (evt.which) ? evt.which : event.keyCode;
 
 
@@ -191,7 +191,7 @@
 
                     <tr>
                         <td align="right">Cantidad:</td>
-                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validate(event)' ></asp:TextBox></td>
+                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validateNumerosEnteros(event)' ></asp:TextBox></td>
                     </tr>
          
                     <tr>

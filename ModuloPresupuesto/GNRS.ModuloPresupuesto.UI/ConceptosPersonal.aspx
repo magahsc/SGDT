@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ConceptosPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConceptosPersonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
     <script>
-        function validate(evt) {
+        function validateDecimales(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode;
 
 
@@ -44,7 +44,7 @@
                     
                     <tr>
                         <td align="right">Monto:</td>
-                        <td><asp:TextBox ID="MontoTextBox" onkeypress='return validate(event)'  runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="MontoTextBox" onkeypress='return validateDecimales(event)'  runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
                     </tr>
          
                     <tr>                

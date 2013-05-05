@@ -33,3 +33,8 @@ C:\Users\N3AR\Downloads\ModuloPresupuesto\ModuloPresupuesto\GNRS.ModuloPresupues
 C:\Users\N3AR\Downloads\ModuloPresupuesto\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\N3AR\Downloads\ModuloPresupuesto\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
 C:\Users\N3AR\Downloads\ModuloPresupuesto\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\Renzo\Desktop\A\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\Renzo\Desktop\A\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\Renzo\Desktop\A\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Renzo\Desktop\A\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\Renzo\Desktop\A\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb

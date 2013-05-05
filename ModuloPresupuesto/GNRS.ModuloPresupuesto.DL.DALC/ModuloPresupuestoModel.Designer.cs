@@ -309,6 +309,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<AUDITORIA_PRESUPUESTO> _AUDITORIA_PRESUPUESTO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<COSTO_EMPRESA> COSTO_EMPRESA
+        {
+            get
+            {
+                if ((_COSTO_EMPRESA == null))
+                {
+                    _COSTO_EMPRESA = base.CreateObjectSet<COSTO_EMPRESA>("COSTO_EMPRESA");
+                }
+                return _COSTO_EMPRESA;
+            }
+        }
+        private ObjectSet<COSTO_EMPRESA> _COSTO_EMPRESA;
 
         #endregion
         #region AddTo Methods
@@ -423,6 +439,14 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         public void AddToAUDITORIA_PRESUPUESTO(AUDITORIA_PRESUPUESTO aUDITORIA_PRESUPUESTO)
         {
             base.AddObject("AUDITORIA_PRESUPUESTO", aUDITORIA_PRESUPUESTO);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the COSTO_EMPRESA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCOSTO_EMPRESA(COSTO_EMPRESA cOSTO_EMPRESA)
+        {
+            base.AddObject("COSTO_EMPRESA", cOSTO_EMPRESA);
         }
 
         #endregion
@@ -1318,6 +1342,133 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PresupuestoDBModel", Name="COSTO_EMPRESA")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class COSTO_EMPRESA : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new COSTO_EMPRESA object.
+        /// </summary>
+        /// <param name="id_costoempresa">Initial value of the id_costoempresa property.</param>
+        public static COSTO_EMPRESA CreateCOSTO_EMPRESA(global::System.Int32 id_costoempresa)
+        {
+            COSTO_EMPRESA cOSTO_EMPRESA = new COSTO_EMPRESA();
+            cOSTO_EMPRESA.id_costoempresa = id_costoempresa;
+            return cOSTO_EMPRESA;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id_costoempresa
+        {
+            get
+            {
+                return _id_costoempresa;
+            }
+            set
+            {
+                if (_id_costoempresa != value)
+                {
+                    Onid_costoempresaChanging(value);
+                    ReportPropertyChanging("id_costoempresa");
+                    _id_costoempresa = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id_costoempresa");
+                    Onid_costoempresaChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id_costoempresa;
+        partial void Onid_costoempresaChanging(global::System.Int32 value);
+        partial void Onid_costoempresaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> id_categoria
+        {
+            get
+            {
+                return _id_categoria;
+            }
+            set
+            {
+                Onid_categoriaChanging(value);
+                ReportPropertyChanging("id_categoria");
+                _id_categoria = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_categoria");
+                Onid_categoriaChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _id_categoria;
+        partial void Onid_categoriaChanging(Nullable<global::System.Int32> value);
+        partial void Onid_categoriaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String beneficio_social
+        {
+            get
+            {
+                return _beneficio_social;
+            }
+            set
+            {
+                Onbeneficio_socialChanging(value);
+                ReportPropertyChanging("beneficio_social");
+                _beneficio_social = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("beneficio_social");
+                Onbeneficio_socialChanged();
+            }
+        }
+        private global::System.String _beneficio_social;
+        partial void Onbeneficio_socialChanging(global::System.String value);
+        partial void Onbeneficio_socialChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> factor
+        {
+            get
+            {
+                return _factor;
+            }
+            set
+            {
+                OnfactorChanging(value);
+                ReportPropertyChanging("factor");
+                _factor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("factor");
+                OnfactorChanged();
+            }
+        }
+        private Nullable<global::System.Double> _factor;
+        partial void OnfactorChanging(Nullable<global::System.Double> value);
+        partial void OnfactorChanged();
+
+        #endregion
+    
     }
     
     /// <summary>
@@ -2277,7 +2428,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_paternoChanging(value);
                 ReportPropertyChanging("apellido_paterno");
-                _apellido_paterno = StructuralObject.SetValidValue(value, true);
+                _apellido_paterno = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("apellido_paterno");
                 Onapellido_paternoChanged();
             }
@@ -2301,7 +2452,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_maternoChanging(value);
                 ReportPropertyChanging("apellido_materno");
-                _apellido_materno = StructuralObject.SetValidValue(value, true);
+                _apellido_materno = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("apellido_materno");
                 Onapellido_maternoChanged();
             }

@@ -58,6 +58,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="ConceptosPersonal.aspx" />
     <Content Include="ConfiguracionPresupuesto.aspx" />
+    <Content Include="CostoEmpresa.aspx" />
     <Content Include="images\delete.gif" />
     <Content Include="images\edit.gif" />
     <Content Include="images\ModuloPresupuesto.jpg" />
@@ -128,6 +129,13 @@
     </Compile>
     <Compile Include="ConfiguracionPresupuesto.aspx.designer.cs">
       <DependentUpon>ConfiguracionPresupuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CostoEmpresa.aspx.cs">
+      <DependentUpon>CostoEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CostoEmpresa.aspx.designer.cs">
+      <DependentUpon>CostoEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

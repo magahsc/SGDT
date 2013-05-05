@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CapacitarProyectadoBC.cs" />
+    <Compile Include="CostoEmpresaBC.cs" />
     <Compile Include="PresupuestoPersonalProyectadoBC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

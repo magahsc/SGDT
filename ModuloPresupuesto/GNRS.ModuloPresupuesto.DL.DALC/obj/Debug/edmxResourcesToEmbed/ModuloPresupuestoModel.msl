@@ -146,5 +146,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="COSTO_EMPRESA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.COSTO_EMPRESA">
+        <MappingFragment StoreEntitySet="COSTO_EMPRESA">
+          <ScalarProperty Name="factor" ColumnName="factor" />
+          <ScalarProperty Name="beneficio_social" ColumnName="beneficio_social" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="id_costoempresa" ColumnName="id_costoempresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

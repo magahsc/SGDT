@@ -31,10 +31,12 @@
             </div>
      </div>
             
-     <div id="menu" >
-        <div id="side_bar">
-           
+     <div id="container_page" >
+        <div id="side_bar">           
                 <ol id="main_nav0">        	
+                   
+                              
+                 
                     <li class="AccordionPanel AccordionPanelOpen">
            	                <a class=" AccordionPanelTab" href="#">Presupuesto de personal proyectado</a>
                                 <ul class="AccordionPanelContent" style="height: auto; display: block;">
@@ -53,9 +55,17 @@
                      <a href="ConfiguracionPresupuesto.aspx" class="menu-vertical AccordionPanelClosed">
 					    Configuración de presupuesto de Presupuesto</a>
                     <ul class="AccordionPanelContent AccordionPanelClosed" style="height: 0px; display: none; ">                           
-                              
-                     </ul>
+                    </ul>
 
+
+                    
+                     <a href="CostoEmpresa.aspx" class="menu-vertical AccordionPanelClosed">
+					    Costo Empresa</a>
+                    <ul class="AccordionPanelContent AccordionPanelClosed" style="height: 0px; display: none; ">                           
+                    </ul>
+
+
+                    
                 </ol>
                 <script type="text/javascript">
                           var acc0 = new Spry.Widget.Accordion("main_nav0", { useFixedPanelHeights: false, defaultPanel: -1 });          

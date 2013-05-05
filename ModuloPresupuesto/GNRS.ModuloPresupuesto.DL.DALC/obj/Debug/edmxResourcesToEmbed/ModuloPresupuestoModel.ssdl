@@ -6,6 +6,7 @@
     <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CURSO" EntityType="PresupuestoDBModel.Store.CURSO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
@@ -127,6 +128,18 @@
     <Property Name="nombre_concepto" Type="varchar" Nullable="false" MaxLength="200" />
     <Property Name="mostrar_boleta" Type="bit" Nullable="false" />
     <Property Name="columna_boleta" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'PresupuestoDB.dbo.COSTO_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="COSTO_EMPRESA">
+    <Key>
+      <PropertyRef Name="id_costoempresa" />
+    </Key>
+    <Property Name="id_costoempresa" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="id_categoria" Type="int" />
+    <Property Name="beneficio_social" Type="varchar" MaxLength="200" />
+    <Property Name="factor" Type="float" />
   </EntityType>
   <EntityType Name="CURSO">
     <Key>

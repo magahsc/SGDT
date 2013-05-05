@@ -83,6 +83,7 @@
       <End Role="PERSONA" EntitySet="PERSONA" />
       <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
     </AssociationSet>
+    <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.COSTO_EMPRESA" />
   </EntityContainer>
   <EntityType Name="AREA">
     <Key>
@@ -460,4 +461,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="COSTO_EMPRESA">
+    <Key>
+      <PropertyRef Name="id_costoempresa" />
+    </Key>
+    <Property Type="Int32" Name="id_costoempresa" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="id_categoria" />
+    <Property Type="String" Name="beneficio_social" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Double" Name="factor" />
+  </EntityType>
 </Schema>
