@@ -13,6 +13,7 @@
           <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo" />
+            
           <EntitySet Name="CURSO" EntityType="PresupuestoDBModel.Store.CURSO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
@@ -23,7 +24,6 @@
           <EntitySet Name="PRESUPUESTO_CAPACITACION" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SECCION" EntityType="PresupuestoDBModel.Store.SECCION" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA" Association="PresupuestoDBModel.Store.AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
             <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
             <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
@@ -140,6 +140,7 @@
           <Property Name="id_persona" Type="int" Nullable="false" />
           <Property Name="id_concepto" Type="int" Nullable="false" />
           <Property Name="monto" Type="float" Nullable="false" />
+          <Property Name="monto_costo_empresa" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="CONCEPTO_REMUNERACION">
           <Key>
@@ -150,6 +151,9 @@
           <Property Name="mostrar_boleta" Type="bit" Nullable="false" />
           <Property Name="columna_boleta" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'PresupuestoDB.dbo.COSTO_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
         <EntityType Name="COSTO_EMPRESA">
           <Key>
             <PropertyRef Name="id_costoempresa" />
@@ -216,6 +220,7 @@
           <Property Name="id_seccion" Type="int" Nullable="false" />
           <Property Name="id_localidad" Type="int" Nullable="false" />
           <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" />
+          <Property Name="tipo_empleado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
           <Key>
@@ -260,16 +265,6 @@
           <Property Name="id_seccion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre_seccion" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="id_area" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
           <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Type="PresupuestoDBModel.Store.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
@@ -585,7 +580,6 @@
             <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
             <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="AREA">
           <Key>
@@ -615,6 +609,7 @@
           <Property Name="monto" Type="Double" Nullable="false" />
           <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA" FromRole="CONCEPTO_POR_PERSONA" ToRole="PERSONA" />
           <NavigationProperty Name="CONCEPTO_REMUNERACION" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION" FromRole="CONCEPTO_POR_PERSONA" ToRole="CONCEPTO_REMUNERACION" />
+          <Property Type="Double" Name="monto_costo_empresa" Nullable="false" />
         </EntityType>
         <EntityType Name="CONCEPTO_REMUNERACION">
           <Key>
@@ -689,6 +684,7 @@
           <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERSONA" ToRole="PERIODO_PRESUPUESTO" />
           <Property Type="DateTime" Name="fecha_creacion" Nullable="false" />
           <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="PERSONA" ToRole="AUDITORIA_PRESUPUESTO" />
+          <Property Type="Int32" Name="tipo_empleado" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESUPUESTO_CAPACITACION">
           <Key>
@@ -1007,16 +1003,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1033,7 +1019,8 @@
             <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="CONCEPTO_POR_PERSONA"><EntityTypeMapping TypeName="PresupuestoDBModel.CONCEPTO_POR_PERSONA"><MappingFragment StoreEntitySet="CONCEPTO_POR_PERSONA">
-            <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+            <ScalarProperty Name="monto_costo_empresa" ColumnName="monto_costo_empresa" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
             <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
             <ScalarProperty Name="monto" ColumnName="monto" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -1066,7 +1053,8 @@
             <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PERSONA"><EntityTypeMapping TypeName="PresupuestoDBModel.PERSONA"><MappingFragment StoreEntitySet="PERSONA">
-            <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+            <ScalarProperty Name="tipo_empleado" ColumnName="tipo_empleado" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
                 <ScalarProperty Name="id_persona" ColumnName="id_persona" />
             <ScalarProperty Name="apellido_paterno" ColumnName="apellido_paterno" />
@@ -1150,17 +1138,6 @@
                 <ScalarProperty Name="nombre_actividad" ColumnName="nombre_actividad" />
                 <ScalarProperty Name="codigo_actividad_proyectada" ColumnName="codigo_actividad_proyectada" />
                 <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PresupuestoDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1297,7 +1274,6 @@
           <ConnectorPoint PointX="11.59375" PointY="5.4588919791666672" />
           <ConnectorPoint PointX="12.75" PointY="5.4588919791666672" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="PresupuestoDBModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="7.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

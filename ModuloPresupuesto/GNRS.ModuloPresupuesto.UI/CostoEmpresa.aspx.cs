@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using GNRS.ModuloPresupuesto.BL.BC;
 using GNRS.ModuloPresupuesto.DL.DALC;
 using System.Data.Entity;
+using System.Web.Services;
 
 namespace GNRS.ModuloPresupuesto.UI
 {
@@ -19,6 +20,9 @@ namespace GNRS.ModuloPresupuesto.UI
             {
                 CargarCostoEmpresaGridView();
                 LimpiarCampos();
+
+
+                
             }
 
         }
@@ -36,7 +40,7 @@ namespace GNRS.ModuloPresupuesto.UI
             lista = objCostoEmpresaBC.listarCosto_Empresa();
             CostoEmpresaGridView.DataSource = lista;
             CostoEmpresaGridView.DataBind();
-            ComboBoxUpdatePanel.Update();
+            GridUpdatePanel.Update();
         }
         protected string FormatCategoria(string categoria)
         {
@@ -79,14 +83,16 @@ namespace GNRS.ModuloPresupuesto.UI
                         if (resultado == true)
                         {
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El Beneficio social ha sido guardado exitosamente.')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El beneficio social se ha actualizado exitosamente.')", true);
 
                             BeneficioSocialTextBox.Text = "";
                             FactorTextBox.Text = "";
                             Session.Remove("id_costoEmpresa");
                             Session.Remove("accion");
+                            Session.Add("mensajeRecalcular", "si");
 
                             LimpiarCampos();
+
                             CargarCostoEmpresaGridView();
                         }
                         
@@ -97,8 +103,9 @@ namespace GNRS.ModuloPresupuesto.UI
                         resultado = objCostoEmpresaBC.insertarCostoEmpresa(objCostoEmpresa);
                         if (resultado == true)
                         {
+                            Session.Add("mensajeRecalcular", "si");
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El Beneficio social ha sido guardado exitosamente.')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El beneficio social ha sido guardado exitosamente.')", true);
 
                             BeneficioSocialTextBox.Text = "";
                             FactorTextBox.Text = "";
@@ -136,17 +143,48 @@ namespace GNRS.ModuloPresupuesto.UI
 
                 Session.Add("accion", "editar");
                 Session.Add("id_costoEmpresa", id_costoEmpresa);
-                ComboBoxUpdatePanel.Update();
+
+                PrimerUpdatePanel.Update();
+
             }
 
             if (e.CommandName.Equals("cmdEliminar"))
             {
+                Session.Remove("accion");
+                Session.Remove("id_costoEmpresa");
+
                 int id_costoEmpresa = Convert.ToInt32(e.CommandArgument);
 
                 objCostoEmpresaBC = new CostoEmpresaBC();
                 objCostoEmpresaBC.eliminarCostoEmpresa(id_costoEmpresa);
+                Session.Add("mensajeRecalcular", "si");
+
                 CargarCostoEmpresaGridView();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "alert('El beneficio social ha sido eliminado exitosamente.')", true);
+
+
+           
             }
+        }
+
+        protected void Recalcular_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "confirmarRecalcular('Esta opcion recalculara el beneficio social para todos los empleados. ¿Esta seguro de realizar esta operaion?')", true);
+
+        }
+
+        [WebMethod]
+        public static void recalcularCostoEmpresa()
+        {
+            CostoEmpresaBC objCostoEmpresaBC = new CostoEmpresaBC();
+            float costoEmpresaEmpleado = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(1);
+            float costoEmpresaObrero = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(2);
+
+           // Session.Add("costoEmpresaEmpleado", costoEmpresaEmpleado);
+           // Session.Add("costoEmpresaObrero", costoEmpresaObrero);
+
+            objCostoEmpresaBC.recalcular(costoEmpresaEmpleado, costoEmpresaObrero);
+            HttpContext.Current.Session.Remove("mensajeRecalcular");
         }
     }
 }

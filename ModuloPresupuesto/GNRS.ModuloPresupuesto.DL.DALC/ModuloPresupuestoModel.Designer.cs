@@ -358,22 +358,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<sysdiagrams> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagrams>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagrams> _sysdiagrams;
 
         #endregion
         #region AddTo Methods
@@ -512,14 +496,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         public void AddToPRESUPUESTO_ACTIVIDAD_PROYECTADA(PRESUPUESTO_ACTIVIDAD_PROYECTADA pRESUPUESTO_ACTIVIDAD_PROYECTADA)
         {
             base.AddObject("PRESUPUESTO_ACTIVIDAD_PROYECTADA", pRESUPUESTO_ACTIVIDAD_PROYECTADA);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagrams sysdiagrams)
-        {
-            base.AddObject("sysdiagrams", sysdiagrams);
         }
 
         #endregion
@@ -1257,12 +1233,14 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="id_persona">Initial value of the id_persona property.</param>
         /// <param name="id_concepto">Initial value of the id_concepto property.</param>
         /// <param name="monto">Initial value of the monto property.</param>
-        public static CONCEPTO_POR_PERSONA CreateCONCEPTO_POR_PERSONA(global::System.Int32 id_persona, global::System.Int32 id_concepto, global::System.Double monto)
+        /// <param name="monto_costo_empresa">Initial value of the monto_costo_empresa property.</param>
+        public static CONCEPTO_POR_PERSONA CreateCONCEPTO_POR_PERSONA(global::System.Int32 id_persona, global::System.Int32 id_concepto, global::System.Double monto, global::System.Double monto_costo_empresa)
         {
             CONCEPTO_POR_PERSONA cONCEPTO_POR_PERSONA = new CONCEPTO_POR_PERSONA();
             cONCEPTO_POR_PERSONA.id_persona = id_persona;
             cONCEPTO_POR_PERSONA.id_concepto = id_concepto;
             cONCEPTO_POR_PERSONA.monto = monto;
+            cONCEPTO_POR_PERSONA.monto_costo_empresa = monto_costo_empresa;
             return cONCEPTO_POR_PERSONA;
         }
 
@@ -1346,6 +1324,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.Double _monto;
         partial void OnmontoChanging(global::System.Double value);
         partial void OnmontoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double monto_costo_empresa
+        {
+            get
+            {
+                return _monto_costo_empresa;
+            }
+            set
+            {
+                Onmonto_costo_empresaChanging(value);
+                ReportPropertyChanging("monto_costo_empresa");
+                _monto_costo_empresa = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("monto_costo_empresa");
+                Onmonto_costo_empresaChanged();
+            }
+        }
+        private global::System.Double _monto_costo_empresa;
+        partial void Onmonto_costo_empresaChanging(global::System.Double value);
+        partial void Onmonto_costo_empresaChanged();
 
         #endregion
     
@@ -2611,7 +2613,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="id_localidad">Initial value of the id_localidad property.</param>
         /// <param name="id_periodo_presupuesto">Initial value of the id_periodo_presupuesto property.</param>
         /// <param name="fecha_creacion">Initial value of the fecha_creacion property.</param>
-        public static PERSONA CreatePERSONA(global::System.Int32 id_persona, global::System.String apellido_paterno, global::System.String apellido_materno, global::System.String nombres_persona, global::System.String estado_persona, global::System.Int32 id_cargo, global::System.Int32 id_seccion, global::System.Int32 id_localidad, global::System.Int32 id_periodo_presupuesto, global::System.DateTime fecha_creacion)
+        /// <param name="tipo_empleado">Initial value of the tipo_empleado property.</param>
+        public static PERSONA CreatePERSONA(global::System.Int32 id_persona, global::System.String apellido_paterno, global::System.String apellido_materno, global::System.String nombres_persona, global::System.String estado_persona, global::System.Int32 id_cargo, global::System.Int32 id_seccion, global::System.Int32 id_localidad, global::System.Int32 id_periodo_presupuesto, global::System.DateTime fecha_creacion, global::System.Int32 tipo_empleado)
         {
             PERSONA pERSONA = new PERSONA();
             pERSONA.id_persona = id_persona;
@@ -2624,6 +2627,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             pERSONA.id_localidad = id_localidad;
             pERSONA.id_periodo_presupuesto = id_periodo_presupuesto;
             pERSONA.fecha_creacion = fecha_creacion;
+            pERSONA.tipo_empleado = tipo_empleado;
             return pERSONA;
         }
 
@@ -2672,7 +2676,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_paternoChanging(value);
                 ReportPropertyChanging("apellido_paterno");
-                _apellido_paterno = StructuralObject.SetValidValue(value, false);
+                _apellido_paterno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_paterno");
                 Onapellido_paternoChanged();
             }
@@ -2696,7 +2700,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_maternoChanging(value);
                 ReportPropertyChanging("apellido_materno");
-                _apellido_materno = StructuralObject.SetValidValue(value, false);
+                _apellido_materno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_materno");
                 Onapellido_maternoChanged();
             }
@@ -2872,6 +2876,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.DateTime _fecha_creacion;
         partial void Onfecha_creacionChanging(global::System.DateTime value);
         partial void Onfecha_creacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 tipo_empleado
+        {
+            get
+            {
+                return _tipo_empleado;
+            }
+            set
+            {
+                Ontipo_empleadoChanging(value);
+                ReportPropertyChanging("tipo_empleado");
+                _tipo_empleado = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("tipo_empleado");
+                Ontipo_empleadoChanged();
+            }
+        }
+        private global::System.Int32 _tipo_empleado;
+        partial void Ontipo_empleadoChanging(global::System.Int32 value);
+        partial void Ontipo_empleadoChanged();
 
         #endregion
     
@@ -4125,161 +4153,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PresupuestoDBModel", Name="sysdiagrams")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagrams : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagrams object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagrams Createsysdiagrams(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagrams sysdiagrams = new sysdiagrams();
-            sysdiagrams.name = name;
-            sysdiagrams.principal_id = principal_id;
-            sysdiagrams.diagram_id = diagram_id;
-            return sysdiagrams;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
     }
 
     #endregion

@@ -48,6 +48,7 @@
     <Compile Include="AuditoriaPresupuestoDALC.cs" />
     <Compile Include="CapacitarProyectadoDALC.cs" />
     <Compile Include="CargoDALC.cs" />
+    <Compile Include="ConceptoPersonaDALC.cs" />
     <Compile Include="ConceptoRemuneracionDALC.cs" />
     <Compile Include="CostoEmpresaDALC.cs" />
     <Compile Include="CursoDALC.cs" />

@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/ModuloPresupuesto.Master" CodeBehind="CostoEmpresa.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.CostoEmpresa" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contenido" runat="server">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
@@ -49,15 +49,23 @@
         
   </script>
   <script>
+     
       function mensajeCamposIncompletos() {
           $("#dialog-message").text("Debe ingresar todos los campos.").dialog("open");
 
       }
 
       function costoEmpresaRegistroExitoso(mensaje) {
+          
           $("#dialog-message").text(mensaje).dialog("open");
-        
       }
+
+      function confirmarRecalcular(mensaje) {
+
+          $("#dialog-confirmacion").text(mensaje).dialog("open");
+      }
+ 
+
   </script>
 
   
@@ -76,6 +84,35 @@
                }
            });
            $("#dialog-message").css({
+               fontSize: 15
+           });
+
+       });
+
+
+
+       $(function () {
+           $("#dialog-confirmacion").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               buttons: {
+                   "Aceptar": function () {
+                       PageMethods.recalcularCostoEmpresa();
+                       $(this).dialog("close");
+                      
+                       $("#dialog-message").text('Se ha recalculado correctamente el beneficio social para todos los empleados').dialog("open");
+
+                   },
+                   Cancel: function () {
+                       $(this).dialog("close");
+
+
+                   }
+               }
+           });
+           $("#dialog-confirmacion").css({
                fontSize: 15
            });
 
@@ -99,6 +136,7 @@
 
   <div id="dialog-message" title="SGDT">  </div>
   <div id="dialog-error" title="Error">  </div>
+  <div id="dialog-confirmacion" title="SGDT">  </div>
   
   
   
@@ -112,7 +150,7 @@
 
     <asp:Label ID="Label1" runat="server" Text="Informacion de personal a proyectar"></asp:Label>
     
-     <asp:UpdatePanel ID="ComboBoxUpdatePanel" runat="server" UpdateMode="Conditional"> 
+     <asp:UpdatePanel ID="PrimerUpdatePanel" runat="server" UpdateMode="Conditional"> 
      <ContentTemplate>   
             <Table ID="Table1" runat="server" >
                  <tbody>
@@ -147,7 +185,14 @@
                                 onclick="GuardarButton_Click" />
                         </td>
                     </tr>
-
+      </tbody>
+            </Table>
+            </ContentTemplate>
+</asp:UpdatePanel>
+<asp:UpdatePanel ID="GridUpdatePanel" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate>   
+            <Table ID="CostoEmpresaTable" runat="server" >
+                 <tbody>
                        <tr>
                         <td colspan="2" align="center">
                              <asp:GridView ID="CostoEmpresaGridView" runat="server" 
@@ -168,14 +213,14 @@
                                   
                                     <asp:TemplateField HeaderText="Editar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="cmdEditar" CommandArgument='<%# Eval("id_costoempresa") %>'>
+                                                <asp:LinkButton ID="lnkEditar" runat="server" AutoPostBack="false" CommandName="cmdEditar" CommandArgument='<%# Eval("id_costoempresa") %>'>
                                                    E</asp:LinkButton>
                                               </ItemTemplate>
                                     </asp:TemplateField>
 
                                      <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  CommandName="cmdEliminar" CommandArgument='<%# Eval("id_costoempresa") %>'></asp:LinkButton>
+                                                <asp:LinkButton ID="Button1" runat="server" Text="X"  AutoPostBack="false" CommandName="cmdEliminar" CommandArgument='<%# Eval("id_costoempresa") %>'></asp:LinkButton>
                        
                                               </ItemTemplate>
                                     </asp:TemplateField>
@@ -186,16 +231,23 @@
                         </td>
 
                     </tr>
-
+                    <tr>
+                        <td colspan="2" align="right">
+                           <asp:Button ID="Recalcular" runat="server" Text="Recalcular"   onclick="Recalcular_Click" 
+                                />
+                        </td>
+                        </tr> 
                  </tbody>
             </Table>
 
 
   </ContentTemplate> 
+  
   </asp:UpdatePanel>
 
-  <input type="hidden" name="nuevo" id="nuevo" runat="server" />
- 
+
+    <input type="hidden" name="nuevo" id="nuevo" runat="server" />
+    
 
 
  

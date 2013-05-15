@@ -107,5 +107,23 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
 
         }
+
+
+
+        public List<PERSONA> listarPersonas()
+        {
+            try
+            {
+                List<PERSONA> lista = new List<PERSONA>();
+                var context = new PresupuestoDBEntities();
+                lista = context.PERSONA.ToList();
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

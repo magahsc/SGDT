@@ -111,5 +111,28 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
 
+
+        public List<COSTO_EMPRESA> listarCosto_Empresa_X_Categoria(int codCategoria)
+        {
+            //--1 :empelado 2.obrero
+            try
+            {
+                List<COSTO_EMPRESA> lista = new List<COSTO_EMPRESA>();
+                var context = new PresupuestoDBEntities();
+
+                lista = (from s in context.COSTO_EMPRESA
+                         where s.id_categoria == codCategoria
+                         select s).ToList();
+                
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

@@ -90,7 +90,6 @@
       <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
       <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
     </AssociationSet>
-    <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.sysdiagrams" />
   </EntityContainer>
   <EntityType Name="AREA">
     <Key>
@@ -120,6 +119,7 @@
     <Property Name="monto" Type="Double" Nullable="false" />
     <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA" FromRole="CONCEPTO_POR_PERSONA" ToRole="PERSONA" />
     <NavigationProperty Name="CONCEPTO_REMUNERACION" Relationship="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION" FromRole="CONCEPTO_POR_PERSONA" ToRole="CONCEPTO_REMUNERACION" />
+    <Property Type="Double" Name="monto_costo_empresa" Nullable="false" />
   </EntityType>
   <EntityType Name="CONCEPTO_REMUNERACION">
     <Key>
@@ -194,6 +194,7 @@
     <NavigationProperty Name="PERIODO_PRESUPUESTO" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERSONA" ToRole="PERIODO_PRESUPUESTO" />
     <Property Type="DateTime" Name="fecha_creacion" Nullable="false" />
     <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="PERSONA" ToRole="AUDITORIA_PRESUPUESTO" />
+    <Property Type="Int32" Name="tipo_empleado" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION">
     <Key>
@@ -512,14 +513,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="principal_id" Nullable="false" />
-    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="version" />
-    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
-  </EntityType>
 </Schema>

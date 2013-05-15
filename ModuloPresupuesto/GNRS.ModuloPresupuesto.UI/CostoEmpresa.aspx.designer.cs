@@ -31,13 +31,13 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// ComboBoxUpdatePanel control.
+        /// PrimerUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel ComboBoxUpdatePanel;
+        protected global::System.Web.UI.UpdatePanel PrimerUpdatePanel;
         
         /// <summary>
         /// Table1 control.
@@ -85,6 +85,24 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Button GuardarButton;
         
         /// <summary>
+        /// GridUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel GridUpdatePanel;
+        
+        /// <summary>
+        /// CostoEmpresaTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable CostoEmpresaTable;
+        
+        /// <summary>
         /// CostoEmpresaGridView control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView CostoEmpresaGridView;
+        
+        /// <summary>
+        /// Recalcular control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Recalcular;
         
         /// <summary>
         /// nuevo control.

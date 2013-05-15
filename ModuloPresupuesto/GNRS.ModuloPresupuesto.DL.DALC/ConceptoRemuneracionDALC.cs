@@ -40,5 +40,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 return false;
             }
         }
+
+        
     }
 }

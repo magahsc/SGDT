@@ -11,6 +11,8 @@ namespace GNRS.ModuloPresupuesto.BL.BC
     public class CostoEmpresaBC
     {
         CostoEmpresaDALC objCostoDALC = new CostoEmpresaDALC();
+        PersonaDALC objPersonaDALC = new PersonaDALC();
+        ConceptoPersonaDALC objConceptoPersonaDALC = new ConceptoPersonaDALC();
 
         public Boolean insertarCostoEmpresa(COSTO_EMPRESA costo_empresa)
         {
@@ -90,5 +92,75 @@ namespace GNRS.ModuloPresupuesto.BL.BC
                 throw;
             }
         }
+
+
+        public float calcularCostoEmpresaXCategoria(int idCategoria)
+        {
+            try
+            {
+                List<COSTO_EMPRESA> lista = new List<COSTO_EMPRESA>();
+                lista = objCostoDALC.listarCosto_Empresa_X_Categoria(idCategoria);
+                float costoEmpresa = 0;
+                foreach (COSTO_EMPRESA it in lista)
+                {
+                    float aux = (float)it.factor;
+                    costoEmpresa += aux;
+                }
+
+
+                lista = objCostoDALC.listarCosto_Empresa_X_Categoria(0);
+                foreach (COSTO_EMPRESA it in lista)
+                {
+                    float aux = (float)it.factor;
+                    costoEmpresa += aux;
+                }
+                return costoEmpresa;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public Boolean recalcular(float costoEmpresaEmpleado, float costoEmpresaObrero)
+        {
+            //--1 :empelado 2.obrero
+            try
+            {
+                List<PERSONA> listaPersonas = new List<PERSONA>();
+                listaPersonas = objPersonaDALC.listarPersonas();
+                float montoNuevo=0;
+
+                foreach (PERSONA itPersona in listaPersonas)
+                {
+                    List<CONCEPTO_POR_PERSONA> listaConceptoPorPersona = new List<CONCEPTO_POR_PERSONA>();
+                    listaConceptoPorPersona = objConceptoPersonaDALC.listarConceptosXPersona(itPersona.id_persona);
+
+                    foreach (CONCEPTO_POR_PERSONA itConceptoPersona in listaConceptoPorPersona)
+                    {
+                        if(itPersona.tipo_empleado==1)
+                            montoNuevo=(float)itConceptoPersona.monto*costoEmpresaEmpleado;
+                        if(itPersona.tipo_empleado==2)
+                            montoNuevo=(float)itConceptoPersona.monto*costoEmpresaObrero;
+                        if(itPersona.tipo_empleado==0)
+                            montoNuevo=0;
+
+                        objConceptoPersonaDALC.editarMontoCostoEmpresa(itPersona.id_persona, itConceptoPersona.id_concepto, montoNuevo);
+
+
+                    }
+                }
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }
