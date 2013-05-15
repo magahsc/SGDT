@@ -65,6 +65,7 @@
     <Content Include="images\ModuloPresupuesto.jpg" />
     <Content Include="ListarPresupuestoCapacitacion.aspx" />
     <Content Include="MainPage.aspx" />
+    <Content Include="RegistrarActividadRRHH.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
     <Content Include="RegistrarPresupuestoPersonalProyectado.aspx" />
     <Content Include="Styles\Site.css" />
@@ -176,6 +177,13 @@
     </Compile>
     <Compile Include="ModuloPresupuesto.Master.designer.cs">
       <DependentUpon>ModuloPresupuesto.Master</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarActividadRRHH.aspx.cs">
+      <DependentUpon>RegistrarActividadRRHH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarActividadRRHH.aspx.designer.cs">
+      <DependentUpon>RegistrarActividadRRHH.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistrarPresupuestoCapacitacion.aspx.cs">
       <DependentUpon>RegistrarPresupuestoCapacitacion.aspx</DependentUpon>

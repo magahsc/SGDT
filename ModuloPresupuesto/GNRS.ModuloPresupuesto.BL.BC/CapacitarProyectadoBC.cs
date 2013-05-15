@@ -18,6 +18,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         PersonaDALC personaDALC = new PersonaDALC();
         CapacitarProyectadoDALC capacitarDALC = new CapacitarProyectadoDALC();
         AuditoriaPresupuestoDALC auditoriaDALC = new AuditoriaPresupuestoDALC();
+        ActividadRRHHDALC actividadDALC = new ActividadRRHHDALC();
 
         public List<LOCALIDAD> listarLocalidades()
         {
@@ -217,6 +218,18 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         public Boolean EliminarCapacitacionProyectadaxPersona(PRESUPUESTO_CAPACITACION_POR_PERSONAL objcapacitacionxpersona)
         {
             return capacitarDALC.EliminarCapacitacionProyectadaxPersona(objcapacitacionxpersona);
+        }
+
+        //Nuevo
+        public int insertarActividadRRHH(PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad)
+        {
+            return actividadDALC.insertarActividadRRHH(objactividad);
+        }
+
+
+        public Boolean ActualizarActividadRRHH(PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad)
+        {
+            return actividadDALC.ActualizarActividadRRHH(objactividad);
         }
     }
 }

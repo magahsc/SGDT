@@ -84,6 +84,13 @@
       <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
     </AssociationSet>
     <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.COSTO_EMPRESA" />
+    <EntitySet Name="CATEGORIA_PERSONAL" EntityType="PresupuestoDBModel.CATEGORIA_PERSONAL" />
+    <EntitySet Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntityType="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+    <AssociationSet Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA" Association="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+      <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+      <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.sysdiagrams" />
   </EntityContainer>
   <EntityType Name="AREA">
     <Key>
@@ -436,6 +443,8 @@
     <Property Type="String" Name="tipo_presupuesto" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
     <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PERSONA" />
+    <Property Type="Int32" Name="id_actividad_proyectada" Nullable="false" />
+    <NavigationProperty Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
   </EntityType>
   <Association Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
     <End Type="PresupuestoDBModel.PRESUPUESTO_CAPACITACION" Role="PRESUPUESTO_CAPACITACION" Multiplicity="1" />
@@ -469,5 +478,48 @@
     <Property Type="Int32" Name="id_categoria" />
     <Property Type="String" Name="beneficio_social" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Type="Double" Name="factor" />
+  </EntityType>
+  <EntityType Name="CATEGORIA_PERSONAL">
+    <Key>
+      <PropertyRef Name="id_Categoria" />
+    </Key>
+    <Property Type="Int32" Name="id_Categoria" Nullable="false" />
+    <Property Type="String" Name="nombre_categoria" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="estado" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+    <Key>
+      <PropertyRef Name="id_actividad_proyectada" />
+    </Key>
+    <Property Type="Int32" Name="id_actividad_proyectada" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="codigo_actividad_proyectada" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nombre_actividad" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="mes_inicio" Nullable="false" />
+    <Property Type="Int32" Name="mes_fin" Nullable="false" />
+    <Property Type="Double" Name="monto_actividad" Nullable="false" />
+    <Property Type="String" Name="detalle_actividad" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" ToRole="AUDITORIA_PRESUPUESTO" />
+  </EntityType>
+  <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+    <End Type="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
+    <End Type="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Role="AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+        <PropertyRef Name="id_actividad_proyectada" />
+      </Principal>
+      <Dependent Role="AUDITORIA_PRESUPUESTO">
+        <PropertyRef Name="id_actividad_proyectada" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="principal_id" Nullable="false" />
+    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="version" />
+    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
   </EntityType>
 </Schema>

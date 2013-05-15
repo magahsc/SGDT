@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActividadRRHHDALC.cs" />
     <Compile Include="AreaDALC.cs" />
     <Compile Include="AuditoriaPresupuestoDALC.cs" />
     <Compile Include="CapacitarProyectadoDALC.cs" />

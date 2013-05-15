@@ -9,18 +9,25 @@
           <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AUDITORIA_PRESUPUESTO" EntityType="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CATEGORIA_PERSONAL" EntityType="PresupuestoDBModel.Store.CATEGORIA_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo"  />
+          <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CURSO" EntityType="PresupuestoDBModel.Store.CURSO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LOCALIDAD_SECCION" EntityType="PresupuestoDBModel.Store.LOCALIDAD_SECCION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PERIODO_PRESUPUESTO" EntityType="PresupuestoDBModel.Store.PERIODO_PRESUPUESTO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PERSONA" EntityType="PresupuestoDBModel.Store.PERSONA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_ACTIVIDAD_PROYECTADA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PRESUPUESTO_CAPACITACION" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL" EntityType="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION_POR_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SECCION" EntityType="PresupuestoDBModel.Store.SECCION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA" Association="PresupuestoDBModel.Store.AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+            <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
           <AssociationSet Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" Association="PresupuestoDBModel.Store.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
             <End Role="PRESUPUESTO_CAPACITACION" EntitySet="PRESUPUESTO_CAPACITACION" />
             <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
@@ -104,6 +111,7 @@
           <Property Name="id_auditoria" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="id_capacitacion_proyectada" Type="int" Nullable="false" />
           <Property Name="id_personal_proyectado" Type="int" Nullable="false" />
+          <Property Name="id_actividad_proyectada" Type="int" Nullable="false" />
           <Property Name="fecha_accion" Type="datetime" Nullable="false" />
           <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
@@ -115,6 +123,14 @@
           <Property Name="id_cargo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre_cargo" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIA_PERSONAL">
+          <Key>
+            <PropertyRef Name="id_Categoria" />
+          </Key>
+          <Property Name="id_Categoria" Type="int" Nullable="false" />
+          <Property Name="nombre_categoria" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CONCEPTO_POR_PERSONA">
           <Key>
@@ -134,9 +150,6 @@
           <Property Name="mostrar_boleta" Type="bit" Nullable="false" />
           <Property Name="columna_boleta" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'PresupuestoDB.dbo.COSTO_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="COSTO_EMPRESA">
           <Key>
             <PropertyRef Name="id_costoempresa" />
@@ -204,6 +217,18 @@
           <Property Name="id_localidad" Type="int" Nullable="false" />
           <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+          <Key>
+            <PropertyRef Name="id_actividad_proyectada" />
+          </Key>
+          <Property Name="id_actividad_proyectada" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_actividad_proyectada" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="nombre_actividad" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="mes_inicio" Type="int" Nullable="false" />
+          <Property Name="mes_fin" Type="int" Nullable="false" />
+          <Property Name="monto_actividad" Type="float" Nullable="false" />
+          <Property Name="detalle_actividad" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="PRESUPUESTO_CAPACITACION">
           <Key>
             <PropertyRef Name="id_presupuesto_capacitacion" />
@@ -236,6 +261,28 @@
           <Property Name="nombre_seccion" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="id_area" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+          <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Type="PresupuestoDBModel.Store.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
+          <End Role="AUDITORIA_PRESUPUESTO" Type="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+              <PropertyRef Name="id_actividad_proyectada" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_actividad_proyectada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
           <End Role="PRESUPUESTO_CAPACITACION" Type="PresupuestoDBModel.Store.PRESUPUESTO_CAPACITACION" Multiplicity="1" />
           <End Role="AUDITORIA_PRESUPUESTO" Type="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" Multiplicity="*" />
@@ -532,6 +579,13 @@
             <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
           </AssociationSet>
           <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.COSTO_EMPRESA" />
+          <EntitySet Name="CATEGORIA_PERSONAL" EntityType="PresupuestoDBModel.CATEGORIA_PERSONAL" />
+          <EntitySet Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntityType="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+          <AssociationSet Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA" Association="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+            <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+            <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="PresupuestoDBModel.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="AREA">
           <Key>
@@ -884,6 +938,8 @@
           <Property Type="String" Name="tipo_presupuesto" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
           <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PERSONA" />
+          <Property Type="Int32" Name="id_actividad_proyectada" Nullable="false" />
+          <NavigationProperty Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
         </EntityType>
         <Association Name="AUDITORIA_DEL_PRESUPUESTO_CAPACITACION">
           <End Type="PresupuestoDBModel.PRESUPUESTO_CAPACITACION" Role="PRESUPUESTO_CAPACITACION" Multiplicity="1" />
@@ -917,6 +973,49 @@
           <Property Type="Int32" Name="id_categoria" />
           <Property Type="String" Name="beneficio_social" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Double" Name="factor" />
+        </EntityType>
+        <EntityType Name="CATEGORIA_PERSONAL">
+          <Key>
+            <PropertyRef Name="id_Categoria" />
+          </Key>
+          <Property Type="Int32" Name="id_Categoria" Nullable="false" />
+          <Property Type="String" Name="nombre_categoria" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="estado" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+          <Key>
+            <PropertyRef Name="id_actividad_proyectada" />
+          </Key>
+          <Property Type="Int32" Name="id_actividad_proyectada" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="codigo_actividad_proyectada" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nombre_actividad" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="mes_inicio" Nullable="false" />
+          <Property Type="Int32" Name="mes_fin" Nullable="false" />
+          <Property Type="Double" Name="monto_actividad" Nullable="false" />
+          <Property Type="String" Name="detalle_actividad" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" ToRole="AUDITORIA_PRESUPUESTO" />
+        </EntityType>
+        <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
+          <End Type="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
+          <End Type="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Role="AUDITORIA_PRESUPUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+              <PropertyRef Name="id_actividad_proyectada" />
+            </Principal>
+            <Dependent Role="AUDITORIA_PRESUPUESTO">
+              <PropertyRef Name="id_actividad_proyectada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1012,6 +1111,7 @@
           <EntitySetMapping Name="AUDITORIA_PRESUPUESTO">
             <EntityTypeMapping TypeName="PresupuestoDBModel.AUDITORIA_PRESUPUESTO">
               <MappingFragment StoreEntitySet="AUDITORIA_PRESUPUESTO">
+                <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
                 <ScalarProperty Name="tipo_presupuesto" ColumnName="tipo_presupuesto" />
                 <ScalarProperty Name="tipo_accion" ColumnName="tipo_accion" />
                 <ScalarProperty Name="fecha_accion" ColumnName="fecha_accion" />
@@ -1028,6 +1128,39 @@
                 <ScalarProperty Name="beneficio_social" ColumnName="beneficio_social" />
                 <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
                 <ScalarProperty Name="id_costoempresa" ColumnName="id_costoempresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA_PERSONAL">
+            <EntityTypeMapping TypeName="PresupuestoDBModel.CATEGORIA_PERSONAL">
+              <MappingFragment StoreEntitySet="CATEGORIA_PERSONAL">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
+                <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+            <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+              <MappingFragment StoreEntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+                <ScalarProperty Name="detalle_actividad" ColumnName="detalle_actividad" />
+                <ScalarProperty Name="monto_actividad" ColumnName="monto_actividad" />
+                <ScalarProperty Name="mes_fin" ColumnName="mes_fin" />
+                <ScalarProperty Name="mes_inicio" ColumnName="mes_inicio" />
+                <ScalarProperty Name="nombre_actividad" ColumnName="nombre_actividad" />
+                <ScalarProperty Name="codigo_actividad_proyectada" ColumnName="codigo_actividad_proyectada" />
+                <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PresupuestoDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1085,9 +1218,10 @@
           <ConnectorPoint PointX="9.75" PointY="7.3651432291666659" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="11.615143229166666" />
-          <ConnectorPoint PointX="10.5" PointY="11.615143229166666" />
-          <ConnectorPoint PointX="10.5" PointY="8.3552864583333317" />
+          <ConnectorPoint PointX="9" PointY="10.625" />
+          <ConnectorPoint PointX="9.375" PointY="10.25" />
+          <ConnectorPoint PointX="9.375" PointY="7.89146684375" />
+          <ConnectorPoint PointX="9.75" PointY="7.89146684375" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.CURSO_DEL_PRESUPUESTO" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
@@ -1145,15 +1279,25 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="PresupuestoDBModel.AUDITORIA_PRESUPUESTO" Width="1.5" PointX="12.75" PointY="4" Height="2.5571907552083388" />
         <AssociationConnector Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" >
-          <ConnectorPoint PointX="9" PointY="1.7812500000000002" />
-          <ConnectorPoint PointX="13.5" PointY="1.7812500000000002" />
-          <ConnectorPoint PointX="13.5" PointY="4" />
+          <ConnectorPoint PointX="9" PointY="2.6103417968750016" />
+          <ConnectorPoint PointX="14.09375" PointY="2.6103417968750016" />
+          <ConnectorPoint PointX="14.09375" PointY="4" />
         </AssociationConnector>
         <AssociationConnector Association="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" >
           <ConnectorPoint PointX="9" PointY="6.0625025000000008" />
+          <ConnectorPoint PointX="11.510416666666666" PointY="6.0625025" />
+          <ConnectorPoint PointX="11.677083333333334" PointY="6.0625025000000008" />
           <ConnectorPoint PointX="12.75" PointY="6.0625025000000008" />
         </AssociationConnector>
         <EntityTypeShape EntityType="PresupuestoDBModel.COSTO_EMPRESA" Width="1.5" PointX="3" PointY="1.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="PresupuestoDBModel.CATEGORIA_PERSONAL" Width="1.5" PointX="12.375" PointY="0.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Width="1.5" PointX="10.375" PointY="10" Height="2.5571907552083388" />
+        <AssociationConnector Association="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" >
+          <ConnectorPoint PointX="11.59375" PointY="10" />
+          <ConnectorPoint PointX="11.59375" PointY="5.4588919791666672" />
+          <ConnectorPoint PointX="12.75" PointY="5.4588919791666672" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PresupuestoDBModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="7.75" Height="1.9802864583333388" />
       </Diagram>
     </Diagrams>
   </Designer>

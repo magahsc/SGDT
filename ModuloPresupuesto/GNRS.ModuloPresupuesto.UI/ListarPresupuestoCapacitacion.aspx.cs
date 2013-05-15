@@ -543,6 +543,7 @@ namespace GNRS.ModuloPresupuesto.UI
             objauditoria.id_personal_proyectado = 0;
             objauditoria.fecha_accion = DateTime.Now;
             objauditoria.tipo_accion = "E";
+            objauditoria.id_actividad_proyectada = 0;
             objauditoria.tipo_presupuesto = "C";
 
             objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
