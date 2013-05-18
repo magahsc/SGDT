@@ -90,6 +90,7 @@
       <End Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" EntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
       <End Role="AUDITORIA_PRESUPUESTO" EntitySet="AUDITORIA_PRESUPUESTO" />
     </AssociationSet>
+    <EntitySet Name="ACTIVIDAD" EntityType="PresupuestoDBModel.ACTIVIDAD" />
   </EntityContainer>
   <EntityType Name="AREA">
     <Key>
@@ -482,9 +483,9 @@
   </EntityType>
   <EntityType Name="CATEGORIA_PERSONAL">
     <Key>
-      <PropertyRef Name="id_Categoria" />
+      <PropertyRef Name="id_categoria" />
     </Key>
-    <Property Type="Int32" Name="id_Categoria" Nullable="false" />
+    <Property Type="Int32" Name="id_categoria" Nullable="false" />
     <Property Type="String" Name="nombre_categoria" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Boolean" Name="estado" Nullable="false" />
   </EntityType>
@@ -500,6 +501,9 @@
     <Property Type="Double" Name="monto_actividad" Nullable="false" />
     <Property Type="String" Name="detalle_actividad" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="AUDITORIA_PRESUPUESTO" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" ToRole="AUDITORIA_PRESUPUESTO" />
+    <Property Type="String" Name="presupesto_aprobado" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="tipo_moneda" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="false" />
   </EntityType>
   <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
     <End Type="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
@@ -513,4 +517,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ACTIVIDAD">
+    <Key>
+      <PropertyRef Name="id_actividad" />
+    </Key>
+    <Property Type="Int32" Name="id_actividad" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="nombre_actividad" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

@@ -162,15 +162,18 @@
     <EntitySetMapping Name="CATEGORIA_PERSONAL">
       <EntityTypeMapping TypeName="PresupuestoDBModel.CATEGORIA_PERSONAL">
         <MappingFragment StoreEntitySet="CATEGORIA_PERSONAL">
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
-          <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
       <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA">
         <MappingFragment StoreEntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="tipo_moneda" ColumnName="tipo_moneda" />
+          <ScalarProperty Name="presupesto_aprobado" ColumnName="presupesto_aprobado" />
           <ScalarProperty Name="detalle_actividad" ColumnName="detalle_actividad" />
           <ScalarProperty Name="monto_actividad" ColumnName="monto_actividad" />
           <ScalarProperty Name="mes_fin" ColumnName="mes_fin" />
@@ -178,6 +181,14 @@
           <ScalarProperty Name="nombre_actividad" ColumnName="nombre_actividad" />
           <ScalarProperty Name="codigo_actividad_proyectada" ColumnName="codigo_actividad_proyectada" />
           <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACTIVIDAD">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.ACTIVIDAD">
+        <MappingFragment StoreEntitySet="ACTIVIDAD">
+          <ScalarProperty Name="nombre_actividad" ColumnName="nombre_actividad" />
+          <ScalarProperty Name="id_actividad" ColumnName="id_actividad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

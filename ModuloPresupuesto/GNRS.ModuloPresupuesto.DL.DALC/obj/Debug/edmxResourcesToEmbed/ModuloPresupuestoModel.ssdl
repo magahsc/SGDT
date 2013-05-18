@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="PresupuestoDBModelStoreContainer">
+    <EntitySet Name="ACTIVIDAD" EntityType="PresupuestoDBModel.Store.ACTIVIDAD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AUDITORIA_PRESUPUESTO" EntityType="PresupuestoDBModel.Store.AUDITORIA_PRESUPUESTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CARGO_PERSONAL" EntityType="PresupuestoDBModel.Store.CARGO_PERSONAL" store:Type="Tables" Schema="dbo" />
@@ -91,6 +92,13 @@
       <End Role="CURSO" EntitySet="CURSO" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ACTIVIDAD">
+    <Key>
+      <PropertyRef Name="id_actividad" />
+    </Key>
+    <Property Name="id_actividad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_actividad" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <EntityType Name="AREA">
     <Key>
       <PropertyRef Name="id_area" />
@@ -120,9 +128,9 @@
   </EntityType>
   <EntityType Name="CATEGORIA_PERSONAL">
     <Key>
-      <PropertyRef Name="id_Categoria" />
+      <PropertyRef Name="id_categoria" />
     </Key>
-    <Property Name="id_Categoria" Type="int" Nullable="false" />
+    <Property Name="id_categoria" Type="int" Nullable="false" />
     <Property Name="nombre_categoria" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="estado" Type="bit" Nullable="false" />
   </EntityType>
@@ -210,11 +218,11 @@
     <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
     <Property Name="fecha_creacion" Type="date" Nullable="false" />
     <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="tipo_empleado" Type="int" Nullable="false" />
     <Property Name="id_cargo" Type="int" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />
     <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" />
-    <Property Name="tipo_empleado" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
     <Key>
@@ -225,8 +233,11 @@
     <Property Name="nombre_actividad" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="mes_inicio" Type="int" Nullable="false" />
     <Property Name="mes_fin" Type="int" Nullable="false" />
-    <Property Name="monto_actividad" Type="float" Nullable="false" />
     <Property Name="detalle_actividad" Type="text" Nullable="false" />
+    <Property Name="presupesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="monto_actividad" Type="float" Nullable="false" />
+    <Property Name="tipo_moneda" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="PRESUPUESTO_CAPACITACION">
     <Key>

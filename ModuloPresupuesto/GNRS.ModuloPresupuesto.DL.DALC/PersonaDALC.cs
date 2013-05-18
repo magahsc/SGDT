@@ -16,6 +16,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 context.PERSONA.AddObject(persona);
                 persona.estado_persona = "P";
+                persona.tipo_empleado = 1;
 
                 DateTime now = DateTime.Now;
                 persona.fecha_creacion = now;

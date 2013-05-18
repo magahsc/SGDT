@@ -358,6 +358,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ACTIVIDAD> ACTIVIDAD
+        {
+            get
+            {
+                if ((_ACTIVIDAD == null))
+                {
+                    _ACTIVIDAD = base.CreateObjectSet<ACTIVIDAD>("ACTIVIDAD");
+                }
+                return _ACTIVIDAD;
+            }
+        }
+        private ObjectSet<ACTIVIDAD> _ACTIVIDAD;
 
         #endregion
         #region AddTo Methods
@@ -497,6 +513,14 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         {
             base.AddObject("PRESUPUESTO_ACTIVIDAD_PROYECTADA", pRESUPUESTO_ACTIVIDAD_PROYECTADA);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ACTIVIDAD EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToACTIVIDAD(ACTIVIDAD aCTIVIDAD)
+        {
+            base.AddObject("ACTIVIDAD", aCTIVIDAD);
+        }
 
         #endregion
     }
@@ -505,6 +529,87 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PresupuestoDBModel", Name="ACTIVIDAD")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ACTIVIDAD : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ACTIVIDAD object.
+        /// </summary>
+        /// <param name="id_actividad">Initial value of the id_actividad property.</param>
+        /// <param name="nombre_actividad">Initial value of the nombre_actividad property.</param>
+        public static ACTIVIDAD CreateACTIVIDAD(global::System.Int32 id_actividad, global::System.String nombre_actividad)
+        {
+            ACTIVIDAD aCTIVIDAD = new ACTIVIDAD();
+            aCTIVIDAD.id_actividad = id_actividad;
+            aCTIVIDAD.nombre_actividad = nombre_actividad;
+            return aCTIVIDAD;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id_actividad
+        {
+            get
+            {
+                return _id_actividad;
+            }
+            set
+            {
+                if (_id_actividad != value)
+                {
+                    Onid_actividadChanging(value);
+                    ReportPropertyChanging("id_actividad");
+                    _id_actividad = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id_actividad");
+                    Onid_actividadChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id_actividad;
+        partial void Onid_actividadChanging(global::System.Int32 value);
+        partial void Onid_actividadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String nombre_actividad
+        {
+            get
+            {
+                return _nombre_actividad;
+            }
+            set
+            {
+                Onnombre_actividadChanging(value);
+                ReportPropertyChanging("nombre_actividad");
+                _nombre_actividad = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("nombre_actividad");
+                Onnombre_actividadChanged();
+            }
+        }
+        private global::System.String _nombre_actividad;
+        partial void Onnombre_actividadChanging(global::System.String value);
+        partial void Onnombre_actividadChanged();
+
+        #endregion
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1123,13 +1228,13 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// Create a new CATEGORIA_PERSONAL object.
         /// </summary>
-        /// <param name="id_Categoria">Initial value of the id_Categoria property.</param>
+        /// <param name="id_categoria">Initial value of the id_categoria property.</param>
         /// <param name="nombre_categoria">Initial value of the nombre_categoria property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        public static CATEGORIA_PERSONAL CreateCATEGORIA_PERSONAL(global::System.Int32 id_Categoria, global::System.String nombre_categoria, global::System.Boolean estado)
+        public static CATEGORIA_PERSONAL CreateCATEGORIA_PERSONAL(global::System.Int32 id_categoria, global::System.String nombre_categoria, global::System.Boolean estado)
         {
             CATEGORIA_PERSONAL cATEGORIA_PERSONAL = new CATEGORIA_PERSONAL();
-            cATEGORIA_PERSONAL.id_Categoria = id_Categoria;
+            cATEGORIA_PERSONAL.id_categoria = id_categoria;
             cATEGORIA_PERSONAL.nombre_categoria = nombre_categoria;
             cATEGORIA_PERSONAL.estado = estado;
             return cATEGORIA_PERSONAL;
@@ -1143,27 +1248,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 id_Categoria
+        public global::System.Int32 id_categoria
         {
             get
             {
-                return _id_Categoria;
+                return _id_categoria;
             }
             set
             {
-                if (_id_Categoria != value)
+                if (_id_categoria != value)
                 {
-                    Onid_CategoriaChanging(value);
-                    ReportPropertyChanging("id_Categoria");
-                    _id_Categoria = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id_Categoria");
-                    Onid_CategoriaChanged();
+                    Onid_categoriaChanging(value);
+                    ReportPropertyChanging("id_categoria");
+                    _id_categoria = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id_categoria");
+                    Onid_categoriaChanged();
                 }
             }
         }
-        private global::System.Int32 _id_Categoria;
-        partial void Onid_CategoriaChanging(global::System.Int32 value);
-        partial void Onid_CategoriaChanged();
+        private global::System.Int32 _id_categoria;
+        partial void Onid_categoriaChanging(global::System.Int32 value);
+        partial void Onid_categoriaChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3108,7 +3213,10 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="mes_fin">Initial value of the mes_fin property.</param>
         /// <param name="monto_actividad">Initial value of the monto_actividad property.</param>
         /// <param name="detalle_actividad">Initial value of the detalle_actividad property.</param>
-        public static PRESUPUESTO_ACTIVIDAD_PROYECTADA CreatePRESUPUESTO_ACTIVIDAD_PROYECTADA(global::System.Int32 id_actividad_proyectada, global::System.String codigo_actividad_proyectada, global::System.String nombre_actividad, global::System.Int32 mes_inicio, global::System.Int32 mes_fin, global::System.Double monto_actividad, global::System.String detalle_actividad)
+        /// <param name="presupesto_aprobado">Initial value of the presupesto_aprobado property.</param>
+        /// <param name="tipo_moneda">Initial value of the tipo_moneda property.</param>
+        /// <param name="fecha_creacion">Initial value of the fecha_creacion property.</param>
+        public static PRESUPUESTO_ACTIVIDAD_PROYECTADA CreatePRESUPUESTO_ACTIVIDAD_PROYECTADA(global::System.Int32 id_actividad_proyectada, global::System.String codigo_actividad_proyectada, global::System.String nombre_actividad, global::System.Int32 mes_inicio, global::System.Int32 mes_fin, global::System.Double monto_actividad, global::System.String detalle_actividad, global::System.String presupesto_aprobado, global::System.String tipo_moneda, global::System.DateTime fecha_creacion)
         {
             PRESUPUESTO_ACTIVIDAD_PROYECTADA pRESUPUESTO_ACTIVIDAD_PROYECTADA = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.id_actividad_proyectada = id_actividad_proyectada;
@@ -3118,6 +3226,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.mes_fin = mes_fin;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.monto_actividad = monto_actividad;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.detalle_actividad = detalle_actividad;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.presupesto_aprobado = presupesto_aprobado;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.tipo_moneda = tipo_moneda;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.fecha_creacion = fecha_creacion;
             return pRESUPUESTO_ACTIVIDAD_PROYECTADA;
         }
 
@@ -3294,6 +3405,78 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.String _detalle_actividad;
         partial void Ondetalle_actividadChanging(global::System.String value);
         partial void Ondetalle_actividadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String presupesto_aprobado
+        {
+            get
+            {
+                return _presupesto_aprobado;
+            }
+            set
+            {
+                Onpresupesto_aprobadoChanging(value);
+                ReportPropertyChanging("presupesto_aprobado");
+                _presupesto_aprobado = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("presupesto_aprobado");
+                Onpresupesto_aprobadoChanged();
+            }
+        }
+        private global::System.String _presupesto_aprobado;
+        partial void Onpresupesto_aprobadoChanging(global::System.String value);
+        partial void Onpresupesto_aprobadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String tipo_moneda
+        {
+            get
+            {
+                return _tipo_moneda;
+            }
+            set
+            {
+                Ontipo_monedaChanging(value);
+                ReportPropertyChanging("tipo_moneda");
+                _tipo_moneda = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("tipo_moneda");
+                Ontipo_monedaChanged();
+            }
+        }
+        private global::System.String _tipo_moneda;
+        partial void Ontipo_monedaChanging(global::System.String value);
+        partial void Ontipo_monedaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime fecha_creacion
+        {
+            get
+            {
+                return _fecha_creacion;
+            }
+            set
+            {
+                Onfecha_creacionChanging(value);
+                ReportPropertyChanging("fecha_creacion");
+                _fecha_creacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fecha_creacion");
+                Onfecha_creacionChanged();
+            }
+        }
+        private global::System.DateTime _fecha_creacion;
+        partial void Onfecha_creacionChanging(global::System.DateTime value);
+        partial void Onfecha_creacionChanged();
 
         #endregion
     
