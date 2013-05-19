@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActividadBE.cs" />
     <Compile Include="CapacitacionProyectadaBE.cs" />
     <Compile Include="ConceptoTemporalBE.cs" />
     <Compile Include="PersonaBE.cs" />

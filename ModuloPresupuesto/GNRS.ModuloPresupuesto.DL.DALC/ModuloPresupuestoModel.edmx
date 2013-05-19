@@ -13,8 +13,7 @@
           <EntitySet Name="CATEGORIA_PERSONAL" EntityType="PresupuestoDBModel.Store.CATEGORIA_PERSONAL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_POR_PERSONA" EntityType="PresupuestoDBModel.Store.CONCEPTO_POR_PERSONA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CONCEPTO_REMUNERACION" EntityType="PresupuestoDBModel.Store.CONCEPTO_REMUNERACION" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo">
-          </EntitySet>
+          <EntitySet Name="COSTO_EMPRESA" EntityType="PresupuestoDBModel.Store.COSTO_EMPRESA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CURSO" EntityType="PresupuestoDBModel.Store.CURSO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="INSTITUCION" EntityType="PresupuestoDBModel.Store.INSTITUCION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LOCALIDAD" EntityType="PresupuestoDBModel.Store.LOCALIDAD" store:Type="Tables" Schema="dbo" />
@@ -159,15 +158,12 @@
           <Property Name="mostrar_boleta" Type="bit" Nullable="false" />
           <Property Name="columna_boleta" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'PresupuestoDB.dbo.COSTO_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="COSTO_EMPRESA">
           <Key>
             <PropertyRef Name="id_costoempresa" />
           </Key>
           <Property Name="id_costoempresa" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="id_categoria" Type="int" />
+          <Property Name="id_categoria" Type="int" Nullable="false" />
           <Property Name="beneficio_social" Type="varchar" MaxLength="200" />
           <Property Name="factor" Type="float" />
         </EntityType>
@@ -244,6 +240,8 @@
           <Property Name="monto_actividad" Type="float" Nullable="false" />
           <Property Name="tipo_moneda" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="anio_inicio" Type="int" />
+          <Property Name="anio_fin" Type="int" />
         </EntityType>
         <EntityType Name="PRESUPUESTO_CAPACITACION">
           <Key>
@@ -978,7 +976,7 @@
             <PropertyRef Name="id_costoempresa" />
           </Key>
           <Property Type="Int32" Name="id_costoempresa" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="id_categoria" />
+          <Property Type="Int32" Name="id_categoria" Nullable="false" />
           <Property Type="String" Name="beneficio_social" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Double" Name="factor" />
         </EntityType>
@@ -1005,6 +1003,8 @@
           <Property Type="String" Name="presupesto_aprobado" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="tipo_moneda" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="DateTime" Name="fecha_creacion" Nullable="false" />
+          <Property Type="Int32" Name="anio_inicio" />
+          <Property Type="Int32" Name="anio_fin" />
         </EntityType>
         <Association Name="AUDITORIA_DE_ACTIVIDAD_PROYECTADA">
           <End Type="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA" Role="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Multiplicity="1" />
@@ -1153,6 +1153,8 @@
           <EntitySetMapping Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
             <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA">
               <MappingFragment StoreEntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+                <ScalarProperty Name="anio_fin" ColumnName="anio_fin" />
+                <ScalarProperty Name="anio_inicio" ColumnName="anio_inicio" />
                 <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="tipo_moneda" ColumnName="tipo_moneda" />
                 <ScalarProperty Name="presupesto_aprobado" ColumnName="presupesto_aprobado" />

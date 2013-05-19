@@ -231,5 +231,37 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         {
             return actividadDALC.ActualizarActividadRRHH(objactividad);
         }
+
+
+        public List<ACTIVIDAD> ListaActividadNombres()
+        {
+            return actividadDALC.ListaNombresActividad();
+        }
+
+        public ACTIVIDAD ObtenerActividadXCodigo(int codigoActividad)
+        {
+            return actividadDALC.obtenerActividadXCodigo(codigoActividad);
+        }
+
+        public List<ActividadBE> listarActividadxMesxEstado(ActividadBE actividad)
+        {
+            return actividadDALC.ListarActividadMesxEstado(actividad);
+        }
+
+        public List<ActividadBE> listarActividadxMes(ActividadBE actividad)
+        {
+            return actividadDALC.ListarActividadMes(actividad);
+        }
+
+        public List<ActividadBE> listarActividadxEstado(ActividadBE actividad)
+        {
+            return actividadDALC.ListarActividadEstado(actividad);
+        }
+
+        public List<ActividadBE> listarActividadxTodo()
+        {
+            return actividadDALC.ListarActividadxTodo();
+        }
+
     }
 }

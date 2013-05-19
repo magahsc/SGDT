@@ -221,6 +221,7 @@ namespace GNRS.ModuloPresupuesto.UI
             Session.Add("anio", anioDropDownList.SelectedValue.ToString());
             Session.Add("Mensaje", "0");
             alert("La configuración del presupuesto se grabo satisfactoriamente");
+            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('La configuración del presupuesto se grabo satisfactoriamente')", true);
             /*Context.Items.Add("dia", diaDropDownList.SelectedValue.ToString());
             Context.Items.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
             Context.Items.Add("anio", anioDropDownList.SelectedValue.ToString());*/

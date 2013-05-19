@@ -63,9 +63,10 @@
     <Content Include="images\delete.gif" />
     <Content Include="images\edit.gif" />
     <Content Include="images\ModuloPresupuesto.jpg" />
+    <Content Include="ListarActividad.aspx" />
     <Content Include="ListarPresupuestoCapacitacion.aspx" />
     <Content Include="MainPage.aspx" />
-    <Content Include="RegistrarActividadRRHH.aspx" />
+    <Content Include="RegistrarActividad.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
     <Content Include="RegistrarPresupuestoPersonalProyectado.aspx" />
     <Content Include="Styles\Site.css" />
@@ -156,6 +157,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ListarActividad.aspx.cs">
+      <DependentUpon>ListarActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarActividad.aspx.designer.cs">
+      <DependentUpon>ListarActividad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ListarPresupuestoCapacitacion.aspx.cs">
       <DependentUpon>ListarPresupuestoCapacitacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -178,12 +186,12 @@
     <Compile Include="ModuloPresupuesto.Master.designer.cs">
       <DependentUpon>ModuloPresupuesto.Master</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarActividadRRHH.aspx.cs">
-      <DependentUpon>RegistrarActividadRRHH.aspx</DependentUpon>
+    <Compile Include="RegistrarActividad.aspx.cs">
+      <DependentUpon>RegistrarActividad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistrarActividadRRHH.aspx.designer.cs">
-      <DependentUpon>RegistrarActividadRRHH.aspx</DependentUpon>
+    <Compile Include="RegistrarActividad.aspx.designer.cs">
+      <DependentUpon>RegistrarActividad.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistrarPresupuestoCapacitacion.aspx.cs">
       <DependentUpon>RegistrarPresupuestoCapacitacion.aspx</DependentUpon>
@@ -229,7 +237,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>17462</DevelopmentServerPort>
+          <DevelopmentServerPort>3406</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

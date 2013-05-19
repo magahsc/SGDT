@@ -58,8 +58,8 @@
                       <li class="AccordionPanel AccordionPanelOpen">
            	                <a class=" AccordionPanelTab" href="#">Presupuesto de Actividades Proyectadas</a>
                                 <ul class="AccordionPanelContent" style="height: auto; display: block;">
-                                    <li><a href="RegistrarActividadRRHH.aspx" id="A3">Registrar actividad de RRHH</a></li>
-                                    <li><a href="MainPage.aspx" id="A4">Listar actividad de RRHH</a></li>
+                                    <li><a href="RegistrarActividad.aspx" id="A3">Registrar actividad de RRHH</a></li>
+                                    <li><a href="ListarActividad.aspx" id="A4">Listar actividad de RRHH</a></li>
                                 </ul>
                      </li> 
 

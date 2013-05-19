@@ -17,8 +17,9 @@ namespace GNRS.ModuloPresupuesto.UI
                 {
                     if(Session["Mensaje"].ToString().Equals("1"))
                     {
-                    String mensaje = "Debe configurar el mes y el año para poder realizar un registro de capacitación"; 
-                    alert(mensaje);
+                      String mensaje = "Debe configurar el mes y el año para poder realizar un registro de capacitación"; 
+                      alert(mensaje);
+                     // ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Debe configurar el mes y el año para poder realizar un registro de capacitación')", true);
                     }
                 }
             

@@ -49,5 +49,327 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
 
         }
+
+        public List<ACTIVIDAD> ListaNombresActividad()
+        {
+            try
+            {
+                List<ACTIVIDAD> lista = new List<ACTIVIDAD>();
+                var context = new PresupuestoDBEntities();
+                lista = context.ACTIVIDAD.ToList();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public ACTIVIDAD obtenerActividadXCodigo(int codigoActividad)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                ACTIVIDAD actividad = new ACTIVIDAD();
+
+                actividad = (from a in context.ACTIVIDAD
+                             where a.id_actividad == codigoActividad
+                               select a).First();
+
+                return actividad;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<ActividadBE> ListarActividadMesxEstado(ActividadBE objactividad)
+        {
+            String tipo = "";
+            try
+            {
+                List<ActividadBE> lista = new List<ActividadBE>();
+                ActividadBE objactividadBE;
+                var context = new PresupuestoDBEntities();
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                              where p.mes_inicio == objactividad.Mes && p.anio_inicio == objactividad.Anio && p.presupesto_aprobado == objactividad.Presupuesto_aprobado
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, p.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupesto_aprobado }).ToList();
+
+                foreach (var item in prueba)
+                {
+                    if (item.tipo_moneda.Equals("S"))
+                        tipo = "S/. ";
+                    if (item.tipo_moneda.Equals("D"))
+                        tipo = "$ ";
+
+                    objactividadBE = new ActividadBE();
+                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad,2);
+                    objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
+                    objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
+                    objactividadBE.Nombre_actividad = item.nombre_actividad;
+
+                    String dia = Convert.ToString(item.fecha_creacion.Day);
+                    String mes = Convert.ToString(item.fecha_creacion.Month);
+                    String anio = Convert.ToString(item.fecha_creacion.Year);
+                    anio = anio.Substring(2, 2);
+
+                    objactividadBE.Fecha_creacion = item.fecha_creacion;
+                    objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
+
+                    if (item.presupesto_aprobado.Equals("A"))
+                        objactividadBE.Presupuesto_aprobado = "Aprobado";
+                    if (item.presupesto_aprobado.Equals("N"))
+                        objactividadBE.Presupuesto_aprobado = "No aprobado";
+                    if (item.presupesto_aprobado.Equals("P"))
+                        objactividadBE.Presupuesto_aprobado = "Pendiente";
+
+                    if (!item.presupesto_aprobado.Equals("E"))
+                        lista.Add(objactividadBE);
+                }
+
+                if (lista.Count() > 0)
+                    return lista;
+                else
+                    return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<ActividadBE> ListarActividadMes(ActividadBE objactividad)
+        {
+            String tipo = "";
+            try
+            {
+                List<ActividadBE> lista = new List<ActividadBE>();
+                ActividadBE objactividadBE;
+                var context = new PresupuestoDBEntities();
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                              where p.mes_inicio == objactividad.Mes && p.anio_inicio == objactividad.Anio
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, p.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupesto_aprobado }).ToList();
+
+                foreach (var item in prueba)
+                {
+                    if (item.tipo_moneda.Equals("S"))
+                        tipo = "S/. ";
+                    if (item.tipo_moneda.Equals("D"))
+                        tipo = "$ ";
+
+                    objactividadBE = new ActividadBE();
+                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad, 2);
+                    objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
+                    objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
+                    objactividadBE.Nombre_actividad = item.nombre_actividad;
+
+                    String dia = Convert.ToString(item.fecha_creacion.Day);
+                    String mes = Convert.ToString(item.fecha_creacion.Month);
+                    String anio = Convert.ToString(item.fecha_creacion.Year);
+                    anio = anio.Substring(2, 2);
+
+                    objactividadBE.Fecha_creacion = item.fecha_creacion;
+                    objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
+
+                    if (item.presupesto_aprobado.Equals("A"))
+                        objactividadBE.Presupuesto_aprobado = "Aprobado";
+                    if (item.presupesto_aprobado.Equals("N"))
+                        objactividadBE.Presupuesto_aprobado = "No aprobado";
+                    if (item.presupesto_aprobado.Equals("P"))
+                        objactividadBE.Presupuesto_aprobado = "Pendiente";
+
+                    if (!item.presupesto_aprobado.Equals("E"))
+                        lista.Add(objactividadBE);
+                }
+
+                if (lista.Count() > 0)
+                    return lista;
+                else
+                    return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<ActividadBE> ListarActividadEstado(ActividadBE objactividad)
+        {
+            String tipo = "";
+            try
+            {
+                List<ActividadBE> lista = new List<ActividadBE>();
+                ActividadBE objactividadBE;
+                var context = new PresupuestoDBEntities();
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                              where p.presupesto_aprobado == objactividad.Presupuesto_aprobado
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, p.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupesto_aprobado }).ToList();
+
+                foreach (var item in prueba)
+                {
+                    if (item.tipo_moneda.Equals("S"))
+                        tipo = "S/. ";
+                    if (item.tipo_moneda.Equals("D"))
+                        tipo = "$ ";
+
+                    objactividadBE = new ActividadBE();
+                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad, 2);
+                    objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
+                    objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
+                    objactividadBE.Nombre_actividad = item.nombre_actividad;
+
+                    String dia = Convert.ToString(item.fecha_creacion.Day);
+                    String mes = Convert.ToString(item.fecha_creacion.Month);
+                    String anio = Convert.ToString(item.fecha_creacion.Year);
+                    anio = anio.Substring(2, 2);
+
+                    objactividadBE.Fecha_creacion = item.fecha_creacion;
+                    objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
+
+                    if (item.presupesto_aprobado.Equals("A"))
+                        objactividadBE.Presupuesto_aprobado = "Aprobado";
+                    if (item.presupesto_aprobado.Equals("N"))
+                        objactividadBE.Presupuesto_aprobado = "No aprobado";
+                    if (item.presupesto_aprobado.Equals("P"))
+                        objactividadBE.Presupuesto_aprobado = "Pendiente";
+
+                    if (!item.presupesto_aprobado.Equals("E"))
+                        lista.Add(objactividadBE);
+                }
+
+                if (lista.Count() > 0)
+                    return lista;
+                else
+                    return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<ActividadBE> ListarActividadxTodo()
+        {
+            String tipo = "";
+            try
+            {
+                List<ActividadBE> lista = new List<ActividadBE>();
+                ActividadBE objactividadBE;
+                var context = new PresupuestoDBEntities();
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, p.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupesto_aprobado }).ToList();
+
+                foreach (var item in prueba)
+                {
+                    if (item.tipo_moneda.Equals("S"))
+                        tipo = "S/. ";
+                    if (item.tipo_moneda.Equals("D"))
+                        tipo = "$ ";
+
+                    objactividadBE = new ActividadBE();
+                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad, 2);
+                    objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
+                    objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
+                    objactividadBE.Nombre_actividad = item.nombre_actividad;
+
+                    String dia = Convert.ToString(item.fecha_creacion.Day);
+                    String mes = Convert.ToString(item.fecha_creacion.Month);
+                    String anio = Convert.ToString(item.fecha_creacion.Year);
+                    anio = anio.Substring(2, 2);
+
+                    objactividadBE.Fecha_creacion = item.fecha_creacion;
+                    objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
+
+                    if (item.presupesto_aprobado.Equals("A"))
+                        objactividadBE.Presupuesto_aprobado = "Aprobado";
+                    if (item.presupesto_aprobado.Equals("N"))
+                        objactividadBE.Presupuesto_aprobado = "No aprobado";
+                    if (item.presupesto_aprobado.Equals("P"))
+                        objactividadBE.Presupuesto_aprobado = "Pendiente";
+
+                    if (!item.presupesto_aprobado.Equals("E"))
+                        lista.Add(objactividadBE);
+                }
+
+                if (lista.Count() > 0)
+                    return lista;
+                else
+                    return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public String cambiarmesydia(String dato)
+        {
+            String sdato = dato;
+            switch (dato)
+            {
+                case "1":
+                    {
+                        sdato = "01";
+                        break;
+                    }
+
+                case "2":
+                    {
+                        sdato = "02";
+                        break;
+                    }
+
+                case "3":
+                    {
+                        sdato = "03";
+                        break;
+                    }
+
+                case "4":
+                    {
+                        sdato = "04";
+                        break;
+                    }
+
+                case "5":
+                    {
+                        sdato = "05";
+                        break;
+                    }
+
+                case "6":
+                    {
+                        sdato = "06";
+                        break;
+                    }
+
+                case "7":
+                    {
+                        sdato = "07";
+                        break;
+                    }
+
+                case "8":
+                    {
+                        sdato = "08";
+                        break;
+                    }
+
+                case "9":
+                    {
+                        sdato = "09";
+                        break;
+                    }
+
+            }
+
+            return sdato;
+        }
     }
 }

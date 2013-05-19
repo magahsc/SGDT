@@ -38,7 +38,7 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
                     Session.Remove("mensajeRecalcular");
-
+                
                 }
 
             }

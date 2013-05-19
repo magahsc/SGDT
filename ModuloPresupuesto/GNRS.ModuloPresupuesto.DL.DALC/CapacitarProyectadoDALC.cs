@@ -84,7 +84,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -141,7 +141,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -198,7 +198,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -255,7 +255,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -312,7 +312,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -369,7 +369,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -426,7 +426,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
@@ -482,7 +482,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 {
                     if (item.tipo_moneda.Equals("S"))
                         tipo = "S/. ";
-                    if (item.tipo_moneda.Equals("S"))
+                    if (item.tipo_moneda.Equals("D"))
                         tipo = "$ ";
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();

@@ -1709,10 +1709,12 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// Create a new COSTO_EMPRESA object.
         /// </summary>
         /// <param name="id_costoempresa">Initial value of the id_costoempresa property.</param>
-        public static COSTO_EMPRESA CreateCOSTO_EMPRESA(global::System.Int32 id_costoempresa)
+        /// <param name="id_categoria">Initial value of the id_categoria property.</param>
+        public static COSTO_EMPRESA CreateCOSTO_EMPRESA(global::System.Int32 id_costoempresa, global::System.Int32 id_categoria)
         {
             COSTO_EMPRESA cOSTO_EMPRESA = new COSTO_EMPRESA();
             cOSTO_EMPRESA.id_costoempresa = id_costoempresa;
+            cOSTO_EMPRESA.id_categoria = id_categoria;
             return cOSTO_EMPRESA;
         }
 
@@ -1749,9 +1751,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> id_categoria
+        public global::System.Int32 id_categoria
         {
             get
             {
@@ -1766,8 +1768,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 Onid_categoriaChanged();
             }
         }
-        private Nullable<global::System.Int32> _id_categoria;
-        partial void Onid_categoriaChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _id_categoria;
+        partial void Onid_categoriaChanging(global::System.Int32 value);
         partial void Onid_categoriaChanged();
     
         /// <summary>
@@ -2781,7 +2783,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_paternoChanging(value);
                 ReportPropertyChanging("apellido_paterno");
-                _apellido_paterno = StructuralObject.SetValidValue(value, true);
+                _apellido_paterno = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("apellido_paterno");
                 Onapellido_paternoChanged();
             }
@@ -2805,7 +2807,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_maternoChanging(value);
                 ReportPropertyChanging("apellido_materno");
-                _apellido_materno = StructuralObject.SetValidValue(value, true);
+                _apellido_materno = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("apellido_materno");
                 Onapellido_maternoChanged();
             }
@@ -3477,6 +3479,54 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.DateTime _fecha_creacion;
         partial void Onfecha_creacionChanging(global::System.DateTime value);
         partial void Onfecha_creacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> anio_inicio
+        {
+            get
+            {
+                return _anio_inicio;
+            }
+            set
+            {
+                Onanio_inicioChanging(value);
+                ReportPropertyChanging("anio_inicio");
+                _anio_inicio = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("anio_inicio");
+                Onanio_inicioChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _anio_inicio;
+        partial void Onanio_inicioChanging(Nullable<global::System.Int32> value);
+        partial void Onanio_inicioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> anio_fin
+        {
+            get
+            {
+                return _anio_fin;
+            }
+            set
+            {
+                Onanio_finChanging(value);
+                ReportPropertyChanging("anio_fin");
+                _anio_fin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("anio_fin");
+                Onanio_finChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _anio_fin;
+        partial void Onanio_finChanging(Nullable<global::System.Int32> value);
+        partial void Onanio_finChanged();
 
         #endregion
     

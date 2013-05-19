@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ListarPresupuestoCapacitacion.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ListarPresupuestoCapacitacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ListarActividad.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ListarActividad" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
@@ -59,8 +60,8 @@
     
     </asp:ScriptManager> 
 
-    Puede buscar los presupuestos de capactación proyectada por los siguientes 
-    criterios<br />
+    Puede buscar los presupuestos de actividades proyectada por los siguientes 
+    criterios:<br />
 
      <asp:UpdatePanel ID="CriteriosUpdatePanel" runat="server" UpdateMode="Conditional"> 
        <ContentTemplate> 
@@ -70,29 +71,19 @@
           <tr>
              <td>&nbsp;</td>
             
-             <td>Mes:</td>
-             <td><asp:DropDownList ID="mesDropDownList" runat="server" Height="24px" 
+             <td>Mes de inicio de la actividad:</td>
+             <td><asp:DropDownList ID="mesInicioDropDownList" runat="server" Height="24px" 
                         Width="140px" 
-                      AutoPostBack="True" 
-                     onselectedindexchanged="mesDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                     
+                      ></asp:DropDownList></td>
  
-              <td>Año:</td>
-              <td><asp:DropDownList ID="anioDropDownList" runat="server" Height="24px" 
-                        Width="130px" 
-                        AutoPostBack="True" 
-                      onselectedindexchanged="anioDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       
-                      
-&nbsp;</td>
 
-                <td>Estado:</td>
+
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estado:</td>
               <td><asp:DropDownList ID="estadoDropDownList" runat="server" Height="24px" 
                         Width="152px" 
-                        AutoPostBack="True" 
-                      onselectedindexchanged="estadoDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       
-                      
-&nbsp;</td>
+                        
+                     ></asp:DropDownList></td>
 
 
             </tr>
@@ -127,56 +118,49 @@
  <asp:UpdatePanel ID="DatosUpdatePanel" runat="server" UpdateMode="Conditional" > 
   <ContentTemplate>
    
-    <asp:GridView ID="ListasCapacitarProyectadaGridView" runat="server" 
+    <asp:GridView ID="ListaActividadProyectadaGridView" runat="server" 
           AutoGenerateColumns="false" align = "center"
         
-          CellPadding="3" CellSpacing="1" onrowcommand="ListasCapacitarProyectadaGridView_RowCommand"   
+          CellPadding="3" CellSpacing="1" 
          >
      <Columns>
 
-                  <asp:BoundField HeaderText="ID Capacitacion Proyectada" DataField="Id_presupuesto_capacitacion" visible ="false"
+                  <asp:BoundField HeaderText="ID Actividad Proyectada" DataField="Id_actividad_proyectada" visible ="false"
                         ItemStyle-Width="200">                   
                     </asp:BoundField>
 
-					<asp:BoundField HeaderText="Codigo" DataField="Cod_presupuesto" 
+					<asp:BoundField HeaderText="Codigo" DataField="Codigo_actividad" 
+                        ItemStyle-Width="150" >                    
+                    </asp:BoundField>
+
+                   <asp:BoundField HeaderText="Nombre de la actividad" DataField="Nombre_actividad" 
                         ItemStyle-Width="300" >                    
                     </asp:BoundField>
 
-                   <asp:BoundField HeaderText="Curso" DataField="Nombre_curso" 
-                        ItemStyle-Width="300" >                    
-                    </asp:BoundField>
-
-                    <asp:BoundField HeaderText="Monto Total" DataField="Smonto_total" 
-                        ItemStyle-Width="300" >                    
+                    <asp:BoundField HeaderText="Monto Total" DataField="Monto_total" 
+                        ItemStyle-Width="200" >                    
                     </asp:BoundField>
 
                     <asp:BoundField HeaderText="Fecha de creación" DataField="Fecha_modificada" 
-                        ItemStyle-Width="300" >                    
+                        ItemStyle-Width="200" >                    
                     </asp:BoundField>
 
                     <asp:BoundField HeaderText="Estado" DataField="Presupuesto_aprobado" 
-                        ItemStyle-Width="300" >                    
+                        ItemStyle-Width="200" >                    
                     </asp:BoundField>
 
                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("id_presupuesto_capacitacion") %>'><img src="images/edit.gif" width="16" height="16" alt="editar" border="0" /></asp:LinkButton>
+							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("id_actividad_proyectada") %>'><img src="images/edit.gif" width="16" height="16" alt="editar" border="0" /></asp:LinkButton>
 						</ItemTemplate>
 					</asp:TemplateField>
 
-					<asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
+					 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-						<asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%#Eval("id_presupuesto_capacitacion") %>' Visible=false
-                             ></asp:LinkButton>
-
-                         <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("cod_presupuesto") %>' Visible=false
-                             ></asp:LinkButton>
-                            
-                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>');" >X</button>
-                                            
-                                            </ItemTemplate>
-
+							<asp:LinkButton ID="lnkEliminar" runat="server" CommandName="CMDEliminar" CommandArgument='<%#Eval("id_actividad_proyectada") %>'><img src="images/delete.gif" width="16" height="16" alt="eliminar" border="0" /></asp:LinkButton>
+						</ItemTemplate>
 					</asp:TemplateField>
+
 
                    
 
@@ -192,4 +176,5 @@
  </asp:Panel>
     <br />
     <br />
+
 </asp:Content>
