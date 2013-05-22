@@ -30,7 +30,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 INSTITUCION institucion = new INSTITUCION();
 
                 institucion = (from i in context.INSTITUCION
-                               join c in context.CURSO on i.id_institucion equals c.codigo_institucion
+                               join c in context.CURSO on i.id_institucion equals c.id_institucion
                                where c.id_curso == codigoCurso
                                select i).First();
 

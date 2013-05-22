@@ -14,7 +14,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 List<CONCEPTO_REMUNERACION> lista = new List<CONCEPTO_REMUNERACION>();
                 var context = new PresupuestoDBEntities();
                 lista = (from s in context.CONCEPTO_REMUNERACION
-                         where s.mostrar_boleta==true && s.columna_boleta==tipo
+                         where s.mostrar_boleta==1 && s.columna_boleta==tipo
                          select s).ToList();
                 return lista;
 

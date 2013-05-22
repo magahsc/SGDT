@@ -18,9 +18,15 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.ACTIVIDAD), "PRESUPUESTO_ACTIVIDAD_PROYECTADA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_ACTIVIDAD_PROYECTADA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_SECCION_AREA", "AREA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.AREA), "SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.SECCION), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_ACTIVIDAD_PROYECTADA), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_Cargo_Personal_SECCION", "SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.SECCION), "CARGO_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.CARGO_PERSONAL), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PERSONA_Cargo_Personal", "CARGO_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.CARGO_PERSONAL), "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.CATEGORIA_PERSONAL), "COSTO_EMPRESA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.COSTO_EMPRESA), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.CATEGORIA_PERSONAL), "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_CONCEPTO_POR_PERSONA_CONCEPTO_POR_PERSONA", "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), "CONCEPTO_POR_PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.CONCEPTO_POR_PERSONA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_CONCEPTO_POR_PERSONA_CONCEPTO_REMUNERACION", "CONCEPTO_REMUNERACION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.CONCEPTO_REMUNERACION), "CONCEPTO_POR_PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.CONCEPTO_POR_PERSONA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "CURSO_DEL_PRESUPUESTO", "CURSO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.CURSO), "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), true)]
@@ -29,13 +35,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_LOCALIDAD_SECCION_SECCION", "SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.SECCION), "LOCALIDAD_SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.LOCALIDAD_SECCION), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PERSONA_LOCALIDAD_SECCION", "LOCALIDAD_SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.LOCALIDAD_SECCION), "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_LOCALIDAD_SECCION", "LOCALIDAD_SECCION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.LOCALIDAD_SECCION), "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), true)]
-[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), "PRESUPUESTO_CAPACITACION_POR_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION_POR_PERSONAL), true)]
-[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), "PRESUPUESTO_CAPACITACION_POR_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION_POR_PERSONAL), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PERSONA_PERIODO_PRESUPUESTO", "PERIODO_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERIODO_PRESUPUESTO), "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), true)]
 [assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO", "PERIODO_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERIODO_PRESUPUESTO), "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), true)]
-[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
-[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
-[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_ACTIVIDAD_PROYECTADA), "AUDITORIA_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.AUDITORIA_PRESUPUESTO), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERIODO_PRESUPUESTO), "PRESUPUESTO_ACTIVIDAD_PROYECTADA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_ACTIVIDAD_PROYECTADA), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PERSONA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PERSONA), "PRESUPUESTO_CAPACITACION_POR_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION_POR_PERSONAL), true)]
+[assembly: EdmRelationshipAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION), "PRESUPUESTO_CAPACITACION_POR_PERSONAL", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GNRS.ModuloPresupuesto.DL.DALC.PRESUPUESTO_CAPACITACION_POR_PERSONAL), true)]
 
 #endregion
 
@@ -90,6 +94,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<ACTIVIDAD> ACTIVIDAD
+        {
+            get
+            {
+                if ((_ACTIVIDAD == null))
+                {
+                    _ACTIVIDAD = base.CreateObjectSet<ACTIVIDAD>("ACTIVIDAD");
+                }
+                return _ACTIVIDAD;
+            }
+        }
+        private ObjectSet<ACTIVIDAD> _ACTIVIDAD;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<AREA> AREA
         {
             get
@@ -106,6 +126,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
+        {
+            get
+            {
+                if ((_AUDITORIA_PRESUPUESTO == null))
+                {
+                    _AUDITORIA_PRESUPUESTO = base.CreateObjectSet<AUDITORIA_PRESUPUESTO>("AUDITORIA_PRESUPUESTO");
+                }
+                return _AUDITORIA_PRESUPUESTO;
+            }
+        }
+        private ObjectSet<AUDITORIA_PRESUPUESTO> _AUDITORIA_PRESUPUESTO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<CARGO_PERSONAL> CARGO_PERSONAL
         {
             get
@@ -118,6 +154,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<CARGO_PERSONAL> _CARGO_PERSONAL;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<CATEGORIA_PERSONAL> CATEGORIA_PERSONAL
+        {
+            get
+            {
+                if ((_CATEGORIA_PERSONAL == null))
+                {
+                    _CATEGORIA_PERSONAL = base.CreateObjectSet<CATEGORIA_PERSONAL>("CATEGORIA_PERSONAL");
+                }
+                return _CATEGORIA_PERSONAL;
+            }
+        }
+        private ObjectSet<CATEGORIA_PERSONAL> _CATEGORIA_PERSONAL;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -150,6 +202,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<CONCEPTO_REMUNERACION> _CONCEPTO_REMUNERACION;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<COSTO_EMPRESA> COSTO_EMPRESA
+        {
+            get
+            {
+                if ((_COSTO_EMPRESA == null))
+                {
+                    _COSTO_EMPRESA = base.CreateObjectSet<COSTO_EMPRESA>("COSTO_EMPRESA");
+                }
+                return _COSTO_EMPRESA;
+            }
+        }
+        private ObjectSet<COSTO_EMPRESA> _COSTO_EMPRESA;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -218,6 +286,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<PERIODO_PRESUPUESTO> PERIODO_PRESUPUESTO
+        {
+            get
+            {
+                if ((_PERIODO_PRESUPUESTO == null))
+                {
+                    _PERIODO_PRESUPUESTO = base.CreateObjectSet<PERIODO_PRESUPUESTO>("PERIODO_PRESUPUESTO");
+                }
+                return _PERIODO_PRESUPUESTO;
+            }
+        }
+        private ObjectSet<PERIODO_PRESUPUESTO> _PERIODO_PRESUPUESTO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<PERSONA> PERSONA
         {
             get
@@ -230,6 +314,22 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<PERSONA> _PERSONA;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADA
+        {
+            get
+            {
+                if ((_PRESUPUESTO_ACTIVIDAD_PROYECTADA == null))
+                {
+                    _PRESUPUESTO_ACTIVIDAD_PROYECTADA = base.CreateObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PRESUPUESTO_ACTIVIDAD_PROYECTADA");
+                }
+                return _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
+            }
+        }
+        private ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -278,105 +378,17 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
         private ObjectSet<SECCION> _SECCION;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PERIODO_PRESUPUESTO> PERIODO_PRESUPUESTO
-        {
-            get
-            {
-                if ((_PERIODO_PRESUPUESTO == null))
-                {
-                    _PERIODO_PRESUPUESTO = base.CreateObjectSet<PERIODO_PRESUPUESTO>("PERIODO_PRESUPUESTO");
-                }
-                return _PERIODO_PRESUPUESTO;
-            }
-        }
-        private ObjectSet<PERIODO_PRESUPUESTO> _PERIODO_PRESUPUESTO;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
-        {
-            get
-            {
-                if ((_AUDITORIA_PRESUPUESTO == null))
-                {
-                    _AUDITORIA_PRESUPUESTO = base.CreateObjectSet<AUDITORIA_PRESUPUESTO>("AUDITORIA_PRESUPUESTO");
-                }
-                return _AUDITORIA_PRESUPUESTO;
-            }
-        }
-        private ObjectSet<AUDITORIA_PRESUPUESTO> _AUDITORIA_PRESUPUESTO;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<COSTO_EMPRESA> COSTO_EMPRESA
-        {
-            get
-            {
-                if ((_COSTO_EMPRESA == null))
-                {
-                    _COSTO_EMPRESA = base.CreateObjectSet<COSTO_EMPRESA>("COSTO_EMPRESA");
-                }
-                return _COSTO_EMPRESA;
-            }
-        }
-        private ObjectSet<COSTO_EMPRESA> _COSTO_EMPRESA;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<CATEGORIA_PERSONAL> CATEGORIA_PERSONAL
-        {
-            get
-            {
-                if ((_CATEGORIA_PERSONAL == null))
-                {
-                    _CATEGORIA_PERSONAL = base.CreateObjectSet<CATEGORIA_PERSONAL>("CATEGORIA_PERSONAL");
-                }
-                return _CATEGORIA_PERSONAL;
-            }
-        }
-        private ObjectSet<CATEGORIA_PERSONAL> _CATEGORIA_PERSONAL;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADA
-        {
-            get
-            {
-                if ((_PRESUPUESTO_ACTIVIDAD_PROYECTADA == null))
-                {
-                    _PRESUPUESTO_ACTIVIDAD_PROYECTADA = base.CreateObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PRESUPUESTO_ACTIVIDAD_PROYECTADA");
-                }
-                return _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
-            }
-        }
-        private ObjectSet<PRESUPUESTO_ACTIVIDAD_PROYECTADA> _PRESUPUESTO_ACTIVIDAD_PROYECTADA;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ACTIVIDAD> ACTIVIDAD
-        {
-            get
-            {
-                if ((_ACTIVIDAD == null))
-                {
-                    _ACTIVIDAD = base.CreateObjectSet<ACTIVIDAD>("ACTIVIDAD");
-                }
-                return _ACTIVIDAD;
-            }
-        }
-        private ObjectSet<ACTIVIDAD> _ACTIVIDAD;
 
         #endregion
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ACTIVIDAD EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToACTIVIDAD(ACTIVIDAD aCTIVIDAD)
+        {
+            base.AddObject("ACTIVIDAD", aCTIVIDAD);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the AREA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -387,11 +399,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the AUDITORIA_PRESUPUESTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAUDITORIA_PRESUPUESTO(AUDITORIA_PRESUPUESTO aUDITORIA_PRESUPUESTO)
+        {
+            base.AddObject("AUDITORIA_PRESUPUESTO", aUDITORIA_PRESUPUESTO);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the CARGO_PERSONAL EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToCARGO_PERSONAL(CARGO_PERSONAL cARGO_PERSONAL)
         {
             base.AddObject("CARGO_PERSONAL", cARGO_PERSONAL);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the CATEGORIA_PERSONAL EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCATEGORIA_PERSONAL(CATEGORIA_PERSONAL cATEGORIA_PERSONAL)
+        {
+            base.AddObject("CATEGORIA_PERSONAL", cATEGORIA_PERSONAL);
         }
     
         /// <summary>
@@ -408,6 +436,14 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         public void AddToCONCEPTO_REMUNERACION(CONCEPTO_REMUNERACION cONCEPTO_REMUNERACION)
         {
             base.AddObject("CONCEPTO_REMUNERACION", cONCEPTO_REMUNERACION);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the COSTO_EMPRESA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCOSTO_EMPRESA(COSTO_EMPRESA cOSTO_EMPRESA)
+        {
+            base.AddObject("COSTO_EMPRESA", cOSTO_EMPRESA);
         }
     
         /// <summary>
@@ -443,11 +479,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the PERIODO_PRESUPUESTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPERIODO_PRESUPUESTO(PERIODO_PRESUPUESTO pERIODO_PRESUPUESTO)
+        {
+            base.AddObject("PERIODO_PRESUPUESTO", pERIODO_PRESUPUESTO);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the PERSONA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPERSONA(PERSONA pERSONA)
         {
             base.AddObject("PERSONA", pERSONA);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PRESUPUESTO_ACTIVIDAD_PROYECTADA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPRESUPUESTO_ACTIVIDAD_PROYECTADA(PRESUPUESTO_ACTIVIDAD_PROYECTADA pRESUPUESTO_ACTIVIDAD_PROYECTADA)
+        {
+            base.AddObject("PRESUPUESTO_ACTIVIDAD_PROYECTADA", pRESUPUESTO_ACTIVIDAD_PROYECTADA);
         }
     
         /// <summary>
@@ -472,54 +524,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         public void AddToSECCION(SECCION sECCION)
         {
             base.AddObject("SECCION", sECCION);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PERIODO_PRESUPUESTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPERIODO_PRESUPUESTO(PERIODO_PRESUPUESTO pERIODO_PRESUPUESTO)
-        {
-            base.AddObject("PERIODO_PRESUPUESTO", pERIODO_PRESUPUESTO);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the AUDITORIA_PRESUPUESTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAUDITORIA_PRESUPUESTO(AUDITORIA_PRESUPUESTO aUDITORIA_PRESUPUESTO)
-        {
-            base.AddObject("AUDITORIA_PRESUPUESTO", aUDITORIA_PRESUPUESTO);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the COSTO_EMPRESA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCOSTO_EMPRESA(COSTO_EMPRESA cOSTO_EMPRESA)
-        {
-            base.AddObject("COSTO_EMPRESA", cOSTO_EMPRESA);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the CATEGORIA_PERSONAL EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCATEGORIA_PERSONAL(CATEGORIA_PERSONAL cATEGORIA_PERSONAL)
-        {
-            base.AddObject("CATEGORIA_PERSONAL", cATEGORIA_PERSONAL);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PRESUPUESTO_ACTIVIDAD_PROYECTADA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPRESUPUESTO_ACTIVIDAD_PROYECTADA(PRESUPUESTO_ACTIVIDAD_PROYECTADA pRESUPUESTO_ACTIVIDAD_PROYECTADA)
-        {
-            base.AddObject("PRESUPUESTO_ACTIVIDAD_PROYECTADA", pRESUPUESTO_ACTIVIDAD_PROYECTADA);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ACTIVIDAD EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToACTIVIDAD(ACTIVIDAD aCTIVIDAD)
-        {
-            base.AddObject("ACTIVIDAD", aCTIVIDAD);
         }
 
         #endregion
@@ -609,6 +613,31 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "ACTIVIDAD_DEL_PRESUPUESTO", "PRESUPUESTO_ACTIVIDAD_PROYECTADA")]
+        public EntityCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "PRESUPUESTO_ACTIVIDAD_PROYECTADA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -733,20 +762,20 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="id_auditoria">Initial value of the id_auditoria property.</param>
         /// <param name="id_capacitacion_proyectada">Initial value of the id_capacitacion_proyectada property.</param>
         /// <param name="id_personal_proyectado">Initial value of the id_personal_proyectado property.</param>
+        /// <param name="id_actividad_proyectada">Initial value of the id_actividad_proyectada property.</param>
         /// <param name="fecha_accion">Initial value of the fecha_accion property.</param>
         /// <param name="tipo_accion">Initial value of the tipo_accion property.</param>
         /// <param name="tipo_presupuesto">Initial value of the tipo_presupuesto property.</param>
-        /// <param name="id_actividad_proyectada">Initial value of the id_actividad_proyectada property.</param>
-        public static AUDITORIA_PRESUPUESTO CreateAUDITORIA_PRESUPUESTO(global::System.Int32 id_auditoria, global::System.Int32 id_capacitacion_proyectada, global::System.Int32 id_personal_proyectado, global::System.DateTime fecha_accion, global::System.String tipo_accion, global::System.String tipo_presupuesto, global::System.Int32 id_actividad_proyectada)
+        public static AUDITORIA_PRESUPUESTO CreateAUDITORIA_PRESUPUESTO(global::System.Int32 id_auditoria, global::System.Int32 id_capacitacion_proyectada, global::System.Int32 id_personal_proyectado, global::System.Int32 id_actividad_proyectada, global::System.DateTime fecha_accion, global::System.String tipo_accion, global::System.String tipo_presupuesto)
         {
             AUDITORIA_PRESUPUESTO aUDITORIA_PRESUPUESTO = new AUDITORIA_PRESUPUESTO();
             aUDITORIA_PRESUPUESTO.id_auditoria = id_auditoria;
             aUDITORIA_PRESUPUESTO.id_capacitacion_proyectada = id_capacitacion_proyectada;
             aUDITORIA_PRESUPUESTO.id_personal_proyectado = id_personal_proyectado;
+            aUDITORIA_PRESUPUESTO.id_actividad_proyectada = id_actividad_proyectada;
             aUDITORIA_PRESUPUESTO.fecha_accion = fecha_accion;
             aUDITORIA_PRESUPUESTO.tipo_accion = tipo_accion;
             aUDITORIA_PRESUPUESTO.tipo_presupuesto = tipo_presupuesto;
-            aUDITORIA_PRESUPUESTO.id_actividad_proyectada = id_actividad_proyectada;
             return aUDITORIA_PRESUPUESTO;
         }
 
@@ -833,6 +862,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 id_actividad_proyectada
+        {
+            get
+            {
+                return _id_actividad_proyectada;
+            }
+            set
+            {
+                Onid_actividad_proyectadaChanging(value);
+                ReportPropertyChanging("id_actividad_proyectada");
+                _id_actividad_proyectada = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_actividad_proyectada");
+                Onid_actividad_proyectadaChanged();
+            }
+        }
+        private global::System.Int32 _id_actividad_proyectada;
+        partial void Onid_actividad_proyectadaChanging(global::System.Int32 value);
+        partial void Onid_actividad_proyectadaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.DateTime fecha_accion
         {
             get
@@ -899,34 +952,48 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.String _tipo_presupuesto;
         partial void Ontipo_presupuestoChanging(global::System.String value);
         partial void Ontipo_presupuestoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id_actividad_proyectada
-        {
-            get
-            {
-                return _id_actividad_proyectada;
-            }
-            set
-            {
-                Onid_actividad_proyectadaChanging(value);
-                ReportPropertyChanging("id_actividad_proyectada");
-                _id_actividad_proyectada = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("id_actividad_proyectada");
-                Onid_actividad_proyectadaChanged();
-            }
-        }
-        private global::System.Int32 _id_actividad_proyectada;
-        partial void Onid_actividad_proyectadaChanging(global::System.Int32 value);
-        partial void Onid_actividad_proyectadaChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA")]
+        public PRESUPUESTO_ACTIVIDAD_PROYECTADA PRESUPUESTO_ACTIVIDAD_PROYECTADA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADAReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1000,44 +1067,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PERSONA>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "PERSONA", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA")]
-        public PRESUPUESTO_ACTIVIDAD_PROYECTADA PRESUPUESTO_ACTIVIDAD_PROYECTADA
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADAReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", value);
                 }
             }
         }
@@ -1231,7 +1260,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="id_categoria">Initial value of the id_categoria property.</param>
         /// <param name="nombre_categoria">Initial value of the nombre_categoria property.</param>
         /// <param name="estado">Initial value of the estado property.</param>
-        public static CATEGORIA_PERSONAL CreateCATEGORIA_PERSONAL(global::System.Int32 id_categoria, global::System.String nombre_categoria, global::System.Boolean estado)
+        public static CATEGORIA_PERSONAL CreateCATEGORIA_PERSONAL(global::System.Int32 id_categoria, global::System.String nombre_categoria, global::System.Int32 estado)
         {
             CATEGORIA_PERSONAL cATEGORIA_PERSONAL = new CATEGORIA_PERSONAL();
             cATEGORIA_PERSONAL.id_categoria = id_categoria;
@@ -1299,7 +1328,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean estado
+        public global::System.Int32 estado
         {
             get
             {
@@ -1314,12 +1343,59 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 OnestadoChanged();
             }
         }
-        private global::System.Boolean _estado;
-        partial void OnestadoChanging(global::System.Boolean value);
+        private global::System.Int32 _estado;
+        partial void OnestadoChanging(global::System.Int32 value);
         partial void OnestadoChanged();
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "COSTO_EMPRESA")]
+        public EntityCollection<COSTO_EMPRESA> COSTO_EMPRESA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<COSTO_EMPRESA>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "COSTO_EMPRESA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<COSTO_EMPRESA>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "COSTO_EMPRESA", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PERSONA_CATEGORIA_PERSONAL", "PERSONA")]
+        public EntityCollection<PERSONA> PERSONA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PERSONA>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "PERSONA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PERSONA>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "PERSONA", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -1554,7 +1630,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="nombre_concepto">Initial value of the nombre_concepto property.</param>
         /// <param name="mostrar_boleta">Initial value of the mostrar_boleta property.</param>
         /// <param name="columna_boleta">Initial value of the columna_boleta property.</param>
-        public static CONCEPTO_REMUNERACION CreateCONCEPTO_REMUNERACION(global::System.Int32 id_concepto, global::System.String nombre_concepto, global::System.Boolean mostrar_boleta, global::System.Int32 columna_boleta)
+        public static CONCEPTO_REMUNERACION CreateCONCEPTO_REMUNERACION(global::System.Int32 id_concepto, global::System.String nombre_concepto, global::System.Int32 mostrar_boleta, global::System.Int32 columna_boleta)
         {
             CONCEPTO_REMUNERACION cONCEPTO_REMUNERACION = new CONCEPTO_REMUNERACION();
             cONCEPTO_REMUNERACION.id_concepto = id_concepto;
@@ -1623,7 +1699,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean mostrar_boleta
+        public global::System.Int32 mostrar_boleta
         {
             get
             {
@@ -1638,8 +1714,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 Onmostrar_boletaChanged();
             }
         }
-        private global::System.Boolean _mostrar_boleta;
-        partial void Onmostrar_boletaChanging(global::System.Boolean value);
+        private global::System.Int32 _mostrar_boleta;
+        partial void Onmostrar_boletaChanging(global::System.Int32 value);
         partial void Onmostrar_boletaChanged();
     
         /// <summary>
@@ -1710,11 +1786,15 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         /// <param name="id_costoempresa">Initial value of the id_costoempresa property.</param>
         /// <param name="id_categoria">Initial value of the id_categoria property.</param>
-        public static COSTO_EMPRESA CreateCOSTO_EMPRESA(global::System.Int32 id_costoempresa, global::System.Int32 id_categoria)
+        /// <param name="beneficio_social">Initial value of the beneficio_social property.</param>
+        /// <param name="factor">Initial value of the factor property.</param>
+        public static COSTO_EMPRESA CreateCOSTO_EMPRESA(global::System.Int32 id_costoempresa, global::System.Int32 id_categoria, global::System.String beneficio_social, global::System.Double factor)
         {
             COSTO_EMPRESA cOSTO_EMPRESA = new COSTO_EMPRESA();
             cOSTO_EMPRESA.id_costoempresa = id_costoempresa;
             cOSTO_EMPRESA.id_categoria = id_categoria;
+            cOSTO_EMPRESA.beneficio_social = beneficio_social;
+            cOSTO_EMPRESA.factor = factor;
             return cOSTO_EMPRESA;
         }
 
@@ -1775,7 +1855,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String beneficio_social
         {
@@ -1787,7 +1867,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onbeneficio_socialChanging(value);
                 ReportPropertyChanging("beneficio_social");
-                _beneficio_social = StructuralObject.SetValidValue(value, true);
+                _beneficio_social = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("beneficio_social");
                 Onbeneficio_socialChanged();
             }
@@ -1799,9 +1879,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Double> factor
+        public global::System.Double factor
         {
             get
             {
@@ -1816,12 +1896,53 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 OnfactorChanged();
             }
         }
-        private Nullable<global::System.Double> _factor;
-        partial void OnfactorChanging(Nullable<global::System.Double> value);
+        private global::System.Double _factor;
+        partial void OnfactorChanging(global::System.Double value);
         partial void OnfactorChanged();
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL")]
+        public CATEGORIA_PERSONAL CATEGORIA_PERSONAL
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<CATEGORIA_PERSONAL> CATEGORIA_PERSONALReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_COSTO_EMPRESA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -1843,8 +1964,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="tipo_moneda">Initial value of the tipo_moneda property.</param>
         /// <param name="fecha_inicio">Initial value of the fecha_inicio property.</param>
         /// <param name="fecha_fin">Initial value of the fecha_fin property.</param>
-        /// <param name="codigo_institucion">Initial value of the codigo_institucion property.</param>
-        public static CURSO CreateCURSO(global::System.Int32 id_curso, global::System.String nombre_curso, global::System.Double costo_curso, global::System.String tipo_moneda, global::System.DateTime fecha_inicio, global::System.DateTime fecha_fin, global::System.Int32 codigo_institucion)
+        /// <param name="id_institucion">Initial value of the id_institucion property.</param>
+        public static CURSO CreateCURSO(global::System.Int32 id_curso, global::System.String nombre_curso, global::System.Double costo_curso, global::System.String tipo_moneda, global::System.DateTime fecha_inicio, global::System.DateTime fecha_fin, global::System.Int32 id_institucion)
         {
             CURSO cURSO = new CURSO();
             cURSO.id_curso = id_curso;
@@ -1853,7 +1974,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             cURSO.tipo_moneda = tipo_moneda;
             cURSO.fecha_inicio = fecha_inicio;
             cURSO.fecha_fin = fecha_fin;
-            cURSO.codigo_institucion = codigo_institucion;
+            cURSO.id_institucion = id_institucion;
             return cURSO;
         }
 
@@ -2012,24 +2133,24 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 codigo_institucion
+        public global::System.Int32 id_institucion
         {
             get
             {
-                return _codigo_institucion;
+                return _id_institucion;
             }
             set
             {
-                Oncodigo_institucionChanging(value);
-                ReportPropertyChanging("codigo_institucion");
-                _codigo_institucion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("codigo_institucion");
-                Oncodigo_institucionChanged();
+                Onid_institucionChanging(value);
+                ReportPropertyChanging("id_institucion");
+                _id_institucion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_institucion");
+                Onid_institucionChanged();
             }
         }
-        private global::System.Int32 _codigo_institucion;
-        partial void Oncodigo_institucionChanging(global::System.Int32 value);
-        partial void Oncodigo_institucionChanged();
+        private global::System.Int32 _id_institucion;
+        partial void Onid_institucionChanging(global::System.Int32 value);
+        partial void Onid_institucionChanged();
 
         #endregion
     
@@ -2693,6 +2814,28 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA")]
+        public EntityCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA> PRESUPUESTO_ACTIVIDAD_PROYECTADA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_ACTIVIDAD_PROYECTADA>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PRESUPUESTO_ACTIVIDAD_PROYECTADA", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -2711,30 +2854,26 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// Create a new PERSONA object.
         /// </summary>
         /// <param name="id_persona">Initial value of the id_persona property.</param>
-        /// <param name="apellido_paterno">Initial value of the apellido_paterno property.</param>
-        /// <param name="apellido_materno">Initial value of the apellido_materno property.</param>
         /// <param name="nombres_persona">Initial value of the nombres_persona property.</param>
+        /// <param name="fecha_creacion">Initial value of the fecha_creacion property.</param>
         /// <param name="estado_persona">Initial value of the estado_persona property.</param>
+        /// <param name="id_categoria">Initial value of the id_categoria property.</param>
         /// <param name="id_cargo">Initial value of the id_cargo property.</param>
         /// <param name="id_seccion">Initial value of the id_seccion property.</param>
         /// <param name="id_localidad">Initial value of the id_localidad property.</param>
         /// <param name="id_periodo_presupuesto">Initial value of the id_periodo_presupuesto property.</param>
-        /// <param name="fecha_creacion">Initial value of the fecha_creacion property.</param>
-        /// <param name="tipo_empleado">Initial value of the tipo_empleado property.</param>
-        public static PERSONA CreatePERSONA(global::System.Int32 id_persona, global::System.String apellido_paterno, global::System.String apellido_materno, global::System.String nombres_persona, global::System.String estado_persona, global::System.Int32 id_cargo, global::System.Int32 id_seccion, global::System.Int32 id_localidad, global::System.Int32 id_periodo_presupuesto, global::System.DateTime fecha_creacion, global::System.Int32 tipo_empleado)
+        public static PERSONA CreatePERSONA(global::System.Int32 id_persona, global::System.String nombres_persona, global::System.DateTime fecha_creacion, global::System.String estado_persona, global::System.Int32 id_categoria, global::System.Int32 id_cargo, global::System.Int32 id_seccion, global::System.Int32 id_localidad, global::System.Int32 id_periodo_presupuesto)
         {
             PERSONA pERSONA = new PERSONA();
             pERSONA.id_persona = id_persona;
-            pERSONA.apellido_paterno = apellido_paterno;
-            pERSONA.apellido_materno = apellido_materno;
             pERSONA.nombres_persona = nombres_persona;
+            pERSONA.fecha_creacion = fecha_creacion;
             pERSONA.estado_persona = estado_persona;
+            pERSONA.id_categoria = id_categoria;
             pERSONA.id_cargo = id_cargo;
             pERSONA.id_seccion = id_seccion;
             pERSONA.id_localidad = id_localidad;
             pERSONA.id_periodo_presupuesto = id_periodo_presupuesto;
-            pERSONA.fecha_creacion = fecha_creacion;
-            pERSONA.tipo_empleado = tipo_empleado;
             return pERSONA;
         }
 
@@ -2771,7 +2910,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String apellido_paterno
         {
@@ -2783,7 +2922,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_paternoChanging(value);
                 ReportPropertyChanging("apellido_paterno");
-                _apellido_paterno = StructuralObject.SetValidValue(value, false);
+                _apellido_paterno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_paterno");
                 Onapellido_paternoChanged();
             }
@@ -2795,7 +2934,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String apellido_materno
         {
@@ -2807,7 +2946,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 Onapellido_maternoChanging(value);
                 ReportPropertyChanging("apellido_materno");
-                _apellido_materno = StructuralObject.SetValidValue(value, false);
+                _apellido_materno = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("apellido_materno");
                 Onapellido_maternoChanged();
             }
@@ -2845,6 +2984,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.DateTime fecha_creacion
+        {
+            get
+            {
+                return _fecha_creacion;
+            }
+            set
+            {
+                Onfecha_creacionChanging(value);
+                ReportPropertyChanging("fecha_creacion");
+                _fecha_creacion = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fecha_creacion");
+                Onfecha_creacionChanged();
+            }
+        }
+        private global::System.DateTime _fecha_creacion;
+        partial void Onfecha_creacionChanging(global::System.DateTime value);
+        partial void Onfecha_creacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.String estado_persona
         {
             get
@@ -2863,6 +3026,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.String _estado_persona;
         partial void Onestado_personaChanging(global::System.String value);
         partial void Onestado_personaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id_categoria
+        {
+            get
+            {
+                return _id_categoria;
+            }
+            set
+            {
+                Onid_categoriaChanging(value);
+                ReportPropertyChanging("id_categoria");
+                _id_categoria = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_categoria");
+                Onid_categoriaChanged();
+            }
+        }
+        private global::System.Int32 _id_categoria;
+        partial void Onid_categoriaChanging(global::System.Int32 value);
+        partial void Onid_categoriaChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2959,58 +3146,32 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.Int32 _id_periodo_presupuesto;
         partial void Onid_periodo_presupuestoChanging(global::System.Int32 value);
         partial void Onid_periodo_presupuestoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime fecha_creacion
-        {
-            get
-            {
-                return _fecha_creacion;
-            }
-            set
-            {
-                Onfecha_creacionChanging(value);
-                ReportPropertyChanging("fecha_creacion");
-                _fecha_creacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("fecha_creacion");
-                Onfecha_creacionChanged();
-            }
-        }
-        private global::System.DateTime _fecha_creacion;
-        partial void Onfecha_creacionChanging(global::System.DateTime value);
-        partial void Onfecha_creacionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 tipo_empleado
-        {
-            get
-            {
-                return _tipo_empleado;
-            }
-            set
-            {
-                Ontipo_empleadoChanging(value);
-                ReportPropertyChanging("tipo_empleado");
-                _tipo_empleado = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("tipo_empleado");
-                Ontipo_empleadoChanged();
-            }
-        }
-        private global::System.Int32 _tipo_empleado;
-        partial void Ontipo_empleadoChanging(global::System.Int32 value);
-        partial void Ontipo_empleadoChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO")]
+        public EntityCollection<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3046,6 +3207,44 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CARGO_PERSONAL>("PresupuestoDBModel.FK_PERSONA_Cargo_Personal", "CARGO_PERSONAL", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL")]
+        public CATEGORIA_PERSONAL CATEGORIA_PERSONAL
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<CATEGORIA_PERSONAL> CATEGORIA_PERSONALReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CATEGORIA_PERSONAL>("PresupuestoDBModel.FK_PERSONA_CATEGORIA_PERSONAL", "CATEGORIA_PERSONAL", value);
                 }
             }
         }
@@ -3116,28 +3315,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL")]
-        public EntityCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL> PRESUPUESTO_CAPACITACION_POR_PERSONAL
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PERSONA_PERIODO_PRESUPUESTO", "PERIODO_PRESUPUESTO")]
         public PERIODO_PRESUPUESTO PERIODO_PRESUPUESTO
         {
@@ -3176,18 +3353,18 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO")]
-        public EntityCollection<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL")]
+        public EntityCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL> PRESUPUESTO_CAPACITACION_POR_PERSONAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL", "AUDITORIA_PRESUPUESTO", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PERSONA", "PRESUPUESTO_CAPACITACION_POR_PERSONAL", value);
                 }
             }
         }
@@ -3210,27 +3387,33 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         /// <param name="id_actividad_proyectada">Initial value of the id_actividad_proyectada property.</param>
         /// <param name="codigo_actividad_proyectada">Initial value of the codigo_actividad_proyectada property.</param>
-        /// <param name="nombre_actividad">Initial value of the nombre_actividad property.</param>
+        /// <param name="id_actividad">Initial value of the id_actividad property.</param>
         /// <param name="mes_inicio">Initial value of the mes_inicio property.</param>
+        /// <param name="anio_inicio">Initial value of the anio_inicio property.</param>
         /// <param name="mes_fin">Initial value of the mes_fin property.</param>
-        /// <param name="monto_actividad">Initial value of the monto_actividad property.</param>
+        /// <param name="anio_fin">Initial value of the anio_fin property.</param>
         /// <param name="detalle_actividad">Initial value of the detalle_actividad property.</param>
-        /// <param name="presupesto_aprobado">Initial value of the presupesto_aprobado property.</param>
+        /// <param name="presupuesto_aprobado">Initial value of the presupuesto_aprobado property.</param>
+        /// <param name="monto_actividad">Initial value of the monto_actividad property.</param>
         /// <param name="tipo_moneda">Initial value of the tipo_moneda property.</param>
         /// <param name="fecha_creacion">Initial value of the fecha_creacion property.</param>
-        public static PRESUPUESTO_ACTIVIDAD_PROYECTADA CreatePRESUPUESTO_ACTIVIDAD_PROYECTADA(global::System.Int32 id_actividad_proyectada, global::System.String codigo_actividad_proyectada, global::System.String nombre_actividad, global::System.Int32 mes_inicio, global::System.Int32 mes_fin, global::System.Double monto_actividad, global::System.String detalle_actividad, global::System.String presupesto_aprobado, global::System.String tipo_moneda, global::System.DateTime fecha_creacion)
+        /// <param name="id_periodo_presupuesto">Initial value of the id_periodo_presupuesto property.</param>
+        public static PRESUPUESTO_ACTIVIDAD_PROYECTADA CreatePRESUPUESTO_ACTIVIDAD_PROYECTADA(global::System.Int32 id_actividad_proyectada, global::System.String codigo_actividad_proyectada, global::System.Int32 id_actividad, global::System.Int32 mes_inicio, global::System.Int32 anio_inicio, global::System.Int32 mes_fin, global::System.Int32 anio_fin, global::System.String detalle_actividad, global::System.String presupuesto_aprobado, global::System.Double monto_actividad, global::System.String tipo_moneda, global::System.DateTime fecha_creacion, global::System.Int32 id_periodo_presupuesto)
         {
             PRESUPUESTO_ACTIVIDAD_PROYECTADA pRESUPUESTO_ACTIVIDAD_PROYECTADA = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.id_actividad_proyectada = id_actividad_proyectada;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.codigo_actividad_proyectada = codigo_actividad_proyectada;
-            pRESUPUESTO_ACTIVIDAD_PROYECTADA.nombre_actividad = nombre_actividad;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.id_actividad = id_actividad;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.mes_inicio = mes_inicio;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.anio_inicio = anio_inicio;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.mes_fin = mes_fin;
-            pRESUPUESTO_ACTIVIDAD_PROYECTADA.monto_actividad = monto_actividad;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.anio_fin = anio_fin;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.detalle_actividad = detalle_actividad;
-            pRESUPUESTO_ACTIVIDAD_PROYECTADA.presupesto_aprobado = presupesto_aprobado;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.presupuesto_aprobado = presupuesto_aprobado;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.monto_actividad = monto_actividad;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.tipo_moneda = tipo_moneda;
             pRESUPUESTO_ACTIVIDAD_PROYECTADA.fecha_creacion = fecha_creacion;
+            pRESUPUESTO_ACTIVIDAD_PROYECTADA.id_periodo_presupuesto = id_periodo_presupuesto;
             return pRESUPUESTO_ACTIVIDAD_PROYECTADA;
         }
 
@@ -3293,24 +3476,24 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String nombre_actividad
+        public global::System.Int32 id_actividad
         {
             get
             {
-                return _nombre_actividad;
+                return _id_actividad;
             }
             set
             {
-                Onnombre_actividadChanging(value);
-                ReportPropertyChanging("nombre_actividad");
-                _nombre_actividad = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("nombre_actividad");
-                Onnombre_actividadChanged();
+                Onid_actividadChanging(value);
+                ReportPropertyChanging("id_actividad");
+                _id_actividad = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_actividad");
+                Onid_actividadChanged();
             }
         }
-        private global::System.String _nombre_actividad;
-        partial void Onnombre_actividadChanging(global::System.String value);
-        partial void Onnombre_actividadChanged();
+        private global::System.Int32 _id_actividad;
+        partial void Onid_actividadChanging(global::System.Int32 value);
+        partial void Onid_actividadChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3341,6 +3524,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 anio_inicio
+        {
+            get
+            {
+                return _anio_inicio;
+            }
+            set
+            {
+                Onanio_inicioChanging(value);
+                ReportPropertyChanging("anio_inicio");
+                _anio_inicio = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("anio_inicio");
+                Onanio_inicioChanged();
+            }
+        }
+        private global::System.Int32 _anio_inicio;
+        partial void Onanio_inicioChanging(global::System.Int32 value);
+        partial void Onanio_inicioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 mes_fin
         {
             get
@@ -3365,24 +3572,24 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Double monto_actividad
+        public global::System.Int32 anio_fin
         {
             get
             {
-                return _monto_actividad;
+                return _anio_fin;
             }
             set
             {
-                Onmonto_actividadChanging(value);
-                ReportPropertyChanging("monto_actividad");
-                _monto_actividad = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("monto_actividad");
-                Onmonto_actividadChanged();
+                Onanio_finChanging(value);
+                ReportPropertyChanging("anio_fin");
+                _anio_fin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("anio_fin");
+                Onanio_finChanged();
             }
         }
-        private global::System.Double _monto_actividad;
-        partial void Onmonto_actividadChanging(global::System.Double value);
-        partial void Onmonto_actividadChanged();
+        private global::System.Int32 _anio_fin;
+        partial void Onanio_finChanging(global::System.Int32 value);
+        partial void Onanio_finChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3413,24 +3620,48 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String presupesto_aprobado
+        public global::System.String presupuesto_aprobado
         {
             get
             {
-                return _presupesto_aprobado;
+                return _presupuesto_aprobado;
             }
             set
             {
-                Onpresupesto_aprobadoChanging(value);
-                ReportPropertyChanging("presupesto_aprobado");
-                _presupesto_aprobado = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("presupesto_aprobado");
-                Onpresupesto_aprobadoChanged();
+                Onpresupuesto_aprobadoChanging(value);
+                ReportPropertyChanging("presupuesto_aprobado");
+                _presupuesto_aprobado = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("presupuesto_aprobado");
+                Onpresupuesto_aprobadoChanged();
             }
         }
-        private global::System.String _presupesto_aprobado;
-        partial void Onpresupesto_aprobadoChanging(global::System.String value);
-        partial void Onpresupesto_aprobadoChanged();
+        private global::System.String _presupuesto_aprobado;
+        partial void Onpresupuesto_aprobadoChanging(global::System.String value);
+        partial void Onpresupuesto_aprobadoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double monto_actividad
+        {
+            get
+            {
+                return _monto_actividad;
+            }
+            set
+            {
+                Onmonto_actividadChanging(value);
+                ReportPropertyChanging("monto_actividad");
+                _monto_actividad = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("monto_actividad");
+                Onmonto_actividadChanged();
+            }
+        }
+        private global::System.Double _monto_actividad;
+        partial void Onmonto_actividadChanging(global::System.Double value);
+        partial void Onmonto_actividadChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3483,54 +3714,68 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> anio_inicio
+        public global::System.Int32 id_periodo_presupuesto
         {
             get
             {
-                return _anio_inicio;
+                return _id_periodo_presupuesto;
             }
             set
             {
-                Onanio_inicioChanging(value);
-                ReportPropertyChanging("anio_inicio");
-                _anio_inicio = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("anio_inicio");
-                Onanio_inicioChanged();
+                Onid_periodo_presupuestoChanging(value);
+                ReportPropertyChanging("id_periodo_presupuesto");
+                _id_periodo_presupuesto = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("id_periodo_presupuesto");
+                Onid_periodo_presupuestoChanged();
             }
         }
-        private Nullable<global::System.Int32> _anio_inicio;
-        partial void Onanio_inicioChanging(Nullable<global::System.Int32> value);
-        partial void Onanio_inicioChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> anio_fin
-        {
-            get
-            {
-                return _anio_fin;
-            }
-            set
-            {
-                Onanio_finChanging(value);
-                ReportPropertyChanging("anio_fin");
-                _anio_fin = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("anio_fin");
-                Onanio_finChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _anio_fin;
-        partial void Onanio_finChanging(Nullable<global::System.Int32> value);
-        partial void Onanio_finChanged();
+        private global::System.Int32 _id_periodo_presupuesto;
+        partial void Onid_periodo_presupuestoChanging(global::System.Int32 value);
+        partial void Onid_periodo_presupuestoChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD")]
+        public ACTIVIDAD ACTIVIDAD
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ACTIVIDAD>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ACTIVIDAD>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ACTIVIDAD> ACTIVIDADReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ACTIVIDAD>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ACTIVIDAD>("PresupuestoDBModel.ACTIVIDAD_DEL_PRESUPUESTO", "ACTIVIDAD", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3550,6 +3795,44 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA", "AUDITORIA_PRESUPUESTO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO")]
+        public PERIODO_PRESUPUESTO PERIODO_PRESUPUESTO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PERIODO_PRESUPUESTO>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PERIODO_PRESUPUESTO>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PERIODO_PRESUPUESTO> PERIODO_PRESUPUESTOReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PERIODO_PRESUPUESTO>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PERIODO_PRESUPUESTO>("PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA", "PERIODO_PRESUPUESTO", value);
                 }
             }
         }
@@ -3852,6 +4135,28 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO")]
+        public EntityCollection<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "CURSO_DEL_PRESUPUESTO", "CURSO")]
         public CURSO CURSO
         {
@@ -3928,28 +4233,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL")]
-        public EntityCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL> PRESUPUESTO_CAPACITACION_POR_PERSONAL
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO", "PERIODO_PRESUPUESTO")]
         public PERIODO_PRESUPUESTO PERIODO_PRESUPUESTO
         {
@@ -3988,18 +4271,18 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO")]
-        public EntityCollection<AUDITORIA_PRESUPUESTO> AUDITORIA_PRESUPUESTO
+        [EdmRelationshipNavigationPropertyAttribute("PresupuestoDBModel", "FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL")]
+        public EntityCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL> PRESUPUESTO_CAPACITACION_POR_PERSONAL
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AUDITORIA_PRESUPUESTO>("PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION", "AUDITORIA_PRESUPUESTO", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESUPUESTO_CAPACITACION_POR_PERSONAL>("PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_POR_PERSONAL_PRESUPUESTO_CAPACITACION", "PRESUPUESTO_CAPACITACION_POR_PERSONAL", value);
                 }
             }
         }

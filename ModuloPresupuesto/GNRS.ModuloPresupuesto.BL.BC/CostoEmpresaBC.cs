@@ -140,11 +140,11 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
                     foreach (CONCEPTO_POR_PERSONA itConceptoPersona in listaConceptoPorPersona)
                     {
-                        if(itPersona.tipo_empleado==1)
+                        if(itPersona.id_categoria==1)
                             montoNuevo=(float)itConceptoPersona.monto*costoEmpresaEmpleado;
-                        if(itPersona.tipo_empleado==2)
+                        if (itPersona.id_categoria == 2)
                             montoNuevo=(float)itConceptoPersona.monto*costoEmpresaObrero;
-                        if(itPersona.tipo_empleado==0)
+                        if (itPersona.id_categoria == 0)
                             montoNuevo=0;
 
                         objConceptoPersonaDALC.editarMontoCostoEmpresa(itPersona.id_persona, itConceptoPersona.id_concepto, montoNuevo);

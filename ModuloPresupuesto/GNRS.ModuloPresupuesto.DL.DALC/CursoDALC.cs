@@ -14,7 +14,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 List<CURSO> lista = new List<CURSO>();
                 var context = new PresupuestoDBEntities();
                 lista = (from s in context.CURSO
-                         where s.codigo_institucion == codigoInstituto
+                         where s.id_institucion == codigoInstituto
                          select s).ToList();
                 return lista;
 

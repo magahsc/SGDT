@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Entity;
+
 using GNRS.ModuloPresupuesto.BL.BE;
 
 namespace GNRS.ModuloPresupuesto.DL.DALC
@@ -93,9 +94,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 List<ActividadBE> lista = new List<ActividadBE>();
                 ActividadBE objactividadBE;
                 var context = new PresupuestoDBEntities();
-                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
-                              where p.mes_inicio == objactividad.Mes && p.anio_inicio == objactividad.Anio && p.presupesto_aprobado == objactividad.Presupuesto_aprobado
-                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, p.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupesto_aprobado }).ToList();
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA join a in context.ACTIVIDAD on p.id_actividad equals a.id_actividad
+                              where p.mes_inicio == objactividad.Mes && p.anio_inicio == objactividad.Anio && p.presupuesto_aprobado == objactividad.Presupuesto_aprobado
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, a.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado }).ToList();
 
                 foreach (var item in prueba)
                 {
@@ -118,14 +119,14 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     objactividadBE.Fecha_creacion = item.fecha_creacion;
                     objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;
 
-                    if (item.presupesto_aprobado.Equals("A"))
+                    if (item.presupuesto_aprobado.Equals("A"))
                         objactividadBE.Presupuesto_aprobado = "Aprobado";
-                    if (item.presupesto_aprobado.Equals("N"))
+                    if (item.presupuesto_aprobado.Equals("N"))
                         objactividadBE.Presupuesto_aprobado = "No aprobado";
-                    if (item.presupesto_aprobado.Equals("P"))
+                    if (item.presupuesto_aprobado.Equals("P"))
                         objactividadBE.Presupuesto_aprobado = "Pendiente";
 
-                    if (!item.presupesto_aprobado.Equals("E"))
+                    if (!item.presupuesto_aprobado.Equals("E"))
                         lista.Add(objactividadBE);
                 }
 
@@ -140,7 +141,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
-
+        /*
         public List<ActividadBE> ListarActividadMes(ActividadBE objactividad)
         {
             String tipo = "";
@@ -307,7 +308,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
-
+        */
         public String cambiarmesydia(String dato)
         {
             String sdato = dato;

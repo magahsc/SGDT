@@ -348,11 +348,11 @@ namespace GNRS.ModuloPresupuesto.UI
                 objactividad.mes_fin = icodmesFinal;
                 objactividad.anio_inicio = icodanioInicio;
                 objactividad.anio_fin = icodanioFinal;
-                objactividad.nombre_actividad = valoractividad.nombre_actividad;
+               // objactividad.nombre_actividad = valoractividad.nombre_actividad;
                 objactividad.monto_actividad = monto;
                 objactividad.detalle_actividad = observaciones;
                 objactividad.fecha_creacion = DateTime.Now;
-                objactividad.presupesto_aprobado = "P";
+               // objactividad.presupesto_aprobado = "P";
 
                 if (TipoMonedaRadioButtonList.SelectedIndex == 0)
                     objactividad.tipo_moneda = "S";

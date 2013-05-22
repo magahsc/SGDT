@@ -252,7 +252,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 objactividad.Mes = icodmesInicio;
                 objactividad.Anio = icodanioInicio;
 
-                List<ActividadBE> lista = objcapacitar.listarActividadxMes(objactividad);
+                List<ActividadBE> lista = null;
+                    //objcapacitar.listarActividadxMes(objactividad);
 
                 if (lista != null)
                 {
@@ -288,7 +289,8 @@ namespace GNRS.ModuloPresupuesto.UI
                     objactividad.Presupuesto_aprobado = "A";
 
 
-                List<ActividadBE> lista = objcapacitar.listarActividadxEstado(objactividad);
+                List<ActividadBE> lista = null;
+                //objcapacitar.listarActividadxEstado(objactividad);
 
                 if (lista != null)
                 {
@@ -312,7 +314,8 @@ namespace GNRS.ModuloPresupuesto.UI
 
             if (mesInicioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex == 0)
             {
-                List<ActividadBE> lista = objcapacitar.listarActividadxTodo();
+                List<ActividadBE> lista = null;
+                //objcapacitar.listarActividadxTodo();
 
                 if (lista != null)
                 {

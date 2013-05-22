@@ -10,6 +10,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 {
     public class CapacitarProyectadoBC
     {
+        
         LocalidadDALC localidadDALC = new LocalidadDALC();
         AreaDALC areaDALC = new AreaDALC();
         SeccionDALC seccionDALC = new SeccionDALC();
@@ -248,7 +249,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return actividadDALC.ListarActividadMesxEstado(actividad);
         }
 
-        public List<ActividadBE> listarActividadxMes(ActividadBE actividad)
+        /*public List<ActividadBE> listarActividadxMes(ActividadBE actividad)
         {
             return actividadDALC.ListarActividadMes(actividad);
         }
@@ -262,6 +263,6 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         {
             return actividadDALC.ListarActividadxTodo();
         }
-
+        */
     }
 }
