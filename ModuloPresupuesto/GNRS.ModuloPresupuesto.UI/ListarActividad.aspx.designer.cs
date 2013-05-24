@@ -49,6 +49,33 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.DropDownList mesInicioDropDownList;
         
         /// <summary>
+        /// anioInicioDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList anioInicioDropDownList;
+        
+        /// <summary>
+        /// mesFinDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList mesFinDropDownList;
+        
+        /// <summary>
+        /// anioFinDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList anioFinDropDownList;
+        
+        /// <summary>
         /// estadoDropDownList control.
         /// </summary>
         /// <remarks>

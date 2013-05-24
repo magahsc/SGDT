@@ -22,9 +22,21 @@ namespace GNRS.ModuloPresupuesto.UI
             {
                     int imes = 1;
 
-                    mesInicioDropDownList.DataSource = ListaMesInicio(imes);
+                    mesInicioDropDownList.DataSource = ListaMes(imes);
                     mesInicioDropDownList.DataBind();
                     mesInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
+
+                    anioInicioDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
+                    anioInicioDropDownList.DataBind();
+                    anioInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
+
+                    mesFinDropDownList.DataSource = ListaMes(imes);
+                    mesFinDropDownList.DataBind();
+                    mesFinDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
+
+                    anioFinDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
+                    anioFinDropDownList.DataBind();
+                    anioFinDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
 
                     estadoDropDownList.DataSource = listaestado();
                     estadoDropDownList.DataBind();
@@ -33,110 +45,84 @@ namespace GNRS.ModuloPresupuesto.UI
             }
         }
 
-        public String mes(int mes, int anio)
+        public String mes(int mes)
         {
             String mesd = "";
             switch (mes)
             {
                 case 1:
                     {
-                        mesd = "Enero - " + anio;
+                        mesd = "Enero";
                         break;
                     }
 
                 case 2:
                     {
-                        mesd = "Febrero - " + anio;
+                        mesd = "Febrero";
                         break;
                     }
 
                 case 3:
                     {
-                        mesd = "Marzo - " + anio;
+                        mesd = "Marzo";
                         break;
                     }
 
                 case 4:
                     {
-                        mesd = "Abril - " + anio;
+                        mesd = "Abril";
                         break;
                     }
 
                 case 5:
                     {
-                        mesd = "Mayo - " + anio;
+                        mesd = "Mayo";
                         break;
                     }
 
                 case 6:
                     {
-                        mesd = "Junio - " + anio;
+                        mesd = "Junio";
                         break;
                     }
 
                 case 7:
                     {
-                        mesd = "Julio - " + anio;
+                        mesd = "Julio";
                         break;
                     }
 
                 case 8:
                     {
-                        mesd = "Agosto - " + anio;
+                        mesd = "Agosto";
                         break;
                     }
 
                 case 9:
                     {
-                        mesd = "Setiembre - " + anio;
+                        mesd = "Setiembre";
                         break;
                     }
 
                 case 10:
                     {
-                        mesd = "Octubre - " + anio;
+                        mesd = "Octubre";
                         break;
                     }
 
                 case 11:
                     {
-                        mesd = "Noviembre - " + anio;
+                        mesd = "Noviembre";
                         break;
                     }
 
                 case 12:
                     {
-                        mesd = "Diciembre - " + anio;
+                        mesd = "Diciembre";
                         break;
                     }
             }
             return mesd;
-        }
-
-        public List<String> ListaMesInicio(int numeromes)
-        {
-            List<String> lista = new List<String>();
-            int ianio = DateTime.Now.Year;
-            int variable = 0;
-            int valida = 0;
-
-            for (int i = numeromes; i <= numeromes + 11; i++)
-            {
-                if (i <= 12)
-                    variable = i;
-
-                if (i > 12 && valida == 0)
-                {
-                    variable = 1;
-                    ianio++;
-                    valida = 1;
-                }
-
-                lista.Add(mes(variable, ianio));
-                variable++;
-            }
-
-            return lista;
         }
 
         public List<String> listaestado()
@@ -150,74 +136,147 @@ namespace GNRS.ModuloPresupuesto.UI
             return lsestado;
         }
 
-        public int GetCodMes(DropDownList dpl)
+         public int mesa(String mes)
         {
-            int scod = 0;
+            int mesd = 0;
+            switch (mes)
+            {
+                case "Enero":
+                    {
+                        mesd = 1;
+                        break;
+                    }
 
-            if (dpl.SelectedValue.Contains("Enero"))
-                scod = 1;
-            if (dpl.SelectedValue.Contains("Febrero"))
-                scod = 2;
-            if (dpl.SelectedValue.Contains("Marzo"))
-                scod = 3;
-            if (dpl.SelectedValue.Contains("Abril"))
-                scod = 4;
-            if (dpl.SelectedValue.Contains("Mayo"))
-                scod = 5;
-            if (dpl.SelectedValue.Contains("Junio"))
-                scod = 6;
-            if (dpl.SelectedValue.Contains("Julio"))
-                scod = 7;
-            if (dpl.SelectedValue.Contains("Agosto"))
-                scod = 8;
-            if (dpl.SelectedValue.Contains("Setiembre"))
-                scod = 9;
-            if (dpl.SelectedValue.Contains("Octubre"))
-                scod = 10;
-            if (dpl.SelectedValue.Contains("Noviembre"))
-                scod = 11;
-            if (dpl.SelectedValue.Contains("Diciembre"))
-                scod = 12;
+                case "Febrero":
+                    {
+                        mesd = 2;
+                        break;
+                    }
 
-            return scod;
+                case "Marzo":
+                    {
+                        mesd = 3;
+                        break;
+                    }
+
+                case "Abril":
+                    {
+                        mesd = 4;
+                        break;
+                    }
+
+                case "Mayo":
+                    {
+                        mesd = 5;
+                        break;
+                    }
+
+                case "Junio":
+                    {
+                        mesd = 6;
+                        break;
+                    }
+
+                case "Julio":
+                    {
+                        mesd = 7;
+                        break;
+                    }
+
+                case "Agosto":
+                    {
+                        mesd = 8;
+                        break;
+                    }
+
+                case "Setiembre":
+                    {
+                        mesd = 9;
+                        break;
+                    }
+
+                case "Octubre":
+                    {
+                        mesd = 10;
+                        break;
+                    }
+
+                case "Noviembre":
+                    {
+                        mesd = 11;
+                        break;
+                    }
+
+                case "Diciembre":
+                    {
+                        mesd = 12;
+                        break;
+                    }
+            }
+            return mesd;
         }
 
-        public int GetCodAnio(DropDownList dpl)
+        public List<String> ListaMes(int numeromes)
         {
-            int scod = 0;
-            int ianio1 = DateTime.Now.Year;
-            String sanio1 = Convert.ToString(ianio1);
-            int ianio2 = ianio1 + 1;
-            String sanio2 = Convert.ToString(ianio2);
+            List<String> lista = new List<String>();
 
-            if (dpl.SelectedValue.Contains(sanio1))
-                scod = ianio1;
-            if (dpl.SelectedValue.Contains(sanio2))
-                scod = ianio2;
+            for (int i = numeromes; i <= 12; i++)
+            {
+                lista.Add(mes(i));
+            }
 
-            return scod;
+            return lista;
+        }
+
+        public List<int> ListaAnio(int numeroanio)
+        {
+            List<int> lista = new List<int>();
+
+            for (int i = 2010; i <= numeroanio + 1; i++)
+            {
+                lista.Add(i);
+            }
+
+            return lista;
         }
 
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            if (mesInicioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                ActividadBE objactividad = new ActividadBE();
+            ActividadBE objactividad = new ActividadBE();
+            if (mesInicioDropDownList.SelectedIndex == 0 )
+               objactividad.MesInicio = 0;
 
-                int icodmesInicio = GetCodMes(mesInicioDropDownList);
-                int icodanioInicio = GetCodAnio(mesInicioDropDownList);
+            if (mesFinDropDownList.SelectedIndex == 0 )
+               objactividad.MesFinal = 0;
 
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objactividad.Presupuesto_aprobado = "P";
+            if (anioInicioDropDownList.SelectedIndex == 0 )
+               objactividad.AnioInicio = 0;
 
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objactividad.Presupuesto_aprobado = "N";
+            if (anioFinDropDownList.SelectedIndex == 0 )
+               objactividad.AnioFinal = 0;
 
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objactividad.Presupuesto_aprobado = "A";
+            if (estadoDropDownList.SelectedIndex == 0 )
+               objactividad.Presupuesto_aprobado = "V";
 
-                  objactividad.Mes = icodmesInicio;
-                  objactividad.Anio = icodanioInicio;
+
+            if (estadoDropDownList.SelectedIndex == 1)
+                objactividad.Presupuesto_aprobado = "P";
+
+            if (estadoDropDownList.SelectedIndex == 2)
+                objactividad.Presupuesto_aprobado = "N";
+
+           if (estadoDropDownList.SelectedIndex == 3)
+               objactividad.Presupuesto_aprobado = "A";
+
+
+            if (mesInicioDropDownList.SelectedIndex > 0)
+                objactividad.MesInicio = mesa(mesInicioDropDownList.SelectedValue);
+            if (anioInicioDropDownList.SelectedIndex > 0)
+                objactividad.AnioInicio = Convert.ToInt32(anioInicioDropDownList.SelectedValue);
+            if (mesFinDropDownList.SelectedIndex > 0)
+                objactividad.MesFinal = mesa(mesFinDropDownList.SelectedValue);
+            if (anioFinDropDownList.SelectedIndex > 0)
+                objactividad.AnioFinal = Convert.ToInt32(anioFinDropDownList.SelectedValue);
 
                   List<ActividadBE> lista =  objcapacitar.listarActividadxMesxEstado(objactividad);
 
@@ -241,102 +300,5 @@ namespace GNRS.ModuloPresupuesto.UI
             
             }
 
-
-            if (mesInicioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex == 0)
-            {
-                ActividadBE objactividad = new ActividadBE();
-
-                int icodmesInicio = GetCodMes(mesInicioDropDownList);
-                int icodanioInicio = GetCodAnio(mesInicioDropDownList);
-
-                objactividad.Mes = icodmesInicio;
-                objactividad.Anio = icodanioInicio;
-
-                List<ActividadBE> lista = null;
-                    //objcapacitar.listarActividadxMes(objactividad);
-
-                if (lista != null)
-                {
-                    ListaActividadProyectadaGridView.DataSource = lista;
-                    ListaActividadProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListaActividadProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesInicioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                ActividadBE objactividad = new ActividadBE();
-
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objactividad.Presupuesto_aprobado = "P";
-
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objactividad.Presupuesto_aprobado = "N";
-
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objactividad.Presupuesto_aprobado = "A";
-
-
-                List<ActividadBE> lista = null;
-                //objcapacitar.listarActividadxEstado(objactividad);
-
-                if (lista != null)
-                {
-                    ListaActividadProyectadaGridView.DataSource = lista;
-                    ListaActividadProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListaActividadProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesInicioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex == 0)
-            {
-                List<ActividadBE> lista = null;
-                //objcapacitar.listarActividadxTodo();
-
-                if (lista != null)
-                {
-                    ListaActividadProyectadaGridView.DataSource = lista;
-                    ListaActividadProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListaActividadProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-        }
     }
 }

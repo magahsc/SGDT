@@ -315,9 +315,185 @@ namespace GNRS.ModuloPresupuesto.UI
             return scod;
         }
 
+        [WebMethod]
+        public static string registrar(string codigoactividad, string mesinicio, string mesfin, string monto, string tipomoneda, string observaciones)
+        {
+            CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+            String actividad = Convert.ToString(codigoactividad);
+            int iactividad = Convert.ToInt32(actividad);
+
+            int icodmesInicio = GetCodMesP(mesinicio);
+            int icodanioInicio = GetCodAnioP(mesinicio);
+
+            int icodmesFinal = GetCodMesP(mesfin);
+            int icodanioFinal = GetCodAnioP(mesfin);
+
+            Double dmonto = Convert.ToDouble(monto);
+            String Observaciones = Convert.ToString(observaciones);
+
+            String smes = Convert.ToString(DateTime.Now.Month);
+            smes = cambiarmesydiaP(smes);
+            String sanio = Convert.ToString(DateTime.Now.Year);
+            sanio = sanio.Substring(2, 2);
+            String sdia = Convert.ToString(DateTime.Now.Day);
+            sdia = cambiarmesydiaP(sdia);
+
+            PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
+            objactividad.codigo_actividad_proyectada = "";
+            objactividad.mes_inicio = icodmesInicio;
+            objactividad.mes_fin = icodmesFinal;
+            objactividad.anio_inicio = icodanioInicio;
+            objactividad.anio_fin = icodanioFinal;
+            objactividad.id_actividad = iactividad;
+            objactividad.monto_actividad = dmonto;
+            objactividad.detalle_actividad = observaciones;
+            objactividad.fecha_creacion = DateTime.Now;
+            objactividad.presupuesto_aprobado = "P";
+
+            int itipomoneda = Convert.ToInt32(tipomoneda);
+
+            if (itipomoneda == 0)
+                objactividad.tipo_moneda = "S";
+            if (itipomoneda == 1)
+                objactividad.tipo_moneda = "D";
+
+            int idActividad = objcapacitar.insertarActividadRRHH(objactividad);
+            String codigopresupuesto = sdia + smes + sanio + "" + idActividad;
+            objactividad.codigo_actividad_proyectada = codigopresupuesto;
+            objcapacitar.ActualizarActividadRRHH(objactividad);
+
+            String Mensaje = "El presupuesto de la actividad de RRHH " + codigopresupuesto + " ha sido guardado satisfactoriamente";
+            Page objp = new Page();
+            objp.Session.Add("MensajeActividadRegistrada", Mensaje);
+            //alert("El presupuesto de actividad de RRHH ");
+           /* ActividadComboBox.SelectedIndex = 0;
+            MesInicioComboBox.SelectedIndex = 0;
+            MesFinComboBox.SelectedIndex = 0;
+            MontoTextBox.Text = "";
+            ObservacionesTextBox.Text = "";
+            MesFinComboBox.Enabled = false;
+            ComboBoxUpdatePanel.Update();*/
+
+            /*hdnSession.Value = HttpContext.Current.Session["MensajeActividadRegistrada"].ToString();
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);*/
+            return Mensaje;
+        }
+
+        private static int GetCodMesP(string dpl)
+        {
+            int scod = 0;
+
+            if (dpl.Contains("Enero"))
+                scod = 1;
+            if (dpl.Contains("Febrero"))
+                scod = 2;
+            if (dpl.Contains("Marzo"))
+                scod = 3;
+            if (dpl.Contains("Abril"))
+                scod = 4;
+            if (dpl.Contains("Mayo"))
+                scod = 5;
+            if (dpl.Contains("Junio"))
+                scod = 6;
+            if (dpl.Contains("Julio"))
+                scod = 7;
+            if (dpl.Contains("Agosto"))
+                scod = 8;
+            if (dpl.Contains("Setiembre"))
+                scod = 9;
+            if (dpl.Contains("Octubre"))
+                scod = 10;
+            if (dpl.Contains("Noviembre"))
+                scod = 11;
+            if (dpl.Contains("Diciembre"))
+                scod = 12;
+
+            return scod;
+        }
+
+        private static int GetCodAnioP(string dpl)
+        {
+            int scod = 0;
+            String sanio1 = HttpContext.Current.Session["anio"].ToString();
+            int ianio1 = Convert.ToInt32(sanio1);
+            int ianio2 = ianio1 + 1;
+            String sanio2 = Convert.ToString(ianio2);
+
+            if (dpl.Equals(sanio1))
+                scod = ianio1;
+            if (dpl.Equals(sanio2))
+                scod = ianio2;
+
+            return scod;
+        }
+
+        private static String cambiarmesydiaP(String dato)
+        {
+            String sdato = dato;
+            switch (dato)
+            {
+                case "1":
+                    {
+                        sdato = "01";
+                        break;
+                    }
+
+                case "2":
+                    {
+                        sdato = "02";
+                        break;
+                    }
+
+                case "3":
+                    {
+                        sdato = "03";
+                        break;
+                    }
+
+                case "4":
+                    {
+                        sdato = "04";
+                        break;
+                    }
+
+                case "5":
+                    {
+                        sdato = "05";
+                        break;
+                    }
+
+                case "6":
+                    {
+                        sdato = "06";
+                        break;
+                    }
+
+                case "7":
+                    {
+                        sdato = "07";
+                        break;
+                    }
+
+                case "8":
+                    {
+                        sdato = "08";
+                        break;
+                    }
+
+                case "9":
+                    {
+                        sdato = "09";
+                        break;
+                    }
+
+            }
+
+            return sdato;
+        }
+        
         protected void GuardarButton_Click(object sender, EventArgs e)
         {
-            if (MesInicioComboBox.SelectedIndex > 0 && MesFinComboBox.SelectedIndex > 0 && ActividadComboBox.SelectedIndex > 0 && MontoTextBox.Text != "" &&
+            /*if (MesInicioComboBox.SelectedIndex > 0 && MesFinComboBox.SelectedIndex > 0 && ActividadComboBox.SelectedIndex > 0 && MontoTextBox.Text != "" &&
                  MontoTextBox.Text != null)
             {
                 String actividad = ActividadComboBox.SelectedValue;
@@ -339,20 +515,17 @@ namespace GNRS.ModuloPresupuesto.UI
                 String sdia = Convert.ToString(DateTime.Now.Day);
                 sdia = cambiarmesydia(sdia);
 
-                ACTIVIDAD valoractividad = new ACTIVIDAD();
-                valoractividad = objcapacitar.ObtenerActividadXCodigo(iactividad);
-
                 PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
                 objactividad.codigo_actividad_proyectada = "";
                 objactividad.mes_inicio = icodmesInicio;
                 objactividad.mes_fin = icodmesFinal;
                 objactividad.anio_inicio = icodanioInicio;
                 objactividad.anio_fin = icodanioFinal;
-               // objactividad.nombre_actividad = valoractividad.nombre_actividad;
+                objactividad.id_actividad = iactividad;
                 objactividad.monto_actividad = monto;
                 objactividad.detalle_actividad = observaciones;
                 objactividad.fecha_creacion = DateTime.Now;
-               // objactividad.presupesto_aprobado = "P";
+                 objactividad.presupuesto_aprobado = "P";
 
                 if (TipoMonedaRadioButtonList.SelectedIndex == 0)
                     objactividad.tipo_moneda = "S";
@@ -364,8 +537,10 @@ namespace GNRS.ModuloPresupuesto.UI
                 objactividad.codigo_actividad_proyectada = codigopresupuesto;
                 objcapacitar.ActualizarActividadRRHH(objactividad);
 
-                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('El presupuesto de la actividadde RRHH " + codigopresupuesto + " ha sido guaradado satisfactoriamente')", true);
-                alert("El presupuesto de actividad de RRHH " + codigopresupuesto + " ha sido guardado satisfactoriamente");
+                String Mensaje = "El presupuesto de la actividad de RRHH " + codigopresupuesto + " ha sido guardado satisfactoriamente";
+                Page objp = new Page();
+                objp.Session.Add("MensajeActividadRegistrada", Mensaje);
+                //alert("El presupuesto de actividad de RRHH ");
                 ActividadComboBox.SelectedIndex = 0;
                 MesInicioComboBox.SelectedIndex = 0;
                 MesFinComboBox.SelectedIndex = 0;
@@ -374,8 +549,11 @@ namespace GNRS.ModuloPresupuesto.UI
                 MesFinComboBox.Enabled = false;
                 ComboBoxUpdatePanel.Update();
 
-            }
+                hdnSession.Value = Session["MensajeActividadRegistrada"].ToString();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);
 
+            }*/
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensajeValidacion()", true);
         }
 
         protected void MesInicioComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -404,11 +582,5 @@ namespace GNRS.ModuloPresupuesto.UI
             }
         }
 
-        public void alert(string msg)
-        {
-            Label lbl = new Label();
-            lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
-            Page.Controls.Add(lbl);
-        }
     }
 }

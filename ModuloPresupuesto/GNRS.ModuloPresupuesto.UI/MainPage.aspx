@@ -31,5 +31,16 @@
 
         }
   </script>
-  
+
+   <div id="dialog-message" title="Modulo de Presupuesto">  </div>
+   <asp:ScriptManager ID="ScriptManager1" runat="server">  
+    
+    </asp:ScriptManager> 
+
+     <asp:UpdatePanel ID="MensajeUpdatePanel" runat="server" UpdateMode="Conditional"> 
+       <ContentTemplate> 
+
+       </ContentTemplate>  
+ </asp:UpdatePanel>
+
 </asp:Content>

@@ -87,5 +87,53 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             get { return _presupuesto_aprobado; }
             set { _presupuesto_aprobado = value; }
         }
+
+        private int _mesInicio;
+
+        public int MesInicio
+        {
+            get { return _mesInicio; }
+            set { _mesInicio = value; }
+        }
+
+        private int _mesFinal;
+
+        public int MesFinal
+        {
+            get { return _mesFinal; }
+            set { _mesFinal = value; }
+        }
+
+        private int _anioInicio;
+
+        public int AnioInicio
+        {
+            get { return _anioInicio; }
+            set { _anioInicio = value; }
+        }
+
+        private int _anioFinal;
+
+        public int AnioFinal
+        {
+            get { return _anioFinal; }
+            set { _anioFinal = value; }
+        }
+
+        private String _fechaInicio;
+
+        public String FechaInicio
+        {
+            get { return _fechaInicio; }
+            set { _fechaInicio = value; }
+        }
+
+        private String _fechaFin;
+
+        public String FechaFin
+        {
+            get { return _fechaFin; }
+            set { _fechaFin = value; }
+        }
     }
 }

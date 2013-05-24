@@ -71,23 +71,42 @@
           <tr>
              <td>&nbsp;</td>
             
-             <td>Mes de inicio de la actividad:</td>
+             <td>Mes de inicio:</td>
              <td><asp:DropDownList ID="mesInicioDropDownList" runat="server" Height="24px" 
-                        Width="140px" 
-                     
-                      ></asp:DropDownList></td>
+                        Width="140px" ></asp:DropDownList></td>
  
 
 
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estado:</td>
-              <td><asp:DropDownList ID="estadoDropDownList" runat="server" Height="24px" 
-                        Width="152px" 
-                        
-                     ></asp:DropDownList></td>
-
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Año inicio:</td>
+             <td><asp:DropDownList ID="anioInicioDropDownList" runat="server" Height="24px" 
+                        Width="140px"></asp:DropDownList></td> 
 
             </tr>
 
+            <tr>
+             <td>&nbsp;</td>
+            
+             <td>Mes de fin:</td>
+             <td><asp:DropDownList ID="mesFinDropDownList" runat="server" Height="24px" 
+                        Width="140px" ></asp:DropDownList></td>
+ 
+
+
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Año fin:</td>
+             <td><asp:DropDownList ID="anioFinDropDownList" runat="server" Height="24px" 
+                        Width="140px"></asp:DropDownList></td> 
+            </tr>
+             
+            
+            <tr>
+             <td>&nbsp;</td>
+              <td>Estado:</td>
+            <td><asp:DropDownList ID="estadoDropDownList" runat="server" Height="24px" 
+                        Width="140px" 
+                        
+                     ></asp:DropDownList></td>
+            </tr>
+            
          </tbody>
     </Table>
      </ContentTemplate>  
@@ -138,15 +157,19 @@
                     </asp:BoundField>
 
                     <asp:BoundField HeaderText="Monto Total" DataField="Monto_total" 
-                        ItemStyle-Width="200" >                    
+                        ItemStyle-Width="150" >                    
                     </asp:BoundField>
 
-                    <asp:BoundField HeaderText="Fecha de creación" DataField="Fecha_modificada" 
-                        ItemStyle-Width="200" >                    
+                    <asp:BoundField HeaderText="Fecha de inicio" DataField="FechaInicio" 
+                        ItemStyle-Width="150" >                    
+                    </asp:BoundField>
+
+                    <asp:BoundField HeaderText="Fecha de fin" DataField="FechaFin" 
+                        ItemStyle-Width="150" >                    
                     </asp:BoundField>
 
                     <asp:BoundField HeaderText="Estado" DataField="Presupuesto_aprobado" 
-                        ItemStyle-Width="200" >                    
+                        ItemStyle-Width="150" >                    
                     </asp:BoundField>
 
                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">

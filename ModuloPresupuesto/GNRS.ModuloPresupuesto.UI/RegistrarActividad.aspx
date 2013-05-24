@@ -1,10 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="RegistrarActividad.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.RegistrarActividad" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<asp:ScriptManager ID="ScriptManager1" runat="server">
+<asp:ScriptManager ID="ScriptManager1" runat="server"  EnablePageMethods="true" 
+    EnablePartialRendering="true">
     </asp:ScriptManager>
 
     <script>
+        function lala(message) {
+            alert(message);
+        }
         function isNumberKey(event, value) {
             var charCode = (event.which) ? event.which : event.keyCode
             var intcount = 0;
@@ -23,32 +30,154 @@
     </script>
 
      <script>
-         $(function () {
-             $("#dialog-message").dialog({
-                 modal: true,
-                 autoOpen: false,
-                 height: 200,
-                 width: 500,
-                 buttons: {
-                     Ok: function () {
-                         $(this).dialog("close");
+        
+             $(function () {
+                 $("#dialog-message").dialog({
+                     modal: true,
+                     autoOpen: false,
+                     height: 200,
+                     width: 500,
+                     buttons: {
+                         Ok: function () {
+                             $(this).dialog("close");
+                         }
                      }
-                 }
-             });
-             $("#dialog-message").css({
-                 fontSize: 15
-             });
+                 });
+                 $("#dialog-message").css({
+                     fontSize: 15
+                 });
 
-         });
+             });
+         
+  </script>
+
+   <script type="text/javascript" language="javascript">
+
+       function MostrarMensaje() {
+           var hdnSession = document.getElementById("<%= hdnSession.ClientID %>");
+           var mensaje = hdnSession.value;
+           $("#dialog-message").text(mensaje).dialog("open");
+
+       } 
+       
+       function MostrarMensajeFinal(mensaje) {
+           $("#dialog-mensajes").text(mensaje).dialog("open");
+
+       }
   </script>
 
    <script>
 
-       function MostrarMensaje(mensaje) {
-           $("#dialog-message").text(mensaje).dialog("open");
+       $(function () {
+           $("#dialog-mensajes").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               autoOpen: false,
+               buttons: {
+                   "Aceptar": function () {
+                       $(this).dialog("close");
+                   }
+               }
+           });
+           $("#dialog-mensajes").css({
+               fontSize: 15
+           });
 
-       }
+       });
+         
   </script>
+     
+       <script>
+           $(document).ready(function () {
+
+               $("#dialog-confirmacion").dialog({
+                   autoOpen: false,
+                   draggable: true,
+
+                   height: 200,
+                   width: 350,
+                   modal: true,
+                   buttons: {
+                       "Si": function () {
+                           var codigoactividad = document.getElementById("contenido_ActividadComboBox").value;
+                           var mesinicio = document.getElementById("contenido_MesInicioComboBox").value;
+                           var mesfin = document.getElementById("contenido_MesFinComboBox").value;
+                           var monto = document.getElementById("contenido_MontoTextBox").value;
+
+                           var tipomoneda = 0;
+                           var RB1 = document.getElementById("<%=TipoMonedaRadioButtonList.ClientID%>");
+                           var radio = RB1.getElementsByTagName("input");
+                           var label = RB1.getElementsByTagName("label");
+                           for (var i = 0; i < radio.length; i++) {
+                               if (radio[i].checked) {
+                                    tipomoneda = i;
+                               }
+                           }
+
+                           var observaciones = document.getElementById("contenido_ObservacionesTextBox").value;
+                           PageMethods.registrar(codigoactividad, mesinicio, mesfin, monto, tipomoneda, observaciones, MostrarMensajeFinal);
+                         
+                           document.getElementById("contenido_ActividadComboBox").selectedIndex = 0;
+                           document.getElementById("contenido_MesInicioComboBox").selectedIndex = 0;
+                           document.getElementById("contenido_MesFinComboBox").selectedIndex = 0;
+                           document.getElementById("contenido_MontoTextBox").value = "";
+                           document.getElementById("contenido_MesFinComboBox").disabled = true;
+                           observaciones = document.getElementById("contenido_ObservacionesTextBox").value = "";
+                           $(this).dialog("close");
+
+                       },
+                       "No": function () {
+                           $(this).dialog("close");
+                       }
+                   }
+               });
+
+
+
+
+           });
+
+        function mostrarMensajeConfirmacion() {
+            var texto = '¿Desea guardar el presupuesto ?';
+
+            $("#dialog-confirmacion").text(texto).dialog("open");
+        }
+
+        function mostrarMensajeValidacion() {
+            var texto = 'Datos incompletos. LLene todos los campos para poder registrar el presupuesto';
+            var codigoactividad = document.getElementById("contenido_ActividadComboBox").value;
+            var mesinicio = document.getElementById("contenido_MesInicioComboBox").value;
+            var mesfin = document.getElementById("contenido_MesFinComboBox").value;
+            var monto = document.getElementById("contenido_MontoTextBox").value;
+
+            var RB1 = document.getElementById("<%=TipoMonedaRadioButtonList.ClientID%>");
+            var radio = RB1.getElementsByTagName("input");
+            var label = RB1.getElementsByTagName("label");
+            for (var i = 0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    var tipomoneda = i;
+                }
+            }
+            var observaciones = document.getElementById("contenido_ObservacionesTextBox").value;
+
+            if (codigoactividad == "" || mesinicio == "" || mesfin == "" || monto == "" || observaciones == "") {
+                $("#dialog-mensajes").text(texto).dialog("open");
+            }
+            else {
+                mostrarMensajeConfirmacion();
+            }
+  
+        }   
+       
+         
+  </script>
+
+   <div id="dialog-confirmacion" title="Confirmación de registro"></div>
+
+  <div id="dialog-message" title="Modulo de Presupuesto">  </div>
+  <div id="dialog-mensajes" title="Modulo de Presupuesto">  </div>
 
   <asp:Label ID="Label1" runat="server" Text="Información relacionada a la actividad de RRHH"></asp:Label>
     :<br />
@@ -127,8 +256,10 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             &nbsp;&nbsp;
-            <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="111px" onclick="GuardarButton_Click" OnClientClick="if (confirm('¿Desea guardar el presupuesto?')) { return true; } else { return false; }"
-                />
+            <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="111px" onclick="GuardarButton_Click" 
+             />
+            <asp:HiddenField ID="hdnSession" runat="server" />    
+               
 
 
   </ContentTemplate> 
