@@ -27,8 +27,8 @@ namespace GNRS.ModuloPresupuesto.UI
                     ConceptosGridView.DataSource = ConceptosTemporalesLista;
                     ConceptosGridView.DataBind();
                 }
-                else
-                    GuardarConceptosButton.Visible = false;
+                //else
+                //    GuardarConceptosButton.Visible = false;
             }
         }
 
@@ -66,6 +66,9 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             if (ConceptoComboBox.SelectedItem.Value != "" && TipoConceptoComboBox.SelectedItem.Value != "" && MontoTextBox.Text != "")
             {
+                string montoRegistrar = MontoTextBox.Text.Replace(".", ",");
+                
+
                 List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
 
                 if (Session["ConceptosTemporalesLista"] != null)
@@ -89,7 +92,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 objConceptoTemp.Concepto_Texto = ConceptoComboBox.SelectedItem.Text;
 
                 float _monto;
-                float.TryParse(MontoTextBox.Text, out _monto);
+                float.TryParse(montoRegistrar, out _monto);
                 objConceptoTemp.Monto = _monto;
 
 
@@ -122,6 +125,10 @@ namespace GNRS.ModuloPresupuesto.UI
                 ConceptosGridView.DataBind();
 
                 Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
+                Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
+               // nroConceptoPersonalHidden.Attributes["value"] = ConceptosTemporalesLista.Count().ToString();
+                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
+              //  conceptosHidden.Attributes["value"] = ConceptosTemporalesLista.ToString();
 
                 ConceptoComboBox.Enabled = false;
                 ConceptoComboBox.SelectedIndex = 0;
@@ -129,13 +136,13 @@ namespace GNRS.ModuloPresupuesto.UI
                 MontoTextBox.Text = "";
 
                 AgregarButton.Enabled = false;
-                GuardarConceptosButton.Visible = true;
+               // GuardarConceptosButton.Visible = true;
 
                 ComboBoxUpdatePanel.Update();
             }
-          
 
 
+            
         }
 
         protected void ConceptosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -202,6 +209,11 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
                 Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
+                Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
+              //  nroConceptoPersonalHidden.Attributes["value"] = ConceptosTemporalesLista.Count().ToString();
+                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
+
+
                 ConceptosGridView.DataSource = ConceptosTemporalesLista;
                 ConceptosGridView.DataBind();
 
@@ -211,20 +223,20 @@ namespace GNRS.ModuloPresupuesto.UI
 
         }
 
-        protected void GuardarConceptosButton_Click(object sender, EventArgs e)
-        {
-            List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
+        //protected void GuardarConceptosButton_Click(object sender, EventArgs e)
+        //{
+        //    List<ConceptoTemporalBE> ConceptosTemporalesLista = new List<ConceptoTemporalBE>();
 
-            if (Session["ConceptosTemporalesLista"] != null)
-            {
-                ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
+        //    if (Session["ConceptosTemporalesLista"] != null)
+        //    {
+        //        ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
 
-            }
-            Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
-            Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
-            Response.Redirect("RegistrarPresupuestoPersonalProyectado.aspx");
+        //    }
+        //    Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
+        //    Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
+        //    Response.Redirect("RegistrarPresupuestoPersonalProyectado.aspx");
 
-        }
+        //}
 
         protected void ConceptoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {

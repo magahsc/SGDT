@@ -83,7 +83,7 @@ namespace GNRS.ModuloPresupuesto.UI
                         if (resultado == true)
                         {
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El beneficio social se ha actualizado exitosamente.')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El costo empresa se ha actualizado exitosamente.')", true);
 
                             BeneficioSocialTextBox.Text = "";
                             FactorTextBox.Text = "";
@@ -105,7 +105,7 @@ namespace GNRS.ModuloPresupuesto.UI
                         {
                             Session.Add("mensajeRecalcular", "si");
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El beneficio social ha sido guardado exitosamente.')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El costo empresa se ha guardado exitosamente.')", true);
 
                             BeneficioSocialTextBox.Text = "";
                             FactorTextBox.Text = "";
@@ -160,7 +160,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 Session.Add("mensajeRecalcular", "si");
 
                 CargarCostoEmpresaGridView();
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "alert('El beneficio social ha sido eliminado exitosamente.')", true);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "alert('El costo empresa se ha sido eliminado exitosamente.')", true);
 
 
            
@@ -169,7 +169,7 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void Recalcular_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "confirmarRecalcular('Esta opcion recalculara el beneficio social para todos los empleados. ¿Esta seguro de realizar esta operaion?')", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "confirmarRecalcular('Esta opción recalculará el beneficio social para todos los empleados. ¿Está seguro de realizar esta operación?')", true);
 
         }
 

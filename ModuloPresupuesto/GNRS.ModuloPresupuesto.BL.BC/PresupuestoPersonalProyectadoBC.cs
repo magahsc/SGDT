@@ -115,14 +115,14 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return ConceptosList;
         }
 
-        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre)
+        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre,int codigoTipoPersonal)
         {
             PERSONA persona = new PERSONA();
             persona.id_localidad = codigoLocalidad;
             persona.id_seccion = codigoSeccion;
             persona.id_cargo = codigoCargo;
             persona.nombres_persona = nombre;
-
+            persona.id_categoria = codigoTipoPersonal;
             personaDALC = new PersonaDALC();
            
             Boolean registro=personaDALC.insertarPersonalProyectado(persona);
@@ -140,13 +140,13 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
         }
 
-        public Boolean registrarConceptoXPersona(int codPersona,int codConcepto,float monto)
+        public Boolean registrarConceptoXPersona(int codPersona,int codConcepto,float monto,float costoEmpresa)
         {
             CONCEPTO_POR_PERSONA objConceptoPersona=new CONCEPTO_POR_PERSONA();
             objConceptoPersona.id_concepto = codConcepto;
             objConceptoPersona.id_persona = codPersona;
             objConceptoPersona.monto = monto;
-
+            objConceptoPersona.monto_costo_empresa = costoEmpresa;
 
 
             ConceptoRemuneracionDALC conceptoDALC= new ConceptoRemuneracionDALC();
@@ -177,8 +177,10 @@ namespace GNRS.ModuloPresupuesto.BL.BC
                     string cargoCompleto = lista[lista.Count() - 1].nombres_persona;
                     if (cargoCompleto.Contains(cargo))
                     {
-                        int index = cargo.Length;
-                        string numero = cargoCompleto.Substring(index + 1);
+                        string temp = "";
+                        temp = cargo + " Proy-";
+                        int index = temp.Length;
+                        string numero = cargoCompleto.Substring(index);
                         codigo = Convert.ToInt32(numero);
 
                     }

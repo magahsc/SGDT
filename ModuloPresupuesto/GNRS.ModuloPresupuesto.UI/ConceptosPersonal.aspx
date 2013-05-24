@@ -1,17 +1,40 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="ConceptosPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConceptosPersonal" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-    <script>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="ConceptosPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.ConceptosPersonal" %>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<body>
+ <form id="Form1" runat="server">
+ 
+  <script>
         function validateDecimales(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode;
 
 
-            if (charCode != 44 && charCode > 31 && (charCode < 48 || charCode > 57))
+            if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
                 return false;
             return true;
         }
   </script>
+  <body onbeforeunload="terminate();">
   
-  
+  <script>
+      
+
+   function terminate() {
+
+       var cantidad = document.getElementById("nroConceptoPersonal").value;
+       var o = new Object();       
+       if (cantidad == null) {
+           cantidad = "0";
+                 }
+       o.valor = cantidad;       
+       window.returnValue = o;
+   }
+
+
+</script>
+
+
+
   <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
     EnablePartialRendering="true">  
     
@@ -85,18 +108,20 @@
 
                     </tr>
 
-                    <tr>
-                        <td colspan=2 align=right>
-                            <asp:Button ID="GuardarConceptosButton" runat="server" Text="Guardar Conceptos" 
-                                onclick="GuardarConceptosButton_Click" /> 
-
-                        </td>
-                    </tr>
+                  
                     
                  </tbody>
             </Table>
 
 
+<asp:TextBox ID="nroConceptoPersonal" runat="server" Text="0"  BorderWidth=0 ForeColor=White ></asp:TextBox>
+
+
   </ContentTemplate> 
   </asp:UpdatePanel>
-</asp:Content>
+
+ 
+  </form>
+</body>
+</html>
+

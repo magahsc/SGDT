@@ -14,23 +14,7 @@
                     height: 200,
                     width: 350,
                     modal: true,
-                    buttons: {
-                        "Aceptar": function () {
-                            var codigoLocalidad = document.getElementById("contenido_LocalidadComboBox").value;
-                            var codigoArea = document.getElementById("contenido_AreaComboBox").value;
-                            var codigoSeccion = document.getElementById("contenido_SeccionComboBox").value;
-                            var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
-                            var cantidad = document.getElementById("contenido_CantidadTextBox").value;
-
-                            var CargoDDL = document.getElementById("contenido_CargoComboBox");
-                            var cargo = CargoDDL.options[CargoDDL.selectedIndex].text;
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, confirmarRegistro);
-                            $(this).dialog("close");
-                        },
-                        Cancel: function () {
-                            $(this).dialog("close");
-                        }
-                    }
+                   
                 });
 
                 $("#dialog-form").css({
@@ -51,7 +35,7 @@
   <script>
      
       function mensajeCamposIncompletos() {
-          $("#dialog-message").text("Debe ingresar todos los campos.").dialog("open");
+          $("#dialog-message").text("Datos incompletos. Llene todos los campos para poder registrar el costo de empresa.").dialog("open");
 
       }
 
@@ -130,13 +114,13 @@
       }
 
   </script>
-  <div id="dialog-form" title="Confirmacion de registro">
+  <div id="dialog-form" title="Módulo de Presupuesto">
   <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea guardar el personal?</p>
   </div>
 
-  <div id="dialog-message" title="SGDT">  </div>
-  <div id="dialog-error" title="Error">  </div>
-  <div id="dialog-confirmacion" title="SGDT">  </div>
+  <div id="dialog-message" title="Módulo de Presupuesto">  </div>
+  <div id="dialog-error" title="Módulo de Presupuesto">  </div>
+  <div id="dialog-confirmacion" title="Módulo de Presupuesto">  </div>
   
   
   

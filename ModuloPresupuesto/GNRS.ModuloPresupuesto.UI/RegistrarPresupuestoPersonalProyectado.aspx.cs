@@ -23,6 +23,9 @@ namespace GNRS.ModuloPresupuesto.UI
 
             if (!IsPostBack)
             {
+
+
+                cargarCostosEmpresa();
                 cargarComboBox();
 
                
@@ -36,10 +39,6 @@ namespace GNRS.ModuloPresupuesto.UI
                 {
                     ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
                     nuevo.Attributes["value"] = "no";
-
-                    
-                    
-
                 }
                 else
                 {
@@ -47,7 +46,7 @@ namespace GNRS.ModuloPresupuesto.UI
 
                 }
 
-
+               
                 if (Session["mes"] == null ||    Session["dia"] == null ||        Session["anio"] == null)
                 {
 
@@ -57,6 +56,16 @@ namespace GNRS.ModuloPresupuesto.UI
             }
         }
 
+        public void cargarCostosEmpresa()
+        {
+            CostoEmpresaBC objCostoEmpresaBC = new CostoEmpresaBC();
+            float costoEmpresaEmpleado = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(1);
+            float costoEmpresaObrero = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(2);
+
+            costoEmpresaEmpleadoHidden.Attributes["value"] = costoEmpresaEmpleado.ToString();
+            costoEmpresaObreroHidden.Attributes["value"] = costoEmpresaObrero.ToString();
+        }
+        
         public void alert(string msg)
         {
             Label lbl = new Label();
@@ -102,6 +111,15 @@ namespace GNRS.ModuloPresupuesto.UI
                 CantidadTextBox.Text = (string)Session["cantidad"];
             }
 
+            if (Session["codTipoPersonal"] != null)
+            {
+
+                string codL = (string)Session["codTipoPersonal"];
+                TipoPersonalComboBox.Items.FindByValue(codL).Selected = true;
+               
+            } 
+            
+            
             ComboBoxUpdatePanel.Update();
 
            
@@ -212,8 +230,9 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
         [WebMethod]
-        public static string confirmarRegistro(string codLocalidad, string codArea, string codSeccion, string codCargo, string cantidad,string cargo)
+        public static string confirmarRegistro(string codLocalidad, string codArea, string codSeccion, string codCargo, string cantidad, string cargo, string codTipoPersonal, string costoEmpresaEmpleadoHidden, string costoEmpresaObreroHidden, List<ConceptoTemporalBE>  elementos)
         {
+            List<ConceptoTemporalBE> lala = elementos;
             if (cargo.Equals(""))
             {
                 return "";
@@ -223,7 +242,7 @@ namespace GNRS.ModuloPresupuesto.UI
             PresupuestoPersonalProyectadoBC presupuestoPersonalBC = new PresupuestoPersonalProyectadoBC();
 
 
-            int codigoLocalidad, codigoArea, codigoSeccion, codigoCargo;
+            int codigoLocalidad, codigoArea, codigoSeccion, codigoCargo,codigoTipoPersonal;
 
             if (!int.TryParse(codLocalidad, out codigoLocalidad))
             {
@@ -245,19 +264,34 @@ namespace GNRS.ModuloPresupuesto.UI
                 codigoCargo = 0;
             }
 
+            if (!int.TryParse(codTipoPersonal, out codigoTipoPersonal))
+            {
+                codigoTipoPersonal = 0;
+            }
+
 
             int numeroDeCargoActual = presupuestoPersonalBC.obtenerCodDePersonalProyectado(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cargo);
             numeroDeCargoActual++;
 
-
+            float costoEmpresaRegistrar=-1;
+            if (codigoTipoPersonal == 1)
+            {
+                costoEmpresaRegistrar = float.Parse(costoEmpresaEmpleadoHidden);
+            }
+            if (codigoTipoPersonal == 2)
+            {
+                costoEmpresaRegistrar = float.Parse(costoEmpresaObreroHidden);
+            }
            
             for(int i=1;i <=cantidadAgregar;i++)
             {               
 
-                string nombre = cargo + " " + numeroDeCargoActual;
+                string nombre = cargo + " Proy-" + numeroDeCargoActual;
                 numeroDeCargoActual++;
 
-                int codAgregado = presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, nombre);
+
+
+                int codAgregado = presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, nombre,codigoTipoPersonal);
 
                 if (codAgregado != -1)
                 {
@@ -270,8 +304,11 @@ namespace GNRS.ModuloPresupuesto.UI
 
                     foreach (ConceptoTemporalBE item in ConceptosTemporalesLista)
                     {
-                        presupuestoPersonalBC.registrarConceptoXPersona(codAgregado, item.Concepto_Cod, item.Monto);
+                        presupuestoPersonalBC.registrarConceptoXPersona(codAgregado, item.Concepto_Cod, item.Monto, costoEmpresaRegistrar);
                     }
+
+                    HttpContext.Current.Session.Remove("ConceptosTemporalesLista");
+
                 }
                 else
                 {
@@ -284,31 +321,37 @@ namespace GNRS.ModuloPresupuesto.UI
 
         }
 
-        protected void AgregarConceptosButton_Click(object sender, EventArgs e)
-        {
+        //protected void AgregarConceptosButton_Click(object sender, EventArgs e)
+        //{
 
             
-            if (nuevo.Attributes["value"].Equals("si"))
-                Session.Remove("ConceptosTemporalesLista");
+        //    if (nuevo.Attributes["value"].Equals("si"))
+        //        Session.Remove("ConceptosTemporalesLista");
 
 
-            if (LocalidadComboBox.SelectedItem.Value != "")
-                Session.Add("codLocalidad", LocalidadComboBox.SelectedItem.Value);
+        //    if (LocalidadComboBox.SelectedItem.Value != "")
+        //        Session.Add("codLocalidad", LocalidadComboBox.SelectedItem.Value);
 
-            if (AreaComboBox.SelectedItem.Value != "")
-                Session.Add("codArea", AreaComboBox.SelectedItem.Value);
+        //    if (AreaComboBox.SelectedItem.Value != "")
+        //        Session.Add("codArea", AreaComboBox.SelectedItem.Value);
 
-            if (SeccionComboBox.SelectedItem.Value != "")
-                Session.Add("codSeccion", SeccionComboBox.SelectedItem.Value);
+        //    if (SeccionComboBox.SelectedItem.Value != "")
+        //        Session.Add("codSeccion", SeccionComboBox.SelectedItem.Value);
 
-            if (CargoComboBox.SelectedItem.Value != "")
-                Session.Add("codCargo", CargoComboBox.SelectedItem.Value);
+        //    if (CargoComboBox.SelectedItem.Value != "")
+        //        Session.Add("codCargo", CargoComboBox.SelectedItem.Value);
             
-            if (CantidadTextBox.Text != "")
-                Session.Add("cantidad", CantidadTextBox.Text);
+        //    if (CantidadTextBox.Text != "")
+        //        Session.Add("cantidad", CantidadTextBox.Text);
 
-            Response.Redirect("ConceptosPersonal.aspx");
-        }
+
+        //    if (LocalidadComboBox.SelectedItem.Value != "")
+        //        Session.Add("codTipoPersonal", TipoPersonalComboBox.SelectedItem.Value);
+
+
+
+        //    Response.Redirect("ConceptosPersonal.aspx");
+        //}
 
         protected void CargoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -325,6 +368,11 @@ namespace GNRS.ModuloPresupuesto.UI
             catch (Exception ex)
             {
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Page.ClientScript.RegisterStartupScript( GetType(),"popup", "window.open('ConceptosPersonal.aspx');", true);
         }
 
         

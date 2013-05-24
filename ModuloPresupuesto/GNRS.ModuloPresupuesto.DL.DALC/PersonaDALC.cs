@@ -16,7 +16,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 context.PERSONA.AddObject(persona);
                 persona.estado_persona = "P";
-                persona.id_categoria = 1;
+                persona.apellido_materno = "";
+                persona.apellido_paterno = "";
+
 
                 DateTime now = DateTime.Now;
                 persona.fecha_creacion = now;
@@ -71,8 +73,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 lista = (from p in context.PERSONA
                          // orderby p.nombres_persona descending
-                         // where (p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && p.id_cargo == codigoCargo)
-                         where p.id_localidad == codigolocalidad
+                          where (p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && p.id_cargo == codigoCargo)
+                        // where p.id_localidad == codigolocalidad
                          select p).ToList();
 
                 //foreach (var item in prueba)

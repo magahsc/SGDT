@@ -49,6 +49,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.HtmlControls.HtmlTable Table1;
         
         /// <summary>
+        /// TipoPersonalComboBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TipoPersonalComboBox;
+        
+        /// <summary>
         /// LocalidadComboBox control.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,41 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden nuevo;
+        
+        /// <summary>
+        /// nroConceptos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden nroConceptos;
+        
+        /// <summary>
+        /// conceptosHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden conceptosHidden;
+        
+        /// <summary>
+        /// costoEmpresaEmpleadoHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden costoEmpresaEmpleadoHidden;
+        
+        /// <summary>
+        /// costoEmpresaObreroHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden costoEmpresaObreroHidden;
     }
 }

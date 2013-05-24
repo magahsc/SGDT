@@ -12,7 +12,7 @@
                 $("#dialog-form").dialog({
                     autoOpen: false,
                     height: 200,
-                    width: 350,
+                    width: 450,
                     modal: true,
                     buttons: {
                         "Aceptar": function () {
@@ -21,10 +21,17 @@
                             var codigoSeccion = document.getElementById("contenido_SeccionComboBox").value;
                             var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
                             var cantidad = document.getElementById("contenido_CantidadTextBox").value;
-                           
+
                             var CargoDDL = document.getElementById("contenido_CargoComboBox");
                             var cargo = CargoDDL.options[CargoDDL.selectedIndex].text;
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad,cargo, confirmarRegistro);
+
+                            var codigoTipoPersonal = document.getElementById("contenido_TipoPersonalComboBox").value;
+                            var costoEmpresaEmpleadoHidden = document.getElementById("contenido_costoEmpresaEmpleadoHidden").value;
+                            var costoEmpresaObreroHidden = document.getElementById("contenido_costoEmpresaObreroHidden").value;
+
+                            var elementos = '<%= HttpContext.Current.Session["ConceptosTemporalesLista"] %>';
+
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden, elementos,confirmarRegistro);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -40,11 +47,13 @@
 
                 $("#opener").click(function () {
                     var cantidadPersonales = document.getElementById("contenido_CantidadTextBox").value;
-                    var cantidadConceptos = '<%= Session["NumeroConceptos"] %>';
+                    var cantidadConceptos = document.getElementById("contenido_nroConceptos").value;
                     var codigoCargo = document.getElementById("contenido_CargoComboBox").value;
 
-                    if (codigoCargo=="" || cantidadPersonales == "" || cantidadConceptos == "" || cantidadConceptos == "0") {
-                        $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
+                    var tipoPersonal = document.getElementById("contenido_TipoPersonalComboBox").value;
+
+                    if (cantidadConceptos == "0" || codigoCargo == "" || cantidadPersonales == "" || tipoPersonal == "") {
+                        $("#dialog-error").text("Datos incompletos. Llene todos los campos para poder registrar el presupuesto de personal proyectado").dialog("open");
                     }
                     else {
                         $("#dialog-form").dialog("open");
@@ -63,11 +72,10 @@
       function confirmarRegistro(message) {
        
        if (message != "") {
-           var texto = "El personal proyectado ha sido guardado exitosamente";
+           var texto = "El personal proyectado se ha guardado exitosamente";
+
            $("#dialog-message").text(texto).dialog("open");
-       } else {
-           $("#dialog-error").text("Debe ingresar todos los campos solicitados.").dialog("open");
-       }
+       } 
          
       }
   </script>
@@ -82,6 +90,9 @@
                   Ok: function () {
                       document.getElementById("contenido_CantidadTextBox").value = '';
 
+                      document.getElementById("contenido_TipoPersonalComboBox").selectedIndex = 0;
+
+                      
                       document.getElementById("contenido_LocalidadComboBox").selectedIndex = 0;                    
                       document.getElementById("contenido_SeccionComboBox").selectedIndex = 0;
                       document.getElementById("contenido_SeccionComboBox").disabled = true;
@@ -92,6 +103,7 @@
                       document.getElementById("contenido_AgregarConceptosButton").disabled = true;
                       document.getElementById("contenido_nuevo").value = "si";
                       
+                 
                       $(this).dialog("close");
 
                   }
@@ -134,14 +146,31 @@
           return true;
       }
     
+     function mostrarAspxAsPopUp() {
 
+   
+        var esNuevo = document.getElementById("contenido_nuevo").value;
+
+        if (esNuevo == "si") {
+            <%Session["ConceptosTemporalesLista"] = null;%>
+        }
+
+        var strReturn = window.showModalDialog('ConceptosPersonal.aspx', null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
+
+        document.getElementById("contenido_nroConceptos").value = strReturn.valor;
+        document.getElementById("contenido_conceptosHidden").value = strReturn.elementos;
+         
+     
+    }
   </script>
-  <div id="dialog-form" title="Confirmacion de registro">
-  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea guardar el personal?</p>
+
+ 
+  <div id="dialog-form" title="Módulo de Presupuesto">
+  <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>¿Desea guardar el personal proyectado?</p>
   </div>
 
-  <div id="dialog-message" title="Confirmacion de registro">  </div>
-  <div id="dialog-error" title="Error">  </div>
+  <div id="dialog-message" title="Módulo de Presupuesto">  </div>
+  <div id="dialog-error" title="Módulo de Presupuesto">  </div>
   
   
   
@@ -159,6 +188,16 @@
      <ContentTemplate>   
             <Table ID="Table1" runat="server" >
                  <tbody>
+                    <tr >
+                        <td align="right" >Tipo de personal:</td>
+                        <td><asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
+                                AutoPostBack="True" Height="20px" Width="130px" >
+                                <asp:ListItem Value="" > Seleccione el tipo de personal </asp:ListItem>
+                                <asp:ListItem Value="1"  Text="Empleado"> </asp:ListItem>
+                                <asp:ListItem Value="2"  Text="Obrero"> </asp:ListItem>
+                                </asp:DropDownList></td>
+                    </tr>
+                    
                     <tr >
                         <td align="right" >Localidad:</td>
                         <td><asp:DropDownList ID="LocalidadComboBox" runat="server" 
@@ -198,8 +237,9 @@
                         <td align="right">Conceptos:</td>
                          <td>
                              <asp:Button ID="AgregarConceptosButton" runat="server" Text="+" 
-                                 onclick="AgregarConceptosButton_Click" />   </td>      
-                        
+                                 OnClientClick=" mostrarAspxAsPopUp()"
+                                  />   </td>      
+                      
                     </tr>
 
                     <tr>
@@ -217,8 +257,14 @@
   </ContentTemplate> 
   </asp:UpdatePanel>
 
+  
+
   <input type="hidden" name="nuevo" id="nuevo" runat="server" />
- 
+ <input type="hidden" name="nroConceptos" id="nroConceptos" runat="server" />
+ <input type="hidden"   id="conceptosHidden" runat="server" />
+
+ <input type="hidden" name="costoEmpresaEmpleadoHidden" id="costoEmpresaEmpleadoHidden" runat="server" />
+ <input type="hidden" name="costoEmpresaObreroHidden" id="costoEmpresaObreroHidden" runat="server" />
 
 
  
