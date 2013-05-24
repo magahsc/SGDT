@@ -146,7 +146,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             objConceptoPersona.id_concepto = codConcepto;
             objConceptoPersona.id_persona = codPersona;
             objConceptoPersona.monto = monto;
-            objConceptoPersona.monto_costo_empresa = costoEmpresa;
+            objConceptoPersona.monto_costo_empresa = costoEmpresa * monto;
 
 
             ConceptoRemuneracionDALC conceptoDALC= new ConceptoRemuneracionDALC();

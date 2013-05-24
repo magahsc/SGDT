@@ -20,6 +20,7 @@ namespace GNRS.ModuloPresupuesto.UI
             if (!IsPostBack)
             {
                 cargarComboBox();
+               
                 if (Session["ConceptosTemporalesLista"] != null)
                 {
                     List<ConceptoTemporalBE> ConceptosTemporalesLista;
@@ -252,6 +253,13 @@ namespace GNRS.ModuloPresupuesto.UI
             {
             }
         }
-       
+
+
+        [WebMethod]
+        public static string borrarSession()
+        {
+             HttpContext.Current.Session.Remove("ConceptosTemporalesLista");
+             return "";
+        }
     }
 }

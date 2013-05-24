@@ -230,9 +230,9 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
         [WebMethod]
-        public static string confirmarRegistro(string codLocalidad, string codArea, string codSeccion, string codCargo, string cantidad, string cargo, string codTipoPersonal, string costoEmpresaEmpleadoHidden, string costoEmpresaObreroHidden, List<ConceptoTemporalBE>  elementos)
+        public static string confirmarRegistro(string codLocalidad, string codArea, string codSeccion, string codCargo, string cantidad, string cargo, string codTipoPersonal, string costoEmpresaEmpleadoHidden, string costoEmpresaObreroHidden)
         {
-            List<ConceptoTemporalBE> lala = elementos;
+
             if (cargo.Equals(""))
             {
                 return "";
@@ -307,7 +307,7 @@ namespace GNRS.ModuloPresupuesto.UI
                         presupuestoPersonalBC.registrarConceptoXPersona(codAgregado, item.Concepto_Cod, item.Monto, costoEmpresaRegistrar);
                     }
 
-                    HttpContext.Current.Session.Remove("ConceptosTemporalesLista");
+                   
 
                 }
                 else
@@ -316,7 +316,9 @@ namespace GNRS.ModuloPresupuesto.UI
                 }
             }
 
-           
+
+                HttpContext.Current.Session.Remove("ConceptosTemporalesLista");
+
                 return "sdf";
 
         }

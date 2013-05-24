@@ -26,8 +26,10 @@
        if (cantidad == null) {
            cantidad = "0";
                  }
-       o.valor = cantidad;       
+       o.valor = cantidad;
        window.returnValue = o;
+
+       
    }
 
 

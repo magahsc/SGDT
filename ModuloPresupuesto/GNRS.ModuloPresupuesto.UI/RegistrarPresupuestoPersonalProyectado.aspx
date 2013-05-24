@@ -29,9 +29,8 @@
                             var costoEmpresaEmpleadoHidden = document.getElementById("contenido_costoEmpresaEmpleadoHidden").value;
                             var costoEmpresaObreroHidden = document.getElementById("contenido_costoEmpresaObreroHidden").value;
 
-                            var elementos = '<%= HttpContext.Current.Session["ConceptosTemporalesLista"] %>';
-
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden, elementos,confirmarRegistro);
+ 
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden ,confirmarRegistro);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -149,11 +148,7 @@
      function mostrarAspxAsPopUp() {
 
    
-        var esNuevo = document.getElementById("contenido_nuevo").value;
-
-        if (esNuevo == "si") {
-            <%Session["ConceptosTemporalesLista"] = null;%>
-        }
+        
 
         var strReturn = window.showModalDialog('ConceptosPersonal.aspx', null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
 
