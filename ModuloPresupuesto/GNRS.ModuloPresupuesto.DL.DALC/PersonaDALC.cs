@@ -73,8 +73,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 lista = (from p in context.PERSONA
                          // orderby p.nombres_persona descending
-                          where (p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && p.id_cargo == codigoCargo)
-                        // where p.id_localidad == codigolocalidad
+                         where (p.id_localidad == codigolocalidad && p.id_seccion == codigoseccion && p.id_cargo == codigoCargo)
+                         // where p.id_localidad == codigolocalidad
                          select p).ToList();
 
                 //foreach (var item in prueba)
@@ -128,5 +128,53 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+
+
+        public PERSONA obtenerPersonasXId(int id)
+        {
+            try
+            {
+                PERSONA persona = new PERSONA();
+                var context = new PresupuestoDBEntities();
+                persona = (from p in context.PERSONA
+                           where p.id_persona == id
+                           select p).First();
+
+
+                return persona;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public Boolean editarPersona(PERSONA persona)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PERSONA obj = (from a in context.PERSONA
+                               where a.id_persona == persona.id_persona
+                               select a).First();
+                obj.id_categoria = persona.id_categoria;
+                obj.id_cargo = persona.id_cargo;
+                obj.id_localidad = persona.id_localidad;
+                obj.id_seccion = persona.id_seccion;
+                obj.nombres_persona = persona.nombres_persona;
+                DateTime now = DateTime.Now;
+                persona.fecha_creacion = now;
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

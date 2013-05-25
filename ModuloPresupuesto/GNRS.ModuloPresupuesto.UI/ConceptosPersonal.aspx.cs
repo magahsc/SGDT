@@ -27,6 +27,8 @@ namespace GNRS.ModuloPresupuesto.UI
                     ConceptosTemporalesLista = (List<ConceptoTemporalBE>)Session["ConceptosTemporalesLista"];
                     ConceptosGridView.DataSource = ConceptosTemporalesLista;
                     ConceptosGridView.DataBind();
+                    nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
+                    ComboBoxUpdatePanel.Update();
                 }
                 //else
                 //    GuardarConceptosButton.Visible = false;
@@ -127,19 +129,17 @@ namespace GNRS.ModuloPresupuesto.UI
 
                 Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
                 Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
-               // nroConceptoPersonalHidden.Attributes["value"] = ConceptosTemporalesLista.Count().ToString();
-                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
-              //  conceptosHidden.Attributes["value"] = ConceptosTemporalesLista.ToString();
-
+           
                 ConceptoComboBox.Enabled = false;
                 ConceptoComboBox.SelectedIndex = 0;
                 TipoConceptoComboBox.SelectedIndex = 0;
                 MontoTextBox.Text = "";
 
                 AgregarButton.Enabled = false;
-               // GuardarConceptosButton.Visible = true;
 
                 ComboBoxUpdatePanel.Update();
+                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
+
             }
 
 
@@ -211,14 +211,14 @@ namespace GNRS.ModuloPresupuesto.UI
 
                 Session.Add("ConceptosTemporalesLista", ConceptosTemporalesLista);
                 Session.Add("NumeroConceptos", ConceptosTemporalesLista.Count().ToString());
-              //  nroConceptoPersonalHidden.Attributes["value"] = ConceptosTemporalesLista.Count().ToString();
-                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
-
+             
 
                 ConceptosGridView.DataSource = ConceptosTemporalesLista;
                 ConceptosGridView.DataBind();
 
                 ComboBoxUpdatePanel.Update();
+                nroConceptoPersonal.Text = ConceptosTemporalesLista.Count().ToString();
+
             }
 
 

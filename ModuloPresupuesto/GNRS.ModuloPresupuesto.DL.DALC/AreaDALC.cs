@@ -36,7 +36,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                          where s.id_seccion == codigoSeccion
                          select s.id_area).ToList();
 
-               // prueba.ToList().ForEach(ig => ig.ToList().ForEach(emp => lista.Add(emp.id_area)));
+                // prueba.ToList().ForEach(ig => ig.ToList().ForEach(emp => lista.Add(emp.id_area)));
 
                 return lista;
 
@@ -55,7 +55,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 var context = new PresupuestoDBEntities();
                 area = (from a in context.AREA
                         where a.id_area == codigoArea
-                         select a).First();
+                        select a).First();
                 return area;
 
             }
@@ -85,5 +85,25 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+
+
+        public int obtenerIdAreaXCodigoSeccion(int codigoSeccion)
+        {
+            try
+            {
+                int idCodigoArea;
+                var context = new PresupuestoDBEntities();
+                idCodigoArea = (from s in context.SECCION
+                                where s.id_seccion == codigoSeccion
+                                select s.id_area).First();
+                return idCodigoArea;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

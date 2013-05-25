@@ -14,9 +14,10 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         AreaDALC areaDALC = new AreaDALC();
         SeccionDALC seccionDALC = new SeccionDALC();
         CargoDALC cargoDALC = new CargoDALC();
-        PersonaDALC personaDALC;
-        ConceptoRemuneracionDALC conceptoRemuneracionDALC;
-
+        PersonaDALC personaDALC=new PersonaDALC();
+        ConceptoRemuneracionDALC conceptoRemuneracionDALC=new ConceptoRemuneracionDALC();
+        ConceptoPersonaDALC objConceptoPersonaDALC=new ConceptoPersonaDALC();
+        AuditoriaPresupuestoDALC objAuditoriaPresupuestoDALC = new AuditoriaPresupuestoDALC();
 
 
         public List<LOCALIDAD> listarLocalidades()
@@ -194,6 +195,43 @@ namespace GNRS.ModuloPresupuesto.BL.BC
                 throw;
             }
 
+        }
+
+
+
+        public Boolean actualizarPersonalProyectar(int codigoLocalidad, int codigoSeccion, int codigoCargo, string nombre, int codigoTipoPersonal,int id_persona)
+        {
+            PERSONA persona = new PERSONA();
+            persona.id_localidad = codigoLocalidad;
+            persona.id_seccion = codigoSeccion;
+            persona.id_cargo = codigoCargo;
+            persona.nombres_persona = nombre;
+            persona.id_categoria = codigoTipoPersonal;
+            persona.id_persona = id_persona;
+
+         
+            Boolean actualizoPersona= personaDALC.editarPersona(persona);
+           //costoempres
+
+            //eliminar
+            if (actualizoPersona == true)
+            {
+                objConceptoPersonaDALC.eliminarConceptosXIDPersona(persona.id_persona);
+
+                AUDITORIA_PRESUPUESTO objAuditoria=new AUDITORIA_PRESUPUESTO();
+                DateTime now = DateTime.Now; 
+                objAuditoria.fecha_accion=now;
+                objAuditoria.id_actividad_proyectada=0;
+                objAuditoria.id_capacitacion_proyectada=0;
+                objAuditoria.id_personal_proyectado=id_persona;
+                objAuditoria.tipo_accion="A";
+                objAuditoria.tipo_presupuesto="P";
+                objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);
+
+                return true;
+            }
+            return false;
+            
         }
     }
 }
