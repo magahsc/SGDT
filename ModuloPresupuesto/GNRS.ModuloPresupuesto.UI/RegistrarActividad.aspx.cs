@@ -365,17 +365,7 @@ namespace GNRS.ModuloPresupuesto.UI
             String Mensaje = "El presupuesto de la actividad de RRHH " + codigopresupuesto + " ha sido guardado satisfactoriamente";
             Page objp = new Page();
             objp.Session.Add("MensajeActividadRegistrada", Mensaje);
-            //alert("El presupuesto de actividad de RRHH ");
-           /* ActividadComboBox.SelectedIndex = 0;
-            MesInicioComboBox.SelectedIndex = 0;
-            MesFinComboBox.SelectedIndex = 0;
-            MontoTextBox.Text = "";
-            ObservacionesTextBox.Text = "";
-            MesFinComboBox.Enabled = false;
-            ComboBoxUpdatePanel.Update();*/
-
-            /*hdnSession.Value = HttpContext.Current.Session["MensajeActividadRegistrada"].ToString();
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);*/
+            
             return Mensaje;
         }
 
@@ -419,9 +409,9 @@ namespace GNRS.ModuloPresupuesto.UI
             int ianio2 = ianio1 + 1;
             String sanio2 = Convert.ToString(ianio2);
 
-            if (dpl.Equals(sanio1))
+            if (dpl.Contains(sanio1))
                 scod = ianio1;
-            if (dpl.Equals(sanio2))
+            if (dpl.Contains(sanio2))
                 scod = ianio2;
 
             return scod;
@@ -493,66 +483,6 @@ namespace GNRS.ModuloPresupuesto.UI
         
         protected void GuardarButton_Click(object sender, EventArgs e)
         {
-            /*if (MesInicioComboBox.SelectedIndex > 0 && MesFinComboBox.SelectedIndex > 0 && ActividadComboBox.SelectedIndex > 0 && MontoTextBox.Text != "" &&
-                 MontoTextBox.Text != null)
-            {
-                String actividad = ActividadComboBox.SelectedValue;
-                int iactividad = Convert.ToInt32(actividad);
-
-                int icodmesInicio = GetCodMes(MesInicioComboBox);
-                int icodanioInicio = GetCodAnio(MesInicioComboBox);
-
-                int icodmesFinal = GetCodMes(MesFinComboBox);
-                int icodanioFinal = GetCodAnio(MesFinComboBox);
-
-                double monto = Convert.ToDouble(MontoTextBox.Text);
-                String observaciones = ObservacionesTextBox.Text;
-
-                String smes = Convert.ToString(DateTime.Now.Month);
-                smes = cambiarmesydia(smes);
-                String sanio = Convert.ToString(DateTime.Now.Year);
-                sanio = sanio.Substring(2, 2);
-                String sdia = Convert.ToString(DateTime.Now.Day);
-                sdia = cambiarmesydia(sdia);
-
-                PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
-                objactividad.codigo_actividad_proyectada = "";
-                objactividad.mes_inicio = icodmesInicio;
-                objactividad.mes_fin = icodmesFinal;
-                objactividad.anio_inicio = icodanioInicio;
-                objactividad.anio_fin = icodanioFinal;
-                objactividad.id_actividad = iactividad;
-                objactividad.monto_actividad = monto;
-                objactividad.detalle_actividad = observaciones;
-                objactividad.fecha_creacion = DateTime.Now;
-                 objactividad.presupuesto_aprobado = "P";
-
-                if (TipoMonedaRadioButtonList.SelectedIndex == 0)
-                    objactividad.tipo_moneda = "S";
-                if (TipoMonedaRadioButtonList.SelectedIndex == 1)
-                    objactividad.tipo_moneda = "D";
-
-                int idActividad = objcapacitar.insertarActividadRRHH(objactividad);
-                String codigopresupuesto = sdia + smes + sanio + "" + idActividad;
-                objactividad.codigo_actividad_proyectada = codigopresupuesto;
-                objcapacitar.ActualizarActividadRRHH(objactividad);
-
-                String Mensaje = "El presupuesto de la actividad de RRHH " + codigopresupuesto + " ha sido guardado satisfactoriamente";
-                Page objp = new Page();
-                objp.Session.Add("MensajeActividadRegistrada", Mensaje);
-                //alert("El presupuesto de actividad de RRHH ");
-                ActividadComboBox.SelectedIndex = 0;
-                MesInicioComboBox.SelectedIndex = 0;
-                MesFinComboBox.SelectedIndex = 0;
-                MontoTextBox.Text = "";
-                ObservacionesTextBox.Text = "";
-                MesFinComboBox.Enabled = false;
-                ComboBoxUpdatePanel.Update();
-
-                hdnSession.Value = Session["MensajeActividadRegistrada"].ToString();
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);
-
-            }*/
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensajeValidacion()", true);
         }
 

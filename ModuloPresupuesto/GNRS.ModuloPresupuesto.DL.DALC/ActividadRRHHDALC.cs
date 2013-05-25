@@ -37,7 +37,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 
                 objactividadproyectada = (from c in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
                                           where c.id_actividad_proyectada == objactividad.id_actividad_proyectada
-                                             select c).First();
+                                          select c).First();
 
                 objactividadproyectada.codigo_actividad_proyectada = objactividad.codigo_actividad_proyectada;
                 context.SaveChanges();
@@ -75,7 +75,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 
                 actividad = (from a in context.ACTIVIDAD
                              where a.id_actividad == codigoActividad
-                               select a).First();
+                             select a).First();
 
                 return actividad;
 
@@ -94,10 +94,11 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 List<ActividadBE> lista = new List<ActividadBE>();
                 ActividadBE objactividadBE;
                 var context = new PresupuestoDBEntities();
-                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA join a in context.ACTIVIDAD on p.id_actividad equals a.id_actividad
+                var prueba = (from p in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                              join a in context.ACTIVIDAD on p.id_actividad equals a.id_actividad
                               where (p.mes_inicio == objactividad.MesInicio || objactividad.MesInicio == 0) && (p.mes_fin == objactividad.MesFinal || objactividad.MesFinal == 0) && (p.anio_inicio == objactividad.AnioInicio || objactividad.AnioInicio == 0)
                               && (p.anio_fin == objactividad.AnioFinal || objactividad.AnioFinal == 0) && (p.presupuesto_aprobado == objactividad.Presupuesto_aprobado || objactividad.Presupuesto_aprobado == "V")
-                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, a.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado,p.mes_inicio, p.anio_inicio, p.mes_fin, p.anio_fin }).ToList();
+                              select new { p.id_actividad_proyectada, p.codigo_actividad_proyectada, a.nombre_actividad, p.monto_actividad, p.tipo_moneda, p.fecha_creacion, p.presupuesto_aprobado, p.mes_inicio, p.anio_inicio, p.mes_fin, p.anio_fin }).ToList();
 
                 foreach (var item in prueba)
                 {
@@ -107,18 +108,18 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                         tipo = "$ ";
 
                     objactividadBE = new ActividadBE();
-                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad,2);
+                    objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad, 2);
                     objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
                     objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
                     objactividadBE.Nombre_actividad = item.nombre_actividad;
 
-                   /* String dia = Convert.ToString(item.fecha_creacion.Day);
-                    String mes = Convert.ToString(item.fecha_creacion.Month);
-                    String anio = Convert.ToString(item.fecha_creacion.Year);
-                    anio = anio.Substring(2, 2);
+                    /* String dia = Convert.ToString(item.fecha_creacion.Day);
+                     String mes = Convert.ToString(item.fecha_creacion.Month);
+                     String anio = Convert.ToString(item.fecha_creacion.Year);
+                     anio = anio.Substring(2, 2);
 
-                    objactividadBE.Fecha_creacion = item.fecha_creacion;
-                    objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;*/
+                     objactividadBE.Fecha_creacion = item.fecha_creacion;
+                     objactividadBE.Fecha_modificada = cambiarmesydia(dia) + "/" + cambiarmesydia(mes) + "/" + anio;*/
 
                     objactividadBE.FechaInicio = mes(item.mes_inicio) + " " + item.anio_inicio;
                     objactividadBE.FechaFin = mes(item.mes_fin) + " " + item.anio_fin;
@@ -288,6 +289,48 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     }
             }
             return mesd;
+        }
+
+        public Boolean ActualizarEstadoActividadProyectada(int idActividad)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PRESUPUESTO_ACTIVIDAD_PROYECTADA presupuestoactividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
+
+                presupuestoactividad = (from c in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                                        where c.id_actividad_proyectada == idActividad
+                                        select c).First();
+
+                presupuestoactividad.presupuesto_aprobado = "E";
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public PRESUPUESTO_ACTIVIDAD_PROYECTADA obtenerPresupuestoActividad(int idActividad)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PRESUPUESTO_ACTIVIDAD_PROYECTADA presupuestoActividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
+
+                presupuestoActividad = (from c in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                                        where c.id_actividad_proyectada == idActividad
+                                        select c).First();
+
+                return presupuestoActividad;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

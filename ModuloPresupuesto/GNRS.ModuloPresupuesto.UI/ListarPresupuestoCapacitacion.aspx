@@ -7,6 +7,7 @@
     
     
     
+   
     <script>
         $(document).ready(function () {
 
@@ -40,7 +41,7 @@
         });
 
         function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
-            var texto = '¿Está seguro de eliminar el presupuesto ' + sco + ' ?';
+            var texto = '¿Está seguro de eliminar el presupuesto ' + sco + '?';
 
             $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
             // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
@@ -52,7 +53,7 @@
         
   </script>
 
-   <div id="dialog-confirmacion" title="Confirmacion de registro"></div>
+   <div id="dialog-confirmacion" title="Modulo de Presupuesto"></div>
 
 
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" >  
@@ -73,14 +74,12 @@
              <td>Mes:</td>
              <td><asp:DropDownList ID="mesDropDownList" runat="server" Height="24px" 
                         Width="140px" 
-                      AutoPostBack="True" 
-                     onselectedindexchanged="mesDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                     ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
  
               <td>Año:</td>
               <td><asp:DropDownList ID="anioDropDownList" runat="server" Height="24px" 
-                        Width="130px" 
-                        AutoPostBack="True" 
-                      onselectedindexchanged="anioDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Width="130px"  
+                      ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                        
                       
 &nbsp;</td>
@@ -88,8 +87,7 @@
                 <td>Estado:</td>
               <td><asp:DropDownList ID="estadoDropDownList" runat="server" Height="24px" 
                         Width="152px" 
-                        AutoPostBack="True" 
-                      onselectedindexchanged="estadoDropDownList_SelectedIndexChanged" ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      ></asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                        
                       
 &nbsp;</td>
@@ -166,10 +164,10 @@
 
 					<asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-						<asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%#Eval("id_presupuesto_capacitacion") %>' Visible=false
+						<asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%#Eval("id_presupuesto_capacitacion") %>' Visible="false"
                              ></asp:LinkButton>
 
-                         <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("cod_presupuesto") %>' Visible=false
+                         <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("cod_presupuesto") %>' Visible="false"
                              ></asp:LinkButton>
                             
                          <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>');" >X</button>

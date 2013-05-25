@@ -235,294 +235,76 @@ namespace GNRS.ModuloPresupuesto.UI
             return lsestado;
         }
 
-        protected void mesDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CriteriosUpdatePanel.Update();
-            ListasCapacitarProyectadaGridView.DataSource = null;
-            ListasCapacitarProyectadaGridView.DataBind();
-            DatosUpdatePanel.Update();
-        }
+        /* protected void mesDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+         {
+             CriteriosUpdatePanel.Update();
+             ListasCapacitarProyectadaGridView.DataSource = null;
+             ListasCapacitarProyectadaGridView.DataBind();
+             DatosUpdatePanel.Update();
+         }
 
-        protected void anioDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CriteriosUpdatePanel.Update();
-            ListasCapacitarProyectadaGridView.DataSource = null;
-            ListasCapacitarProyectadaGridView.DataBind();
-            DatosUpdatePanel.Update();
-        }
+         protected void anioDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+         {
+             CriteriosUpdatePanel.Update();
+             ListasCapacitarProyectadaGridView.DataSource = null;
+             ListasCapacitarProyectadaGridView.DataBind();
+             DatosUpdatePanel.Update();
+         }
 
-        protected void estadoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CriteriosUpdatePanel.Update();
-            ListasCapacitarProyectadaGridView.DataSource = null;
-            ListasCapacitarProyectadaGridView.DataBind();
-            DatosUpdatePanel.Update();
-        }
+         protected void estadoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+         {
+             CriteriosUpdatePanel.Update();
+             ListasCapacitarProyectadaGridView.DataSource = null;
+             ListasCapacitarProyectadaGridView.DataBind();
+             DatosUpdatePanel.Update();
+         }*/
 
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            if (mesDropDownList.SelectedIndex == 0 && anioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex == 0)
-            {
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxTodo();
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
+            CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
 
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
+            if (mesDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Mes = 0;
+            if (anioDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Anio = 0;
+            if (estadoDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Presupuesto_aprobado = "V";
 
-            }
+            if (estadoDropDownList.SelectedIndex == 1)
+                objcapacitacionBE.Presupuesto_aprobado = "P";
 
-            if (mesDropDownList.SelectedIndex > 0 && anioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
+            if (estadoDropDownList.SelectedIndex == 2)
+                objcapacitacionBE.Presupuesto_aprobado = "N";
+
+            if (estadoDropDownList.SelectedIndex == 3)
+                objcapacitacionBE.Presupuesto_aprobado = "A";
+
+            if (mesDropDownList.SelectedIndex > 0)
                 objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
+            if (anioDropDownList.SelectedIndex > 0)
                 objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
 
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objcapacitacionBE.Presupuesto_aprobado = "P";
 
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objcapacitacionBE.Presupuesto_aprobado = "N";
-
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objcapacitacionBE.Presupuesto_aprobado = "A";
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnioxEstado(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesDropDownList.SelectedIndex > 0 && anioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex == 0)
+            List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnioxEstado(objcapacitacionBE);
+            if (lista != null)
             {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                //objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                //objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMes(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
+                ListasCapacitarProyectadaGridView.DataSource = lista;
+                ListasCapacitarProyectadaGridView.DataBind();
+                ListasCapacitarProyectadaGridView.Visible = true;
+                MensajeLabel.Text = "";
+                DatosUpdatePanel.Update();
+                MensajeUpdatePanel.Update();
             }
 
-            if (mesDropDownList.SelectedIndex == 0 && anioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex == 0)
+            if (lista == null)
             {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                //objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                //objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxAnio(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
+                MensajeLabel.Visible = true;
+                ListasCapacitarProyectadaGridView.Visible = false;
+                MensajeLabel.Text = "No existen presupuestos para mostrar.";
+                MensajeUpdatePanel.Update();
+                DatosUpdatePanel.Update();
             }
 
-            if (mesDropDownList.SelectedIndex == 0 && anioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                //objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                //objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objcapacitacionBE.Presupuesto_aprobado = "P";
-
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objcapacitacionBE.Presupuesto_aprobado = "N";
-
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objcapacitacionBE.Presupuesto_aprobado = "A";
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxEstado(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesDropDownList.SelectedIndex > 0 && anioDropDownList.SelectedIndex == 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                //objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objcapacitacionBE.Presupuesto_aprobado = "P";
-
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objcapacitacionBE.Presupuesto_aprobado = "N";
-
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objcapacitacionBE.Presupuesto_aprobado = "A";
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxEstado(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesDropDownList.SelectedIndex > 0 && anioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex == 0)
-            {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                //objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                /* if (estadoDropDownList.SelectedIndex == 1)
-                     objcapacitacionBE.Presupuesto_aprobado = "P";
-
-                 if (estadoDropDownList.SelectedIndex == 2)
-                     objcapacitacionBE.Presupuesto_aprobado = "N";
-
-                 if (estadoDropDownList.SelectedIndex == 3)
-                     objcapacitacionBE.Presupuesto_aprobado = "A";*/
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnio(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
-
-            if (mesDropDownList.SelectedIndex == 0 && anioDropDownList.SelectedIndex > 0 && estadoDropDownList.SelectedIndex > 0)
-            {
-                CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
-                //objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
-                objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
-                objcapacitacionBE.Presupuesto_aprobado = estadoDropDownList.SelectedValue;
-
-                if (estadoDropDownList.SelectedIndex == 1)
-                    objcapacitacionBE.Presupuesto_aprobado = "P";
-
-                if (estadoDropDownList.SelectedIndex == 2)
-                    objcapacitacionBE.Presupuesto_aprobado = "N";
-
-                if (estadoDropDownList.SelectedIndex == 3)
-                    objcapacitacionBE.Presupuesto_aprobado = "A";
-
-                List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxAnioxEstado(objcapacitacionBE);
-                if (lista != null)
-                {
-                    ListasCapacitarProyectadaGridView.DataSource = lista;
-                    ListasCapacitarProyectadaGridView.DataBind();
-                    MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    MensajeUpdatePanel.Update();
-                }
-
-                if (lista == null)
-                {
-                    MensajeLabel.Visible = true;
-                    ListasCapacitarProyectadaGridView.Visible = false;
-                    MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
-                }
-
-            }
         }
 
         [WebMethod]
@@ -548,12 +330,6 @@ namespace GNRS.ModuloPresupuesto.UI
 
             objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
 
-            //DatosUpdatePanel.Update();
-            //CriteriosUpdatePanel.Update();
-            //BuscarButton_Click(sender, e);
-
-
-            // alert("¿Está seguro de eliminar el presupuesto " + objpresupuesto.codigo_presupuesto + "?");
             return "laksdl2";
 
         }

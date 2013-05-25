@@ -20,27 +20,27 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             if (!IsPostBack)
             {
-                    int imes = 1;
+                int imes = 1;
 
-                    mesInicioDropDownList.DataSource = ListaMes(imes);
-                    mesInicioDropDownList.DataBind();
-                    mesInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
+                mesInicioDropDownList.DataSource = ListaMes(imes);
+                mesInicioDropDownList.DataBind();
+                mesInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
 
-                    anioInicioDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
-                    anioInicioDropDownList.DataBind();
-                    anioInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
+                anioInicioDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
+                anioInicioDropDownList.DataBind();
+                anioInicioDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
 
-                    mesFinDropDownList.DataSource = ListaMes(imes);
-                    mesFinDropDownList.DataBind();
-                    mesFinDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
+                mesFinDropDownList.DataSource = ListaMes(imes);
+                mesFinDropDownList.DataBind();
+                mesFinDropDownList.Items.Insert(0, new ListItem("Seleccione el mes", ""));
 
-                    anioFinDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
-                    anioFinDropDownList.DataBind();
-                    anioFinDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
+                anioFinDropDownList.DataSource = ListaAnio(DateTime.Now.Year);
+                anioFinDropDownList.DataBind();
+                anioFinDropDownList.Items.Insert(0, new ListItem("Seleccione el año", ""));
 
-                    estadoDropDownList.DataSource = listaestado();
-                    estadoDropDownList.DataBind();
-                    estadoDropDownList.Items.Insert(0, new ListItem("Seleccione el estado", ""));
+                estadoDropDownList.DataSource = listaestado();
+                estadoDropDownList.DataBind();
+                estadoDropDownList.Items.Insert(0, new ListItem("Seleccione el estado", ""));
 
             }
         }
@@ -136,7 +136,7 @@ namespace GNRS.ModuloPresupuesto.UI
             return lsestado;
         }
 
-         public int mesa(String mes)
+        public int mesa(String mes)
         {
             int mesd = 0;
             switch (mes)
@@ -243,20 +243,20 @@ namespace GNRS.ModuloPresupuesto.UI
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             ActividadBE objactividad = new ActividadBE();
-            if (mesInicioDropDownList.SelectedIndex == 0 )
-               objactividad.MesInicio = 0;
+            if (mesInicioDropDownList.SelectedIndex == 0)
+                objactividad.MesInicio = 0;
 
-            if (mesFinDropDownList.SelectedIndex == 0 )
-               objactividad.MesFinal = 0;
+            if (mesFinDropDownList.SelectedIndex == 0)
+                objactividad.MesFinal = 0;
 
-            if (anioInicioDropDownList.SelectedIndex == 0 )
-               objactividad.AnioInicio = 0;
+            if (anioInicioDropDownList.SelectedIndex == 0)
+                objactividad.AnioInicio = 0;
 
-            if (anioFinDropDownList.SelectedIndex == 0 )
-               objactividad.AnioFinal = 0;
+            if (anioFinDropDownList.SelectedIndex == 0)
+                objactividad.AnioFinal = 0;
 
-            if (estadoDropDownList.SelectedIndex == 0 )
-               objactividad.Presupuesto_aprobado = "V";
+            if (estadoDropDownList.SelectedIndex == 0)
+                objactividad.Presupuesto_aprobado = "V";
 
 
             if (estadoDropDownList.SelectedIndex == 1)
@@ -265,8 +265,8 @@ namespace GNRS.ModuloPresupuesto.UI
             if (estadoDropDownList.SelectedIndex == 2)
                 objactividad.Presupuesto_aprobado = "N";
 
-           if (estadoDropDownList.SelectedIndex == 3)
-               objactividad.Presupuesto_aprobado = "A";
+            if (estadoDropDownList.SelectedIndex == 3)
+                objactividad.Presupuesto_aprobado = "A";
 
 
             if (mesInicioDropDownList.SelectedIndex > 0)
@@ -278,27 +278,68 @@ namespace GNRS.ModuloPresupuesto.UI
             if (anioFinDropDownList.SelectedIndex > 0)
                 objactividad.AnioFinal = Convert.ToInt32(anioFinDropDownList.SelectedValue);
 
-                  List<ActividadBE> lista =  objcapacitar.listarActividadxMesxEstado(objactividad);
+            List<ActividadBE> lista = objcapacitar.listarActividadxMesxEstado(objactividad);
 
-                  if (lista != null)
-                  {
-                      ListaActividadProyectadaGridView.DataSource = lista;
-                      ListaActividadProyectadaGridView.DataBind();
-                      MensajeLabel.Text = "";
-                      DatosUpdatePanel.Update();
-                      MensajeUpdatePanel.Update();
-                  }
-
-                  if (lista == null)
-                  {
-                      MensajeLabel.Visible = true;
-                      ListaActividadProyectadaGridView.Visible = false;
-                      MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                      MensajeUpdatePanel.Update();
-                      DatosUpdatePanel.Update();
-                  }
-            
+            if (lista != null)
+            {
+                ListaActividadProyectadaGridView.DataSource = lista;
+                ListaActividadProyectadaGridView.Visible = true;
+                ListaActividadProyectadaGridView.DataBind();
+                MensajeLabel.Text = "";
+                DatosUpdatePanel.Update();
+                MensajeUpdatePanel.Update();
             }
+
+            if (lista == null)
+            {
+                MensajeLabel.Visible = true;
+                ListaActividadProyectadaGridView.Visible = false;
+                MensajeLabel.Text = "No existen presupuestos para mostrar.";
+                MensajeUpdatePanel.Update();
+                DatosUpdatePanel.Update();
+            }
+
+        }
+
+        /*protected void ListaActividadProyectadaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+           string[] arg = new string[2];
+
+            if (e.CommandName.ToUpper().Equals("CMDELIMINAR"))
+            {
+                arg = e.CommandArgument.ToString().Split(';');
+                hdnSession1.Value = arg[0];
+                hdnSession2.Value = arg[1];
+            }
+
+            MensajeUpdatePanel.Update();
+            CriteriosUpdatePanel.Update();
+            DatosUpdatePanel.Update();
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensajeConfirmacion()", true);
+        }*/
+
+        [WebMethod]
+        public static string eliminar(string sIdActividad, string sco)
+        {
+            int iIdActividad;
+            AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
+            CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+
+            iIdActividad = Convert.ToInt32(sIdActividad);
+            objcapacitar.ActualizarEstadoActividadPresupuesto(iIdActividad);
+
+            objauditoria.id_capacitacion_proyectada = 0;
+            objauditoria.id_personal_proyectado = 0;
+            objauditoria.fecha_accion = DateTime.Now;
+            objauditoria.tipo_accion = "E";
+            objauditoria.id_actividad_proyectada = iIdActividad;
+            objauditoria.tipo_presupuesto = "A";
+
+            objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
+            String mensaje = "El presupuesto de actividad de RRHH " + sco + " ha sido eliminado satisfactoriamente";
+            return mensaje;
+
+        }
 
     }
 }

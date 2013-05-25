@@ -7,6 +7,27 @@
  
     
     
+     <script>
+         $(function () {
+             $("#dialog-mensajes").dialog({
+                 modal: true,
+                 autoOpen: false,
+                 height: 200,
+                 width: 500,
+                 autoOpen: false,
+                 buttons: {
+                     "Aceptar": function () {
+                         $(this).dialog("close");
+                     }
+                 }
+             });
+             $("#dialog-mensajes").css({
+                 fontSize: 15
+             });
+
+         });
+         
+  </script>
     
     <script>
         $(document).ready(function () {
@@ -16,13 +37,16 @@
                 draggable: true,
 
                 height: 200,
-                width: 350,
+                width: 450,
                 modal: true,
                 buttons: {
                     "Aceptar": function () {
-                        var sIdCapacitacion = $(this).data("sIdCapacitacion");
-                        // var scodigo = $(this).data("scodigo");
-                        PageMethods.eliminar(sIdCapacitacion);
+                        //var sIdActividad = $(this).data("sIdActividad");
+                        var hdnSession1 = document.getElementById("<%= hdnSession1.ClientID %>");
+                        var sIdActividad = hdnSession1.value;
+                        var hdnSession2 = document.getElementById("<%= hdnSession2.ClientID %>");
+                        var sco = hdnSession2.value;
+                        PageMethods.eliminar(sIdActividad, sco, MostrarMensajeFinal);
 
                         var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
                         clickButton.click();
@@ -40,21 +64,26 @@
 
         });
 
-        function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
-            var texto = '¿Está seguro de eliminar el presupuesto ' + sco + ' ?';
+        function mostrarMensajeConfirmacion(id, sco) {
+            var hdnSession2 = document.getElementById("<%= hdnSession2.ClientID %>");
+            hdnSession2.value = sco;
+            var hdnSession1 = document.getElementById("<%= hdnSession1.ClientID %>");
+            hdnSession1.value = id;
+            var texto = '¿Está seguro que desea eliminar el presupuesto de actividad de RRHH ' + sco + '?';
 
-            $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
-            // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
-        }   
+            $("#dialog-confirmacion").text(texto).dialog("open");
+        }
+
+        function MostrarMensajeFinal(mensaje) {
+            $("#dialog-mensajes").text(mensaje).dialog("open");
+
+        }
        
 
-      
-
-        
   </script>
 
-   <div id="dialog-confirmacion" title="Confirmacion de registro"></div>
-
+   <div id="dialog-confirmacion" title="Modulo de Presupuesto"></div>
+   <div id="dialog-mensajes" title="Modulo de Presupuesto">  </div>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" >  
     
@@ -125,11 +154,12 @@
               <td><asp:Button ID="BuscarButton" runat="server" Text="Buscar" 
         Width="94px" onclick="BuscarButton_Click" /></td>
 
-        
-
        </tr>
        </tbody>
        </Table>
+       
+       <asp:HiddenField ID="hdnSession1" runat="server" />
+       <asp:HiddenField ID="hdnSession2" runat="server" />
   </ContentTemplate> 
 </asp:UpdatePanel > 
   
@@ -140,7 +170,7 @@
     <asp:GridView ID="ListaActividadProyectadaGridView" runat="server" 
           AutoGenerateColumns="false" align = "center"
         
-          CellPadding="3" CellSpacing="1" 
+          CellPadding="3" CellSpacing="1"
          >
      <Columns>
 
@@ -178,10 +208,25 @@
 						</ItemTemplate>
 					</asp:TemplateField>
 
-					 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
+					
+					<asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-							<asp:LinkButton ID="lnkEliminar" runat="server" CommandName="CMDEliminar" CommandArgument='<%#Eval("id_actividad_proyectada") %>'><img src="images/delete.gif" width="16" height="16" alt="eliminar" border="0" /></asp:LinkButton>
-						</ItemTemplate>
+
+                        <!--- <asp:LinkButton ID="lnkCustomize" CommandName="CMDEliminar" CommandArgument='<%#Eval("id_actividad_proyectada") + ";" +Eval("codigo_actividad")%>'  runat="server"> 
+                          <img src="images/delete.gif" width="16" height="16" alt="eliminar" border="0" />
+                           </asp:LinkButton>  
+                            --->
+                            <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%#Eval("id_actividad_proyectada") %>' Visible="false"
+                             ></asp:LinkButton>
+
+                         <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("codigo_actividad") %>' Visible="false"
+                             ></asp:LinkButton>
+                            
+                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_actividad_proyectada") %>', '<%#Eval("codigo_actividad") %>');" >X</button>
+                                            
+                        
+                                            </ItemTemplate>
+
 					</asp:TemplateField>
 
 
@@ -199,5 +244,4 @@
  </asp:Panel>
     <br />
     <br />
-
 </asp:Content>

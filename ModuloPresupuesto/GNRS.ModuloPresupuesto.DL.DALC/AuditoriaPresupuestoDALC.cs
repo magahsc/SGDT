@@ -10,7 +10,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
     public class AuditoriaPresupuestoDALC
     {
         //nuevo
-        public int insertarCapacitacionProyectada(AUDITORIA_PRESUPUESTO objauditoria)
+        public int insertarAuditoriaProyectada(AUDITORIA_PRESUPUESTO objauditoria)
         {
             try
             {
@@ -19,7 +19,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 context.SaveChanges();
                 int i = objauditoria.id_auditoria;
                 return i;
-
             }
             catch (Exception ex)
             {

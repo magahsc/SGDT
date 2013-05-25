@@ -3,7 +3,6 @@
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-
 <asp:ScriptManager ID="ScriptManager1" runat="server"  EnablePageMethods="true" 
     EnablePartialRendering="true">
     </asp:ScriptManager>
@@ -30,24 +29,24 @@
     </script>
 
      <script>
-        
-             $(function () {
-                 $("#dialog-message").dialog({
-                     modal: true,
-                     autoOpen: false,
-                     height: 200,
-                     width: 500,
-                     buttons: {
-                         Ok: function () {
-                             $(this).dialog("close");
-                         }
-                     }
-                 });
-                 $("#dialog-message").css({
-                     fontSize: 15
-                 });
 
+         $(function () {
+             $("#dialog-message").dialog({
+                 modal: true,
+                 autoOpen: false,
+                 height: 200,
+                 width: 500,
+                 buttons: {
+                     Ok: function () {
+                         $(this).dialog("close");
+                     }
+                 }
              });
+             $("#dialog-message").css({
+                 fontSize: 15
+             });
+
+         });
          
   </script>
 
@@ -58,8 +57,8 @@
            var mensaje = hdnSession.value;
            $("#dialog-message").text(mensaje).dialog("open");
 
-       } 
-       
+       }
+
        function MostrarMensajeFinal(mensaje) {
            $("#dialog-mensajes").text(mensaje).dialog("open");
 
@@ -112,13 +111,13 @@
                            var label = RB1.getElementsByTagName("label");
                            for (var i = 0; i < radio.length; i++) {
                                if (radio[i].checked) {
-                                    tipomoneda = i;
+                                   tipomoneda = i;
                                }
                            }
 
                            var observaciones = document.getElementById("contenido_ObservacionesTextBox").value;
                            PageMethods.registrar(codigoactividad, mesinicio, mesfin, monto, tipomoneda, observaciones, MostrarMensajeFinal);
-                         
+
                            document.getElementById("contenido_ActividadComboBox").selectedIndex = 0;
                            document.getElementById("contenido_MesInicioComboBox").selectedIndex = 0;
                            document.getElementById("contenido_MesFinComboBox").selectedIndex = 0;
@@ -139,37 +138,37 @@
 
            });
 
-        function mostrarMensajeConfirmacion() {
-            var texto = '¿Desea guardar el presupuesto ?';
+           function mostrarMensajeConfirmacion() {
+               var texto = '¿Desea registrar el presupuesto de actividad proyectada ?';
 
-            $("#dialog-confirmacion").text(texto).dialog("open");
-        }
+               $("#dialog-confirmacion").text(texto).dialog("open");
+           }
 
-        function mostrarMensajeValidacion() {
-            var texto = 'Datos incompletos. LLene todos los campos para poder registrar el presupuesto';
-            var codigoactividad = document.getElementById("contenido_ActividadComboBox").value;
-            var mesinicio = document.getElementById("contenido_MesInicioComboBox").value;
-            var mesfin = document.getElementById("contenido_MesFinComboBox").value;
-            var monto = document.getElementById("contenido_MontoTextBox").value;
+           function mostrarMensajeValidacion() {
+               var texto = 'Datos incompletos. LLene todos los campos para poder registrar el presupuesto';
+               var codigoactividad = document.getElementById("contenido_ActividadComboBox").value;
+               var mesinicio = document.getElementById("contenido_MesInicioComboBox").value;
+               var mesfin = document.getElementById("contenido_MesFinComboBox").value;
+               var monto = document.getElementById("contenido_MontoTextBox").value;
 
-            var RB1 = document.getElementById("<%=TipoMonedaRadioButtonList.ClientID%>");
-            var radio = RB1.getElementsByTagName("input");
-            var label = RB1.getElementsByTagName("label");
-            for (var i = 0; i < radio.length; i++) {
-                if (radio[i].checked) {
-                    var tipomoneda = i;
-                }
-            }
-            var observaciones = document.getElementById("contenido_ObservacionesTextBox").value;
+               var RB1 = document.getElementById("<%=TipoMonedaRadioButtonList.ClientID%>");
+               var radio = RB1.getElementsByTagName("input");
+               var label = RB1.getElementsByTagName("label");
+               for (var i = 0; i < radio.length; i++) {
+                   if (radio[i].checked) {
+                       var tipomoneda = i;
+                   }
+               }
+               var observaciones = document.getElementById("contenido_ObservacionesTextBox").value;
 
-            if (codigoactividad == "" || mesinicio == "" || mesfin == "" || monto == "" || observaciones == "") {
-                $("#dialog-mensajes").text(texto).dialog("open");
-            }
-            else {
-                mostrarMensajeConfirmacion();
-            }
-  
-        }   
+               if (codigoactividad == "" || mesinicio == "" || mesfin == "" || monto == "" || observaciones == "") {
+                   $("#dialog-mensajes").text(texto).dialog("open");
+               }
+               else {
+                   mostrarMensajeConfirmacion();
+               }
+
+           }   
        
          
   </script>

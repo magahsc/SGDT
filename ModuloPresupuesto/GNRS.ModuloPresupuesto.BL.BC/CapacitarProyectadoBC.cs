@@ -10,7 +10,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 {
     public class CapacitarProyectadoBC
     {
-        
+
         LocalidadDALC localidadDALC = new LocalidadDALC();
         AreaDALC areaDALC = new AreaDALC();
         SeccionDALC seccionDALC = new SeccionDALC();
@@ -135,42 +135,6 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return capacitarDALC.ListarCapacitacionProyectadaxMesxAnioxEstado(objcapacitar);
         }
 
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMes(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxMes(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxAnio(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxAnio(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxEstado(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxEstado(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMesxAnio(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxMesxAnio(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxMesxEstado(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxMesxEstado(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxAnioxEstado(CapacitacionProyectadaBE objcapacitar)
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxAnioxEstado(objcapacitar);
-        }
-
-        public List<CapacitacionProyectadaBE> listarCapacitacionProyectadaxTodo()
-        {
-            return capacitarDALC.ListarCapacitacionProyectadaxTodo();
-        }
-
-       
         public Boolean ActualizarEstadoPresupuestoCapacitacion(int id_presupuesto_capacitacion)
         {
             return capacitarDALC.ActualizarEstadoCapacitacionProyectada(id_presupuesto_capacitacion);
@@ -178,7 +142,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
 
         public int RegistrarAuditoriaPresupuesto(AUDITORIA_PRESUPUESTO objauditoria)
         {
-            return auditoriaDALC.insertarCapacitacionProyectada(objauditoria);
+            return auditoriaDALC.insertarAuditoriaProyectada(objauditoria);
         }
 
         public PRESUPUESTO_CAPACITACION ObtenerPresupuestoCapacitacion(int id_presupuesto_capacitacion)
@@ -249,20 +213,15 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return actividadDALC.ListarActividadMesxEstado(actividad);
         }
 
-        /*public List<ActividadBE> listarActividadxMes(ActividadBE actividad)
+        public Boolean ActualizarEstadoActividadPresupuesto(int idActividad)
         {
-            return actividadDALC.ListarActividadMes(actividad);
+            return actividadDALC.ActualizarEstadoActividadProyectada(idActividad);
         }
 
-        public List<ActividadBE> listarActividadxEstado(ActividadBE actividad)
+        public PRESUPUESTO_ACTIVIDAD_PROYECTADA ObtenerPresupuestoActividad(int idActividad)
         {
-            return actividadDALC.ListarActividadEstado(actividad);
+            return actividadDALC.obtenerPresupuestoActividad(idActividad);
         }
 
-        public List<ActividadBE> listarActividadxTodo()
-        {
-            return actividadDALC.ListarActividadxTodo();
-        }
-        */
     }
 }

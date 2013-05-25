@@ -121,6 +121,24 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Button BuscarButton;
         
         /// <summary>
+        /// hdnSession1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSession1;
+        
+        /// <summary>
+        /// hdnSession2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSession2;
+        
+        /// <summary>
         /// Panel1 control.
         /// </summary>
         /// <remarks>
