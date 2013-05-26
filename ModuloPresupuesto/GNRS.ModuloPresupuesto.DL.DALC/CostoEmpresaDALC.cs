@@ -9,15 +9,15 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 {
     public class CostoEmpresaDALC
     {
-        public Boolean insertarCostoEmpresa(COSTO_EMPRESA costo_empresa)
+        public int insertarCostoEmpresa(COSTO_EMPRESA costo_empresa)
         {
             try
             {
                 var context = new PresupuestoDBEntities();
                 context.COSTO_EMPRESA.AddObject(costo_empresa);
-              
+
                 context.SaveChanges();
-                return true;
+                return costo_empresa.id_costoempresa;
 
             }
             catch (Exception ex)

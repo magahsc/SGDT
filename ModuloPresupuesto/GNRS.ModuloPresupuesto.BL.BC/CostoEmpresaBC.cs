@@ -14,17 +14,13 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         PersonaDALC objPersonaDALC = new PersonaDALC();
         ConceptoPersonaDALC objConceptoPersonaDALC = new ConceptoPersonaDALC();
 
-        public Boolean insertarCostoEmpresa(COSTO_EMPRESA costo_empresa)
+        public int insertarCostoEmpresa(COSTO_EMPRESA costo_empresa)
         {
             try
             {
-                Boolean resultado=objCostoDALC.insertarCostoEmpresa(costo_empresa);
+                int resultado=objCostoDALC.insertarCostoEmpresa(costo_empresa);
 
-                if (resultado == true)
-                    return true;
-
-
-                return false;
+                return resultado;
             }
             catch (Exception ex)
             {

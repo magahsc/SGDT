@@ -100,8 +100,9 @@ namespace GNRS.ModuloPresupuesto.UI
                     }
                     else
                     {
-                        resultado = objCostoEmpresaBC.insertarCostoEmpresa(objCostoEmpresa);
-                        if (resultado == true)
+                        int res = -1;
+                        res = objCostoEmpresaBC.insertarCostoEmpresa(objCostoEmpresa);
+                        if (res != -1)
                         {
                             Session.Add("mensajeRecalcular", "si");
 
