@@ -286,23 +286,32 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
             List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnioxEstado(objcapacitacionBE);
-            if (lista != null)
-            {
-                ListasCapacitarProyectadaGridView.DataSource = lista;
-                ListasCapacitarProyectadaGridView.DataBind();
-                ListasCapacitarProyectadaGridView.Visible = true;
-                MensajeLabel.Text = "";
-                DatosUpdatePanel.Update();
-                MensajeUpdatePanel.Update();
-            }
 
-            if (lista == null)
+            try
             {
-                MensajeLabel.Visible = true;
-                ListasCapacitarProyectadaGridView.Visible = false;
-                MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                MensajeUpdatePanel.Update();
-                DatosUpdatePanel.Update();
+                if (lista != null)
+                {
+                    ListasCapacitarProyectadaGridView.DataSource = lista;
+                    ListasCapacitarProyectadaGridView.DataBind();
+                    ListasCapacitarProyectadaGridView.Visible = true;
+                    //MensajeLabel.Text = "";
+                    DatosUpdatePanel.Update();
+                    //MensajeUpdatePanel.Update();
+                }
+
+                if (lista == null)
+                {
+                    //MensajeLabel.Visible = true;
+                    ListasCapacitarProyectadaGridView.Visible = false;
+                   // ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('No existen presupuestos para mostrar')", true);
+                   // MensajeLabel.Text = "No existen presupuestos para mostrar.";
+                    //MensajeUpdatePanel.Update();
+                    DatosUpdatePanel.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Error en la operación. Inténtelo nuevamente')", true);
             }
 
         }
@@ -333,6 +342,7 @@ namespace GNRS.ModuloPresupuesto.UI
             return "laksdl2";
 
         }
+
         protected void ListasCapacitarProyectadaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             String sIdCapacitacion = "";

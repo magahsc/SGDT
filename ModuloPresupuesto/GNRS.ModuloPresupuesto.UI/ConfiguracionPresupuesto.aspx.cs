@@ -219,9 +219,13 @@ namespace GNRS.ModuloPresupuesto.UI
             Session.Add("dia", "01");
             Session.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
             Session.Add("anio", anioDropDownList.SelectedValue.ToString());
+            int anio = Convert.ToInt32(anioDropDownList.SelectedValue);
+            anio = anio + 1;
             Session.Add("Mensaje", "0");
            // alert("La configuración del presupuesto se grabo satisfactoriamente");
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('La configuración del presupuesto se grabo satisfactoriamente')", true);
+            hdnSession.Value = "A partir de este momento, los presupuestos anuales empezarán desde " + mesDropDownList.SelectedValue.ToString() + " " +
+               anioDropDownList.SelectedValue.ToString() + " hasta el " + mesDropDownList.SelectedValue.ToString() + " " + anio;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);
             BotonUpdatePanel.Update();
             /*Context.Items.Add("dia", diaDropDownList.SelectedValue.ToString());
             Context.Items.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));

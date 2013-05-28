@@ -12,7 +12,7 @@
                   height: 200,
                   width: 500,
                   buttons: {
-                      Ok: function () {
+                      "Aceptar": function () {
                           $(this).dialog("close");
                       }
                   }
@@ -26,7 +26,9 @@
 
     <script>
 
-        function MostrarMensaje(mensaje) {
+        function MostrarMensaje() {
+            var hdnSession = document.getElementById("<%= hdnSession.ClientID %>");
+            var mensaje = hdnSession.value;
             $("#dialog-message").text(mensaje).dialog("open");
 
         }
@@ -81,6 +83,7 @@
   <asp:Button 
                       ID="GuardarButton" runat="server" Text="Guardar" 
                       onclick="GuardarButton_Click" />
+                       <asp:HiddenField ID="hdnSession" runat="server" />  
                            </ContentTemplate>  
  </asp:UpdatePanel>
 

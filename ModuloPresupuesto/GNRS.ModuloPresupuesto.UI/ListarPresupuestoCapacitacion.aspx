@@ -47,11 +47,38 @@
             // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
         }   
        
-
-      
-
         
   </script>
+
+      <script>
+          $(function () {
+              $("#dialog-message").dialog({
+                  modal: true,
+                  autoOpen: false,
+                  height: 200,
+                  width: 500,
+                  buttons: {
+                      "Aceptar": function () {
+                          $(this).dialog("close");
+                      }
+                  }
+              });
+              $("#dialog-message").css({
+                  fontSize: 15
+              });
+
+          });
+  </script>
+
+    <script>
+
+        function MostrarMensaje(mensaje) {
+            $("#dialog-message").text(mensaje).dialog("open");
+
+        }
+  </script>
+
+   <div id="dialog-message" title="Modulo de Presupuesto">  </div>
 
    <div id="dialog-confirmacion" title="Modulo de Presupuesto"></div>
 
