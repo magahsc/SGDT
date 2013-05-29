@@ -35,15 +35,47 @@
         });
   </script>
 
+       <script>
+           $(function () {
+               $("#dialog-final").dialog({
+                   modal: true,
+                   autoOpen: false,
+                   height: 200,
+                   width: 500,
+                   buttons: {
+                       "Aceptar": function () {
+                           $(this).dialog("close");
+                           window.onload = function () {
+                               window.opener.location.reload(true);
+                               window.close();
+                           } ();
+                       }
+                   }
+               });
+               $("#dialog-final").css({
+                   fontSize: 15
+               });
+
+           });
+  </script>
+
     <script>
 
         function MostrarMensaje(mensaje) {
             $("#dialog-message").text(mensaje).dialog("open");
+        }
 
+        function mostrarMensajeFinal() {
+            var hdnSession = document.getElementById("<%= hdnSession.ClientID %>");
+            var codigo = hdnSession.value;
+            var texto = 'El presupuesto de capacitación proyectada ' + codigo + ' ha sido actualizado exitosamente';
+
+            $("#dialog-final").text(texto).dialog("open");
         }
   </script>
 
   <div id="dialog-message" title="Modulo de Presupuesto">  </div>
+  <div id="dialog-final" title="Modulo de Presupuesto">  </div>
     <div>
    
       <asp:panel ID="Datos1Panel" runat="server" GroupingText="Información relacionada a la capacitación">
@@ -200,6 +232,8 @@
   <ContentTemplate> 
     <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
         onclick="GuardarButton1_Click" />
+
+        <asp:HiddenField ID="hdnSession" runat="server" />
         </ContentTemplate>  
    </asp:UpdatePanel>
         </div>

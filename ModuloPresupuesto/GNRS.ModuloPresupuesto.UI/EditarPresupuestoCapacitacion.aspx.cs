@@ -109,7 +109,10 @@ namespace GNRS.ModuloPresupuesto.UI
                     MontoPresupuestoLabel.Text = "$ " + objpresupuesto.monto_total;
 
                 LabelUpdatePanel.Update();
-
+                ComboBoxUpdatePanel1.Update();
+                DatosGridView.Update();
+                ComboBoxUpdatePanel2.Update();
+                CheckUpdatePanel.Update();   
 
             }
         }
@@ -518,6 +521,14 @@ namespace GNRS.ModuloPresupuesto.UI
             Control chkSelect = null;
             CURSO curso = new CURSO();
             String tipomoneda = "";
+
+            if (CursoDropDownList.SelectedIndex > 0)
+            {
+                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                curso = objcapacitar.obtenerCurso(codigoCurso);
+                tipomoneda = curso.tipo_moneda;
+            }
+
             // Select the checkboxes from the GridView control
             for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
             {
@@ -565,7 +576,6 @@ namespace GNRS.ModuloPresupuesto.UI
             if (contador == ListaPersonasCapacitarGridView.Rows.Count)
                 MarcarTodosCheckBox.Checked = true;
 
-
             if (CursoDropDownList.SelectedIndex > 0)
             {
                 if (tipomoneda == "S")
@@ -600,47 +610,55 @@ namespace GNRS.ModuloPresupuesto.UI
             j = 0.0;
             contador = 0;
 
-            bool valor = MarcarTodosCheckBox.Checked;
+                bool valor = MarcarTodosCheckBox.Checked;
 
-            for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
-            {
-                GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
-                // bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+                for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                {
+                    GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                    // bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
 
-                ((CheckBox)row.FindControl("SelectCheckBox")).Checked = valor;
+                    ((CheckBox)row.FindControl("SelectCheckBox")).Checked = valor;
+
+                    if (CursoDropDownList.SelectedIndex > 0)
+                    {
+                        int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                        curso = objcapacitar.obtenerCurso(codigoCurso);
+                        tipomoneda = curso.tipo_moneda;
+                        j = j + curso.costo_curso;
+                        contador++;
+                    }
+                }
+
+
+                if (CursoDropDownList.SelectedIndex == 0)
+                {
+                    MontoPresupuestoLabel.Text = "0.0";
+                    Session.Add("costocurso", j);
+                    Session.Add("contador", contador);
+                    LabelUpdatePanel.Update();
+                }
+
 
                 if (CursoDropDownList.SelectedIndex > 0)
                 {
-                    int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
-                    curso = objcapacitar.obtenerCurso(codigoCurso);
-                    tipomoneda = curso.tipo_moneda;
-                    j = j + curso.costo_curso;
-                    contador++;
+                    if (tipomoneda == "S")
+                        MontoPresupuestoLabel.Text = "S/. " + j + "";
+
+                    if (tipomoneda == "D")
+                        MontoPresupuestoLabel.Text = "$ " + j + "";
+
+                    Session.Add("costocurso", j);
+                    Session.Add("contador", contador);
+                    LabelUpdatePanel.Update();
                 }
-            }
 
-
-            if (CursoDropDownList.SelectedIndex == 0)
-            {
-                MontoPresupuestoLabel.Text = "0.0";
-                Session.Add("costocurso", j);
-                Session.Add("contador", contador);
-                LabelUpdatePanel.Update();
-            }
-
-
-
-            if (CursoDropDownList.SelectedIndex > 0)
+            if (MarcarTodosCheckBox.Checked == false)
             {
                 if (tipomoneda == "S")
-                    MontoPresupuestoLabel.Text = "S/. " + j + "";
+                    MontoPresupuestoLabel.Text = "S/. 0.0";
 
                 if (tipomoneda == "D")
-                    MontoPresupuestoLabel.Text = "$ " + j + "";
-
-                Session.Add("costocurso", j);
-                Session.Add("contador", contador);
-                LabelUpdatePanel.Update();
+                    MontoPresupuestoLabel.Text = "$ 0.0";
             }
 
             SeccionDropDownList.Enabled = true;
@@ -658,106 +676,6 @@ namespace GNRS.ModuloPresupuesto.UI
 
         protected void GuardarButton1_Click(object sender, EventArgs e)
         {
-            /*Control chkSelect = null;
-            CURSO curso = new CURSO();
-            iIdCapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
-
-            if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
-            {
-                PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
-                PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = null;
-
-                String scosto = Session["costocurso"].ToString();
-                String scontador = Session["contador"].ToString();
-
-                objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
-                objpresupuesto.monto_total = Convert.ToDouble(scosto);
-                objpresupuesto.id_presupuesto_capacitacion = iIdCapacitacion;
-                objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
-                objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
-                objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-
-                objcapacitar.ActualizarCapacitacionProyectadaDatos(objpresupuesto);
-
-                objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
-                objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
-
-                objcapacitar.EliminarCapacitacionProyectadaxPersona(objpresupuestopersona);
-
-                AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
-
-                objauditoria.id_capacitacion_proyectada = iIdCapacitacion;
-                objauditoria.id_personal_proyectado = 0;
-                objauditoria.fecha_accion = DateTime.Now;
-                objauditoria.tipo_accion = "A";
-                objauditoria.id_actividad_proyectada = 0;
-                objauditoria.tipo_presupuesto = "C";
-
-                objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
-
-
-                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
-                curso = objcapacitar.obtenerCurso(codigoCurso);
-
-                for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
-                {
-                    GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
-                    bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
-
-                    chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
-
-                    if (isChecked)
-                    {
-                        if (chkSelect != null)
-                        {
-                            if (((CheckBox)chkSelect).Checked)
-                            {
-                                if (CursoDropDownList.SelectedIndex > 0)
-                                {
-                                    int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
-                                    objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
-                                    objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
-                                    objpresupuestopersona.monto_presupuesto_proyectado = curso.costo_curso;
-                                    objpresupuestopersona.id_persona = codigopersona;
-                                    objcapacitar.insertarcapacitacionProyectadaxPersona(objpresupuestopersona);
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            SeccionDropDownList.Enabled = true;
-            AreaDropDownList.Enabled = true;
-            LocalidadDropDownList.Enabled = true;
-            CursoDropDownList.Enabled = true;
-            InstitutoDropDownList.Enabled = true;
-
-            InstitutoDropDownList.SelectedIndex = 0;
-            SeccionDropDownList.SelectedIndex = 0;
-            AreaDropDownList.SelectedIndex = 0;
-            LocalidadDropDownList.SelectedIndex = 0;
-            CursoDropDownList.SelectedIndex = 0;
-
-            CursoDropDownList.Enabled = false;
-            SeccionDropDownList.Enabled = false;
-            AreaDropDownList.Enabled = false;
-
-            MarcarTodosCheckBox.Checked = false;
-            MontoPresupuestoLabel.Text = "0.0";
-
-            ListaPersonasCapacitarGridView.DataSource = null;
-            ListaPersonasCapacitarGridView.DataBind();
-
-            ComboBoxUpdatePanel1.Update();
-            DatosGridView.Update();
-            LabelUpdatePanel.Update();
-            ComboBoxUpdatePanel2.Update();
-            CheckUpdatePanel.Update();
-
-            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
-            */
             Control chkSelect = null;
             Boolean marcado = false;
              for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
@@ -782,9 +700,23 @@ namespace GNRS.ModuloPresupuesto.UI
                     }
                 }
 
-            if(InstitutoDropDownList.SelectedIndex == 0 || CursoDropDownList.SelectedIndex == 0 || LocalidadDropDownList.SelectedIndex == 0 || 
-                AreaDropDownList.SelectedIndex == 0 || SeccionDropDownList.SelectedIndex == 0 || marcado == false)
-                  ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Datos incompletos. Llene todos los campos para poder actualizar el presupuesto')", true);
+           if (InstitutoDropDownList.SelectedIndex == 0 || CursoDropDownList.SelectedIndex == 0 || LocalidadDropDownList.SelectedIndex == 0 ||
+                 AreaDropDownList.SelectedIndex == 0 || SeccionDropDownList.SelectedIndex == 0 || marcado == false)
+             {
+                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Datos incompletos. Llene todos los campos para poder actualizar el presupuesto')", true);
+             }
+           if (InstitutoDropDownList.SelectedIndex > 0 && CursoDropDownList.SelectedIndex > 0 && LocalidadDropDownList.SelectedIndex > 0 &&
+             AreaDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0 && marcado == true)
+           {
+               ActualizarDatos();
+               PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
+               int iIdcapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
+               objpresupuesto = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
+               String mensaje = objpresupuesto.codigo_presupuesto;
+               hdnSession.Value = mensaje;
+               ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensajeFinal()", true);
+              // this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
+           }
 
             ComboBoxUpdatePanel1.Update();
             DatosGridView.Update();
@@ -794,6 +726,107 @@ namespace GNRS.ModuloPresupuesto.UI
             FechaUpdatePanel.Update();
             BuscarUpdatePanel.Update();
         
+        }
+
+        public void ActualizarDatos()
+        {
+            Control chkSelect = null;
+             CURSO curso = new CURSO();
+             iIdCapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
+
+                if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
+                {
+                    PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
+                    PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = null;
+
+                    String scosto = Session["costocurso"].ToString();
+                    String scontador = Session["contador"].ToString();
+
+                    objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                    objpresupuesto.monto_total = Convert.ToDouble(scosto);
+                    objpresupuesto.id_presupuesto_capacitacion = iIdCapacitacion;
+                    objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
+                    objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+                    objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+
+                    objcapacitar.ActualizarCapacitacionProyectadaDatos(objpresupuesto);
+
+                    objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+                    objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
+
+                    objcapacitar.EliminarCapacitacionProyectadaxPersona(objpresupuestopersona);
+
+                    AUDITORIA_PRESUPUESTO objauditoria = new AUDITORIA_PRESUPUESTO();
+
+                    objauditoria.id_capacitacion_proyectada = iIdCapacitacion;
+                    objauditoria.id_personal_proyectado = 0;
+                    objauditoria.fecha_accion = DateTime.Now;
+                    objauditoria.tipo_accion = "A";
+                    objauditoria.id_actividad_proyectada = 0;
+                    objauditoria.tipo_presupuesto = "C";
+
+                    objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
+
+
+                    int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                    curso = objcapacitar.obtenerCurso(codigoCurso);
+
+                    for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                    {
+                        GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                        bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                        chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
+
+                        if (isChecked)
+                        {
+                            if (chkSelect != null)
+                            {
+                                if (((CheckBox)chkSelect).Checked)
+                                {
+                                    if (CursoDropDownList.SelectedIndex > 0)
+                                    {
+                                        int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
+                                        objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+                                        objpresupuestopersona.id_presupuesto_capacitacion = iIdCapacitacion;
+                                        objpresupuestopersona.monto_presupuesto_proyectado = curso.costo_curso;
+                                        objpresupuestopersona.id_persona = codigopersona;
+                                        objcapacitar.insertarcapacitacionProyectadaxPersona(objpresupuestopersona);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                SeccionDropDownList.Enabled = true;
+                AreaDropDownList.Enabled = true;
+                LocalidadDropDownList.Enabled = true;
+                CursoDropDownList.Enabled = true;
+                InstitutoDropDownList.Enabled = true;
+
+                /*InstitutoDropDownList.SelectedIndex = 0;
+                SeccionDropDownList.SelectedIndex = 0;
+                AreaDropDownList.SelectedIndex = 0;
+                LocalidadDropDownList.SelectedIndex = 0;
+                CursoDropDownList.SelectedIndex = 0;
+
+                CursoDropDownList.Enabled = false;
+                SeccionDropDownList.Enabled = false;
+                AreaDropDownList.Enabled = false;
+
+                MarcarTodosCheckBox.Checked = false;
+                MontoPresupuestoLabel.Text = "0.0";
+
+                ListaPersonasCapacitarGridView.DataSource = null;
+                ListaPersonasCapacitarGridView.DataBind();*/
+
+                ComboBoxUpdatePanel1.Update();
+                DatosGridView.Update();
+                LabelUpdatePanel.Update();
+                ComboBoxUpdatePanel2.Update();
+                CheckUpdatePanel.Update();   
         }
     }
 }

@@ -353,6 +353,9 @@ namespace GNRS.ModuloPresupuesto.UI
             {
                 sIdCapacitacion = e.CommandArgument.ToString();
                 iIdcapacitacion = Convert.ToInt32(sIdCapacitacion);
+                CriteriosUpdatePanel.Update();
+                MensajeUpdatePanel.Update();
+                DatosUpdatePanel.Update();
                 obj = objcapacitar.ObtenerPresupuestoCapacitacion(iIdcapacitacion);
                 if (obj.presupuesto_aprobado == "P")
                 {
