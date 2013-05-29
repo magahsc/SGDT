@@ -49,6 +49,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Panel Datos1Panel;
         
         /// <summary>
+        /// FechaUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel FechaUpdatePanel;
+        
+        /// <summary>
         /// FechaLabel control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.GridView ListaPersonasCapacitarGridView;
         
         /// <summary>
+        /// CheckUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel CheckUpdatePanel;
+        
+        /// <summary>
         /// MarcarTodosCheckBox control.
         /// </summary>
         /// <remarks>
@@ -218,6 +236,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MontoPresupuestoLabel;
+        
+        /// <summary>
+        /// BuscarUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel BuscarUpdatePanel;
         
         /// <summary>
         /// GuardarButton1 control.

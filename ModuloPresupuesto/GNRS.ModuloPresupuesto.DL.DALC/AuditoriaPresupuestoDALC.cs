@@ -23,7 +23,6 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             catch (Exception ex)
             {
                 throw;
-
             }
         }
     }

@@ -303,7 +303,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 {
                     //MensajeLabel.Visible = true;
                     ListasCapacitarProyectadaGridView.Visible = false;
-                   // ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('No existen presupuestos para mostrar')", true);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('No existen presupuestos para mostrar')", true);
                    // MensajeLabel.Text = "No existen presupuestos para mostrar.";
                     //MensajeUpdatePanel.Update();
                     DatosUpdatePanel.Update();
@@ -338,8 +338,8 @@ namespace GNRS.ModuloPresupuesto.UI
             objauditoria.tipo_presupuesto = "C";
 
             objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
-
-            return "laksdl2";
+            String mensaje = "El presupuesto de capacitación proyectada " + objpresupuesto.codigo_presupuesto + " ha sido eliminado exitosamente";
+            return mensaje;
 
         }
 

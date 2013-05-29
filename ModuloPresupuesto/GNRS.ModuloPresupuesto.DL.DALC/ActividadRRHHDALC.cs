@@ -131,7 +131,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     if (item.presupuesto_aprobado.Equals("P"))
                         objactividadBE.Presupuesto_aprobado = "Pendiente";
 
-                    if (!item.presupuesto_aprobado.Equals("E"))
+                    if (!item.presupuesto_aprobado.Equals("E") && item.id_actividad_proyectada != 0)
                         lista.Add(objactividadBE);
                 }
 

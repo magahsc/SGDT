@@ -243,6 +243,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 LabelUpdatePanel.Update();
 
             }
+
+            CheckUpdatePanel.Update();
         }
 
         protected void CursoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -272,6 +274,8 @@ namespace GNRS.ModuloPresupuesto.UI
 
             if (SeccionDropDownList.SelectedIndex > 0)
                 SeccionDropDownList_SelectedIndexChanged(sender, e);
+
+            CheckUpdatePanel.Update();
         }
 
         protected void LocalidadDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,6 +317,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 MontoPresupuestoLabel.Text = "0.0";
                 LabelUpdatePanel.Update();
             }
+            CheckUpdatePanel.Update();
         }
 
         protected void AreaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -357,7 +362,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 MontoPresupuestoLabel.Text = "0.0";
                 LabelUpdatePanel.Update();
             }
-
+            CheckUpdatePanel.Update();
         }
 
         public void cargarComboBox()
@@ -489,6 +494,7 @@ namespace GNRS.ModuloPresupuesto.UI
                     ListaPersonasCapacitarGridView.DataBind();
 
                     DatosGridView.Update();
+                    CheckUpdatePanel.Update();
                     ComboBoxUpdatePanel2.Update();
 
                 }
@@ -581,6 +587,7 @@ namespace GNRS.ModuloPresupuesto.UI
             ComboBoxUpdatePanel1.Update();
             ComboBoxUpdatePanel2.Update();
             DatosGridView.Update();
+            CheckUpdatePanel.Update();
             //SelectCheckBox.
 
         }
@@ -644,13 +651,14 @@ namespace GNRS.ModuloPresupuesto.UI
             LabelUpdatePanel.Update();
             ComboBoxUpdatePanel1.Update();
             ComboBoxUpdatePanel2.Update();
+            CheckUpdatePanel.Update();
             DatosGridView.Update();
 
         }
 
         protected void GuardarButton1_Click(object sender, EventArgs e)
         {
-            Control chkSelect = null;
+            /*Control chkSelect = null;
             CURSO curso = new CURSO();
             iIdCapacitacion = Convert.ToInt32(Session["IdCapacitacion"].ToString());
 
@@ -746,9 +754,46 @@ namespace GNRS.ModuloPresupuesto.UI
             DatosGridView.Update();
             LabelUpdatePanel.Update();
             ComboBoxUpdatePanel2.Update();
+            CheckUpdatePanel.Update();
 
             this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
+            */
+            Control chkSelect = null;
+            Boolean marcado = false;
+             for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                {
+                    GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                    bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
 
+                    chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
+
+                    if (isChecked)
+                    {
+                        if (chkSelect != null)
+                        {
+                            if (((CheckBox)chkSelect).Checked)
+                            {
+                                if (CursoDropDownList.SelectedIndex > 0)
+                                {
+                                    marcado = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            if(InstitutoDropDownList.SelectedIndex == 0 || CursoDropDownList.SelectedIndex == 0 || LocalidadDropDownList.SelectedIndex == 0 || 
+                AreaDropDownList.SelectedIndex == 0 || SeccionDropDownList.SelectedIndex == 0 || marcado == false)
+                  ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Datos incompletos. Llene todos los campos para poder actualizar el presupuesto')", true);
+
+            ComboBoxUpdatePanel1.Update();
+            DatosGridView.Update();
+            LabelUpdatePanel.Update();
+            ComboBoxUpdatePanel2.Update();
+            CheckUpdatePanel.Update();
+            FechaUpdatePanel.Update();
+            BuscarUpdatePanel.Update();
+        
         }
     }
 }

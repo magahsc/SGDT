@@ -108,7 +108,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     if (item.presupuesto_aprobado.Equals("P"))
                         objcapacitacionBE.Presupuesto_aprobado = "Pendiente";
 
-                    if (!item.presupuesto_aprobado.Equals("E"))
+                    if (!item.presupuesto_aprobado.Equals("E") && item.id_presupuesto_capacitacion != 0)
                         lista.Add(objcapacitacionBE);
                 }
 

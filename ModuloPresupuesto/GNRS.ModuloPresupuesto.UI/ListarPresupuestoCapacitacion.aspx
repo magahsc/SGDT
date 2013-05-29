@@ -4,9 +4,6 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
-    
-    
-    
    
     <script>
         $(document).ready(function () {
@@ -22,10 +19,10 @@
                     "Aceptar": function () {
                         var sIdCapacitacion = $(this).data("sIdCapacitacion");
                         // var scodigo = $(this).data("scodigo");
-                        PageMethods.eliminar(sIdCapacitacion);
-
+                        PageMethods.eliminar(sIdCapacitacion, MostrarMensaje);
                         var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
                         clickButton.click();
+                        
                         $(this).dialog("close");
 
                     },
@@ -41,15 +38,41 @@
         });
 
         function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
-            var texto = '¿Está seguro de eliminar el presupuesto ' + sco + '?';
+            var texto = '¿Está seguro que desea eliminar el presupuesto de capacitación proyectada ' + sco + '?';
 
             $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
             // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
-        }   
+        }
+
+
+        function MostrarMensaje(mensaje) {
+            $("#dialog-message").text(mensaje).dialog("open");
+
+        }
        
         
   </script>
+      <script>
+          $(function () {
+              $("#dialog-message").dialog({
+                  modal: true,
+                  autoOpen: false,
+                  height: 200,
+                  width: 500,
+                  buttons: {
+                      "Aceptar": function () {
+                          $(this).dialog("close");
+                      }
+                  }
+              });
+              $("#dialog-message").css({
+                  fontSize: 15
+              });
 
+          });
+  </script>
+
+   <div id="Div1" title="Modulo de Presupuesto">  </div>
       <script>
           $(function () {
               $("#dialog-message").dialog({

@@ -8,21 +8,58 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
       <asp:ScriptManager ID="ScriptManager1" runat="server">  
     
     </asp:ScriptManager> 
 
+    <script>
+        $(function () {
+            $("#dialog-message").dialog({
+                modal: true,
+                autoOpen: false,
+                height: 200,
+                width: 500,
+                buttons: {
+                    "Aceptar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            $("#dialog-message").css({
+                fontSize: 15
+            });
+
+        });
+  </script>
+
+    <script>
+
+        function MostrarMensaje(mensaje) {
+            $("#dialog-message").text(mensaje).dialog("open");
+
+        }
+  </script>
+
+  <div id="dialog-message" title="Modulo de Presupuesto">  </div>
     <div>
+   
       <asp:panel ID="Datos1Panel" runat="server" GroupingText="Información relacionada a la capacitación">
-       <table border="0" cellpadding="5" cellspacing="0">
+       <asp:UpdatePanel ID="FechaUpdatePanel" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate> 
+     <table border="0" cellpadding="5" cellspacing="0">
         <tr>
             <td>
                 <asp:Label ID="FechaLabel" runat="server" Text=""></asp:Label>
             </td>
         </tr>
-    </table>
-   </asp:panel>
+    </table>    
+    </ContentTemplate>  
+   </asp:UpdatePanel>
+     </asp:panel>
+
 
    </br></br>
 
@@ -132,10 +169,14 @@
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <br />
+          <asp:UpdatePanel ID="CheckUpdatePanel" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate>
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <asp:CheckBox ID="MarcarTodosCheckBox" runat="server"  AutoPostBack="True"
         Text=" Capacitar a todos" Font-Size="Small" oncheckedchanged="MarcarTodosCheckBox_CheckedChanged" 
         />
+        </ContentTemplate>  
+     </asp:UpdatePanel>
       </asp:Panel>
    </asp:panel>
 
@@ -155,8 +196,12 @@
  </asp:UpdatePanel>
     <br />
     
+    <asp:UpdatePanel ID="BuscarUpdatePanel" runat="server" UpdateMode="Conditional"> 
+  <ContentTemplate> 
     <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
         onclick="GuardarButton1_Click" />
+        </ContentTemplate>  
+   </asp:UpdatePanel>
         </div>
     </form>
 </body>
