@@ -9,7 +9,7 @@ using GNRS.ModuloPresupuesto.DL.DALC;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Services;
-
+using GNRS.ModuloPresupuesto.BL.BE;
 namespace GNRS.ModuloPresupuesto.UI
 {
     public partial class RegistrarPresupuestoCapacitacion : System.Web.UI.Page
@@ -433,9 +433,12 @@ namespace GNRS.ModuloPresupuesto.UI
                         int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
                         int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
 
-                        ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
-                        ListaPersonasCapacitarGridView.DataBind();
+                        List<PersonaBE> listaTemp;
+                        listaTemp = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
 
+                        ListaPersonasCapacitarGridView.DataSource = listaTemp;
+                        ListaPersonasCapacitarGridView.DataBind();
+                        //Session.Add("ListaRegistrar",listaTemp);
                         DatosGridView.Update();
                         ComboBoxUpdatePanel2.Update();
                     }
@@ -606,29 +609,204 @@ namespace GNRS.ModuloPresupuesto.UI
 
             if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
             {
+                string hidden = registrarHidden.Value;
+                if (hidden.Equals(""))
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "confirmarRegistro('¿Desea registrar el presupuesto de capacitación proyectada?')", true);
+
+                }
+
+                else
+                {
+
+                    if (registrarHidden.Value.Equals("si"))
+                    {
+
+                        PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
+                        PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = null;
+                        String smes = Session["mes"].ToString();
+                        smes = cambiarmesydia(smes);
+                        String sanio = Session["anio"].ToString();
+                        String sdia = Session["dia"].ToString();
+                        sdia = cambiarmesydia(sdia);
+
+                        String scosto = Session["costocurso"].ToString();
+                        String scontador = Session["contador"].ToString();
+
+                        String cadenafecha = sanio + "-" + smes + "-" + sdia;
+                        DateTime myDate;
+                        myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                        objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                        objpresupuesto.monto_total = Convert.ToDouble(scosto);
+                        objpresupuesto.codigo_presupuesto = "";
+                        objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
+                        objpresupuesto.presupuesto_aprobado = "P";
+                        objpresupuesto.fecha_creacion = DateTime.Now;
+                        objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+                        objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                        objpresupuesto.id_periodo_presupuesto = 0;
+                        int codigoCapacitacion = objcapacitar.insertarcapacitacionProyectada(objpresupuesto);
+
+                        objpresupuesto.id_presupuesto_capacitacion = codigoCapacitacion;
+                        sanio = sanio.Substring(2, 2);
+                        scodigoalert = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
+                        objpresupuesto.codigo_presupuesto = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
+                        objcapacitar.ActualizarcapacitacionProyectada(objpresupuesto);
+                        int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                        curso = objcapacitar.obtenerCurso(codigoCurso);
+
+                        for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
+                        {
+                            GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
+                            bool isChecked = ((CheckBox)row.FindControl("SelectCheckBox")).Checked;
+
+                            chkSelect = ListaPersonasCapacitarGridView.Rows[i].Cells[0].FindControl("SelectCheckBox");
+
+                            if (isChecked)
+                            {
+                                if (chkSelect != null)
+                                {
+                                    if (((CheckBox)chkSelect).Checked)
+                                    {
+                                        if (CursoDropDownList.SelectedIndex > 0)
+                                        {
+                                            int codigopersona = (int)ListaPersonasCapacitarGridView.DataKeys[i].Value;
+                                            objpresupuestopersona = new PRESUPUESTO_CAPACITACION_POR_PERSONAL();
+                                            objpresupuestopersona.id_presupuesto_capacitacion = codigoCapacitacion;
+                                            objpresupuestopersona.monto_presupuesto_proyectado = curso.costo_curso;
+                                            objpresupuestopersona.id_persona = codigopersona;
+                                            objcapacitar.insertarcapacitacionProyectadaxPersona(objpresupuestopersona);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                        codHidden.Attributes["value"] = scodigoalert;
+                        UpdatePanelHidden.Update();
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "registroExitoso(" + scodigoalert + ")", true);
+
+
+                        SeccionDropDownList.Enabled = true;
+                        AreaDropDownList.Enabled = true;
+                        LocalidadDropDownList.Enabled = true;
+                        CursoDropDownList.Enabled = true;
+                        InstitutoDropDownList.Enabled = true;
+
+                        InstitutoDropDownList.SelectedIndex = 0;
+                        SeccionDropDownList.SelectedIndex = 0;
+                        AreaDropDownList.SelectedIndex = 0;
+                        LocalidadDropDownList.SelectedIndex = 0;
+                        CursoDropDownList.SelectedIndex = 0;
+
+                        CursoDropDownList.Enabled = false;
+                        SeccionDropDownList.Enabled = false;
+                        AreaDropDownList.Enabled = false;
+
+                        MarcarTodosCheckBox.Checked = false;
+                        MontoPresupuestoLabel.Text = "0.0";
+
+                        registrarHidden.Attributes["value"] = "";
+                        UpdatePanelHidden.Update();
+
+
+                        ListaPersonasCapacitarGridView.DataSource = null;
+                        ListaPersonasCapacitarGridView.DataBind();
+
+                        ComboBoxUpdatePanel1.Update();
+                        DatosGridView.Update();
+                        LabelUpdatePanel.Update();
+                        ComboBoxUpdatePanel2.Update();
+
+
+
+                    }
+                }
+
+
+
+                //  alert("El presupuesto de capacitacíon proyectada " + scodigoalert + " ha sido guardado existosamente");
+
+            }
+
+            else
+            {
+
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mensajeCamposIncompletos()", true);
+
+            }
+
+            //SeccionDropDownList.Enabled = true;
+            //AreaDropDownList.Enabled = true;
+            //LocalidadDropDownList.Enabled = true;
+            //CursoDropDownList.Enabled = true;
+            //InstitutoDropDownList.Enabled = true;
+
+            //InstitutoDropDownList.SelectedIndex = 0;
+            //SeccionDropDownList.SelectedIndex = 0;
+            //AreaDropDownList.SelectedIndex = 0;
+            //LocalidadDropDownList.SelectedIndex = 0;
+            //CursoDropDownList.SelectedIndex = 0;
+
+            //CursoDropDownList.Enabled = false;
+            //SeccionDropDownList.Enabled = false;
+            //AreaDropDownList.Enabled = false;
+
+            //MarcarTodosCheckBox.Checked = false;
+            //MontoPresupuestoLabel.Text = "0.0";
+
+            //ListaPersonasCapacitarGridView.DataSource = null;
+            //ListaPersonasCapacitarGridView.DataBind();
+
+            //ComboBoxUpdatePanel1.Update();
+            //DatosGridView.Update();
+            //LabelUpdatePanel.Update();
+            //ComboBoxUpdatePanel2.Update();
+
+
+
+        }
+
+
+
+
+        /*[WebMethod]
+        public static string GuardarButton1_Click(string sCurso,string sSeccion,string sLocalidad)
+        {
+        
+            CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+
+            Control chkSelect = null;
+            CURSO curso = new CURSO();
+            String scodigoalert = "";
+
+
+          //  if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0) {
                 PRESUPUESTO_CAPACITACION objpresupuesto = new PRESUPUESTO_CAPACITACION();
                 PRESUPUESTO_CAPACITACION_POR_PERSONAL objpresupuestopersona = null;
-                String smes = Session["mes"].ToString();
-                smes = cambiarmesydia(smes);
-                String sanio = Session["anio"].ToString();
-                String sdia = Session["dia"].ToString();
-                sdia = cambiarmesydia(sdia);
+                String smes = HttpContext.Current.Session["mes"].ToString();
+               // smes = cambiarmesydia(smes);
+                String sanio = HttpContext.Current.Session["anio"].ToString();
+                String sdia = HttpContext.Current.Session["dia"].ToString();
+                //sdia = cambiarmesydia(sdia);
 
-                String scosto = Session["costocurso"].ToString();
-                String scontador = Session["contador"].ToString();
+                String scosto = HttpContext.Current.Session["costocurso"].ToString();
+                String scontador = HttpContext.Current.Session["contador"].ToString();
 
                 String cadenafecha = sanio + "-" + smes + "-" + sdia;
                 DateTime myDate;
                 myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                objpresupuesto.id_curso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                objpresupuesto.id_curso = Convert.ToInt32(sCurso);
                 objpresupuesto.monto_total = Convert.ToDouble(scosto);
                 objpresupuesto.codigo_presupuesto = "";
                 objpresupuesto.cantidad_personas = Convert.ToInt32(scontador);
                 objpresupuesto.presupuesto_aprobado = "P";
                 objpresupuesto.fecha_creacion = DateTime.Now;
-                objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
-                objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                objpresupuesto.id_seccion = Convert.ToInt32(sSeccion);
+                objpresupuesto.id_localidad = Convert.ToInt32(sLocalidad);
                 objpresupuesto.id_periodo_presupuesto = 0;
                 int codigoCapacitacion = objcapacitar.insertarcapacitacionProyectada(objpresupuesto);
 
@@ -637,9 +815,17 @@ namespace GNRS.ModuloPresupuesto.UI
                 scodigoalert = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
                 objpresupuesto.codigo_presupuesto = sdia + "" + smes + "" + sanio + "" + codigoCapacitacion;
                 objcapacitar.ActualizarcapacitacionProyectada(objpresupuesto);
-                int codigoCurso = Convert.ToInt32(CursoDropDownList.SelectedValue);
+                int codigoCurso = Convert.ToInt32(sCurso);
                 curso = objcapacitar.obtenerCurso(codigoCurso);
 
+            
+                List<PersonaBE> ListaResgistrar = new List<PersonaBE>();
+                if (HttpContext.Current.Session["ListaRegistrar"] != null)
+                {
+                    ListaResgistrar = (List<PersonaBE>)HttpContext.Current.Session["ListaRegistrar"];
+
+                }
+            
                 for (int i = 0; i < ListaPersonasCapacitarGridView.Rows.Count; i++)
                 {
                     GridViewRow row = ListaPersonasCapacitarGridView.Rows[i];
@@ -699,15 +885,24 @@ namespace GNRS.ModuloPresupuesto.UI
             ComboBoxUpdatePanel2.Update();
 
 
-
+            return "";
         }
 
+        */
         public void alert(string msg)
         {
             Label lbl = new Label();
             lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
             Page.Controls.Add(lbl);
         }
+
+        protected void ListaPersonasCapacitarGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
 
     }
 }

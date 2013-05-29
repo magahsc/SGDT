@@ -29,8 +29,8 @@
                             var costoEmpresaEmpleadoHidden = document.getElementById("contenido_costoEmpresaEmpleadoHidden").value;
                             var costoEmpresaObreroHidden = document.getElementById("contenido_costoEmpresaObreroHidden").value;
 
- 
-                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden ,confirmarRegistro);
+
+                            PageMethods.confirmarRegistro(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, cantidad, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden, confirmarRegistro);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -69,7 +69,7 @@
                             var identificador = document.getElementById("contenido_identificadorTextBox").value;
                             var id_persona = document.getElementById("contenido_codigoEditarHidden").value;
 
-                            PageMethods.confirmarActualizacion(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, identificador, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden,id_persona, confirmarActualizacion);
+                            PageMethods.confirmarActualizacion(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, identificador, cargo, codigoTipoPersonal, costoEmpresaEmpleadoHidden, costoEmpresaObreroHidden, id_persona, confirmarActualizacion);
                             $(this).dialog("close");
                         },
                         Cancel: function () {
@@ -87,7 +87,7 @@
                 $("#opener").click(function () {
                     var cantidadPersonales = document.getElementById("contenido_CantidadTextBox").value;
                     var cantidadConceptos = document.getElementById("contenido_nroConceptos").value;
-                    
+
 
                     var tipoPersonal = document.getElementById("contenido_TipoPersonalComboBox").value;
                     var codigoLocalidad = document.getElementById("contenido_LocalidadComboBox").value;
@@ -110,7 +110,7 @@
                 $("#openerGuardar").click(function () {
                     var identificador = document.getElementById("contenido_identificadorTextBox").value;
                     var cantidadConceptos = document.getElementById("contenido_nroConceptos").value;
-                    
+
 
                     var tipoPersonal = document.getElementById("contenido_TipoPersonalComboBox").value;
                     var codigoLocalidad = document.getElementById("contenido_LocalidadComboBox").value;
@@ -169,7 +169,7 @@
                     width: 500,
                     buttons: {
                         Ok: function () {
-                            
+
                             $(this).dialog("close");
 
                         }
@@ -191,24 +191,24 @@
   </script>
   <script>
       function confirmarRegistro(message) {
-       
-       if (message != "") {
-           var texto = "El personal proyectado se ha guardado exitosamente";
 
-           $("#dialog-message").text(texto).dialog("open");
-       }
+          if (message != "") {
+              var texto = "El personal proyectado se ha guardado exitosamente";
 
-   }
+              $("#dialog-message").text(texto).dialog("open");
+          }
 
-   function confirmarActualizacion(message) {
+      }
 
-       if (message != "") {
-           var texto = "El personal proyectado se ha actualizado exitosamente";
+      function confirmarActualizacion(message) {
 
-           $("#dialog-message2").text(texto).dialog("open");
-       }
+          if (message != "") {
+              var texto = "El personal proyectado se ha actualizado exitosamente";
 
-   }
+              $("#dialog-message2").text(texto).dialog("open");
+          }
+
+      }
   </script>
 
    <script>
@@ -219,7 +219,7 @@
                height: 200,
                width: 500,
                buttons: {
-                   Ok: function () {                       
+                   Ok: function () {
                        $(this).dialog("close");
                    }
                }
@@ -240,19 +240,19 @@
               return false;
           return true;
       }
-    
-     function mostrarAspxAsPopUp() {
 
-   
-        
+      function mostrarAspxAsPopUp() {
 
-        var strReturn = window.showModalDialog('ConceptosPersonal.aspx', null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
 
-        document.getElementById("contenido_nroConceptos").value = strReturn.valor;
-        document.getElementById("contenido_conceptosHidden").value = strReturn.elementos;
-         
-     
-    }
+
+
+          var strReturn = window.showModalDialog('ConceptosPersonal.aspx', null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
+
+          document.getElementById("contenido_nroConceptos").value = strReturn.valor;
+          document.getElementById("contenido_conceptosHidden").value = strReturn.elementos;
+
+
+      }
   </script>
 
  
@@ -284,117 +284,74 @@
     
      <asp:UpdatePanel ID="ComboBoxUpdatePanel" runat="server" UpdateMode="Conditional"> 
      <ContentTemplate>   
-    <div runat=server id="identificadorDiv" visible=false>
-     <Table ID="Table4" runat="server" >
-                 <tbody>                    
-                    <tr>
-                    
-                        <td align="right"  >Identificador:</td>
-                        <td><asp:TextBox ID="identificadorTextBox" runat="server" Height="20px" Width="130px" ></asp:TextBox></td>
-                    
-                    </tr>
-                </tbody>
-            </Table>
-            </div>
-            <Table ID="Table1" runat="server" >
-                 <tbody>
-                    <tr >
-                        <td align="right" >Tipo de personal:</td>
-                        <td><asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
+    
+        <div runat=server id="identificadorDiv" visible=false>
+            <asp:Label ID="Label2" runat="server" Text="Identificador : " style="padding-left: 32px"></asp:Label>
+            <asp:TextBox ID="identificadorTextBox" runat="server" Height="20px" Width="130px" ></asp:TextBox>
+        </div>
+
+            
+            <asp:Label ID="Label3" runat="server" Text="Tipo de personal : " style="padding-left: 1px"></asp:Label>
+            <asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
                                 AutoPostBack="True" Height="20px" Width="130px" >
                                 <asp:ListItem Value="" > Seleccione el tipo de personal </asp:ListItem>
                                 <asp:ListItem Value="1"  Text="Empleado"> </asp:ListItem>
                                 <asp:ListItem Value="2"  Text="Obrero"> </asp:ListItem>
-                                </asp:DropDownList></td>
-                    </tr>
+                                </asp:DropDownList>
                     
-                    <tr >
-                        <td align="right" >Localidad:</td>
-                        <td><asp:DropDownList ID="LocalidadComboBox" runat="server" 
+                   <br />
+                        <asp:Label ID="Label4" runat="server" Text="Localidad : " style="padding-left: 48px"></asp:Label>
+                        <asp:DropDownList ID="LocalidadComboBox" runat="server" 
                                 onselectedindexchanged="LocalidadComboBox_SelectedIndexChanged"  
-                                AutoPostBack="True" Height="20px" Width="130px" ></asp:DropDownList></td>
-                    </tr>
-
-                      
-                        <tr>
-                            <td align="right">Area:</td>
-                            <td><asp:DropDownList ID="AreaComboBox" runat="server" 
+                                AutoPostBack="True" Height="20px" Width="130px" ></asp:DropDownList>
+                    <br />
+                           <asp:Label ID="Label5" runat="server" Text="Area : " style="padding-left: 82px"></asp:Label>
+                           <asp:DropDownList ID="AreaComboBox" runat="server" 
                                     onselectedindexchanged="AreaComboBox_SelectedIndexChanged" AutoPostBack="True"
-                                    Height="20px" Width="130px" Enabled=false></asp:DropDownList></td>
-                        </tr>
+                                    Height="20px" Width="130px" Enabled=false></asp:DropDownList>
+                       
+                   
+                    <br />
+                     
+                         <asp:Label ID="Label6" runat="server" Text="Seccion : " style="padding-left: 58px"></asp:Label>
+                        <asp:DropDownList ID="SeccionComboBox" runat="server" 
+                                onselectedindexchanged="SeccionComboBox_SelectedIndexChanged" 
+                                AutoPostBack="True" Height="20px" Width="130px" Enabled=false></asp:DropDownList> <br />
+                     
+                    
+                     <asp:Label ID="Label7" runat="server" Text="Cargo : " style="padding-left: 71px"></asp:Label>
+                        <asp:DropDownList ID="CargoComboBox" runat="server" AutoPostBack="True"
+                            Height="20px" Width="130px" Enabled=false 
+                                onselectedindexchanged="CargoComboBox_SelectedIndexChanged"></asp:DropDownList>
                    
 
-                     <tr>
-                        <td align="right">Seccion:</td>
-                        <td><asp:DropDownList ID="SeccionComboBox" runat="server" 
-                                onselectedindexchanged="SeccionComboBox_SelectedIndexChanged" 
-                                AutoPostBack="True" Height="20px" Width="130px" Enabled=false></asp:DropDownList></td>
-                    </tr>
-
-                     <tr>
-                        <td align="right">Cargo:</td>
-                        <td><asp:DropDownList ID="CargoComboBox" runat="server" AutoPostBack="True"
-                            Height="20px" Width="130px" Enabled=false 
-                                onselectedindexchanged="CargoComboBox_SelectedIndexChanged"></asp:DropDownList></td>
-                    </tr>
-              </tbody>
-            </Table>
-
-            <div runat="server" id="cantidadDiv" >
-            
-             <Table ID="Table2" runat="server" >
-                 <tbody>                    
-                    <tr>
-                    
-                        <td align="right"  >Cantidad:</td>
-                        <td><asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validateNumerosEnteros(event)' ></asp:TextBox></td>
-                    
-                    </tr>
-                </tbody>
-            </Table>
+            <div runat="server" id="cantidadDiv" >  
+                 <asp:Label ID="Label8" runat="server" Text="Cantidad : " style="padding-left: 51px"></asp:Label>
+                <asp:TextBox ID="CantidadTextBox" runat="server" Height="20px" Width="130px" onkeypress='return validateNumerosEnteros(event)' ></asp:TextBox>           
              </div>
-                <Table ID="Table3" runat="server" >
-                 <tbody>
-                    <tr>
-                        <td align="right">Conceptos:</td>
-                         <td>
-                             <asp:Button ID="AgregarConceptosButton" runat="server" Text="+" 
+             <br />
+                <asp:Label ID="Label9" runat="server" Text="Conceptos : " style="padding-left: 38px"></asp:Label>
+               <asp:Button ID="AgregarConceptosButton" runat="server" Text="+" 
                                  OnClientClick=" mostrarAspxAsPopUp()"
-                                  />   </td>      
-                      
-                    </tr>
-                        
-                 </tbody>
-            </Table>
-           
+                                  />  
+                    
                 <div runat=server id="registrarButton">
-                <Table ID="Table5" runat="server" >
-                 <tbody>          
-                    <tr>                
-                        <td colspan="2" align="right">
-                           <button id="opener" onclick="return opener_onclick()">Registrar</button>          
-                        </td>
-                    </tr>                    
-                 </tbody>
-                </Table>
+               
+
+                           <button id="opener" onclick="return opener_onclick()" >Registrar</button>          
+                       
+
                 </div>
 
-                <div runat=server id="guardarButton" visible="false">
-                <Table ID="Table6" runat="server" >
-                 <tbody>          
-                    <tr>                
-                        <td colspan="2" align="right">
+                <div runat=server id="guardarButton" visible="false" >
+                
                            <button id="openerGuardar" onclick="return openerGuardar_onclick()">Guardar</button>          
-                        </td>
-                    </tr>    
-                    <tr>
-                        <td>
+                       
+                       <br />
+                       <br />
                             <asp:Button ID="volverButton" runat="server" Text="Volver" 
                                 onclick="volverButton_Click" />
-                        </td>
-                    </tr>                
-                 </tbody>
-                </Table>
+                        
                 </div>
   </ContentTemplate> 
   </asp:UpdatePanel>

@@ -1,32 +1,148 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="RegistrarPresupuestoCapacitacion.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.RegistrarPresupuestoCapacitacion" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">  
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+ 
     
-    </asp:ScriptManager> 
+    
 
 
 <br />
     <br />
 
-    <script type="text/javascript">
-<!--
-        function confirmation() {
-            var answer = confirm("¿Desea guardar el presupuesto?")
-            if (answer) {
-                PageMethods.Guardar();
-                //alert("Bye bye!")
+    
+    <script>
+        function pageLoad() {
+            $(function () {
+                $("#dialog-form").dialog({
+                    autoOpen: false,
+                    height: 200,
+                    width: 350,
+                    modal: true,
+                   
+                });
+
+                $("#dialog-form").css({
+                    fontSize: 15
+                });
 
 
-            }
-            else {
-                //alert("")
-            }
+          
+
+
+            });
+
+
         }
+
+        
+  </script>
+  <script>
+
+      function mensajeCamposIncompletos() {
+
+
+          $("#dialog-message").text("Datos incompletos. Llene todos los campos para poder registrar el costo de empresa.").dialog("open");
+
+      }
+
+      function registroExitoso() {
+
+          var codigo = document.getElementById("contenido_codHidden").value;
+
+          var mensaje = "El presupuesto de capacitación proyectada " + codigo + " ha sido guardado existosamente";
+          $("#dialog-message").text(mensaje).dialog("open");
+      }
+
+      function confirmarRegistro(mensaje) {
+
+          var aklsjdlds = mensaje;
+          $("#dialog-confirmacion").text(mensaje).dialog("open");
+      }
+ 
+
+  </script>
+
+  
+
+   <script>
+       $(function () {
+           $("#dialog-message").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               buttons: {
+                   Ok: function () {
+                       $(this).dialog("close");
+                   }
+               }
+           });
+           $("#dialog-message").css({
+               fontSize: 15
+           });
+
+       });
+
+
+
+       $(function () {
+           $("#dialog-confirmacion").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               buttons: {
+                   "Sí": function () {
+                       document.getElementById("contenido_registrarHidden").value = "si";
+                       document.getElementById("contenido_GuardarButton1").click();
+                       $(this).dialog("close");
+
+
+                   },
+                   "No": function () {
+                       document.getElementById("contenido_registrarHidden").value = "no";
+
+                       $(this).dialog("close");
+
+
+                   }
+               }
+           });
+           $("#dialog-confirmacion").css({
+               fontSize: 15
+           });
+
+       });
+  </script>
+  
+  <script type="text/javascript">
+<!--
+      function confirmation() {
+          var answer = confirm("¿Desea guardar el presupuesto?")
+          if (answer) {
+              PageMethods.Guardar();
+              //alert("Bye bye!")
+
+
+          }
+          else {
+              //alert("")
+          }
+      }
 //-->
 </script>
 
-
+ <div id="dialog-message" title="Módulo de Presupuesto">  </div>
+ <div id="dialog-confirmacion" title="Módulo de Presupuesto">  </div>
+ <div id="dialog-datos-incompletos" title="Módulo de Presupuesto">  </div>
+  
+  <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
+    EnablePartialRendering="true">  
+    
+    </asp:ScriptManager> 
     &nbsp;&nbsp;&nbsp;&nbsp;
     Información relacionada a la capacitación:
     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,7 +214,7 @@
         
         onpageindexchanging="ListaPersonasCapacitarGridView_PageIndexChanging" 
           CellPadding="3" CellSpacing="1" 
-        AllowPaging="True" PageSize="100" 
+        AllowPaging="True" PageSize="100" onselectedindexchanged="ListaPersonasCapacitarGridView_SelectedIndexChanged" 
          >
      <Columns>
 
@@ -160,8 +276,25 @@
     <br />
     <br />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
-        onclick="GuardarButton1_Click" OnClientClick="if (confirm('¿Desea guardar el presupuesto?')) { return true; } else { return false; }"/>
-
+   
+   <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate>  
+     
+      <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
+        onclick="GuardarButton1_Click"/>
+    
+          </ContentTemplate>
+</asp:UpdatePanel>
     <br />
+
+
+
+    <asp:UpdatePanel ID="UpdatePanelHidden" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate>  
+   <input type="hidden" name="registrarHidden" id="registrarHidden" runat="server" />
+     
+   <input type="hidden" name="codHidden" id="codHidden" runat="server" />
+   </ContentTemplate>
+</asp:UpdatePanel>
+
   </asp:Content>

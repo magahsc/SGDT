@@ -33,20 +33,25 @@
         
   </script>
   <script>
-     
+
       function mensajeCamposIncompletos() {
           $("#dialog-message").text("Datos incompletos. Llene todos los campos para poder registrar el costo de empresa.").dialog("open");
 
       }
 
       function costoEmpresaRegistroExitoso(mensaje) {
-          
+
           $("#dialog-message").text(mensaje).dialog("open");
       }
 
       function confirmarRecalcular(mensaje) {
 
           $("#dialog-confirmacion").text(mensaje).dialog("open");
+      }
+
+      function confirmarEditar(mensaje) {
+
+          $("#dialog-confirmacion-editar").text(mensaje).dialog("open");
       }
  
 
@@ -85,7 +90,7 @@
                    "Aceptar": function () {
                        PageMethods.recalcularCostoEmpresa();
                        $(this).dialog("close");
-                      
+
                        $("#dialog-message").text('Se ha recalculado correctamente el beneficio social para todos los empleados').dialog("open");
 
                    },
@@ -97,6 +102,34 @@
                }
            });
            $("#dialog-confirmacion").css({
+               fontSize: 15
+           });
+
+       });
+
+
+
+       $(function () {
+           $("#dialog-confirmacion-editar").dialog({
+               modal: true,
+               autoOpen: false,
+               height: 200,
+               width: 500,
+               buttons: {
+                   "Sí": function () {
+                       document.getElementById("contenido_editarHidden").value = "si";
+                       document.getElementById("contenido_GuardarButton").click();
+                       $(this).dialog("close");
+
+                   },
+                   "No": function () {
+                       $(this).dialog("close");
+
+
+                   }
+               }
+           });
+           $("#dialog-confirmacion-editar").css({
                fontSize: 15
            });
 
@@ -121,6 +154,7 @@
   <div id="dialog-message" title="Módulo de Presupuesto">  </div>
   <div id="dialog-error" title="Módulo de Presupuesto">  </div>
   <div id="dialog-confirmacion" title="Módulo de Presupuesto">  </div>
+  <div id="dialog-confirmacion-editar" title="Módulo de Presupuesto">  </div>
   
   
   
@@ -224,7 +258,8 @@
                  </tbody>
             </Table>
 
-
+             <asp:Button ID="Button1" runat="server" Text="Guadar Presupuesto" 
+        /> 
   </ContentTemplate> 
   
   </asp:UpdatePanel>
@@ -233,6 +268,12 @@
     <input type="hidden" name="nuevo" id="nuevo" runat="server" />
     
 
+    <asp:UpdatePanel ID="UpdatePanelHidden" runat="server" UpdateMode="Conditional"> 
+     <ContentTemplate>  
+   <input type="hidden" name="editarHidden" id="editarHidden" runat="server" />
+     
+   </ContentTemplate>
+</asp:UpdatePanel>
 
  
 

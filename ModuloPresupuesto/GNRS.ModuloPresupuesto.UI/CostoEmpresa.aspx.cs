@@ -22,7 +22,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 LimpiarCampos();
 
 
-                
+
             }
 
         }
@@ -62,41 +62,54 @@ namespace GNRS.ModuloPresupuesto.UI
                 }
                 else
                 {
-                    COSTO_EMPRESA objCostoEmpresa=new COSTO_EMPRESA();
+                    COSTO_EMPRESA objCostoEmpresa = new COSTO_EMPRESA();
                     objCostoEmpresa.beneficio_social = BeneficioSocialTextBox.Text;
-                    objCostoEmpresa.factor=float.Parse(FactorTextBox.Text);
+                    objCostoEmpresa.factor = float.Parse(FactorTextBox.Text);
 
-                    string categoriaSeleccionada=CategoriaComboBox.SelectedItem.Value;
+                    string categoriaSeleccionada = CategoriaComboBox.SelectedItem.Value;
                     objCostoEmpresa.id_categoria = Convert.ToInt32(categoriaSeleccionada);
                     objCostoEmpresaBC = new CostoEmpresaBC();
                     Boolean resultado;
                     if (Session["accion"] != null && Session["accion"].Equals("editar"))
                     {
-                        int codigoEditar=-1;
-                        if (Session["id_costoEmpresa"] != null)
-                        {
-                            codigoEditar=Convert.ToInt32( Session["id_costoEmpresa"].ToString()) ;
-                        }
-                        resultado = objCostoEmpresaBC.editarCostoEmpresa(codigoEditar, objCostoEmpresa);
-                        
-
-                        if (resultado == true)
+                        string hidden = editarHidden.Value;
+                        if (hidden.Equals(""))
                         {
 
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El costo empresa se ha actualizado exitosamente.')", true);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "confirmarEditar('¿Desea actualizar el costo empresa?')", true);
 
-                            BeneficioSocialTextBox.Text = "";
-                            FactorTextBox.Text = "";
-                            Session.Remove("id_costoEmpresa");
-                            Session.Remove("accion");
-                            Session.Add("mensajeRecalcular", "si");
-
-                            LimpiarCampos();
-
-                            CargarCostoEmpresaGridView();
                         }
-                        
+                        else
+                        {
+                            if (editarHidden.Value.Equals("si"))
+                            {
+                                int codigoEditar = -1;
+                                if (Session["id_costoEmpresa"] != null)
+                                {
+                                    codigoEditar = Convert.ToInt32(Session["id_costoEmpresa"].ToString());
+                                }
+                                resultado = objCostoEmpresaBC.editarCostoEmpresa(codigoEditar, objCostoEmpresa);
 
+
+                                if (resultado == true)
+                                {
+
+                                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "costoEmpresaRegistroExitoso('El costo empresa se ha actualizado exitosamente.')", true);
+
+                                    BeneficioSocialTextBox.Text = "";
+                                    FactorTextBox.Text = "";
+                                    Session.Remove("id_costoEmpresa");
+                                    Session.Remove("accion");
+                                    Session.Add("mensajeRecalcular", "si");
+
+                                    LimpiarCampos();
+                                    editarHidden.Attributes["value"] = "";
+                                    UpdatePanelHidden.Update();
+                                    CargarCostoEmpresaGridView();
+                                }
+                            }
+
+                        }
                     }
                     else
                     {
@@ -115,9 +128,9 @@ namespace GNRS.ModuloPresupuesto.UI
                             CargarCostoEmpresaGridView();
                         }
                     }
-                    
-                    
-                   
+
+
+
 
                 }
 
@@ -164,7 +177,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "alert('El costo empresa se ha sido eliminado exitosamente.')", true);
 
 
-           
+
             }
         }
 
@@ -181,8 +194,8 @@ namespace GNRS.ModuloPresupuesto.UI
             float costoEmpresaEmpleado = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(1);
             float costoEmpresaObrero = objCostoEmpresaBC.calcularCostoEmpresaXCategoria(2);
 
-           // Session.Add("costoEmpresaEmpleado", costoEmpresaEmpleado);
-           // Session.Add("costoEmpresaObrero", costoEmpresaObrero);
+            // Session.Add("costoEmpresaEmpleado", costoEmpresaEmpleado);
+            // Session.Add("costoEmpresaObrero", costoEmpresaObrero);
 
             objCostoEmpresaBC.recalcular(costoEmpresaEmpleado, costoEmpresaObrero);
             HttpContext.Current.Session.Remove("mensajeRecalcular");

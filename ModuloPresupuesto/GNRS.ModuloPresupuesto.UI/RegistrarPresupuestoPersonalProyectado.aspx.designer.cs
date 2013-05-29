@@ -49,13 +49,13 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl identificadorDiv;
         
         /// <summary>
-        /// Table4 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table4;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// identificadorTextBox control.
@@ -67,13 +67,13 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.TextBox identificadorTextBox;
         
         /// <summary>
-        /// Table1 control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table1;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// TipoPersonalComboBox control.
@@ -85,6 +85,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.DropDownList TipoPersonalComboBox;
         
         /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
         /// LocalidadComboBox control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList LocalidadComboBox;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// AreaComboBox control.
@@ -103,6 +121,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.DropDownList AreaComboBox;
         
         /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
         /// SeccionComboBox control.
         /// </summary>
         /// <remarks>
@@ -110,6 +137,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList SeccionComboBox;
+        
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
         /// CargoComboBox control.
@@ -130,13 +166,13 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl cantidadDiv;
         
         /// <summary>
-        /// Table2 control.
+        /// Label8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table2;
+        protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
         /// CantidadTextBox control.
@@ -148,13 +184,13 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.TextBox CantidadTextBox;
         
         /// <summary>
-        /// Table3 control.
+        /// Label9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table3;
+        protected global::System.Web.UI.WebControls.Label Label9;
         
         /// <summary>
         /// AgregarConceptosButton control.
@@ -175,15 +211,6 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrarButton;
         
         /// <summary>
-        /// Table5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table5;
-        
-        /// <summary>
         /// guardarButton control.
         /// </summary>
         /// <remarks>
@@ -191,15 +218,6 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl guardarButton;
-        
-        /// <summary>
-        /// Table6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable Table6;
         
         /// <summary>
         /// volverButton control.

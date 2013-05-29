@@ -121,6 +121,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Button Recalcular;
         
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
         /// nuevo control.
         /// </summary>
         /// <remarks>
@@ -128,5 +137,23 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden nuevo;
+        
+        /// <summary>
+        /// UpdatePanelHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelHidden;
+        
+        /// <summary>
+        /// editarHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden editarHidden;
     }
 }

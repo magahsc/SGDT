@@ -166,6 +166,15 @@ namespace GNRS.ModuloPresupuesto.UI {
         protected global::System.Web.UI.WebControls.Label MontoPresupuestoLabel;
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// GuardarButton1 control.
         /// </summary>
         /// <remarks>
@@ -173,5 +182,32 @@ namespace GNRS.ModuloPresupuesto.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button GuardarButton1;
+        
+        /// <summary>
+        /// UpdatePanelHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelHidden;
+        
+        /// <summary>
+        /// registrarHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden registrarHidden;
+        
+        /// <summary>
+        /// codHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden codHidden;
     }
 }
