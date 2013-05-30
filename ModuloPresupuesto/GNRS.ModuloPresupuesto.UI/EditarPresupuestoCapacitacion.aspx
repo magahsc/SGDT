@@ -8,31 +8,52 @@
 </head>
 <body>
     <form id="form1" runat="server">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
       <asp:ScriptManager ID="ScriptManager1" runat="server">  
     
     </asp:ScriptManager> 
 
-    <script>
-        $(function () {
-            $("#dialog-message").dialog({
-                modal: true,
-                autoOpen: false,
-                height: 200,
-                width: 500,
-                buttons: {
-                    "Aceptar": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-            $("#dialog-message").css({
-                fontSize: 15
-            });
+   <!-- <body onbeforeunload="terminate();">
+    
+      <script>
 
+
+          function terminate() {
+
+
+             /* var clickButton = window.opener.document.getElementById("contenido_BuscarButton");
+              clickButton.click();*/
+              window.opener.Refresh();
+
+
+          }
+
+
+</script>   -->
+
+<script>
+    $(function () {
+        $("#dialog-message").dialog({
+            modal: true,
+            autoOpen: false,
+            height: 200,
+            width: 500,
+            buttons: {
+                "Aceptar": function () {
+                    window.opener.Refresh();
+
+                    $(this).dialog("close");
+                    window.close();
+                }
+            }
         });
+        $("#dialog-message").css({
+            fontSize: 15
+        });
+
+    });
   </script>
 
        <script>
@@ -45,10 +66,8 @@
                    buttons: {
                        "Aceptar": function () {
                            $(this).dialog("close");
-                           window.onload = function () {
-                               window.opener.location.reload(true);
-                               window.close();
-                           } ();
+                           window.close();
+
                        }
                    }
                });

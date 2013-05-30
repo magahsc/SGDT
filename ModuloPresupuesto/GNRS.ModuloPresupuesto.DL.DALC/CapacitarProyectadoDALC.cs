@@ -89,6 +89,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
 
                     objcapacitacionBE = new CapacitacionProyectadaBE();
                     objcapacitacionBE.Smonto_total = tipo + "" + Math.Round(item.monto_total, 2);
+                    objcapacitacionBE.IdEditar_presupuesto_capacitacion = item.id_presupuesto_capacitacion;
                     objcapacitacionBE.Id_presupuesto_capacitacion = item.id_presupuesto_capacitacion;
                     objcapacitacionBE.Cod_presupuesto = item.codigo_presupuesto;
                     objcapacitacionBE.Nombre_curso = item.nombre_curso;

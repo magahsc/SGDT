@@ -4,7 +4,14 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
-   
+   <script>
+       function Refresh() {
+           var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
+           clickButton.click();
+       }
+   </script>
+
+
     <script>
         $(document).ready(function () {
 
@@ -22,7 +29,7 @@
                         PageMethods.eliminar(sIdCapacitacion, MostrarMensaje);
                         var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
                         clickButton.click();
-                        
+
                         $(this).dialog("close");
 
                     },
@@ -44,6 +51,17 @@
             // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
         }
 
+
+        function AbrirVentana(sIdCapacitacion) {
+
+
+            var url = 'EditarPresupuestoCapacitacion.aspx?id=' + sIdCapacitacion;
+            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:650px;dialogHide:true;help:no;scroll:yes');
+            //window.open(url);
+
+            Refresh();
+
+        }
 
         function MostrarMensaje(mensaje) {
             $("#dialog-message").text(mensaje).dialog("open");
@@ -163,8 +181,6 @@
               <td><asp:Button ID="BuscarButton" runat="server" Text="Buscar" 
         Width="94px" onclick="BuscarButton_Click" /></td>
 
-        
-
        </tr>
        </tbody>
        </Table>
@@ -178,11 +194,15 @@
     <asp:GridView ID="ListasCapacitarProyectadaGridView" runat="server" 
           AutoGenerateColumns="false" align = "center"
         
-          CellPadding="3" CellSpacing="1" onrowcommand="ListasCapacitarProyectadaGridView_RowCommand"   
+          CellPadding="3" CellSpacing="1" 
          >
      <Columns>
 
                   <asp:BoundField HeaderText="ID Capacitacion Proyectada" DataField="Id_presupuesto_capacitacion" visible ="false"
+                        ItemStyle-Width="200">                   
+                    </asp:BoundField>
+
+                    <asp:BoundField HeaderText="ID Capacitacion Proyectada Editar" DataField="IdEditar_presupuesto_capacitacion" visible ="false"
                         ItemStyle-Width="200">                   
                     </asp:BoundField>
 
@@ -208,8 +228,13 @@
 
                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("id_presupuesto_capacitacion") %>'><img src="images/edit.gif" width="16" height="16" alt="editar" border="0" /></asp:LinkButton>
-						</ItemTemplate>
+						<asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("idEditar_presupuesto_capacitacion") %>' Visible="false"
+                             ></asp:LinkButton>
+
+                         <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_presupuesto_capacitacion") %>');" >Editar</button>
+                                            
+                                            </ItemTemplate>
+
 					</asp:TemplateField>
 
 					<asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
@@ -220,7 +245,7 @@
                          <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("cod_presupuesto") %>' Visible="false"
                              ></asp:LinkButton>
                             
-                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>');" >X</button>
+                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>');" >Eliminar</button>
                                             
                                             </ItemTemplate>
 

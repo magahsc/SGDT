@@ -14,6 +14,15 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             get { return _id_presupuesto_capacitacion; }
             set { _id_presupuesto_capacitacion = value; }
         }
+
+        private int _idEditar_presupuesto_capacitacion;
+
+        public int IdEditar_presupuesto_capacitacion
+        {
+            get { return _idEditar_presupuesto_capacitacion; }
+            set { _idEditar_presupuesto_capacitacion = value; }
+        }
+
         private String _cod_presupuesto;
 
         public String Cod_presupuesto

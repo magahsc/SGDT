@@ -295,8 +295,6 @@ namespace GNRS.ModuloPresupuesto.UI
                     ListasCapacitarProyectadaGridView.DataBind();
                     ListasCapacitarProyectadaGridView.Visible = true;
                     //MensajeLabel.Text = "";
-                    DatosUpdatePanel.Update();
-                    //MensajeUpdatePanel.Update();
                 }
 
                 if (lista == null)
@@ -304,10 +302,11 @@ namespace GNRS.ModuloPresupuesto.UI
                     //MensajeLabel.Visible = true;
                     ListasCapacitarProyectadaGridView.Visible = false;
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('No existen presupuestos para mostrar')", true);
-                   // MensajeLabel.Text = "No existen presupuestos para mostrar.";
-                    //MensajeUpdatePanel.Update();
-                    DatosUpdatePanel.Update();
+                    // MensajeLabel.Text = "No existen presupuestos para mostrar.";
                 }
+                DatosUpdatePanel.Update();
+                CriteriosUpdatePanel.Update();
+                MensajeUpdatePanel.Update();
             }
             catch (Exception ex)
             {
@@ -380,6 +379,63 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             ScriptManager.RegisterStartupScript(control, control.GetType(), "Open", "window.open('" + Url + "');", true);
         }
+
+     /*   protected void PruebaButton_Click(object sender, EventArgs e)
+        {
+            CapacitacionProyectadaBE objcapacitacionBE = new CapacitacionProyectadaBE();
+
+            if (mesDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Mes = 0;
+            if (anioDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Anio = 0;
+            if (estadoDropDownList.SelectedIndex == 0)
+                objcapacitacionBE.Presupuesto_aprobado = "V";
+
+            if (estadoDropDownList.SelectedIndex == 1)
+                objcapacitacionBE.Presupuesto_aprobado = "P";
+
+            if (estadoDropDownList.SelectedIndex == 2)
+                objcapacitacionBE.Presupuesto_aprobado = "N";
+
+            if (estadoDropDownList.SelectedIndex == 3)
+                objcapacitacionBE.Presupuesto_aprobado = "A";
+
+            if (mesDropDownList.SelectedIndex > 0)
+                objcapacitacionBE.Mes = Convert.ToInt32(mesa(mesDropDownList.SelectedValue));
+            if (anioDropDownList.SelectedIndex > 0)
+                objcapacitacionBE.Anio = Convert.ToInt32(anioDropDownList.SelectedValue);
+
+
+            List<CapacitacionProyectadaBE> lista = objcapacitar.listarCapacitacionProyectadaxMesxAnioxEstado(objcapacitacionBE);
+
+            try
+            {
+                if (lista != null)
+                {
+                    ListasCapacitarProyectadaGridView.DataSource = lista;
+                    ListasCapacitarProyectadaGridView.DataBind();
+                    ListasCapacitarProyectadaGridView.Visible = true;
+                    //MensajeLabel.Text = "";
+                    DatosUpdatePanel.Update();
+                    //MensajeUpdatePanel.Update();
+                }
+
+                if (lista == null)
+                {
+                    //MensajeLabel.Visible = true;
+                    ListasCapacitarProyectadaGridView.Visible = false;
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('No existen presupuestos para mostrar')", true);
+                    // MensajeLabel.Text = "No existen presupuestos para mostrar.";
+                    //MensajeUpdatePanel.Update();
+                    DatosUpdatePanel.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje('Error en la operación. Inténtelo nuevamente')", true);
+            }
+
+        }*/
 
     }
 }
