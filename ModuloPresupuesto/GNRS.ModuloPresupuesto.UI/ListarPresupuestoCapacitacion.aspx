@@ -8,6 +8,10 @@
        function Refresh() {
            var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
            clickButton.click();
+          /* __doPostBack('BuscarButton', '');
+           __doPostBack('DatosUpdatePanel', '');
+           __doPostBack('CriteriosUpdatePanel', '');
+           __doPostBack('MensajeUpdatePanel', '');*/
        }
    </script>
 
@@ -59,7 +63,7 @@
             var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:650px;dialogHide:true;help:no;scroll:yes');
             //window.open(url);
 
-            Refresh();
+            //Refresh();
 
         }
 

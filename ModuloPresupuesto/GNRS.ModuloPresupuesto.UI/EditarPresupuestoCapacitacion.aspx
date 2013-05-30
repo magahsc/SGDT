@@ -250,7 +250,7 @@
     <asp:UpdatePanel ID="BuscarUpdatePanel" runat="server" UpdateMode="Conditional"> 
   <ContentTemplate> 
     <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
-        onclick="GuardarButton1_Click" />
+        onclick="GuardarButton1_Click" OnClientClick="window.opener.__doPostBack('BuscarButton_onClick','');"/>
 
         <asp:HiddenField ID="hdnSession" runat="server" />
         </ContentTemplate>  

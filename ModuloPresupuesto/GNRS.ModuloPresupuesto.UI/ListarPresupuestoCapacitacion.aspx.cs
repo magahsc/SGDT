@@ -22,6 +22,19 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             MensajeLabel.Text = "";
             MensajeUpdatePanel.Update();
+
+            this.ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (this.IsPostBack)
+            {
+                string eventTarget = (this.Request["__EVENTTARGET"] == null) ? string.Empty : this.Request["__EVENTTARGET"];
+
+                if (eventTarget == "BuscarButton_onClick")
+                {
+                    BuscarButton_Click(sender, e);
+                }
+            }
+
             if (!IsPostBack)
             {
                 mesDropDownList.DataSource = ListaMes(1);
