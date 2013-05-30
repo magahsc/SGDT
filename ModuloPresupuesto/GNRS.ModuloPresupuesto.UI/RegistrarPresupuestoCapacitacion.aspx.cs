@@ -607,7 +607,8 @@ namespace GNRS.ModuloPresupuesto.UI
             CURSO curso = new CURSO();
             String scodigoalert = "";
 
-            if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0)
+           
+            if (CursoDropDownList.SelectedIndex > 0 && SeccionDropDownList.SelectedIndex > 0 && Session["costocurso"] != null && Session["contador"] != null)
             {
                 string hidden = registrarHidden.Value;
                 if (hidden.Equals(""))

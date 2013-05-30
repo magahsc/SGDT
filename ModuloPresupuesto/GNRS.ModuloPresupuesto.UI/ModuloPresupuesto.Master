@@ -44,7 +44,7 @@
            	                <a class=" AccordionPanelTab" href="#">Presupuesto de personal proyectado</a>
                                 <ul class="AccordionPanelContent" style="height: auto; display: block;">
                                     <li><a href="#" id="A19">Listado personal proyectado</a></li>
-                                    <li><a href="RegistrarPresupuestoPersonalProyectado.aspx" id="A20">Registrar personal a proyectar</a></li>
+                                    <li><a href="RegistrarPresupuestoPersonalProyectado.aspx?modo=1" id="A20">Registrar personal a proyectar</a></li>
                                 </ul>
                      </li> 
                      <li class="AccordionPanel AccordionPanelOpen">
