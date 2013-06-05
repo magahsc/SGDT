@@ -63,73 +63,73 @@ namespace GNRS.ModuloPresupuesto.UI
             {
                 case 1:
                     {
-                        mesd = "Enero - " + anio;
+                        mesd = "Enero " + anio;
                         break;
                     }
 
                 case 2:
                     {
-                        mesd = "Febrero - " + anio;
+                        mesd = "Febrero " + anio;
                         break;
                     }
 
                 case 3:
                     {
-                        mesd = "Marzo - " + anio;
+                        mesd = "Marzo " + anio;
                         break;
                     }
 
                 case 4:
                     {
-                        mesd = "Abril - " + anio;
+                        mesd = "Abril " + anio;
                         break;
                     }
 
                 case 5:
                     {
-                        mesd = "Mayo - " + anio;
+                        mesd = "Mayo " + anio;
                         break;
                     }
 
                 case 6:
                     {
-                        mesd = "Junio - " + anio;
+                        mesd = "Junio " + anio;
                         break;
                     }
 
                 case 7:
                     {
-                        mesd = "Julio - " + anio;
+                        mesd = "Julio " + anio;
                         break;
                     }
 
                 case 8:
                     {
-                        mesd = "Agosto - " + anio;
+                        mesd = "Agosto " + anio;
                         break;
                     }
 
                 case 9:
                     {
-                        mesd = "Setiembre - " + anio;
+                        mesd = "Setiembre " + anio;
                         break;
                     }
 
                 case 10:
                     {
-                        mesd = "Octubre - " + anio;
+                        mesd = "Octubre " + anio;
                         break;
                     }
 
                 case 11:
                     {
-                        mesd = "Noviembre - " + anio;
+                        mesd = "Noviembre " + anio;
                         break;
                     }
 
                 case 12:
                     {
-                        mesd = "Diciembre - " + anio;
+                        mesd = "Diciembre " + anio;
                         break;
                     }
             }
@@ -349,6 +349,15 @@ namespace GNRS.ModuloPresupuesto.UI
             objactividad.detalle_actividad = observaciones;
             objactividad.fecha_creacion = DateTime.Now;
             objactividad.presupuesto_aprobado = "P";
+
+            String sessionmes = HttpContext.Current.Session["mes"].ToString();
+            String sessionanio = HttpContext.Current.Session["anio"].ToString();
+            PERIODO_PRESUPUESTO objPeriodo = new PERIODO_PRESUPUESTO();
+            objPeriodo.mes_periodo = Convert.ToInt32(sessionmes);
+            objPeriodo.anio_periodo = Convert.ToInt32(sessionanio);
+
+            int codigoPeriodo = objcapacitar.RegistrarPeriodoPresupuesto(objPeriodo);
+            objactividad.id_periodo_presupuesto = codigoPeriodo;
 
             int itipomoneda = Convert.ToInt32(tipomoneda);
 

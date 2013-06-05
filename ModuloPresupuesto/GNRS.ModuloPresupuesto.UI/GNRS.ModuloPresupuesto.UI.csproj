@@ -59,6 +59,7 @@
     <Content Include="ConceptosPersonal.aspx" />
     <Content Include="ConfiguracionPresupuesto.aspx" />
     <Content Include="CostoEmpresa.aspx" />
+    <Content Include="EditarActividad.aspx" />
     <Content Include="EditarPresupuestoCapacitacion.aspx" />
     <Content Include="images\delete.gif" />
     <Content Include="images\edit.gif" />
@@ -147,6 +148,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarActividad.aspx.cs">
+      <DependentUpon>EditarActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarActividad.aspx.designer.cs">
+      <DependentUpon>EditarActividad.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditarPresupuestoCapacitacion.aspx.cs">
       <DependentUpon>EditarPresupuestoCapacitacion.aspx</DependentUpon>

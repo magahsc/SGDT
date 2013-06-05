@@ -5,7 +5,17 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
-    
+     <script>
+         function Refresh() {
+             var clickButton = document.getElementById("<%= BuscarButton.ClientID %>");
+             clickButton.click();
+             /* __doPostBack('BuscarButton', '');
+             __doPostBack('DatosUpdatePanel', '');
+             __doPostBack('CriteriosUpdatePanel', '');
+             __doPostBack('MensajeUpdatePanel', '');*/
+         }
+   </script>
+
     
      <script>
          $(function () {
@@ -63,6 +73,17 @@
 
 
         });
+
+
+        function AbrirVentana(sId) {
+
+            var url = 'EditarActividad.aspx?id=' + sId;
+            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:450px;dialogHide:true;help:no;scroll:yes');
+            //window.open(url);
+
+            //Refresh();
+
+        }
 
         function mostrarMensajeConfirmacion(id, sco) {
             var hdnSession2 = document.getElementById("<%= hdnSession2.ClientID %>");
@@ -178,6 +199,10 @@
                         ItemStyle-Width="200">                   
                     </asp:BoundField>
 
+                    <asp:BoundField HeaderText="ID Actividad Proyectada Editar" DataField="IdEditar_Actividad" visible ="false"
+                        ItemStyle-Width="200">                   
+                    </asp:BoundField>
+
 					<asp:BoundField HeaderText="Codigo" DataField="Codigo_actividad" 
                         ItemStyle-Width="150" >                    
                     </asp:BoundField>
@@ -204,25 +229,22 @@
 
                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
-							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("id_actividad_proyectada") %>'><img src="images/edit.gif" width="16" height="16" alt="editar" border="0" /></asp:LinkButton>
-						</ItemTemplate>
+							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("idEditar_Actividad") %>'></asp:LinkButton>
+                            <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_Actividad") %>');" >Editar</button>
+                         </ItemTemplate>
 					</asp:TemplateField>
 
 					
 					<asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
 
-                        <!--- <asp:LinkButton ID="lnkCustomize" CommandName="CMDEliminar" CommandArgument='<%#Eval("id_actividad_proyectada") + ";" +Eval("codigo_actividad")%>'  runat="server"> 
-                          <img src="images/delete.gif" width="16" height="16" alt="eliminar" border="0" />
-                           </asp:LinkButton>  
-                            --->
                             <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%#Eval("id_actividad_proyectada") %>' Visible="false"
                              ></asp:LinkButton>
 
                          <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("codigo_actividad") %>' Visible="false"
                              ></asp:LinkButton>
                             
-                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_actividad_proyectada") %>', '<%#Eval("codigo_actividad") %>');" >X</button>
+                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_actividad_proyectada") %>', '<%#Eval("codigo_actividad") %>');" >Eliminar</button>
                                             
                         
                                             </ItemTemplate>

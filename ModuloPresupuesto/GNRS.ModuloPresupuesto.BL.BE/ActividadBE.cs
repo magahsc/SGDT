@@ -15,6 +15,14 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             set { _id_actividad_proyectada = value; }
         }
 
+        private int _idEditar_Actividad;
+
+        public int IdEditar_Actividad
+        {
+            get { return _idEditar_Actividad; }
+            set { _idEditar_Actividad = value; }
+        }
+
         private String _codigo_actividad;
 
         public String Codigo_actividad

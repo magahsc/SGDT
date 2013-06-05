@@ -18,6 +18,19 @@ namespace GNRS.ModuloPresupuesto.UI
         CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (this.IsPostBack)
+            {
+                string eventTarget = (this.Request["__EVENTTARGET"] == null) ? string.Empty : this.Request["__EVENTTARGET"];
+
+                if (eventTarget == "BuscarButton_onClick")
+                {
+                    BuscarButton_Click(sender, e);
+                }
+            }
+
+
             if (!IsPostBack)
             {
                 int imes = 1;

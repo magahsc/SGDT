@@ -684,7 +684,6 @@ namespace GNRS.ModuloPresupuesto.UI
                             }
                         }
 
-
                         codHidden.Attributes["value"] = scodigoalert;
                         UpdatePanelHidden.Update();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "registroExitoso(" + scodigoalert + ")", true);

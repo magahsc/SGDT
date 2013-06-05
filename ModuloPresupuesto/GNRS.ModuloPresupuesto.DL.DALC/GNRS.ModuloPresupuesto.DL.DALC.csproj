@@ -59,6 +59,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModuloPresupuestoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PeriodoPresupuestoDALC.cs" />
     <Compile Include="PersonaDALC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeccionDALC.cs" />

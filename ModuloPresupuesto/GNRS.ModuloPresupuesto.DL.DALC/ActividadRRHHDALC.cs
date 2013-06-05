@@ -110,6 +110,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     objactividadBE = new ActividadBE();
                     objactividadBE.Monto_total = tipo + "" + Math.Round(item.monto_actividad, 2);
                     objactividadBE.Id_actividad_proyectada = item.id_actividad_proyectada;
+                    objactividadBE.IdEditar_Actividad = item.id_actividad_proyectada; 
                     objactividadBE.Codigo_actividad = item.codigo_actividad_proyectada;
                     objactividadBE.Nombre_actividad = item.nombre_actividad;
 
@@ -331,6 +332,36 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             {
                 throw;
             }
+        }
+
+        //Nuevo
+        public Boolean ActualizarActividadProyectadaDatos(PRESUPUESTO_ACTIVIDAD_PROYECTADA objActividad)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PRESUPUESTO_ACTIVIDAD_PROYECTADA presupuestoActividad = new PRESUPUESTO_ACTIVIDAD_PROYECTADA();
+
+                presupuestoActividad = (from c in context.PRESUPUESTO_ACTIVIDAD_PROYECTADA
+                                             where c.id_actividad_proyectada == objActividad.id_actividad_proyectada
+                                             select c).First();
+
+                presupuestoActividad.mes_inicio = objActividad.mes_inicio;
+                presupuestoActividad.mes_fin = objActividad.mes_fin;
+                presupuestoActividad.anio_inicio = objActividad.anio_inicio;
+                presupuestoActividad.anio_fin = objActividad.anio_fin;
+                presupuestoActividad.monto_actividad = objActividad.monto_actividad;
+                presupuestoActividad.tipo_moneda = objActividad.tipo_moneda;
+                presupuestoActividad.detalle_actividad = objActividad.detalle_actividad;
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

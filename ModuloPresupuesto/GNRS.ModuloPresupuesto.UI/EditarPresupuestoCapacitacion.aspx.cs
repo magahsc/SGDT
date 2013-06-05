@@ -46,6 +46,10 @@ namespace GNRS.ModuloPresupuesto.UI
                 FechaLabel.Text = "Mes de inicio del periodo del presupuesto: " + mes(objpresupuesto.fecha_creacion.Month) + " del " +
                     objpresupuesto.fecha_creacion.Year + "&nbsp;" + "&nbsp;" + " &nbsp;" + "&nbsp; " + "Fecha de creación: " + cambiarmesydia(Convert.ToString(objpresupuesto.fecha_creacion.Day)) + "/" + cambiarmesydia(Convert.ToString(objpresupuesto.fecha_creacion.Month)) + "/" + objpresupuesto.fecha_creacion.Year;
 
+                InstitutoDropDownList.DataSource = objcapacitar.listarInstituciones();
+                InstitutoDropDownList.DataBind();
+                InstitutoDropDownList.Items.Insert(0, new ListItem("Seleccione el instituto", ""));
+
                 objinstitucion = objcapacitar.ObtenerInstitucionxCodigoCurso(Convert.ToInt32(objpresupuesto.id_curso));
                 InstitutoDropDownList.Items.FindByText(objinstitucion.nombre_institucion).Selected = true;
 

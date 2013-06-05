@@ -42,10 +42,9 @@
             width: 500,
             buttons: {
                 "Aceptar": function () {
-                    window.opener.Refresh();
-
+                    
                     $(this).dialog("close");
-                    window.close();
+                    //window.close();
                 }
             }
         });
@@ -65,6 +64,7 @@
                    width: 500,
                    buttons: {
                        "Aceptar": function () {
+                           window.opener.Refresh();
                            $(this).dialog("close");
                            window.close();
 

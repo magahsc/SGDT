@@ -17,6 +17,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         InstitutoDALC institucionesDALC = new InstitutoDALC();
         CursoDALC cursoDALC = new CursoDALC();
         PersonaDALC personaDALC = new PersonaDALC();
+        PeriodoPresupuestoDALC objperiodoDALC = new PeriodoPresupuestoDALC();
         CapacitarProyectadoDALC capacitarDALC = new CapacitarProyectadoDALC();
         AuditoriaPresupuestoDALC auditoriaDALC = new AuditoriaPresupuestoDALC();
         ActividadRRHHDALC actividadDALC = new ActividadRRHHDALC();
@@ -185,7 +186,6 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return capacitarDALC.EliminarCapacitacionProyectadaxPersona(objcapacitacionxpersona);
         }
 
-        //Nuevo
         public int insertarActividadRRHH(PRESUPUESTO_ACTIVIDAD_PROYECTADA objactividad)
         {
             return actividadDALC.insertarActividadRRHH(objactividad);
@@ -223,5 +223,20 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return actividadDALC.obtenerPresupuestoActividad(idActividad);
         }
 
+        //Nuevo
+        public int RegistrarPeriodoPresupuesto(PERIODO_PRESUPUESTO objPeriodo)
+        {
+            return objperiodoDALC.RegistrarPeriodoPresupuesto(objPeriodo);
+        }
+
+        public PERIODO_PRESUPUESTO ObtenerPeriodoPresupuesto(int codigoPeriodo)
+        {
+            return objperiodoDALC.obtenerPeriodoXcodigo(codigoPeriodo);
+        }
+
+        public Boolean ActualizarActividadDatos(PRESUPUESTO_ACTIVIDAD_PROYECTADA objActividad)
+        {
+            return actividadDALC.ActualizarActividadProyectadaDatos(objActividad);
+        }
     }
 }
