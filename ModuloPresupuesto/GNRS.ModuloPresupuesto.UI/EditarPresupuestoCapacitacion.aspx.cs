@@ -494,18 +494,41 @@ namespace GNRS.ModuloPresupuesto.UI
                     CURSO curso = new CURSO();
                     curso = objcapacitar.obtenerCurso(codigoCurso);
 
+                    PERIODO_PRESUPUESTO objPeriodo = new PERIODO_PRESUPUESTO();
+                    objPeriodo = objcapacitar.ObtenerPeriodoPresupuesto(Convert.ToInt32(Session["IdCapacitacion"].ToString()));
 
-                    int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-                    int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
-                    int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+                    String smes = objPeriodo.mes_periodo.ToString();
+                    smes = cambiarmesydia(smes);
+                    String sanio = objPeriodo.anio_periodo.ToString();
+                    String sdia = "01";
+                    sdia = cambiarmesydia(sdia);
 
-                    ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
-                    ListaPersonasCapacitarGridView.DataBind();
+                    String cadenafecha = sanio + "-" + smes + "-" + sdia;
+                    DateTime myDate, myDate2;
+                    myDate = DateTime.ParseExact(cadenafecha, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                    DatosGridView.Update();
-                    CheckUpdatePanel.Update();
-                    ComboBoxUpdatePanel2.Update();
+                    int aniofinal = Convert.ToInt32(sanio) + 1;
+                    String saniofinal = aniofinal + "";
+                    String cadenafecha2 = aniofinal + "-" + smes + "-" + sdia;
+                    myDate2 = DateTime.ParseExact(cadenafecha2, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+                    int aniomydate = Convert.ToInt32(myDate.Year);
+                    int aniocurso = Convert.ToInt32(curso.fecha_inicio.Year);
+
+                    if ((DateTime.Compare(myDate, curso.fecha_inicio) < 0) && (DateTime.Compare(myDate2, curso.fecha_fin) > 0) && aniocurso == aniomydate)
+                    {
+
+                        int codigolocalidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
+                        int codigoarea = Convert.ToInt32(AreaDropDownList.SelectedValue);
+                        int codigoseccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
+
+                        ListaPersonasCapacitarGridView.DataSource = objcapacitar.listarPersona(codigolocalidad, codigoarea, codigoseccion);
+                        ListaPersonasCapacitarGridView.DataBind();
+
+                        DatosGridView.Update();
+                        CheckUpdatePanel.Update();
+                        ComboBoxUpdatePanel2.Update();
+                    }
                 }
             }
 

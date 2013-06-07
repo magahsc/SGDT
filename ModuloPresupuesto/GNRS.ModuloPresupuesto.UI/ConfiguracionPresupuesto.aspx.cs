@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using GNRS.ModuloPresupuesto.BL.BC;
+using GNRS.ModuloPresupuesto.DL.DALC;
+using System.Data.Entity;
 
 namespace GNRS.ModuloPresupuesto.UI
 {
@@ -219,17 +222,24 @@ namespace GNRS.ModuloPresupuesto.UI
             Session.Add("dia", "01");
             Session.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
             Session.Add("anio", anioDropDownList.SelectedValue.ToString());
+
+            CapacitarProyectadoBC objcapacitar = new CapacitarProyectadoBC();
+            PERIODO_PRESUPUESTO objPeriodo = new PERIODO_PRESUPUESTO();
+            objPeriodo.mes_periodo = Convert.ToInt32(mesa(mesDropDownList.SelectedValue.ToString()));
+            objPeriodo.anio_periodo = Convert.ToInt32(anioDropDownList.SelectedValue);
+
+            int codigoPeriodo = objcapacitar.RegistrarPeriodoPresupuesto(objPeriodo);
+            Session.Add("idPeriodo", codigoPeriodo);
+
             int anio = Convert.ToInt32(anioDropDownList.SelectedValue);
             anio = anio + 1;
             Session.Add("Mensaje", "0");
            // alert("La configuración del presupuesto se grabo satisfactoriamente");
             hdnSession.Value = "A partir de este momento, los presupuestos anuales empezarán desde " + mesDropDownList.SelectedValue.ToString() + " " +
-               anioDropDownList.SelectedValue.ToString() + " hasta el " + mesDropDownList.SelectedValue.ToString() + " " + anio;
+            anioDropDownList.SelectedValue.ToString() + " hasta el " + mesDropDownList.SelectedValue.ToString() + " " + anio;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "MostrarMensaje()", true);
             BotonUpdatePanel.Update();
-            /*Context.Items.Add("dia", diaDropDownList.SelectedValue.ToString());
-            Context.Items.Add("mes", mesa(mesDropDownList.SelectedValue.ToString()));
-            Context.Items.Add("anio", anioDropDownList.SelectedValue.ToString());*/
+
 
         }
 

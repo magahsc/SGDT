@@ -5,15 +5,11 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
-    
-    
-
-
 <br />
     <br />
 
     
-    <script>
+  <script>
         function pageLoad() {
             $(function () {
                 $("#dialog-form").dialog({
@@ -39,6 +35,7 @@
 
         
   </script>
+
   <script>
 
       function mensajeCamposIncompletos() {
@@ -63,11 +60,9 @@
       }
  
 
-  </script>
+  </script> 
 
-  
-
-   <script>
+  <script>
        $(function () {
            $("#dialog-message").dialog({
                modal: true,
@@ -149,7 +144,7 @@
 
 
 
- <asp:UpdatePanel ID="ComboBoxUpdatePanel1" runat="server" UpdateMode="Conditional"> 
+     <asp:UpdatePanel ID="ComboBoxUpdatePanel1" runat="server" UpdateMode="Conditional"> 
   <ContentTemplate>  
   <Table ID="Table1" runat="server" style="height: 50px; width: 450px;">
          <tbody>
@@ -205,11 +200,12 @@
 
 
    <br />
+   
     <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="200">  
      <asp:UpdatePanel ID="DatosGridView" runat="server" UpdateMode="Conditional"> 
-  <ContentTemplate>
+      <ContentTemplate>
    
-    <asp:GridView ID="ListaPersonasCapacitarGridView" runat="server" 
+        <asp:GridView ID="ListaPersonasCapacitarGridView" runat="server" 
           AutoGenerateColumns="false" align = "center" DataKeyNames = "Id_persona"
         
         onpageindexchanging="ListaPersonasCapacitarGridView_PageIndexChanging" 
@@ -247,12 +243,9 @@
     </asp:GridView>
    
      </ContentTemplate>  
-
  </asp:UpdatePanel>
  </asp:Panel>
-
-
-
+ 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:CheckBox ID="MarcarTodosCheckBox" runat="server"  AutoPostBack="True"
         Text=" Capacitar a todos" Font-Size="Small" oncheckedchanged="MarcarTodosCheckBox_CheckedChanged" 
@@ -279,6 +272,8 @@
    
    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional"> 
      <ContentTemplate>  
+     
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
      
       <asp:Button ID="GuardarButton1" runat="server" Text="Guadar Presupuesto" 
         onclick="GuardarButton1_Click"/>

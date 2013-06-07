@@ -21,7 +21,7 @@ namespace GNRS.ModuloPresupuesto.UI
             {
                 if (Session["mes"] == null ||
                    Session["dia"] == null ||
-                   Session["anio"] == null)
+                   Session["anio"] == null || Session["idPeriodo"] == null)
                 {
 
                     Session.Add("Mensaje", "1");
@@ -350,14 +350,7 @@ namespace GNRS.ModuloPresupuesto.UI
             objactividad.fecha_creacion = DateTime.Now;
             objactividad.presupuesto_aprobado = "P";
 
-            String sessionmes = HttpContext.Current.Session["mes"].ToString();
-            String sessionanio = HttpContext.Current.Session["anio"].ToString();
-            PERIODO_PRESUPUESTO objPeriodo = new PERIODO_PRESUPUESTO();
-            objPeriodo.mes_periodo = Convert.ToInt32(sessionmes);
-            objPeriodo.anio_periodo = Convert.ToInt32(sessionanio);
-
-            int codigoPeriodo = objcapacitar.RegistrarPeriodoPresupuesto(objPeriodo);
-            objactividad.id_periodo_presupuesto = codigoPeriodo;
+            objactividad.id_periodo_presupuesto = Convert.ToInt32(HttpContext.Current.Session["idPeriodo"].ToString());
 
             int itipomoneda = Convert.ToInt32(tipomoneda);
 

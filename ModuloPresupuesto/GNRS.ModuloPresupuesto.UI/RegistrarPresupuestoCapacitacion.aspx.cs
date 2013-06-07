@@ -32,11 +32,8 @@ namespace GNRS.ModuloPresupuesto.UI
                 cargarComboBox();
                 if (Session["mes"] == null ||
                     Session["dia"] == null ||
-                    Session["anio"] == null)
+                    Session["anio"] == null || Session["idPeriodo"] == null)
                 {
-                    /*Session.Add("dia", "01");
-                    Session.Add("mes", date.Month);
-                    Session.Add("anio", date.Year);*/
 
                     Session.Add("Mensaje", "1");
                     Server.Transfer("MainPage.aspx");
@@ -646,7 +643,9 @@ namespace GNRS.ModuloPresupuesto.UI
                         objpresupuesto.fecha_creacion = DateTime.Now;
                         objpresupuesto.id_seccion = Convert.ToInt32(SeccionDropDownList.SelectedValue);
                         objpresupuesto.id_localidad = Convert.ToInt32(LocalidadDropDownList.SelectedValue);
-                        objpresupuesto.id_periodo_presupuesto = 0;
+                        objpresupuesto.id_periodo_presupuesto = Convert.ToInt32(Session["idPeriodo"].ToString());
+
+                        //objpresupuesto.id_periodo_presupuesto = 0;
                         int codigoCapacitacion = objcapacitar.insertarcapacitacionProyectada(objpresupuesto);
 
                         objpresupuesto.id_presupuesto_capacitacion = codigoCapacitacion;
@@ -769,9 +768,6 @@ namespace GNRS.ModuloPresupuesto.UI
 
         }
 
-
-
-
         /*[WebMethod]
         public static string GuardarButton1_Click(string sCurso,string sSeccion,string sLocalidad)
         {
@@ -889,6 +885,7 @@ namespace GNRS.ModuloPresupuesto.UI
         }
 
         */
+
         public void alert(string msg)
         {
             Label lbl = new Label();

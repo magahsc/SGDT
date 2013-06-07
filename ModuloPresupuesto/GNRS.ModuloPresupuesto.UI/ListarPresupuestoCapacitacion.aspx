@@ -60,7 +60,7 @@
 
 
             var url = 'EditarPresupuestoCapacitacion.aspx?id=' + sIdCapacitacion;
-            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:650px;dialogHide:true;help:no;scroll:yes');
+            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:780px;dialogHeight:670px;dialogHide:true;help:no;scroll:yes');
             //window.open(url);
 
             //Refresh();
