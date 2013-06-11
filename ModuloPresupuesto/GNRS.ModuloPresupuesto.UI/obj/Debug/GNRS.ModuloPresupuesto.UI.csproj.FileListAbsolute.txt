@@ -175,3 +175,14 @@ C:\Users\N3AR\Desktop\Git\SGDT\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\G
 C:\Users\N3AR\Desktop\Git\SGDT\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.DL.DALC.pdb
 C:\Users\N3AR\Desktop\Git\SGDT\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.dll
 C:\Users\N3AR\Desktop\Git\SGDT\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.UI.dll
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.UI.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.BL.BC.dll
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.DL.DALC.dll
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.BL.BC.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\bin\GNRS.ModuloPresupuesto.DL.DALC.pdb
+C:\Users\Renzo\Desktop\L\ModuloPresupuesto\GNRS.ModuloPresupuesto.UI\obj\Debug\GNRS.ModuloPresupuesto.UI.dll

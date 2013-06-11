@@ -176,5 +176,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             }
         }
 
+        public List<PERSONA> listarPersonasXEstado(string estado)
+        {
+            try
+            {
+                List<PERSONA> lista = new List<PERSONA>();
+                var context = new PresupuestoDBEntities();
+                lista = (from p in context.PERSONA
+                         where p.estado_persona == estado 
+                         select p).ToList();
+               
+
+
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

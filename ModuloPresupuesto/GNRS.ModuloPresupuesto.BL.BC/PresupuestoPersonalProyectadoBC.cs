@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using GNRS.ModuloPresupuesto.DL.DALC;
+using GNRS.ModuloPresupuesto.BL.BE;
+
 using System.Web.Services;
 
 namespace GNRS.ModuloPresupuesto.BL.BC
@@ -116,7 +118,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             return ConceptosList;
         }
 
-        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre,int codigoTipoPersonal)
+        public int registrarPersonalProyectar(int codigoLocalidad, int codigoArea, int codigoSeccion, int codigoCargo, string nombre, int codigoTipoPersonal, int codPeridodPresupuesto)
         {
             PERSONA persona = new PERSONA();
             persona.id_localidad = codigoLocalidad;
@@ -124,6 +126,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             persona.id_cargo = codigoCargo;
             persona.nombres_persona = nombre;
             persona.id_categoria = codigoTipoPersonal;
+            persona.id_periodo_presupuesto = codPeridodPresupuesto;
             personaDALC = new PersonaDALC();
            
             Boolean registro=personaDALC.insertarPersonalProyectado(persona);
@@ -232,6 +235,70 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             }
             return false;
             
+        }
+
+
+
+        public List<PersonalProyectadoBE> listarPersonalProyectadoBEXEstado(string estado)
+        {
+            try
+            {
+                List<PERSONA> listaPersona = personaDALC.listarPersonasXEstado(estado);
+                List<PersonalProyectadoBE> listaPersonalProyectadoTemp = new List<PersonalProyectadoBE>();
+                PersonalProyectadoBE objPersonalProyectadoTemp;
+
+                List<SECCION> listaSeccion = new List<SECCION>();
+                listaSeccion = seccionDALC.listarSeccion();
+                SECCION objSeccion = new SECCION();
+                foreach (PERSONA it in listaPersona)
+                {
+                    objPersonalProyectadoTemp = new PersonalProyectadoBE();
+                    objPersonalProyectadoTemp.Fecha_creacion = it.fecha_creacion;
+
+                    objSeccion = listaSeccion.Find(x => x.id_seccion == it.id_seccion);
+                    objPersonalProyectadoTemp.Id_area = objSeccion.id_area;
+
+                    objPersonalProyectadoTemp.Id_categoria = it.id_categoria;
+                    objPersonalProyectadoTemp.Id_localidad = it.id_localidad;
+                    objPersonalProyectadoTemp.Id_persona = it.id_persona;
+                    objPersonalProyectadoTemp.Id_seccion = it.id_seccion;
+                    objPersonalProyectadoTemp.Identificador = it.nombres_persona;
+
+                    float remuneracion = calcularRemuneracion(it.id_persona);
+                    objPersonalProyectadoTemp.Remuneracion = remuneracion;
+                    listaPersonalProyectadoTemp.Add(objPersonalProyectadoTemp);
+
+                }
+
+                return listaPersonalProyectadoTemp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public float calcularRemuneracion(int id_persona)
+        {
+            try
+            {
+                List<CONCEPTO_POR_PERSONA> listaConceptoPersona = objConceptoPersonaDALC.listarConceptosXPersona(id_persona);
+                float remuneracion=0;
+
+                foreach (CONCEPTO_POR_PERSONA it in listaConceptoPersona)
+                {
+                    remuneracion += (float)it.monto;
+                    remuneracion += (float)it.monto_costo_empresa;
+                }
+
+                return remuneracion;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

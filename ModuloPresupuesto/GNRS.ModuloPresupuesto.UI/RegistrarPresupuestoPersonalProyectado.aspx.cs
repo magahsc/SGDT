@@ -429,6 +429,12 @@ namespace GNRS.ModuloPresupuesto.UI
                 costoEmpresaRegistrar = float.Parse(costoEmpresaObreroHidden);
             }
 
+            int codPeridodPresupuesto = -1;
+            if (HttpContext.Current.Session["idPeriodo"] != null)
+            {
+                codPeridodPresupuesto = (int)HttpContext.Current.Session["idPeriodo"]; 
+            }
+
             for (int i = 1; i <= cantidadAgregar; i++)
             {
 
@@ -437,7 +443,7 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
 
-                int codAgregado = presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, nombre, codigoTipoPersonal);
+                int codAgregado = presupuestoPersonalBC.registrarPersonalProyectar(codigoLocalidad, codigoArea, codigoSeccion, codigoCargo, nombre, codigoTipoPersonal, codPeridodPresupuesto);
 
                 if (codAgregado != -1)
                 {

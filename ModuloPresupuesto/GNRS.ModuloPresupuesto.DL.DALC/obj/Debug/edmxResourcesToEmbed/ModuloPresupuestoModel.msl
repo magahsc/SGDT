@@ -20,6 +20,7 @@
     <EntitySetMapping Name="AUDITORIA_PRESUPUESTO">
       <EntityTypeMapping TypeName="PresupuestoDBModel.AUDITORIA_PRESUPUESTO">
         <MappingFragment StoreEntitySet="AUDITORIA_PRESUPUESTO">
+          <ScalarProperty Name="descripcion_auditoria" ColumnName="descripcion_auditoria" />
           <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
           <ScalarProperty Name="id_capacitacion_proyectada" ColumnName="id_capacitacion_proyectada" />
           <ScalarProperty Name="id_personal_proyectado" ColumnName="id_personal_proyectado" />

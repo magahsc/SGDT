@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="PresupuestoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="PresupuestoDBModelStoreContainer">
           <EntitySet Name="ACTIVIDAD" EntityType="PresupuestoDBModel.Store.ACTIVIDAD" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AREA" EntityType="PresupuestoDBModel.Store.AREA" store:Type="Tables" Schema="dbo" />
@@ -138,6 +138,7 @@
           <Property Name="fecha_accion" Type="datetime" Nullable="false" />
           <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="descripcion_auditoria" Type="varchar" Nullable="false" MaxLength="500" />
         </EntityType>
         <EntityType Name="CARGO_PERSONAL">
           <Key>
@@ -560,8 +561,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PresupuestoDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -703,6 +703,7 @@
           <NavigationProperty Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Relationship="PresupuestoDBModel.AUDITORIA_DE_ACTIVIDAD_PROYECTADA" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
           <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_CAPACITACION" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
           <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.AUDITORIA_DEL_PRESUPUESTO_PERSONAL" FromRole="AUDITORIA_PRESUPUESTO" ToRole="PERSONA" />
+          <Property Type="String" Name="descripcion_auditoria" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CARGO_PERSONAL">
           <Key>
@@ -1179,7 +1180,8 @@
             <ScalarProperty Name="nombre_area" ColumnName="nombre_area" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="AUDITORIA_PRESUPUESTO"><EntityTypeMapping TypeName="PresupuestoDBModel.AUDITORIA_PRESUPUESTO"><MappingFragment StoreEntitySet="AUDITORIA_PRESUPUESTO">
-            <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
+            <ScalarProperty Name="descripcion_auditoria" ColumnName="descripcion_auditoria" />
+                <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
             <ScalarProperty Name="id_capacitacion_proyectada" ColumnName="id_capacitacion_proyectada" />
             <ScalarProperty Name="id_personal_proyectado" ColumnName="id_personal_proyectado" />
             <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />

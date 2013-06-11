@@ -766,7 +766,8 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="fecha_accion">Initial value of the fecha_accion property.</param>
         /// <param name="tipo_accion">Initial value of the tipo_accion property.</param>
         /// <param name="tipo_presupuesto">Initial value of the tipo_presupuesto property.</param>
-        public static AUDITORIA_PRESUPUESTO CreateAUDITORIA_PRESUPUESTO(global::System.Int32 id_auditoria, global::System.Int32 id_capacitacion_proyectada, global::System.Int32 id_personal_proyectado, global::System.Int32 id_actividad_proyectada, global::System.DateTime fecha_accion, global::System.String tipo_accion, global::System.String tipo_presupuesto)
+        /// <param name="descripcion_auditoria">Initial value of the descripcion_auditoria property.</param>
+        public static AUDITORIA_PRESUPUESTO CreateAUDITORIA_PRESUPUESTO(global::System.Int32 id_auditoria, global::System.Int32 id_capacitacion_proyectada, global::System.Int32 id_personal_proyectado, global::System.Int32 id_actividad_proyectada, global::System.DateTime fecha_accion, global::System.String tipo_accion, global::System.String tipo_presupuesto, global::System.String descripcion_auditoria)
         {
             AUDITORIA_PRESUPUESTO aUDITORIA_PRESUPUESTO = new AUDITORIA_PRESUPUESTO();
             aUDITORIA_PRESUPUESTO.id_auditoria = id_auditoria;
@@ -776,6 +777,7 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
             aUDITORIA_PRESUPUESTO.fecha_accion = fecha_accion;
             aUDITORIA_PRESUPUESTO.tipo_accion = tipo_accion;
             aUDITORIA_PRESUPUESTO.tipo_presupuesto = tipo_presupuesto;
+            aUDITORIA_PRESUPUESTO.descripcion_auditoria = descripcion_auditoria;
             return aUDITORIA_PRESUPUESTO;
         }
 
@@ -952,6 +954,30 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.String _tipo_presupuesto;
         partial void Ontipo_presupuestoChanging(global::System.String value);
         partial void Ontipo_presupuestoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String descripcion_auditoria
+        {
+            get
+            {
+                return _descripcion_auditoria;
+            }
+            set
+            {
+                Ondescripcion_auditoriaChanging(value);
+                ReportPropertyChanging("descripcion_auditoria");
+                _descripcion_auditoria = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("descripcion_auditoria");
+                Ondescripcion_auditoriaChanged();
+            }
+        }
+        private global::System.String _descripcion_auditoria;
+        partial void Ondescripcion_auditoriaChanging(global::System.String value);
+        partial void Ondescripcion_auditoriaChanged();
 
         #endregion
     

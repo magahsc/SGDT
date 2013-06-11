@@ -133,6 +133,7 @@
     <Property Name="fecha_accion" Type="datetime" Nullable="false" />
     <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
     <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="descripcion_auditoria" Type="varchar" Nullable="false" MaxLength="500" />
   </EntityType>
   <EntityType Name="CARGO_PERSONAL">
     <Key>

@@ -50,6 +50,23 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             get { return _monto; }
             set { _monto = value; }
         }
+
+
+        private float _costo_empresa;
+        public float Costo_empresa
+        {
+            get { return _costo_empresa; }
+            set { _costo_empresa = value; }
+        }
+
+        private float _total;
+        public float Total
+        {
+            get { return _total; }
+            set { _total = value; }
+        }
+
+
         
     }
 }
