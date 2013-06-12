@@ -380,6 +380,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 objauditoria.tipo_accion = "A";
                 objauditoria.id_actividad_proyectada = Convert.ToInt32(id); ;
                 objauditoria.tipo_presupuesto = "A";
+                objauditoria.descripcion_auditoria = "";
 
                 objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
 

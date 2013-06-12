@@ -348,6 +348,7 @@ namespace GNRS.ModuloPresupuesto.UI
             objauditoria.tipo_accion = "E";
             objauditoria.id_actividad_proyectada = 0;
             objauditoria.tipo_presupuesto = "C";
+            objauditoria.descripcion_auditoria = "";
 
             objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
             String mensaje = "El presupuesto de capacitación proyectada " + objpresupuesto.codigo_presupuesto + " ha sido eliminado exitosamente";

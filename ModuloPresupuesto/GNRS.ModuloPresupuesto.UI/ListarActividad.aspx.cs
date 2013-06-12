@@ -347,6 +347,7 @@ namespace GNRS.ModuloPresupuesto.UI
             objauditoria.tipo_accion = "E";
             objauditoria.id_actividad_proyectada = iIdActividad;
             objauditoria.tipo_presupuesto = "A";
+            objauditoria.descripcion_auditoria = "";
 
             objcapacitar.RegistrarAuditoriaPresupuesto(objauditoria);
             String mensaje = "El presupuesto de actividad de RRHH " + sco + " ha sido eliminado satisfactoriamente";

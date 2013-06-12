@@ -75,24 +75,44 @@
         });
 
 
-        function AbrirVentana(sId) {
+        function AbrirVentana(sId,presupuestoaprobado) {
+            if (presupuestoaprobado == "Pendiente") {
+                var url = 'EditarActividad.aspx?id=' + sId;
+                var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:450px;dialogHide:true;help:no;scroll:yes');
+                //window.open(url);
 
-            var url = 'EditarActividad.aspx?id=' + sId;
-            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:760px;dialogHeight:450px;dialogHide:true;help:no;scroll:yes');
-            //window.open(url);
+                //Refresh();
+            }
 
-            //Refresh();
+            if (presupuestoaprobado == "Aprobado") {
+                var mensaje = 'Esta actividad ha sido aprobada y no se puede actualizar';
+                $("#dialog-mensajes").text(mensaje).dialog("open");
+            }
+            if (presupuestoaprobado == "No aprobado") {
+                var mensaje = 'Esta actividad no ha sido aprobada y no se puede actualizar';
+                $("#dialog-mensajes").text(mensaje).dialog("open");
+            }
 
         }
 
-        function mostrarMensajeConfirmacion(id, sco) {
-            var hdnSession2 = document.getElementById("<%= hdnSession2.ClientID %>");
-            hdnSession2.value = sco;
-            var hdnSession1 = document.getElementById("<%= hdnSession1.ClientID %>");
-            hdnSession1.value = id;
-            var texto = '¿Está seguro que desea eliminar el presupuesto de actividad de RRHH ' + sco + '?';
+        function mostrarMensajeConfirmacion(id, sco, presupuestoaprobado) {
+            if (presupuestoaprobado == "Pendiente") {
+                var hdnSession2 = document.getElementById("<%= hdnSession2.ClientID %>");
+                hdnSession2.value = sco;
+                var hdnSession1 = document.getElementById("<%= hdnSession1.ClientID %>");
+                hdnSession1.value = id;
+                var texto = '¿Está seguro que desea eliminar el presupuesto de actividad de RRHH ' + sco + '?';
 
-            $("#dialog-confirmacion").text(texto).dialog("open");
+                $("#dialog-confirmacion").text(texto).dialog("open");
+            }
+            if (presupuestoaprobado == "Aprobado") {
+                var mensaje = 'Esta actividad ha sido aprobada y no se puede eliminar';
+                $("#dialog-mensajes").text(mensaje).dialog("open");
+            }
+            if (presupuestoaprobado == "No aprobado") {
+                var mensaje = 'Esta actividad no ha sido aprobada y no se puede eliminar';
+                $("#dialog-mensajes").text(mensaje).dialog("open");
+            }
         }
 
         function MostrarMensajeFinal(mensaje) {
@@ -230,7 +250,12 @@
                     <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center" HeaderStyle-Width="80px">
 						<ItemTemplate>
 							<asp:LinkButton ID="lnkEditar" runat="server" CommandName="CMDEditar" CommandArgument='<%#Eval("idEditar_Actividad") %>'></asp:LinkButton>
-                            <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_Actividad") %>');" >Editar</button>
+                            
+                            
+                             <asp:LinkButton ID="LinkButton4" runat="server" CommandArgument='<%#Eval("presupuesto_aprobado") %>' Visible="false"
+                             ></asp:LinkButton>
+
+                            <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_Actividad") %>','<%#Eval("presupuesto_aprobado") %>');" >Editar</button>
                          </ItemTemplate>
 					</asp:TemplateField>
 
@@ -243,8 +268,11 @@
 
                          <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("codigo_actividad") %>' Visible="false"
                              ></asp:LinkButton>
+
+                        <asp:LinkButton ID="LinkButton5" runat="server" CommandArgument='<%#Eval("presupuesto_aprobado") %>' Visible="false"
+                             ></asp:LinkButton>
                             
-                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_actividad_proyectada") %>', '<%#Eval("codigo_actividad") %>');" >Eliminar</button>
+                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_actividad_proyectada") %>', '<%#Eval("codigo_actividad") %>','<%#Eval("presupuesto_aprobado") %>');" >Eliminar</button>
                                             
                         
                                             </ItemTemplate>

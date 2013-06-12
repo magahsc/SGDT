@@ -48,22 +48,43 @@
 
         });
 
-        function mostrarMensajeConfirmacion(sIdCapacitacion, sco) {
-            var texto = '¿Está seguro que desea eliminar el presupuesto de capacitación proyectada ' + sco + '?';
+        function mostrarMensajeConfirmacion(sIdCapacitacion, sco, presupuestoaprobado) {
+            if (presupuestoaprobado == "Pendiente") {
+                var texto = '¿Está seguro que desea eliminar el presupuesto de capacitación proyectada ' + sco + '?';
 
-            $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
-            // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
+                $("#dialog-confirmacion").text(texto).data("sIdCapacitacion", sIdCapacitacion).dialog("open");
+                // $("#dialog-confirmacion").text(texto).data("scodigo", sIdCapacitacion).dialog("open");
+            }
+            if (presupuestoaprobado == "Aprobado") {
+                var mensaje = 'Este presupuesto ha sido aprobado y no se puede eliminar';
+                $("#dialog-message").text(mensaje).dialog("open");
+            }
+            if (presupuestoaprobado == "No aprobado") {
+                var mensaje = 'Este presupuesto no ha sido aprobado y no se puede eliminar';
+                $("#dialog-message").text(mensaje).dialog("open");
+            }
+
         }
 
 
-        function AbrirVentana(sIdCapacitacion) {
+        function AbrirVentana(sIdCapacitacion, presupuestoaprobado) {
 
+            if (presupuestoaprobado == "Pendiente") {
+                var url = 'EditarPresupuestoCapacitacion.aspx?id=' + sIdCapacitacion;
+                var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:780px;dialogHeight:670px;dialogHide:true;help:no;scroll:yes');
+                //window.open(url);
 
-            var url = 'EditarPresupuestoCapacitacion.aspx?id=' + sIdCapacitacion;
-            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:780px;dialogHeight:670px;dialogHide:true;help:no;scroll:yes');
-            //window.open(url);
-
-            //Refresh();
+                //Refresh();
+            }
+            if (presupuestoaprobado == "Aprobado") {
+                var mensaje = 'Este presupuesto ha sido aprobado y no se puede actualizar';
+                $("#dialog-message").text(mensaje).dialog("open");
+            }
+            if (presupuestoaprobado == "No aprobado") {
+                var mensaje = 'Este presupuesto no ha sido aprobado y no se puede actualizar';
+                $("#dialog-message").text(mensaje).dialog("open");
+            }
+              
 
         }
 
@@ -235,7 +256,10 @@
 						<asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("idEditar_presupuesto_capacitacion") %>' Visible="false"
                              ></asp:LinkButton>
 
-                         <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_presupuesto_capacitacion") %>');" >Editar</button>
+                             <asp:LinkButton ID="LinkButton4" runat="server" CommandArgument='<%#Eval("presupuesto_aprobado") %>' Visible="false"
+                             ></asp:LinkButton>
+
+                         <button id="editar" onclick="AbrirVentana('<%#Eval("idEditar_presupuesto_capacitacion") %>', '<%#Eval("presupuesto_aprobado") %>');" >Editar</button>
                                             
                                             </ItemTemplate>
 
@@ -248,8 +272,11 @@
 
                          <asp:LinkButton ID="LinkButton3" runat="server" CommandArgument='<%#Eval("cod_presupuesto") %>' Visible="false"
                              ></asp:LinkButton>
+
+                         <asp:LinkButton ID="LinkButton5" runat="server" CommandArgument='<%#Eval("presupuesto_aprobado") %>' Visible="false"
+                             ></asp:LinkButton>
                             
-                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>');" >Eliminar</button>
+                         <button id="opesadner" onclick="mostrarMensajeConfirmacion('<%#Eval("id_presupuesto_capacitacion") %>', '<%#Eval("cod_presupuesto") %>','<%#Eval("presupuesto_aprobado") %>');" >Eliminar</button>
                                             
                                             </ItemTemplate>
 
