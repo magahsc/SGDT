@@ -1,19 +1,57 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="SolicitudAprobacionPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.SolicitudAprobacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+ 
+  <script>
+        function pageLoad() {
+            $(function () {
+                $("#dialog-form").dialog({
+                    autoOpen: false,
+                    height: 200,
+                    width: 350,
+                    modal: true,                   
+                });               
+            });
 
-    <script>
+           $(function () {
+               $("#dialog-message").dialog({
+                   modal: true,
+                   autoOpen: false,
+                   height: 200,
+                   width: 500,
+                   buttons: {
+                       Ok: function () {
+                           $(this).dialog("close");
+                       }
+                   }
+               });
+               $("#dialog-message").css({
+                   fontSize: 15
+               });
 
-        function mostrarAspxAsPopUp(id) {
+            });
+        }        
+  </script>
 
+  <script>
+      function mostrarMensaje(mensaje) {
+
+          $("#dialog-message").text(mensaje).dialog("open");
+      }
+      
+       function mostrarAspxAsPopUp(id) {
             var url = 'DetalleAprobacionPersonal.aspx?modo=remuneracion&id=' + id;
-
             var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
 
 
         }
 
     </script>
-    
+
+    <div id="dialog-message" title="Módulo de Presupuesto">  </div>
+
     <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" Enabled=false>Personal para aprobacion</asp:LinkButton> 
     <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px">Personal procesado</asp:LinkButton>
     <br />
@@ -58,11 +96,12 @@
                         <td colspan="2" align="center">
                              <asp:GridView ID="PersonalProyectadoGridView" runat="server" 
                                  AutoGenerateColumns="false" style="margin-top: 0px" onrowcommand="PersonalProyectadoGridView_RowCommand" 
-                                
+                                 DataKeyNames="Id_persona"
                                 >
                                 <Columns>
                    
-
+                                    <asp:BoundField DataField="Id_persona" HeaderText="Id_persona" Visible=false/>
+                            
                                     <asp:BoundField DataField="identificador" HeaderText="Identificador" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
 
                                     <asp:TemplateField HeaderText="Tipo de personal" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
@@ -102,7 +141,7 @@
 
                                     <asp:TemplateField HeaderText="Aprobar" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                <asp:CheckBox ID="AprobarCheckBox" runat="server" />
                                               </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -116,15 +155,15 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="right">
-                           <asp:Button ID="SolicitarAprobacionButton" runat="server" Text="Solicitar aprobacion"  
+                           <asp:Button ID="SolicitarAprobacionButton" runat="server" 
+                                Text="Solicitar aprobacion" onclick="SolicitarAprobacionButton_Click"  
                                 />
                         </td>
                         </tr> 
                  </tbody>
             </Table>
 
-             <asp:Button ID="Button1" runat="server" Text="Guadar Presupuesto" 
-        /> 
+             
   </ContentTemplate> 
   
   </asp:UpdatePanel>

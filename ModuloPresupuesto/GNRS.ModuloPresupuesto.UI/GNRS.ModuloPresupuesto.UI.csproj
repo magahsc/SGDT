@@ -94,6 +94,7 @@
     <Content Include="ListarActividad.aspx" />
     <Content Include="ListarPresupuestoCapacitacion.aspx" />
     <Content Include="MainPage.aspx" />
+    <Content Include="PersonalProcesado.aspx" />
     <Content Include="Prueba.aspx" />
     <Content Include="RegistrarActividad.aspx" />
     <Content Include="RegistrarPresupuestoCapacitacion.aspx" />
@@ -223,6 +224,13 @@
     </Compile>
     <Compile Include="MainPage.aspx.designer.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalProcesado.aspx.cs">
+      <DependentUpon>PersonalProcesado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonalProcesado.aspx.designer.cs">
+      <DependentUpon>PersonalProcesado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModuloPresupuesto.Master.cs">

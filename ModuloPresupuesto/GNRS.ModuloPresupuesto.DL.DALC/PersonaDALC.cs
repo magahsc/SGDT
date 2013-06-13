@@ -175,6 +175,24 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+        public Boolean editarEstadoPersona(int id, string nuevoEstado)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PERSONA obj = (from a in context.PERSONA
+                               where a.id_persona == id
+                               select a).First();
+                obj.estado_persona = nuevoEstado;               
+                context.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public List<PERSONA> listarPersonasXEstado(string estado)
         {
@@ -186,6 +204,29 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                          where p.estado_persona == estado 
                          select p).ToList();
                
+
+
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        public List<PERSONA> listarPersonasXEstado(int idPeriodoPresupuesto)
+        {
+            try
+            {
+                List<PERSONA> lista = new List<PERSONA>();
+                var context = new PresupuestoDBEntities();
+                lista = (from p in context.PERSONA
+                         where p.id_periodo_presupuesto == idPeriodoPresupuesto
+                         select p).ToList();
+
 
 
                 return lista;

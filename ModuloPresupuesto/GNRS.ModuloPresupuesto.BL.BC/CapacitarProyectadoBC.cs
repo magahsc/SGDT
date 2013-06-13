@@ -226,7 +226,17 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         //Nuevo
         public int RegistrarPeriodoPresupuesto(PERIODO_PRESUPUESTO objPeriodo)
         {
-            return objperiodoDALC.RegistrarPeriodoPresupuesto(objPeriodo);
+            PERIODO_PRESUPUESTO objPeriodoPreExiste=new PERIODO_PRESUPUESTO();
+            objPeriodoPreExiste=objperiodoDALC.obtenerPeriodoXMesAnio(objPeriodo.mes_periodo,objPeriodo.anio_periodo);
+
+            if (objPeriodoPreExiste == null)
+            {
+                return objperiodoDALC.RegistrarPeriodoPresupuesto(objPeriodo);
+            }
+            else
+            {
+                return objPeriodoPreExiste.id_periodo_presupuesto;
+            }
         }
 
         public PERIODO_PRESUPUESTO ObtenerPeriodoPresupuesto(int codigoPeriodo)

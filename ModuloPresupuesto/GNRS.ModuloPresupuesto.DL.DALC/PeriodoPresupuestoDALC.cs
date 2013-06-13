@@ -45,5 +45,26 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+
+
+        public PERIODO_PRESUPUESTO obtenerPeriodoXMesAnio(int mes, int anio)
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PERIODO_PRESUPUESTO periodo = new PERIODO_PRESUPUESTO();
+
+                periodo = (from a in context.PERIODO_PRESUPUESTO
+                           where a.mes_periodo == mes && a.anio_periodo==anio
+                           select a).First();
+
+                return periodo;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

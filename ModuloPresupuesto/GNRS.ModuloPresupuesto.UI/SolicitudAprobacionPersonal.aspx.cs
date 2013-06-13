@@ -78,7 +78,7 @@ namespace GNRS.ModuloPresupuesto.UI
             listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBEXEstado("P");
             PersonalProyectadoGridView.DataSource = listaPersonalProyectadoBE;
             PersonalProyectadoGridView.DataBind();
-
+            GridUpdatePanel.Update();
         }
         protected string FormatCategoria(string categoria)
         {
@@ -156,6 +156,34 @@ namespace GNRS.ModuloPresupuesto.UI
 
 
             }
+        }
+
+        protected void SolicitarAprobacionButton_Click(object sender, EventArgs e)
+        {
+
+            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
+            List<int> listaIdPersonal = new List<int>();
+            int cod;
+           
+            foreach(GridViewRow row in PersonalProyectadoGridView.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("AprobarCheckBox");
+                if (check.Checked)
+                {
+
+                    cod = (int)PersonalProyectadoGridView.DataKeys[row.RowIndex].Value;
+                    listaIdPersonal.Add(cod);
+
+                }
+            }
+
+            objPresupPersonalProyectadoBC.AprobarSolicitudAprobacion(listaIdPersonal);
+
+            cargarPersonalProyectado();
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensaje('Se envió la solicitud de aprobación.')", true);
+
+            //enviar correo
         }
 
         

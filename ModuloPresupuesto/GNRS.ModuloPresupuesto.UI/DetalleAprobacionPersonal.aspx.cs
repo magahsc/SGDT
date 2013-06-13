@@ -45,12 +45,60 @@ namespace GNRS.ModuloPresupuesto.UI
 
                         if (Request.QueryString["id"] != null)
                         {
-                            string sId_persona = Request.QueryString["id"];
-                            int id_persona;
-                            if (int.TryParse(sId_persona, out id_persona))
+                            string motivoPreaprobacion = ""; 
+                            
+                            if (Request.QueryString["estado"] != null)
                             {
-                                //mostrar
+                                string estad = Request.QueryString["estado"];
+                                string sId_persona = Request.QueryString["id"];
+                                int id_persona;
+
+                                if (int.TryParse(sId_persona, out id_persona))
+                                {
+                                    AuditoriaPresupuestoDALC objDALC = new AuditoriaPresupuestoDALC();
+
+                                    motivoPreaprobacion = objDALC.obtenerAuditoriaProyectadaXTipoAccion(id_persona, estad).descripcion_auditoria;
+                                    if (motivoPreaprobacion.Equals(""))
+                                        motivoPreaprobacion = "No se ingresó motivos";
+                                }
                             }
+
+                            else
+                            {
+                                
+                                string estado = "";
+                                if (Session["estadoAuditoria"] != null)
+                                    estado = (string)Session["estadoAuditoria"];
+
+                                if (!estado.Equals("P") && !estado.Equals("E") && !estado.Equals("EP"))
+                                {
+                                    string sId_persona = Request.QueryString["id"];
+                                    int id_persona;
+
+                                    if (int.TryParse(sId_persona, out id_persona))
+                                    {
+                                        AuditoriaPresupuestoDALC objDALC = new AuditoriaPresupuestoDALC();
+
+                                        motivoPreaprobacion = objDALC.obtenerAuditoriaProyectadaXTipoAccion(id_persona, estado).descripcion_auditoria;
+                                        if (motivoPreaprobacion.Equals(""))
+                                            motivoPreaprobacion = "No se ingresó motivos";
+                                    }
+                                }
+
+                                else
+                                {
+                                    if (estado.Equals("P"))
+                                        motivoPreaprobacion = "No se procesa";
+                                    if (estado.Equals("E"))
+                                        motivoPreaprobacion = "Personal Eliminado";
+                                    if (estado.Equals("EP"))
+                                        motivoPreaprobacion = "No hay motivos";
+
+                                }
+                            }
+
+                            TextBox1.Text = motivoPreaprobacion;
+
                         }
                     }
 
@@ -81,7 +129,7 @@ namespace GNRS.ModuloPresupuesto.UI
                 objConceptoBE.Concepto_Texto = objAuxConceptoRemun.nombre_concepto;
 
                 objConceptoBE.Monto = (float)it.monto;
-
+                
                 int tipoConcepto_Cod = objAuxConceptoRemun.columna_boleta;
 
                 objConceptoBE.TipoConcepto_Cod = tipoConcepto_Cod;
@@ -93,9 +141,13 @@ namespace GNRS.ModuloPresupuesto.UI
                     objConceptoBE.TipoConcepto_Texto = "Aportaciones";
 
 
+                
 
                 // Agregado
                 objConceptoBE.Costo_empresa = (float)it.monto_costo_empresa;
+
+                objConceptoBE.Total = (float)it.monto_costo_empresa + (float)it.monto;
+
 
                 listaConceptosTemporales.Add(objConceptoBE);
                 i++;

@@ -229,6 +229,7 @@ namespace GNRS.ModuloPresupuesto.BL.BC
                 objAuditoria.id_personal_proyectado=id_persona;
                 objAuditoria.tipo_accion="A";
                 objAuditoria.tipo_presupuesto="P";
+                objAuditoria.descripcion_auditoria = "";
                 objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);
 
                 return true;
@@ -300,5 +301,218 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             }
 
         }
+
+
+        public void AprobarSolicitudAprobacion(List<int> listaIdPersona)
+        {
+            try
+            {
+                //modificar Estado
+                Boolean resultado = false;
+                foreach (int id in listaIdPersona)
+                {
+                    resultado=personaDALC.editarEstadoPersona(id, "EP");
+
+                    if (resultado == true)
+                    {
+                        AUDITORIA_PRESUPUESTO objAuditoria = new AUDITORIA_PRESUPUESTO();
+                        DateTime now = DateTime.Now;
+                        objAuditoria.fecha_accion = now;
+                        objAuditoria.tipo_accion = "ES";
+                        objAuditoria.descripcion_auditoria = "";
+                        objAuditoria.id_personal_proyectado = id;
+                        //
+                        objAuditoria.id_actividad_proyectada = 0;
+                        objAuditoria.id_capacitacion_proyectada = 0;
+                        objAuditoria.tipo_presupuesto = "";
+
+                        objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);
+
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        public void AprobarPreAprobacion(List<int> listaIdPersona, List<String> listaMotivo)
+        {
+            try
+            {
+                //modificar Estado
+                Boolean resultado = false;
+           
+                foreach (int id in listaIdPersona)
+                {
+                    resultado=personaDALC.editarEstadoPersona(id, "PA");
+                    
+                    if (resultado == true)
+                    {                    
+                        AUDITORIA_PRESUPUESTO objAuditoria = new AUDITORIA_PRESUPUESTO();
+                        DateTime now = DateTime.Now;
+                        objAuditoria.fecha_accion = now;
+                        objAuditoria.tipo_accion = "PA";
+
+                        int index = listaIdPersona.IndexOf(id);
+                        string mot=listaMotivo[index];
+
+
+                        objAuditoria.descripcion_auditoria = mot;
+                        objAuditoria.id_personal_proyectado = id; 
+                        //
+                        objAuditoria.id_actividad_proyectada = 0;
+                        objAuditoria.id_capacitacion_proyectada = 0;                    
+                        objAuditoria.tipo_presupuesto = "";                   
+
+                        objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);                    
+                    }
+
+                
+                }      
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+
+        public void RechazarPreAprobacion(List<int> listaIdPersona, List<String> listaMotivo)
+        {
+            try
+            {
+                //modificar Estado
+                Boolean resultado = false;
+              
+                foreach (int id in listaIdPersona)
+                {
+                    resultado = personaDALC.editarEstadoPersona(id, "R");
+
+                    if (resultado == true)
+                    {
+                        AUDITORIA_PRESUPUESTO objAuditoria = new AUDITORIA_PRESUPUESTO();
+                        DateTime now = DateTime.Now;
+                        objAuditoria.fecha_accion = now;
+                        objAuditoria.tipo_accion = "R";
+
+                        int index = listaIdPersona.IndexOf(id);
+                        string mot = listaMotivo[index];
+
+
+                        objAuditoria.descripcion_auditoria = mot;
+                        objAuditoria.id_personal_proyectado = id;
+                        //
+                        objAuditoria.id_actividad_proyectada = 0;
+                        objAuditoria.id_capacitacion_proyectada = 0;
+                        objAuditoria.tipo_presupuesto = "";
+
+                        objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);
+                    }
+
+                  
+                }      
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+        public void AprobarAprobacion(List<int> listaIdPersona, List<String> listaMotivo)
+        {
+            try
+            {
+                //modificar Estado
+                Boolean resultado = false;
+
+                foreach (int id in listaIdPersona)
+                {
+                    resultado = personaDALC.editarEstadoPersona(id, "A");
+
+                    if (resultado == true)
+                    {
+                        AUDITORIA_PRESUPUESTO objAuditoria = new AUDITORIA_PRESUPUESTO();
+                        DateTime now = DateTime.Now;
+                        objAuditoria.fecha_accion = now;
+                        objAuditoria.tipo_accion = "AP";
+
+                        int index = listaIdPersona.IndexOf(id);
+                        string mot = listaMotivo[index];
+
+
+                        objAuditoria.descripcion_auditoria = mot;
+                        objAuditoria.id_personal_proyectado = id;
+                        //
+                        objAuditoria.id_actividad_proyectada = 0;
+                        objAuditoria.id_capacitacion_proyectada = 0;
+                        objAuditoria.tipo_presupuesto = "";
+
+                        objAuditoriaPresupuestoDALC.insertarAuditoriaProyectada(objAuditoria);
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+        public List<PersonalProyectadoBE> listarPersonalProyectadoBE(int idPeriodoPresupuesto)
+        {
+            try
+            {
+                List<PERSONA> listaPersona = personaDALC.listarPersonasXEstado(idPeriodoPresupuesto);
+                List<PersonalProyectadoBE> listaPersonalProyectadoTemp = new List<PersonalProyectadoBE>();
+                PersonalProyectadoBE objPersonalProyectadoTemp;
+
+                List<SECCION> listaSeccion = new List<SECCION>();
+                listaSeccion = seccionDALC.listarSeccion();
+                SECCION objSeccion = new SECCION();
+                foreach (PERSONA it in listaPersona)
+                {
+                    objPersonalProyectadoTemp = new PersonalProyectadoBE();
+                    
+
+                    objSeccion = listaSeccion.Find(x => x.id_seccion == it.id_seccion);
+                    objPersonalProyectadoTemp.Id_area = objSeccion.id_area;
+
+                    objPersonalProyectadoTemp.Id_categoria = it.id_categoria;
+                    objPersonalProyectadoTemp.Id_localidad = it.id_localidad;
+                    objPersonalProyectadoTemp.Id_persona = it.id_persona;
+                    objPersonalProyectadoTemp.Id_seccion = it.id_seccion;
+                    objPersonalProyectadoTemp.Identificador = it.nombres_persona;
+
+                    float remuneracion = calcularRemuneracion(it.id_persona);
+                    objPersonalProyectadoTemp.Remuneracion = remuneracion;
+
+                    objPersonalProyectadoTemp.Estado = it.estado_persona;
+
+                    listaPersonalProyectadoTemp.Add(objPersonalProyectadoTemp);
+
+                }
+
+                return listaPersonalProyectadoTemp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
     }
 }

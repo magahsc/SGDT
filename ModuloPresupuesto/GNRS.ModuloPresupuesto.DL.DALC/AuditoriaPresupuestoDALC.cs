@@ -25,5 +25,25 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+
+        public AUDITORIA_PRESUPUESTO obtenerAuditoriaProyectadaXTipoAccion(int id_personalProyectado,string tipoAccion)
+        {
+            try
+            {
+                AUDITORIA_PRESUPUESTO obj = new AUDITORIA_PRESUPUESTO();
+                var context = new PresupuestoDBEntities();
+                obj = (from p in context.AUDITORIA_PRESUPUESTO
+                           where p.id_personal_proyectado == id_personalProyectado && p.tipo_accion==tipoAccion
+                           select p).First();
+
+
+                return obj;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

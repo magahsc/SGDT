@@ -56,6 +56,13 @@ namespace GNRS.ModuloPresupuesto.BL.BE
             set { _remuneracion = value; }
         }
 
+        private string _estado;
+        public string Estado
+        {
+            get { return _estado; }
+            set { _estado = value; }
+        }
+       
 
     }
 }

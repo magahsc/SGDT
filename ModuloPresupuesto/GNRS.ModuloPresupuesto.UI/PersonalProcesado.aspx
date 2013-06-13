@@ -1,60 +1,22 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="PreaprobacionPersonal.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.SolicitudAprobacion2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ModuloPresupuesto.Master" AutoEventWireup="true" CodeBehind="PersonalProcesado.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.PersonalProcesado" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="contenido" runat="server">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
- 
-  <script>
-        function pageLoad() {
-            $(function () {
-                $("#dialog-form").dialog({
-                    autoOpen: false,
-                    height: 200,
-                    width: 350,
-                    modal: true,                   
-                });               
-            });
-
-           $(function () {
-               $("#dialog-message").dialog({
-                   modal: true,
-                   autoOpen: false,
-                   height: 200,
-                   width: 500,
-                   buttons: {
-                       Ok: function () {
-                           $(this).dialog("close");
-                       }
-                   }
-               });
-               $("#dialog-message").css({
-                   fontSize: 15
-               });
-
-            });
-        }        
-  </script>
-
-  <script>
-      function mostrarMensaje(mensaje) {
-
-          $("#dialog-message").text(mensaje).dialog("open");
-      }
-
-        function mostrarAspxAsPopUp(id) {
+      <script>
+      
+       function mostrarAspxAsPopUpRemuneracion(id) {
 
             var url = 'DetalleAprobacionPersonal.aspx?modo=remuneracion&id=' + id;
             var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
-
-
         }
 
-    </script>
-    <div id="dialog-message" title="Módulo de Presupuesto">  </div>
+        function mostrarAspxAsPopUpMotivo(id) {
 
-    
-    <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" Enabled=false>Personal para aprobacion</asp:LinkButton> 
-    <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px">Personal procesado</asp:LinkButton>
+            var url = 'DetalleAprobacionPersonal.aspx?modo=motivo&id=' + id ;
+            var strReturn = window.showModalDialog(url, null, 'status:no;dialogWidth:600px;dialogHeight:300px;dialogHide:true;help:no;scroll:yes');
+        }
+
+    </script>   
+    <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" >Personal para aprobación</asp:LinkButton> 
+    <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px" Enabled=false>Personal procesado</asp:LinkButton>
     <br />
     <asp:Label ID="Label3" runat="server" Text="Tipo de personal : " style="padding-left: 1px"></asp:Label>
     <asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
@@ -86,7 +48,7 @@
 
      
    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
-    EnablePartialRendering="true" >  
+    EnablePartialRendering="true">  
     
     </asp:ScriptManager> 
     <asp:UpdatePanel ID="GridUpdatePanel" runat="server" UpdateMode="Conditional"> 
@@ -97,14 +59,12 @@
                         <td colspan="2" align="center">
                              <asp:GridView ID="PersonalProyectadoGridView" runat="server" 
                                  AutoGenerateColumns="false" style="margin-top: 0px" onrowcommand="PersonalProyectadoGridView_RowCommand" 
-                                 DataKeyNames="Id_persona" 
+                                DataKeyNames="Id_persona"
                                 >
                                 <Columns>
                    
                                     <asp:BoundField DataField="Id_persona" HeaderText="Id_persona" Visible=false/>
-                            
-                   
-
+                                    
                                     <asp:BoundField DataField="identificador" HeaderText="Identificador" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
 
                                     <asp:TemplateField HeaderText="Tipo de personal" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
@@ -133,8 +93,6 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:BoundField DataField="fecha_creacion" HeaderText="Registro" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"/>
-                                   
 
                                     <asp:TemplateField HeaderText="Remuneracion" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
@@ -142,18 +100,22 @@
                                             </ItemTemplate>
                                     </asp:TemplateField>
 
+                                    
+                                    <asp:TemplateField HeaderText="Estado" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>                                           
+                                           <%# FormatEstado(Eval("Estado").ToString()) %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    
                                     <asp:TemplateField HeaderText="Motivo" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="MotivoTextBox" runat="server"  rows="2" TextMode="multiline"></asp:TextBox>
+                                                <asp:Button ID="MotivoButton" runat="server" Text="+" CommandName="cmdMotivo" CommandArgument='<%# Eval("id_persona") %>' />
                                             </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:TemplateField HeaderText="Aprobar" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:CheckBox ID="AprobarCheckBox" runat="server" />
-                                              </ItemTemplate>
-                                    </asp:TemplateField>
 
+
+                                   
                                   
                                 </Columns>
                                </asp:GridView>  
@@ -162,21 +124,12 @@
                         </td>
 
                     </tr>
-                    <tr>
-                        <td colspan="2" align="right">
-                           <asp:Button ID="AprobarButton" runat="server" Text="Aprobar" 
-                                onclick="AprobarButton_Click" />
-                           <asp:Button ID="RechazarButton" runat="server" Text="Rechazar" 
-                                onclick="RechazarButton_Click" />
-                        </td>
-                        </tr> 
+                   
                  </tbody>
             </Table>
 
-             
   </ContentTemplate> 
   
   </asp:UpdatePanel>
-
 
 </asp:Content>

@@ -76,9 +76,10 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
             List<PersonalProyectadoBE> listaPersonalProyectadoBE = new List<PersonalProyectadoBE>();
-            listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBEXEstado("P");
+            listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBEXEstado("PA");
             PersonalProyectadoGridView.DataSource = listaPersonalProyectadoBE;
             PersonalProyectadoGridView.DataBind();
+            GridUpdatePanel.Update();
 
         }
         protected string FormatCategoria(string categoria)
@@ -166,6 +167,76 @@ namespace GNRS.ModuloPresupuesto.UI
 
             
         }
+
+        protected void AprobarButton_Click(object sender, EventArgs e)
+        {
+            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
+            List<int> listaIdPersonal = new List<int>();
+            List<String> listMotivos = new List<String>();
+
+            int cod;
+            string mot;
+
+            foreach (GridViewRow row in PersonalProyectadoGridView.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("AprobarCheckBox");
+                TextBox textbox = (TextBox)row.FindControl("MotivoTextBox");
+                if (check.Checked)
+                {
+
+                    cod = (int)PersonalProyectadoGridView.DataKeys[row.RowIndex].Value;
+                    listaIdPersonal.Add(cod);
+
+                    mot = textbox.Text;
+                    listMotivos.Add(mot);
+
+
+                }
+
+            }
+
+            objPresupPersonalProyectadoBC.AprobarAprobacion(listaIdPersonal, listMotivos);
+
+            cargarPersonalProyectado();
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensaje('Se envió la notificación de aprobación.')", true);
+
+        }
+
+
+        protected void RechazarButton_Click(object sender, EventArgs e)
+        {
+            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
+            List<int> listaIdPersonal = new List<int>();
+            List<String> listMotivos = new List<String>();
+
+            int cod;
+            string mot;
+
+            foreach (GridViewRow row in PersonalProyectadoGridView.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("AprobarCheckBox");
+                TextBox textbox = (TextBox)row.FindControl("MotivoTextBox");
+                if (check.Checked)
+                {
+
+                    cod = (int)PersonalProyectadoGridView.DataKeys[row.RowIndex].Value;
+                    listaIdPersonal.Add(cod);
+
+                    mot = textbox.Text;
+                    listMotivos.Add(mot);
+
+
+                }
+
+            }
+
+            objPresupPersonalProyectadoBC.RechazarPreAprobacion(listaIdPersonal, listMotivos);
+
+            cargarPersonalProyectado();
+        }
+
+
 
 
     }

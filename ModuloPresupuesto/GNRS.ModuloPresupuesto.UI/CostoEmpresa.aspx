@@ -1,36 +1,25 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/ModuloPresupuesto.Master" CodeBehind="CostoEmpresa.aspx.cs" Inherits="GNRS.ModuloPresupuesto.UI.CostoEmpresa" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contenido" runat="server">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
  
-    
-    <script>
+  <script>
         function pageLoad() {
             $(function () {
                 $("#dialog-form").dialog({
                     autoOpen: false,
                     height: 200,
                     width: 350,
-                    modal: true,
-                   
+                    modal: true,                   
                 });
 
                 $("#dialog-form").css({
                     fontSize: 15
-                });
-
-
-          
-
-
+                });    
             });
-
-
-        }
-
-        
+        }        
   </script>
   <script>
 

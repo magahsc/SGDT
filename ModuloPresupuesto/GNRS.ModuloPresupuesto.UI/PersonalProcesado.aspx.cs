@@ -8,12 +8,10 @@ using GNRS.ModuloPresupuesto.DL.DALC;
 using GNRS.ModuloPresupuesto.BL.BC;
 using GNRS.ModuloPresupuesto.BL.BE;
 
-
 namespace GNRS.ModuloPresupuesto.UI
 {
-    public partial class SolicitudAprobacion2 : System.Web.UI.Page
+    public partial class PersonalProcesado : System.Web.UI.Page
     {
-
         LocalidadDALC objLocalidadDALC;
         AreaDALC objAreaDALC;
         SeccionDALC objSeccionDALC;
@@ -76,11 +74,18 @@ namespace GNRS.ModuloPresupuesto.UI
         {
             objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
             List<PersonalProyectadoBE> listaPersonalProyectadoBE = new List<PersonalProyectadoBE>();
-            listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBEXEstado("EP");
+
+            int idPeriodo=-1;
+            if(Session["idPeriodo"]!=null)
+            {
+                idPeriodo = (int)Session["idPeriodo"];
+            }
+            listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBE(idPeriodo);
             PersonalProyectadoGridView.DataSource = listaPersonalProyectadoBE;
             PersonalProyectadoGridView.DataBind();
-
+            GridUpdatePanel.Update();
         }
+
         protected string FormatCategoria(string categoria)
         {
             if (categoria.Equals("0"))
@@ -149,84 +154,70 @@ namespace GNRS.ModuloPresupuesto.UI
         }
 
 
+        protected string FormatEstado(string estado)
+        {
+
+            if(estado.Equals("P "))
+                return "Pendiente";
+            if(estado.Equals("A "))
+                return "Aprobado";
+            if(estado.Equals("E "))
+                return "Eliminado";
+            if(estado.Equals("EP"))
+                return "Enviado para aprobación";
+            if(estado.Equals("PA"))
+                return "Pre aprobado";
+            if(estado.Equals("R "))
+                return "Rechazado";
+
+
+
+            return "";
+        }
+
+        protected void guardarEstadoSession(string estado)
+        {
+
+            if (estado.Equals("P "))
+                Session.Add("estadoAuditoria", "P");
+            if (estado.Equals("E "))
+                Session.Add("estadoAuditoria", "E");
+            if (estado.Equals("EP"))
+                Session.Add("estadoAuditoria", "EP");
+
+            if (estado.Equals("A "))
+                Session.Add("estadoAuditoria", "AP");            
+            if (estado.Equals("PA"))
+                Session.Add("estadoAuditoria", "PA");
+            if (estado.Equals("R "))
+                Session.Add("estadoAuditoria", "R");
+
+
+
+        }
 
         protected void PersonalProyectadoGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("cmdRemuneracion"))
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarAspxAsPopUp(" + e.CommandArgument + ")", true);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarAspxAsPopUpRemuneracion(" + e.CommandArgument + ")", true);
 
 
             }
-        }
 
-        protected void AprobarButton_Click(object sender, EventArgs e)
-        {
-            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
-            List<int> listaIdPersonal = new List<int>();
-            List<String> listMotivos = new List<String>();
-
-            int cod;
-            string mot;
-
-            foreach (GridViewRow row in PersonalProyectadoGridView.Rows)
+            if (e.CommandName.Equals("cmdMotivo"))
             {
-                CheckBox check = (CheckBox)row.FindControl("AprobarCheckBox");
-                TextBox textbox = (TextBox)row.FindControl("MotivoTextBox");
-                if (check.Checked)
-                {
+                PersonaDALC objPersonaDALC = new PersonaDALC();
+                PERSONA objP = new PERSONA();
+                objP = objPersonaDALC.obtenerPersonasXId(Convert.ToInt32(e.CommandArgument));
+                string estado = objP.estado_persona;
+                guardarEstadoSession(estado);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarAspxAsPopUpMotivo(" + e.CommandArgument+ ")", true);
 
-                    cod = (int)PersonalProyectadoGridView.DataKeys[row.RowIndex].Value;
-                    listaIdPersonal.Add(cod);
-
-                    mot = textbox.Text;
-                    listMotivos.Add(mot);
-
-                    
-                }
-           
-            }
-
-            objPresupPersonalProyectadoBC.AprobarPreAprobacion(listaIdPersonal, listMotivos);
-
-            cargarPersonalProyectado();
-
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensaje('Se envió la solicitud de aprobación.')", true);
-
-        }
-
-        protected void RechazarButton_Click(object sender, EventArgs e)
-        {
-            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
-            List<int> listaIdPersonal = new List<int>();
-            List<String> listMotivos = new List<String>();
-
-            int cod;
-            string mot;
-
-            foreach (GridViewRow row in PersonalProyectadoGridView.Rows)
-            {
-                CheckBox check = (CheckBox)row.FindControl("AprobarCheckBox");
-                TextBox textbox = (TextBox)row.FindControl("MotivoTextBox");
-                if (check.Checked)
-                {
-
-                    cod = (int)PersonalProyectadoGridView.DataKeys[row.RowIndex].Value;
-                    listaIdPersonal.Add(cod);
-
-                    mot = textbox.Text;
-                    listMotivos.Add(mot);
-
-
-                }
 
             }
 
-            objPresupPersonalProyectadoBC.RechazarPreAprobacion(listaIdPersonal, listMotivos);
 
-            cargarPersonalProyectado();
         }
-
-
     }
 }
