@@ -239,5 +239,69 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         }
 
 
+
+        public List<PersonalProyectadoBE> listarPersonalProyectadoBE(Int32 id_categoria, String estado, Int32 id_localidad, Int32 id_area, Int32 id_Seccion)
+        {
+            try
+            {
+                List<PersonalProyectadoBE> lista = new List<PersonalProyectadoBE>();
+                PersonalProyectadoBE objpersonaBE;
+                var context = new PresupuestoDBEntities();
+                var prueba = (from p in context.PERSONA
+                              join s in context.SECCION on p.id_seccion equals s.id_seccion
+                              join a in context.AREA on s.id_area equals a.id_area
+                              join l in context.LOCALIDAD on p.id_localidad equals l.id_localidad
+                              join c in context.CARGO_PERSONAL on p.id_cargo equals c.id_cargo
+                              join ca in context.CATEGORIA_PERSONAL on p.id_categoria equals ca.id_categoria
+                              where ((p.id_persona != 0) && (id_categoria == 0 || p.id_categoria == id_categoria) &&
+                                     (estado == "" || p.estado_persona == estado) && (id_localidad == 0 || p.id_localidad == id_localidad) &&
+                                     (id_area == 0 || s.id_area == id_area) && (id_Seccion == 0 || p.id_seccion == id_Seccion))
+                              select new
+                              {
+                                  p.id_persona,
+                                  p.nombres_persona,
+                                  p.apellido_paterno,
+                                  p.apellido_materno,
+                                  p.fecha_creacion,
+                                  p.estado_persona,
+                                  p.id_categoria,
+                                  ca.nombre_categoria,
+                                  p.id_cargo,
+                                  c.nombre_cargo,
+                                  p.id_localidad,
+                                  l.nombre_localidad,
+                                  a.id_area,
+                                  a.nombre_area,
+                                  p.id_seccion,
+                                  s.nombre_seccion
+                              }).ToList();
+
+                foreach (var item in prueba)
+                {
+                    String nombre = item.nombres_persona + " " + item.apellido_paterno + " " + item.apellido_materno;
+                    objpersonaBE = new PersonalProyectadoBE();
+                    objpersonaBE.Id_persona = item.id_persona;
+                    objpersonaBE.Identificador = nombre;
+                    objpersonaBE.Id_categoria = item.id_categoria;
+                    objpersonaBE.Id_localidad = item.id_localidad;
+                    objpersonaBE.Id_area = item.id_area;
+                    objpersonaBE.Id_seccion = item.id_seccion;
+                    objpersonaBE.Estado = item.estado_persona;
+                    objpersonaBE.Fecha_creacion = item.fecha_creacion;
+
+                    
+                    lista.Add(objpersonaBE);
+                }
+
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

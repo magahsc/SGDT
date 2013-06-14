@@ -15,27 +15,46 @@
         }
 
     </script>   
-    <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" >Personal para aprobación</asp:LinkButton> 
+    <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" 
+          onclick="PersonalAprobacionLinkButton_Click" >Personal para aprobación</asp:LinkButton> 
     <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px" Enabled=false>Personal procesado</asp:LinkButton>
     <br />
     <asp:Label ID="Label3" runat="server" Text="Tipo de personal : " style="padding-left: 1px"></asp:Label>
     <asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
-                                AutoPostBack="True" Height="20px" Width="130px" >
-                                <asp:ListItem Value="" > Seleccione el tipo de personal </asp:ListItem>
+                                AutoPostBack="True" Height="20px" Width="130px" 
+          onselectedindexchanged="TipoPersonalComboBox_SelectedIndexChanged" >
+                                <asp:ListItem Value="0" > Seleccione el tipo de personal </asp:ListItem>
                                 <asp:ListItem Value="1"  Text="Empleado"> </asp:ListItem>
                                 <asp:ListItem Value="2"  Text="Obrero"> </asp:ListItem>
                                 </asp:DropDownList>
+                                <asp:Label ID="Label1" runat="server" Text="Estado : " style="padding-left: 65px"></asp:Label>
+   
+    <asp:DropDownList ID="EstadoDropDownList" runat="server" 
+                                AutoPostBack="True" Height="20px" Width="130px" 
+          onselectedindexchanged="EstadoDropDownList_SelectedIndexChanged" >
+                                <asp:ListItem Value="" > Seleccione el estado</asp:ListItem>
+                                <asp:ListItem Value="P"  Text="Pendiente"> </asp:ListItem>
+                                <asp:ListItem Value="A"  Text="Aprobado"> </asp:ListItem>
+                                <asp:ListItem Value="E"  Text="Eliminado"> </asp:ListItem>
+                                <asp:ListItem Value="EP"  Text="Enviado para aprobación"> </asp:ListItem>
+                                <asp:ListItem Value="PA"  Text="Pre aprobado"> </asp:ListItem>
+                                <asp:ListItem Value="R"  Text="Rechazado"> </asp:ListItem>
+
+                                </asp:DropDownList>     
                     
+                   
                    <br />
                         <asp:Label ID="Label4" runat="server" Text="Localidad : " style="padding-left: 48px"></asp:Label>
                         <asp:DropDownList ID="LocalidadComboBox" runat="server" 
                                   
-                                AutoPostBack="True" Height="20px" Width="130px" ></asp:DropDownList>
+                                AutoPostBack="True" Height="20px" Width="130px" 
+          onselectedindexchanged="LocalidadComboBox_SelectedIndexChanged" ></asp:DropDownList>
                   
                            <asp:Label ID="Label5" runat="server" Text="Area : " style="padding-left: 82px"></asp:Label>
                            <asp:DropDownList ID="AreaComboBox" runat="server" 
                                      AutoPostBack="True"
-                                    Height="20px" Width="130px" Enabled=false></asp:DropDownList>
+                                    Height="20px" Width="130px" Enabled=false 
+          onselectedindexchanged="AreaComboBox_SelectedIndexChanged"></asp:DropDownList>
                        
                    
                     
@@ -43,7 +62,8 @@
                          <asp:Label ID="Label6" runat="server" Text="Seccion : " style="padding-left: 58px"></asp:Label>
                         <asp:DropDownList ID="SeccionComboBox" runat="server" 
                                
-                                AutoPostBack="True" Height="20px" Width="130px" Enabled=false></asp:DropDownList> <br />
+                                AutoPostBack="True" Height="20px" Width="130px" 
+          Enabled=false onselectedindexchanged="SeccionComboBox_SelectedIndexChanged"></asp:DropDownList> <br />
                      
 
      

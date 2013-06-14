@@ -51,21 +51,21 @@ namespace GNRS.ModuloPresupuesto.UI
             LocalidadComboBox.DataTextField = "nombre_localidad";
             LocalidadComboBox.DataValueField = "id_localidad";
             LocalidadComboBox.DataBind();
-            LocalidadComboBox.Items.Insert(0, new ListItem("Seleccione la localidad", ""));
+            LocalidadComboBox.Items.Insert(0, new ListItem("Seleccione la localidad", "0"));
 
 
             AreaComboBox.DataSource = listaArea;
             AreaComboBox.DataTextField = "nombre_area";
             AreaComboBox.DataValueField = "id_area";
             AreaComboBox.DataBind();
-            AreaComboBox.Items.Insert(0, new ListItem("Seleccione el area", ""));
+            AreaComboBox.Items.Insert(0, new ListItem("Seleccione el area", "0"));
 
 
             SeccionComboBox.DataSource = listaSeccion;
             SeccionComboBox.DataTextField = "nombre_seccion";
             SeccionComboBox.DataValueField = "id_seccion";
             SeccionComboBox.DataBind();
-            SeccionComboBox.Items.Insert(0, new ListItem("Seleccione la seccion", ""));
+            SeccionComboBox.Items.Insert(0, new ListItem("Seleccione la seccion", "0"));
 
 
           
@@ -181,11 +181,71 @@ namespace GNRS.ModuloPresupuesto.UI
 
             cargarPersonalProyectado();
 
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensaje('Se envió la solicitud de aprobación.')", true);
 
             //enviar correo
+            string body = "<p>Estimado(a)," +
+                    "<br />" +
+                    "Se le informa que se ha realizado una solicitud de aprobacion de presupuesto de personal, ingresa al <br />sistema para mayor detalle. " +
+                    "Recomendamos realizar las acciones pertinentes." +
+                    "<br /><br />Gracias," +
+                    "<br />Administrador del Sistema</p>";
+
+            string asunto = "Solicitud de aprobacion";
+
+            // objPresupPersonalProyectadoBC.EnviarCorreo( body, asunto);
+
+          ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "mostrarMensaje('Se envió la solicitud de aprobación.')", true);
+
+
         }
 
-        
+        protected void cargarGrillaPersonal()
+        {
+           
+
+
+            objPresupPersonalProyectadoBC = new PresupuestoPersonalProyectadoBC();
+            List<PersonalProyectadoBE> listaPersonalProyectadoBE = new List<PersonalProyectadoBE>();
+            listaPersonalProyectadoBE = objPresupPersonalProyectadoBC.listarPersonalProyectadoBEAprobacio("P", Convert.ToInt32(TipoPersonalComboBox.SelectedValue), Convert.ToInt32(LocalidadComboBox.SelectedValue), Convert.ToInt32(AreaComboBox.SelectedValue), Convert.ToInt32(SeccionComboBox.SelectedValue));
+            PersonalProyectadoGridView.DataSource = listaPersonalProyectadoBE;
+            PersonalProyectadoGridView.DataBind();
+            GridUpdatePanel.Update();
+
+
+             
+        }
+
+        protected void TipoPersonalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarGrillaPersonal();
+        }
+
+        protected void AreaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarGrillaPersonal();
+
+        }
+
+        protected void SeccionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarGrillaPersonal();
+
+        }
+
+        protected void LocalidadComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarGrillaPersonal();
+
+        }
+
+        protected void PersonalProcesadoLinkButton_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("PersonalProcesado.aspx");
+        }
+
+
+       
+
+
     }
 }

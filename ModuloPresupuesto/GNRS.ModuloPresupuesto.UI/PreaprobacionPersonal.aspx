@@ -54,12 +54,13 @@
 
     
     <asp:LinkButton ID="PersonalAprobacionLinkButton" runat="server" Enabled=false>Personal para aprobacion</asp:LinkButton> 
-    <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px">Personal procesado</asp:LinkButton>
+    <asp:LinkButton ID="PersonalProcesadoLinkButton" runat="server"  style="padding-left: 40px" onclick="PersonalProcesadoLinkButton_Click">Personal procesado</asp:LinkButton>
     <br />
     <asp:Label ID="Label3" runat="server" Text="Tipo de personal : " style="padding-left: 1px"></asp:Label>
     <asp:DropDownList ID="TipoPersonalComboBox" runat="server" 
-                                AutoPostBack="True" Height="20px" Width="130px" >
-                                <asp:ListItem Value="" > Seleccione el tipo de personal </asp:ListItem>
+                                AutoPostBack="True" Height="20px" Width="130px" 
+        onselectedindexchanged="TipoPersonalComboBox_SelectedIndexChanged" >
+                                <asp:ListItem Value="0" > Seleccione el tipo de personal </asp:ListItem>
                                 <asp:ListItem Value="1"  Text="Empleado"> </asp:ListItem>
                                 <asp:ListItem Value="2"  Text="Obrero"> </asp:ListItem>
                                 </asp:DropDownList>
@@ -68,12 +69,14 @@
                         <asp:Label ID="Label4" runat="server" Text="Localidad : " style="padding-left: 48px"></asp:Label>
                         <asp:DropDownList ID="LocalidadComboBox" runat="server" 
                                   
-                                AutoPostBack="True" Height="20px" Width="130px" ></asp:DropDownList>
+                                AutoPostBack="True" Height="20px" Width="130px" 
+        onselectedindexchanged="LocalidadComboBox_SelectedIndexChanged" ></asp:DropDownList>
                   
                            <asp:Label ID="Label5" runat="server" Text="Area : " style="padding-left: 82px"></asp:Label>
                            <asp:DropDownList ID="AreaComboBox" runat="server" 
                                      AutoPostBack="True"
-                                    Height="20px" Width="130px" Enabled=false></asp:DropDownList>
+                                    Height="20px" Width="130px" 
+        onselectedindexchanged="AreaComboBox_SelectedIndexChanged"></asp:DropDownList>
                        
                    
                     
@@ -81,7 +84,8 @@
                          <asp:Label ID="Label6" runat="server" Text="Seccion : " style="padding-left: 58px"></asp:Label>
                         <asp:DropDownList ID="SeccionComboBox" runat="server" 
                                
-                                AutoPostBack="True" Height="20px" Width="130px" Enabled=false></asp:DropDownList> <br />
+                                AutoPostBack="True" Height="20px" Width="130px" 
+          onselectedindexchanged="SeccionComboBox_SelectedIndexChanged"></asp:DropDownList> <br />
                      
 
      

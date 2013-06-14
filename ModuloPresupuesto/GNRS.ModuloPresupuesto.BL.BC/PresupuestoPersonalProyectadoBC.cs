@@ -5,8 +5,17 @@ using System.Text;
 using System.Data.Entity;
 using GNRS.ModuloPresupuesto.DL.DALC;
 using GNRS.ModuloPresupuesto.BL.BE;
-
 using System.Web.Services;
+
+//
+using System.Threading;
+using System.Net.Mail;
+using System.Reflection;
+using System.Configuration;
+using System.IO;
+using System.Net.Mime;
+using System.Text;
+using System.Net;
 
 namespace GNRS.ModuloPresupuesto.BL.BC
 {
@@ -512,6 +521,75 @@ namespace GNRS.ModuloPresupuesto.BL.BC
             }
 
         }
+
+
+        public void EnviarCorreo(string strBody, string strSubject)
+        {
+            string strTo = "as@gmail.com";
+            string strFrom = "ddas@gmail.com";
+            string pass = "pass";
+
+            MailMessage message = new MailMessage();
+            // Very basic html. HTML should always be valid, otherwise you go to spam
+            message.Body = "<html><body>" + strBody + "</body></html>";
+            // QuotedPrintable encoding is the default, but will often lead to trouble, 
+            // so you should set something meaningful here. Could also be ASCII or some ISO
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            // No Subject usually goes to spam, too
+            message.Subject = strSubject;
+            // Note that you can add multiple recipients, bcc, cc rec., etc. Using the 
+            // address-only syntax, i.e. w/o a readable name saves you from some issues
+            message.To.Add(strTo);
+            message.From = new MailAddress(strFrom, "Usuario", System.Text.Encoding.UTF8);
+            // SmtpHost, -Port, -User, -Password must be a valid account you can use to 
+            // send messages. Note that it is very often required that the account you
+            // use also has the specified sender address associated! 
+            // If you configure the Smtp yourself, you can change that of course
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(strFrom, pass),
+                EnableSsl = true
+            };
+
+            try
+            {
+                // It might be necessary to enforce a specific sender address, see above
+                //if (!string.IsNullOrEmpty(ForceSenderAddress)) {
+                //    message.From = new MailAddress(ForceSenderAddress);
+                //}
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+         public List<PersonalProyectadoBE> listarPersonalProyectadoBEAprobacio(string estado,int categoria,int localidad,int area, int seccion)
+        {
+            try
+            {
+                
+                List<PersonalProyectadoBE> listaPersonalProyectadoTemp = new List<PersonalProyectadoBE>();
+                listaPersonalProyectadoTemp = personaDALC.listarPersonalProyectadoBE(categoria, estado, localidad, area, seccion);
+
+                foreach (PersonalProyectadoBE it in listaPersonalProyectadoTemp)
+                {              
+                    float remuneracion = calcularRemuneracion(it.Id_persona);
+                    it.Remuneracion = remuneracion;             
+
+                }
+                return listaPersonalProyectadoTemp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+             
+        }
+
 
 
     }
