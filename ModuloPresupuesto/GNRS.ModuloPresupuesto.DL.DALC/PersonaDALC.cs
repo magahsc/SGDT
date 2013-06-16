@@ -53,7 +53,9 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                     objpersonaBE.Id_persona = item.id_persona;
                     objpersonaBE.Nombre_persona = nombre;
                     objpersonaBE.Cargo_persona = item.nombre_cargo;
-                    lista.Add(objpersonaBE);
+                    
+                    if(item.id_persona!= 0)
+                       lista.Add(objpersonaBE);
                 }
 
                 return lista;

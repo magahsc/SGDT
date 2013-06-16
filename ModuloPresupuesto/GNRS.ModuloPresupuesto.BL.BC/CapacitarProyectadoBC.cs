@@ -248,5 +248,31 @@ namespace GNRS.ModuloPresupuesto.BL.BC
         {
             return actividadDALC.ActualizarActividadProyectadaDatos(objActividad);
         }
+
+        //Nuevo
+        public List<AprobarPresupuestoBE> ListaCapacitacionesParaAprobar(AprobarPresupuestoBE objAprobar, String estado)
+        {
+            return capacitarDALC.ListarCapacitacionParaAprobar(objAprobar,estado);
+        }
+
+        public List<AprobarPresupuestoBE> ListaCapacitacionesProcesadas(AprobarPresupuestoBE objAprobar)
+        {
+            return capacitarDALC.ListarCapacitacionProcesadas(objAprobar);
+        }
+
+        public Boolean ActualizarCapacitacionParaAprobarEstado(PRESUPUESTO_CAPACITACION objcapacitacion)
+        {
+            return capacitarDALC.ActualizarCapacitacionParaAprobarEstado(objcapacitacion);
+        }
+
+        public PERIODO_PRESUPUESTO ObtenerPeriodoPresupuestoEstado()
+        {
+            return objperiodoDALC.obtenerPeriodoEstado();
+        }
+
+        public AUDITORIA_PRESUPUESTO ObtenerAuditoriaDescripcion(int id, String estado)
+        {
+            return auditoriaDALC.obtenerAuditoriaDescripcion(id, estado);
+        }
     }
 }

@@ -136,7 +136,7 @@
           <Property Name="id_personal_proyectado" Type="int" Nullable="false" />
           <Property Name="id_actividad_proyectada" Type="int" Nullable="false" />
           <Property Name="fecha_accion" Type="datetime" Nullable="false" />
-          <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="tipo_accion" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="descripcion_auditoria" Type="varchar" Nullable="false" MaxLength="500" />
         </EntityType>
@@ -226,6 +226,9 @@
           <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="mes_periodo" Type="int" Nullable="false" />
           <Property Name="anio_periodo" Type="int" Nullable="false" />
+          <Property Name="estado_periodo" Type="int" Nullable="false" />
+          <Property Name="descripcion_periodo" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="fecha_cierre_periodo" Type="datetime" />
         </EntityType>
         <EntityType Name="PERSONA">
           <Key>
@@ -236,7 +239,7 @@
           <Property Name="apellido_materno" Type="varchar" MaxLength="200" />
           <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="fecha_creacion" Type="date" Nullable="false" />
-          <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="estado_persona" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="id_categoria" Type="int" Nullable="false" />
           <Property Name="id_cargo" Type="int" Nullable="false" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
@@ -255,7 +258,7 @@
           <Property Name="mes_fin" Type="int" Nullable="false" />
           <Property Name="anio_fin" Type="int" Nullable="false" />
           <Property Name="detalle_actividad" Type="text" Nullable="false" />
-          <Property Name="presupuesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="presupuesto_aprobado" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="monto_actividad" Type="float" Nullable="false" />
           <Property Name="tipo_moneda" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
@@ -270,7 +273,7 @@
           <Property Name="id_curso" Type="int" Nullable="false" />
           <Property Name="monto_total" Type="float" Nullable="false" />
           <Property Name="cantidad_personas" Type="int" Nullable="false" />
-          <Property Name="presupuesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="presupuesto_aprobado" Type="varchar" Nullable="false" MaxLength="2" />
           <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
           <Property Name="id_seccion" Type="int" Nullable="false" />
           <Property Name="id_localidad" Type="int" Nullable="false" />
@@ -810,6 +813,9 @@
           <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PERSONA" />
           <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
           <NavigationProperty Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Relationship="PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA" FromRole="PERIODO_PRESUPUESTO" ToRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+          <Property Type="Int32" Name="estado_periodo" Nullable="false" />
+          <Property Type="String" Name="descripcion_periodo" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="fecha_cierre_periodo" />
         </EntityType>
         <EntityType Name="PERSONA">
           <Key>
@@ -1240,7 +1246,10 @@
             <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PERIODO_PRESUPUESTO"><EntityTypeMapping TypeName="PresupuestoDBModel.PERIODO_PRESUPUESTO"><MappingFragment StoreEntitySet="PERIODO_PRESUPUESTO">
-            <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+            <ScalarProperty Name="fecha_cierre_periodo" ColumnName="fecha_cierre_periodo" />
+                <ScalarProperty Name="descripcion_periodo" ColumnName="descripcion_periodo" />
+                <ScalarProperty Name="estado_periodo" ColumnName="estado_periodo" />
+                <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
             <ScalarProperty Name="mes_periodo" ColumnName="mes_periodo" />
             <ScalarProperty Name="anio_periodo" ColumnName="anio_periodo" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>

@@ -2706,12 +2706,16 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         /// <param name="id_periodo_presupuesto">Initial value of the id_periodo_presupuesto property.</param>
         /// <param name="mes_periodo">Initial value of the mes_periodo property.</param>
         /// <param name="anio_periodo">Initial value of the anio_periodo property.</param>
-        public static PERIODO_PRESUPUESTO CreatePERIODO_PRESUPUESTO(global::System.Int32 id_periodo_presupuesto, global::System.Int32 mes_periodo, global::System.Int32 anio_periodo)
+        /// <param name="estado_periodo">Initial value of the estado_periodo property.</param>
+        /// <param name="descripcion_periodo">Initial value of the descripcion_periodo property.</param>
+        public static PERIODO_PRESUPUESTO CreatePERIODO_PRESUPUESTO(global::System.Int32 id_periodo_presupuesto, global::System.Int32 mes_periodo, global::System.Int32 anio_periodo, global::System.Int32 estado_periodo, global::System.String descripcion_periodo)
         {
             PERIODO_PRESUPUESTO pERIODO_PRESUPUESTO = new PERIODO_PRESUPUESTO();
             pERIODO_PRESUPUESTO.id_periodo_presupuesto = id_periodo_presupuesto;
             pERIODO_PRESUPUESTO.mes_periodo = mes_periodo;
             pERIODO_PRESUPUESTO.anio_periodo = anio_periodo;
+            pERIODO_PRESUPUESTO.estado_periodo = estado_periodo;
+            pERIODO_PRESUPUESTO.descripcion_periodo = descripcion_periodo;
             return pERIODO_PRESUPUESTO;
         }
 
@@ -2792,6 +2796,78 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
         private global::System.Int32 _anio_periodo;
         partial void Onanio_periodoChanging(global::System.Int32 value);
         partial void Onanio_periodoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 estado_periodo
+        {
+            get
+            {
+                return _estado_periodo;
+            }
+            set
+            {
+                Onestado_periodoChanging(value);
+                ReportPropertyChanging("estado_periodo");
+                _estado_periodo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("estado_periodo");
+                Onestado_periodoChanged();
+            }
+        }
+        private global::System.Int32 _estado_periodo;
+        partial void Onestado_periodoChanging(global::System.Int32 value);
+        partial void Onestado_periodoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String descripcion_periodo
+        {
+            get
+            {
+                return _descripcion_periodo;
+            }
+            set
+            {
+                Ondescripcion_periodoChanging(value);
+                ReportPropertyChanging("descripcion_periodo");
+                _descripcion_periodo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("descripcion_periodo");
+                Ondescripcion_periodoChanged();
+            }
+        }
+        private global::System.String _descripcion_periodo;
+        partial void Ondescripcion_periodoChanging(global::System.String value);
+        partial void Ondescripcion_periodoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> fecha_cierre_periodo
+        {
+            get
+            {
+                return _fecha_cierre_periodo;
+            }
+            set
+            {
+                Onfecha_cierre_periodoChanging(value);
+                ReportPropertyChanging("fecha_cierre_periodo");
+                _fecha_cierre_periodo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("fecha_cierre_periodo");
+                Onfecha_cierre_periodoChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _fecha_cierre_periodo;
+        partial void Onfecha_cierre_periodoChanging(Nullable<global::System.DateTime> value);
+        partial void Onfecha_cierre_periodoChanged();
 
         #endregion
     

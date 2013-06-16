@@ -73,3 +73,8 @@ C:\Users\Renzo\Desktop\M\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\bin\Debu
 C:\Users\Renzo\Desktop\M\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Renzo\Desktop\M\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
 C:\Users\Renzo\Desktop\M\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\N3AR\Desktop\Git\MagahVersion\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\N3AR\Desktop\Git\MagahVersion\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\bin\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb
+C:\Users\N3AR\Desktop\Git\MagahVersion\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\N3AR\Desktop\Git\MagahVersion\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.dll
+C:\Users\N3AR\Desktop\Git\MagahVersion\ModuloPresupuesto\GNRS.ModuloPresupuesto.BL.BE\obj\Debug\GNRS.ModuloPresupuesto.BL.BE.pdb

@@ -45,5 +45,25 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 throw;
             }
         }
+
+        public AUDITORIA_PRESUPUESTO obtenerAuditoriaDescripcion(int id_presupuesto_capacitacion, String estado)
+        {
+            try
+            {
+                AUDITORIA_PRESUPUESTO obj = new AUDITORIA_PRESUPUESTO();
+                var context = new PresupuestoDBEntities();
+                obj = (from p in context.AUDITORIA_PRESUPUESTO
+                       where p.id_capacitacion_proyectada == id_presupuesto_capacitacion && p.tipo_accion == estado
+                       select p).SingleOrDefault();
+
+
+                return obj;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

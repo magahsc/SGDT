@@ -66,5 +66,27 @@ namespace GNRS.ModuloPresupuesto.DL.DALC
                 return null;
             }
         }
+
+        public PERIODO_PRESUPUESTO obtenerPeriodoEstado()
+        {
+            try
+            {
+                var context = new PresupuestoDBEntities();
+                PERIODO_PRESUPUESTO periodo = new PERIODO_PRESUPUESTO();
+
+                periodo = (from a in context.PERIODO_PRESUPUESTO
+                           where a.estado_periodo == 1
+                           select a).SingleOrDefault();
+
+
+
+                return periodo;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

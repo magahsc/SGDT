@@ -245,6 +245,9 @@
     <NavigationProperty Name="PERSONA" Relationship="PresupuestoDBModel.FK_PERSONA_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PERSONA" />
     <NavigationProperty Name="PRESUPUESTO_CAPACITACION" Relationship="PresupuestoDBModel.FK_PRESUPUESTO_CAPACITACION_PERIODO_PRESUPUESTO" FromRole="PERIODO_PRESUPUESTO" ToRole="PRESUPUESTO_CAPACITACION" />
     <NavigationProperty Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA" Relationship="PresupuestoDBModel.PERIODO_PRESUPUESTO_ACTIVIDAD_PROYECTADA" FromRole="PERIODO_PRESUPUESTO" ToRole="PRESUPUESTO_ACTIVIDAD_PROYECTADA" />
+    <Property Type="Int32" Name="estado_periodo" Nullable="false" />
+    <Property Type="String" Name="descripcion_periodo" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="fecha_cierre_periodo" />
   </EntityType>
   <EntityType Name="PERSONA">
     <Key>

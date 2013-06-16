@@ -80,7 +80,7 @@
            	                <a class=" AccordionPanelTab" href="#">Aprobacion presupuesto</a>
                                 <ul class="AccordionPanelContent" style="height: auto; display: block;">
                                     <li><a href="SolicitudAprobacionPersonal.aspx" id="A5">Aprobar Personal Proyectado</a></li>
-                                    <li><a href="#" id="A7">Aprobar Capacitacion Proyectado</a></li>
+                                    <li><a href="SolicitudAprobacionCapacitacion.aspx" id="A7">Aprobar Capacitacion Proyectado</a></li>
                                     <li><a href="#" id="A8">Aprobar Actividad Proyectado</a></li>
                                 </ul>
                      </li>      	

@@ -120,6 +120,9 @@
     <EntitySetMapping Name="PERIODO_PRESUPUESTO">
       <EntityTypeMapping TypeName="PresupuestoDBModel.PERIODO_PRESUPUESTO">
         <MappingFragment StoreEntitySet="PERIODO_PRESUPUESTO">
+          <ScalarProperty Name="fecha_cierre_periodo" ColumnName="fecha_cierre_periodo" />
+          <ScalarProperty Name="descripcion_periodo" ColumnName="descripcion_periodo" />
+          <ScalarProperty Name="estado_periodo" ColumnName="estado_periodo" />
           <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
           <ScalarProperty Name="mes_periodo" ColumnName="mes_periodo" />
           <ScalarProperty Name="anio_periodo" ColumnName="anio_periodo" />

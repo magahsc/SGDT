@@ -131,7 +131,7 @@
     <Property Name="id_personal_proyectado" Type="int" Nullable="false" />
     <Property Name="id_actividad_proyectada" Type="int" Nullable="false" />
     <Property Name="fecha_accion" Type="datetime" Nullable="false" />
-    <Property Name="tipo_accion" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="tipo_accion" Type="varchar" Nullable="false" MaxLength="2" />
     <Property Name="tipo_presupuesto" Type="char" Nullable="false" MaxLength="1" />
     <Property Name="descripcion_auditoria" Type="varchar" Nullable="false" MaxLength="500" />
   </EntityType>
@@ -221,6 +221,9 @@
     <Property Name="id_periodo_presupuesto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="mes_periodo" Type="int" Nullable="false" />
     <Property Name="anio_periodo" Type="int" Nullable="false" />
+    <Property Name="estado_periodo" Type="int" Nullable="false" />
+    <Property Name="descripcion_periodo" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="fecha_cierre_periodo" Type="datetime" />
   </EntityType>
   <EntityType Name="PERSONA">
     <Key>
@@ -231,7 +234,7 @@
     <Property Name="apellido_materno" Type="varchar" MaxLength="200" />
     <Property Name="nombres_persona" Type="varchar" Nullable="false" MaxLength="200" />
     <Property Name="fecha_creacion" Type="date" Nullable="false" />
-    <Property Name="estado_persona" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="estado_persona" Type="varchar" Nullable="false" MaxLength="2" />
     <Property Name="id_categoria" Type="int" Nullable="false" />
     <Property Name="id_cargo" Type="int" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
@@ -250,7 +253,7 @@
     <Property Name="mes_fin" Type="int" Nullable="false" />
     <Property Name="anio_fin" Type="int" Nullable="false" />
     <Property Name="detalle_actividad" Type="text" Nullable="false" />
-    <Property Name="presupuesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="presupuesto_aprobado" Type="varchar" Nullable="false" MaxLength="2" />
     <Property Name="monto_actividad" Type="float" Nullable="false" />
     <Property Name="tipo_moneda" Type="char" Nullable="false" MaxLength="1" />
     <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
@@ -265,7 +268,7 @@
     <Property Name="id_curso" Type="int" Nullable="false" />
     <Property Name="monto_total" Type="float" Nullable="false" />
     <Property Name="cantidad_personas" Type="int" Nullable="false" />
-    <Property Name="presupuesto_aprobado" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="presupuesto_aprobado" Type="varchar" Nullable="false" MaxLength="2" />
     <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
     <Property Name="id_seccion" Type="int" Nullable="false" />
     <Property Name="id_localidad" Type="int" Nullable="false" />

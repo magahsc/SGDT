@@ -195,7 +195,7 @@ namespace GNRS.ModuloPresupuesto.UI
             //correo
             string body = "<p>Estimado(a)," +
                     "<br />" +
-                    "Se le informa que se ha realizado una solicitud de aprobacion presupuesto de personal, ingresa al <br />sistema para mayor detalle. " +
+                    "Se le informa que se ha realizado una solicitud de aprobacion presupuesto de capacitación, ingresa al <br />sistema para mayor detalle. " +
                     "Recomendamos realizar las acciones pertinentes." +
                     "<br /><br />Gracias," +
                     "<br />Administrador del Sistema</p>";
@@ -243,7 +243,7 @@ namespace GNRS.ModuloPresupuesto.UI
             //correo
             string body = "<p>Estimado(a)," +
                     "<br />" +
-                    "Se le informa que se ha rechazado la solicitud de aprobacion de presupuesto de personal, ingresa al <br />sistema para mayor detalle. " +
+                    "Se le informa que se ha rechazado la solicitud de aprobacion de presupuesto de capacitación, ingresa al <br />sistema para mayor detalle. " +
                     "<br /><br />Gracias," +
                     "<br />Administrador del Sistema</p>";
 
