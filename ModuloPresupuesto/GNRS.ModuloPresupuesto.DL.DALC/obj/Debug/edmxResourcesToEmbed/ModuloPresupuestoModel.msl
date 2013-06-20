@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PresupuestoDBModelStoreContainer" CdmEntityContainer="PresupuestoDBEntities">
+    <EntitySetMapping Name="ACTIVIDAD">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.ACTIVIDAD">
+        <MappingFragment StoreEntitySet="ACTIVIDAD">
+          <ScalarProperty Name="id_actividad" ColumnName="id_actividad" />
+          <ScalarProperty Name="nombre_actividad" ColumnName="nombre_actividad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AREA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.AREA">
+        <MappingFragment StoreEntitySet="AREA">
+          <ScalarProperty Name="id_area" ColumnName="id_area" />
+          <ScalarProperty Name="nombre_area" ColumnName="nombre_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AUDITORIA_PRESUPUESTO">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.AUDITORIA_PRESUPUESTO">
+        <MappingFragment StoreEntitySet="AUDITORIA_PRESUPUESTO">
+          <ScalarProperty Name="descripcion_auditoria" ColumnName="descripcion_auditoria" />
+          <ScalarProperty Name="id_auditoria" ColumnName="id_auditoria" />
+          <ScalarProperty Name="id_capacitacion_proyectada" ColumnName="id_capacitacion_proyectada" />
+          <ScalarProperty Name="id_personal_proyectado" ColumnName="id_personal_proyectado" />
+          <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
+          <ScalarProperty Name="fecha_accion" ColumnName="fecha_accion" />
+          <ScalarProperty Name="tipo_accion" ColumnName="tipo_accion" />
+          <ScalarProperty Name="tipo_presupuesto" ColumnName="tipo_presupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CARGO_PERSONAL">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.CARGO_PERSONAL">
+        <MappingFragment StoreEntitySet="CARGO_PERSONAL">
+          <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+          <ScalarProperty Name="nombre_cargo" ColumnName="nombre_cargo" />
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORIA_PERSONAL">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.CATEGORIA_PERSONAL">
+        <MappingFragment StoreEntitySet="CATEGORIA_PERSONAL">
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONCEPTO_POR_PERSONA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.CONCEPTO_POR_PERSONA">
+        <MappingFragment StoreEntitySet="CONCEPTO_POR_PERSONA">
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="monto_costo_empresa" ColumnName="monto_costo_empresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONCEPTO_REMUNERACION">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.CONCEPTO_REMUNERACION">
+        <MappingFragment StoreEntitySet="CONCEPTO_REMUNERACION">
+          <ScalarProperty Name="id_concepto" ColumnName="id_concepto" />
+          <ScalarProperty Name="nombre_concepto" ColumnName="nombre_concepto" />
+          <ScalarProperty Name="mostrar_boleta" ColumnName="mostrar_boleta" />
+          <ScalarProperty Name="columna_boleta" ColumnName="columna_boleta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COSTO_EMPRESA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.COSTO_EMPRESA">
+        <MappingFragment StoreEntitySet="COSTO_EMPRESA">
+          <ScalarProperty Name="id_costoempresa" ColumnName="id_costoempresa" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="beneficio_social" ColumnName="beneficio_social" />
+          <ScalarProperty Name="factor" ColumnName="factor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CURSO">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.CURSO">
+        <MappingFragment StoreEntitySet="CURSO">
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+          <ScalarProperty Name="nombre_curso" ColumnName="nombre_curso" />
+          <ScalarProperty Name="costo_curso" ColumnName="costo_curso" />
+          <ScalarProperty Name="tipo_moneda" ColumnName="tipo_moneda" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="id_institucion" ColumnName="id_institucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INSTITUCION">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.INSTITUCION">
+        <MappingFragment StoreEntitySet="INSTITUCION">
+          <ScalarProperty Name="id_institucion" ColumnName="id_institucion" />
+          <ScalarProperty Name="nombre_institucion" ColumnName="nombre_institucion" />
+          <ScalarProperty Name="tipo_institucion" ColumnName="tipo_institucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOCALIDAD">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.LOCALIDAD">
+        <MappingFragment StoreEntitySet="LOCALIDAD">
+          <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
+          <ScalarProperty Name="nombre_localidad" ColumnName="nombre_localidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOCALIDAD_SECCION">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.LOCALIDAD_SECCION">
+        <MappingFragment StoreEntitySet="LOCALIDAD_SECCION">
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+          <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERIODO_PRESUPUESTO">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PERIODO_PRESUPUESTO">
+        <MappingFragment StoreEntitySet="PERIODO_PRESUPUESTO">
+          <ScalarProperty Name="descripcion_periodo" ColumnName="descripcion_periodo" />
+          <ScalarProperty Name="estado_periodo" ColumnName="estado_periodo" />
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+          <ScalarProperty Name="mes_periodo" ColumnName="mes_periodo" />
+          <ScalarProperty Name="anio_periodo" ColumnName="anio_periodo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERSONA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PERSONA">
+        <MappingFragment StoreEntitySet="PERSONA">
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="apellido_paterno" ColumnName="apellido_paterno" />
+          <ScalarProperty Name="apellido_materno" ColumnName="apellido_materno" />
+          <ScalarProperty Name="nombres_persona" ColumnName="nombres_persona" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="estado_persona" ColumnName="estado_persona" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+          <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+        <MappingFragment StoreEntitySet="PRESUPUESTO_ACTIVIDAD_PROYECTADA">
+          <ScalarProperty Name="id_actividad_proyectada" ColumnName="id_actividad_proyectada" />
+          <ScalarProperty Name="codigo_actividad_proyectada" ColumnName="codigo_actividad_proyectada" />
+          <ScalarProperty Name="id_actividad" ColumnName="id_actividad" />
+          <ScalarProperty Name="mes_inicio" ColumnName="mes_inicio" />
+          <ScalarProperty Name="anio_inicio" ColumnName="anio_inicio" />
+          <ScalarProperty Name="mes_fin" ColumnName="mes_fin" />
+          <ScalarProperty Name="anio_fin" ColumnName="anio_fin" />
+          <ScalarProperty Name="detalle_actividad" ColumnName="detalle_actividad" />
+          <ScalarProperty Name="presupuesto_aprobado" ColumnName="presupuesto_aprobado" />
+          <ScalarProperty Name="monto_actividad" ColumnName="monto_actividad" />
+          <ScalarProperty Name="tipo_moneda" ColumnName="tipo_moneda" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESUPUESTO_CAPACITACION">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_CAPACITACION">
+        <MappingFragment StoreEntitySet="PRESUPUESTO_CAPACITACION">
+          <ScalarProperty Name="id_presupuesto_capacitacion" ColumnName="id_presupuesto_capacitacion" />
+          <ScalarProperty Name="codigo_presupuesto" ColumnName="codigo_presupuesto" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+          <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+          <ScalarProperty Name="cantidad_personas" ColumnName="cantidad_personas" />
+          <ScalarProperty Name="presupuesto_aprobado" ColumnName="presupuesto_aprobado" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+          <ScalarProperty Name="id_localidad" ColumnName="id_localidad" />
+          <ScalarProperty Name="id_periodo_presupuesto" ColumnName="id_periodo_presupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+        <MappingFragment StoreEntitySet="PRESUPUESTO_CAPACITACION_POR_PERSONAL">
+          <ScalarProperty Name="id_presupuesto_capacitacion" ColumnName="id_presupuesto_capacitacion" />
+          <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+          <ScalarProperty Name="monto_presupuesto_proyectado" ColumnName="monto_presupuesto_proyectado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SECCION">
+      <EntityTypeMapping TypeName="PresupuestoDBModel.SECCION">
+        <MappingFragment StoreEntitySet="SECCION">
+          <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+          <ScalarProperty Name="nombre_seccion" ColumnName="nombre_seccion" />
+          <ScalarProperty Name="id_area" ColumnName="id_area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

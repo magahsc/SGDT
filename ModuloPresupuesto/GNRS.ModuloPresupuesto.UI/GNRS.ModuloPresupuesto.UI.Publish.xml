@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\ModuloPresupuesto" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="images/edit.gif" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Default.aspx" publishTime="06/11/2013 18:54:01" />
+    <file relUrl="jc/reset.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.UI.dll" publishTime="06/11/2013 18:53:14" />
+    <file relUrl="jc/img/espanol.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="images/ModuloPresupuesto.jpg" publishTime="06/11/2013 12:30:21" />
+    <file relUrl="RegistrarPresupuestoCapacitacion.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="ListarActividad.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="Web.config" publishTime="06/11/2013 18:17:13" />
+    <file relUrl="jc/img/ventana1.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/img/correo.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="ModuloPresupuesto.Master" publishTime="06/11/2013 13:32:50" />
+    <file relUrl="jc/inner-content.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Global.asax" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="jc/img/vntser.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/img/mapa.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/img/vnt1.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="images/delete.gif" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/SpryAccordion.js" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="EditarActividad.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="jc/img/iso9000.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/feria.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Styles/Site.css" publishTime="06/11/2013 13:05:45" />
+    <file relUrl="jc/menu.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/SpryHTMLPanel.js" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="jc/SpryEffects.js" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.DL.DALC.dll" publishTime="06/11/2013 13:03:42" />
+    <file relUrl="jc/img/Container-icon.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="Prueba.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="CostoEmpresa.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.BL.BC.pdb" publishTime="06/11/2013 13:03:42" />
+    <file relUrl="jc/img/basc.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.UI.pdb" publishTime="06/11/2013 18:53:14" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="Styles/gnrs.css" publishTime="06/11/2013 15:08:21" />
+    <file relUrl="ListarPresupuestoCapacitacion.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="ConceptosPersonal.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="jc/img/english.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="MainPage.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="jc/img/faqs.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="RegistrarPresupuestoPersonalProyectado.aspx" publishTime="06/11/2013 15:10:00" />
+    <file relUrl="jc/img/fnd11.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.BL.BE.pdb" publishTime="06/11/2013 13:03:40" />
+    <file relUrl="jc/img/home.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.DL.DALC.pdb" publishTime="06/11/2013 13:03:42" />
+    <file relUrl="EditarPresupuestoCapacitacion.aspx" publishTime="06/11/2013 04:29:04" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.BL.BE.dll" publishTime="06/11/2013 13:03:41" />
+    <file relUrl="jc/licsa.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="RegistrarActividad.aspx" publishTime="06/11/2013 18:07:19" />
+    <file relUrl="jc/img/degrade.png" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/img/ventana2.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/SpryAccordion.css" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="jc/img/text-titulo.jpg" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="js/swfobject2.js" publishTime="06/11/2013 04:29:05" />
+    <file relUrl="bin/GNRS.ModuloPresupuesto.BL.BC.dll" publishTime="06/11/2013 13:03:42" />
+    <file relUrl="ListarPresupuestoPersonal.aspx" publishTime="06/11/2013 14:43:31" />
+    <file relUrl="ConfiguracionPresupuesto.aspx" publishTime="06/11/2013 04:29:04" />
+  </publishProfile>
+</publishData>

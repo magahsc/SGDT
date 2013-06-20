@@ -1,0 +1,107 @@
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ModuloPresupuesto.Master.cs" Inherits="GNRS.ModuloPresupuesto.UI.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="es-pe">
+
+
+<script type="text/javascript" src="js/swfobject2.js"></script>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="es-pe">
+    
+    <link rel="stylesheet" type="text/css" href="styles/gnrs.css" />
+    <link href="jc/reset.css" rel="stylesheet" type="text/css" />
+    <link href="jc/feria.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="jc/SpryAccordion.js"></script>
+    <link href="jc/SpryAccordion.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="jc/SpryHTMLPanel.js" ></script>
+    <script type="text/javascript" src="jc/SpryEffects.js" ></script>
+    
+      
+</head>
+
+<body >
+    <div id="dialog-recalcular" title="SGDT">  </div>
+
+    <form runat="server" style="width:100%;height:100%">
+    <div class="header">
+            <div class="title" style="width:100%;background-color:Black;color:White;vertical-align:middle">
+               <table>
+               <tr>
+                    <td>
+                        <img src="images/ModuloPresupuesto.jpg" />
+                    </td>
+                    <td>
+                           <label style="font-size:40pt"> Gesti&oacute;n de Negocios R&S</label>
+                                <br />    
+                           <label style="font-size:large"> M&oacute;dulo de Presupuesto</label>                
+                                                 
+                    </td>
+               </tr>
+               </table>
+               
+
+            </div>
+     </div>
+            
+     <div id="container_page" style="height:100%">
+        <div id="side_bar" style="background-color:Black">           
+                <ol id="main_nav0">        	
+
+                    <li class="AccordionPanel AccordionPanelOpen">
+           	                <a class=" AccordionPanelTab" href="#">Presupuesto de personal proyectado</a>
+                                <ul class="AccordionPanelContent" style="height: auto; display: block;">
+                                    <li><a href="RegistrarPresupuestoPersonalProyectado.aspx?modo=1" id="A20">Registrar personal a proyectar</a></li>
+                                    <li><a href="ListarPresupuestoPersonal.aspx" id="A19">Listado personal proyectado</a></li>
+                                </ul>
+                     </li> 
+                     <li class="AccordionPanel AccordionPanelOpen">
+           	                <a class=" AccordionPanelTab" href="#">Presupuesto de capacitacion proyectada</a>
+                                <ul class="AccordionPanelContent" style="height: auto; display: block;">
+                                    <li><a href="RegistrarPresupuestoCapacitacion.aspx" id="A1">Registrar presupuesto de capacitacion</a></li>
+                                    <li><a href="ListarPresupuestoCapacitacion.aspx" id="A2">Listar presupuesto de capacitacion</a></li>
+                                </ul>
+                     </li> 
+
+                      <li class="AccordionPanel AccordionPanelOpen">
+           	                <a class=" AccordionPanelTab" href="#">Presupuesto de Actividades Proyectadas</a>
+                                <ul class="AccordionPanelContent" style="height: auto; display: block;">
+                                    <li><a href="RegistrarActividad.aspx" id="A3">Registrar actividad de RRHH</a></li>
+                                    <li><a href="ListarActividad.aspx" id="A4">Listar actividad de RRHH</a></li>
+                                </ul>
+                     </li> 
+
+                     <a href="ConfiguracionPresupuesto.aspx" class="menu-vertical AccordionPanelClosed">
+					    Configuración de presupuesto de Presupuesto</a>
+                    <ul class="AccordionPanelContent AccordionPanelClosed" style="height: 0px; display: none; ">                           
+                    </ul>
+
+
+                    
+                     <a href="CostoEmpresa.aspx" class="menu-vertical AccordionPanelClosed">
+					    Costo Empresa</a>
+                    <ul class="AccordionPanelContent AccordionPanelClosed" style="height: 0px; display: none; ">                           
+                    </ul>
+
+
+                    
+                </ol>
+                <script type="text/javascript">
+                          var acc0 = new Spry.Widget.Accordion("main_nav0", { useFixedPanelHeights: false, defaultPanel: -1 });          
+	            </script>
+            </div>
+         </div>
+     
+     <div class="main"  style="height:100%" >
+          <asp:ContentPlaceHolder ID="contenido" runat="server" />
+     </div>
+        
+   
+    </form>
+</body>
+</html>

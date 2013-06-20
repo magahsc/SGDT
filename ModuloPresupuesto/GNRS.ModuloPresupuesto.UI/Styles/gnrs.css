@@ -1,0 +1,135 @@
+﻿#body 
+{
+        font-size:small;    
+}
+
+.panel
+{
+    padding:20px;
+    height: 90%;
+}
+
+.texto
+{
+    font-size:small;   
+    font-weight:bold; 
+    color: #4d7893;
+}
+
+.GridHeader
+
+{
+	color: white;
+	position: relative;
+	background-color: #4998D3;
+	font-weight: bold;
+	font-size: 9pt;
+}
+
+.GridRow
+
+{
+	color: #000000;
+	background-color: #FFFFFF;
+	font-weight: normal;
+	font-size: 9pt;
+}
+
+.GridAlternateRow
+
+{
+	color: #000000;
+	background-color: #E6F4F8;
+	font-weight: normal;
+	font-size: 9pt;
+}
+
+
+.button_example{
+border:1px solid #7d99ca; -webkit-border-radius: 2px; -moz-border-radius: 2px;border-radius: 2px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 5px 5px 5px 5px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #4998D3; background-image: linear-gradient(to bottom, #4998D3, #7089b3);
+ }
+
+.button_example:hover{
+ border:1px solid #5d7fbc;
+ background-color: #819bcb; background-image: linear-gradient(to bottom, #819bcb, #536f9d);
+ }
+
+
+
+.button_eliminar{
+border:1px solid #C53030; -webkit-border-radius: 1px; -moz-border-radius: 1px;border-radius: 1px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 3px 3px 3px 3px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #C53030; background-image: linear-gradient(to bottom, #C53030, #C53030);
+ }
+
+.button_eliminar:hover{
+ border:1px solid #F13434;
+ background-color: #F13434; background-image: linear-gradient(to bottom, #F13434, #F13434);
+ }
+
+
+.button_editar{
+border:1px solid #7d99ca; -webkit-border-radius: 1px; -moz-border-radius: 1px;border-radius: 1px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 3px 3px 3px 3px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #4998D3; background-image: linear-gradient(to bottom, #4998D3, #7089b3);
+ }
+
+.button_editar:hover{
+ border:1px solid #5d7fbc;
+ background-color: #819bcb; background-image: linear-gradient(to bottom, #819bcb, #536f9d);
+ }
+
+
+
+
+select
+{
+    color:Black;
+    font-weight:bold;
+    font-size:8pt;
+    margin:0px 0px 0px 0px !important;
+    padding:0px 0px 0px 0px !important;
+    width:200px;
+}
+
+select option
+{
+    background:#4998D3;
+}
+
+.link_inactivo
+{
+    color:#D5D5D5;
+    font-size:11pt;
+    text-decoration:none;
+}
+
+
+.link_activo
+{
+    color:#2873AA;
+    font-size:11pt;
+    text-decoration:none;
+        
+}
+
+.texto_menu
+{
+    color: #D5D5D5;
+}
+
+
+a:link {
+    color:#2873AA;
+    font-size:11pt;
+    text-decoration:none;
+}
+a:hover {
+    color:#2234D3;
+    font-size:11pt;
+    text-decoration:none;
+}
+a:active {
+    color:#00ff00;
+    font-size:11pt;
+    text-decoration:none;
+}

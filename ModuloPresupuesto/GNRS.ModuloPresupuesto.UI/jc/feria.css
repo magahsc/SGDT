@@ -1,0 +1,250 @@
+#container_page {
+	width:1040px;
+	
+}
+#container_page .menu-vertical {
+	background-color: #4998D3;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #87BBE2;
+}
+#container_page .menu-vertical:hover {
+	background-color: #2873AA;
+}
+
+
+#container_inner h1.page_head {
+	width:710px;
+	position:relative;
+	text-indent:8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #999999;
+	display: block;
+	padding: 4px 20px;
+	height: 20px;
+	font-weight: bold;
+	border-style: none;
+	background-image: url(../EXPOINDUSTRIA_files/cab_bargris.gif);
+	background-repeat: no-repeat;
+}
+
+
+/*=ENCABEZADO*/
+#mast_head{ position:relative;}
+#fair_date { position:absolute;	left:293px;	top:29px; width:385px; height:30px; z-index:100; margin:0px;	padding:0px; padding:12px 0 0 0; font-size:17px; font-family: Arial, Helvetica, sans-serif; font-style: italic; color:#666666;}
+
+/*=SIDE_BAR*/
+#side_bar {
+	float: left;
+	background-repeat: no-repeat;
+	background-position: left top;
+	width: 215px;
+	margin-bottom:1.4em;
+}
+
+/*=MAIN_NAV*/
+ol#main_nav {	 height: 100%; }
+div.fairbox_top { margin-top:10px;	height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -40px; display:block; line-height:0px; font-size:1px;}
+div.fairbox_bottom { height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -253px; display:block; line-height:0px; font-size:1px; }
+ol#main_nav li a, ol#main_nav li a:link, ol#main_nav li a:visited {	display: inline;	padding: 10px 6px 10px 18px;	text-decoration: none;	font-size: 11px;	font-weight: bold;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -49px;	font-family:Arial, Helvetica, sans-serif;	}
+ol#main_nav li a.first_item {
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -50px;
+}
+ol#main_nav li a, ol#main_nav li a:link, ol#main_nav li a:visited {	display: block;}
+ol#main_nav li a:hover, ol#main_nav li a:focus {
+	color: #fff;
+	background-position: left -99px;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+}
+ol#main_nav li ul li a, ol#main_nav li ul li a:link, ol#main_nav li ul li a:visited {	display: block;	padding: 6px 6px 6px 25px;	text-decoration: none;	font-weight: normal;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -149px;	}
+ol#main_nav li ul li a:hover, ol#main_nav li ul li a:focus {	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -199px;	color: #fff;}
+
+/*=MAIN_NAV*/
+ol#main_nav0 {	 height: 100%; }
+div.fairbox_top {
+	margin-top:10px;
+	height:6px;
+	display:block;
+	line-height:0px;
+	font-size:1px;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -40px;
+}
+div.fairbox_bottom {
+	height:6px;
+	display:block;
+	line-height:0px;
+	font-size:1px;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -253px;
+}
+ol#main_nav0 li a, ol#main_nav0 li a:link, ol#main_nav0 li a:visited {
+	display: inline;
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	height:auto !important;
+	height: 1%;
+	font-family:Arial, Helvetica, sans-serif;
+	background-color: #4998d3;
+	background-position: left -49px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #87BBE2;
+	padding-top: 10px;
+	padding-right: 6px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+ol#main_nav0 li a.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -50px; }
+ol#main_nav0 li a, ol#main_nav0 li a:link, ol#main_nav0 li a:visited {	display: block;}
+ol#main_nav0 li a:hover, ol#main_nav0 li a:focus {
+	color: #fff;
+	background-color: #2873AA;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -99px;
+}
+ol#main_nav0 li ul li a, ol#main_nav0 li ul li a:link, ol#main_nav0 li ul li a:visited {
+	display: block;
+	text-decoration: none;
+	font-weight: normal;
+	color: #4998D3;
+	height:auto !important;
+	height: 1%;
+	background-image: url(../img/vnt1.png);
+	background-position: 10px center;
+	background-color: #CBE6ED;
+	background-repeat: no-repeat;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E6F3F7;
+	padding-top: 6px;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	padding-left: 20px;
+}
+ol#main_nav0 li ul li a:hover, ol#main_nav0 li ul li a:focus {
+	color: #186caa;
+	background-image: url(../img/vnt2.png);
+}
+
+/*=MAIN_NAV*/
+ol#main_nav1 {	 height: 100%; }
+div.fairbox_top { margin-top:10px;	height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -40px; display:block; line-height:0px; font-size:1px;}
+div.fairbox_bottom { height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -253px; display:block; line-height:0px; font-size:1px; }
+ol#main_nav1 li a, ol#main_nav1 li a:link, ol#main_nav1 li a:visited {
+	display: inline;
+	padding: 10px 6px 10px 18px;
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: bold;
+	color: #fff;
+	height:auto !important;
+	height: 1%;
+	font-family:Arial, Helvetica, sans-serif;
+	background-color: #00CC00;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -49px;
+}
+ol#main_nav1 li a.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -50px; }
+ol#main_nav1 li a, ol#main_nav1 li a:link, ol#main_nav1 li a:visited {	display: block;}
+ol#main_nav1 li a:hover, ol#main_nav1 li a:focus {	color: #fff;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -99px;}
+ol#main_nav1 li ul li a, ol#main_nav1 li ul li a:link, ol#main_nav1 li ul li a:visited {	display: block;	padding: 6px 6px 6px 25px;	text-decoration: none;	font-weight: normal;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -149px;	}
+ol#main_nav1 li ul li a:hover, ol#main_nav1 li ul li a:focus {	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -199px;	color: #fff;}
+
+/*=MAIN_NAV*/
+ol#main_nav2 {	 height: 100%; }
+div.fairbox_top { margin-top:10px;	height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -40px; display:block; line-height:0px; font-size:1px;}
+div.fairbox_bottom { height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -253px; display:block; line-height:0px; font-size:1px; }
+ol#main_nav2 li a, ol#main_nav2 li a:link, ol#main_nav2 li a:visited {	display: inline;	padding: 10px 6px 10px 18px;	text-decoration: none;	font-size: 11px;	font-weight: bold;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -49px;	font-family:Arial, Helvetica, sans-serif;	}
+ol#main_nav2 li a.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -50px; }
+ol#main_nav2 li a, ol#main_nav2 li a:link, ol#main_nav2 li a:visited {	display: block;}
+ol#main_nav2 li a:hover, ol#main_nav2 li a:focus {	color: #fff;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -99px;}
+ol#main_nav2 li ul li a, ol#main_nav2 li ul li a:link, ol#main_nav2 li ul li a:visited {
+	display: block;
+	padding: 6px 6px 6px 25px;
+	text-decoration: none;
+	font-weight: normal;
+	color: #009900;
+	height:auto !important;
+	height: 1%;
+	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -149px;
+}
+ol#main_nav2 li ul li a:hover, ol#main_nav2 li ul li a:focus {
+	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -199px;
+	color: #006699;
+}
+
+
+/*=MAIN_NAV*/
+ol#main_nav3 {	 height: 100%; }
+div.fairbox_top {
+	margin-top:10px;
+	height:6px;
+	display:block;
+	line-height:0px;
+	font-size:1px;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -40px;
+	background-color: #4998D3;
+}
+div.fairbox_bottom {
+	height:6px;
+	display:block;
+	line-height:0px;
+	font-size:1px;
+	background-color: #4998D3;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -253px;
+}
+ol#main_nav3 li a, ol#main_nav3 li a:link, ol#main_nav3 li a:visited {	display: inline;	padding: 10px 6px 10px 18px;	text-decoration: none;	font-size: 11px;	font-weight: bold;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -49px;	font-family:Arial, Helvetica, sans-serif;	}
+ol#main_nav3 li a.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -50px; }
+ol#main_nav3 li a, ol#main_nav3 li a:link, ol#main_nav3 li a:visited {	display: block;}
+ol#main_nav3 li a:hover, ol#main_nav3 li a:focus {	color: #fff;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -99px;}
+ol#main_nav3 li ul li a, ol#main_nav3 li ul li a:link, ol#main_nav3 li ul li a:visited {	display: block;	padding: 6px 6px 6px 25px;	text-decoration: none;	font-weight: normal;	color: #fff;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -149px;	}
+ol#main_nav3 li ul li a:hover, ol#main_nav3 li ul li a:focus {	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -199px;	color: #fff;}
+
+
+
+/*=consola de servicios csw_nav*/
+ol#csw_nav {	 height: 100%; }
+div.fairbox_top_csw {
+	margin-top:8px;
+	height:6px;
+	display:block;
+	line-height:0px;
+	font-size:1px;
+	background-image: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif);
+	background-position: left -259px;
+}
+div.fairbox_bottom_csw { height:6px;	background:  url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -465px; display:block; line-height:0px; font-size:1px; }
+ol#csw_nav li a, ol#csw_nav li a:link, ol#csw_nav li a:visited {	display: inline;	padding: 10px 6px 10px 18px;	text-decoration: none;	font-size: 11px;	font-weight: bold;	color: #666;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -265px;	font-family:Arial, Helvetica, sans-serif;	}
+ol#csw_nav li a, ol#csw_nav li a:link, ol#csw_nav li a:visited {	display: block; }
+ol#csw_nav li a:hover, ol#csw_nav li a:focus{	color: #333;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -315px; }
+ol#csw_nav li ul li a, ol#csw_nav li ul li a:link, ol#csw_nav li ul li a:visited {	display: block;	padding: 6px 6px 6px 25px;	text-decoration: none;	font-weight: normal;	color: #666;	height:auto !important;	height: 1%;	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -365px; 	}
+ol#csw_nav li ul li a:hover, ol#csw_nav li ul li a:focus {	background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -315px;	color: #333;}
+ol#csw_nav li a.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -266px; }
+ol#csw_nav li a:hover.first_item { background: url(../EXPOINDUSTRIA_files/fondo_side_bar.gif) left -316px; }
+#container_page .menu-vertical2 {
+	background-color: #4998D3;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding: 10px;
+}
+#container_page .menu-vertical2:hover {
+	background-color: #2873AA;
+}
